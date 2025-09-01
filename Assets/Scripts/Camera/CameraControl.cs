@@ -70,7 +70,7 @@ public class CameraControl : MonoBehaviour {
 
     private void OnDisable() {
         cameraActions.Camera.RotateCamera.performed -= RotateCamera;
-        cameraActions.Camera.ZoomCamera.performed += ZoomCamera;
+        cameraActions.Camera.ZoomCamera.performed -= ZoomCamera;
 
         cameraActions.Camera.RotateCameraKeys.performed -= OnRotateKeyPressed;
         cameraActions.Camera.RotateCameraKeys.canceled -= OnRotateKeyReleased;
@@ -79,6 +79,9 @@ public class CameraControl : MonoBehaviour {
     }
 
     private void LateUpdate() {
+        if (Keyboard.current.fKey.wasPressedThisFrame) {
+            TrySelectTarget();
+        }
 
         if (cameraTarget != null) {
             transform.position = cameraTarget.position;
@@ -218,5 +221,15 @@ public class CameraControl : MonoBehaviour {
         targetPosition += moveDirection;
     }
 
+    private void TrySelectTarget() {
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit hit)) {
+            var character = hit.collider.GetComponent<CharacterComponent>();
+            Debug.Log($"Hit {hit.collider.name}");
+            if (character != null) {
+                cameraTarget = character.transform;
+            }
+        }
+    }
 
 }
