@@ -1,5 +1,7 @@
+using UnityEngine;
+
 [System.Serializable]
-public class CharacterModel
+public class CharacterModel : MonoBehaviour
 {
     public int Id { get; set; }
     public string Name { get; set; }
