@@ -1,3 +1,4 @@
+using Assets.Scripts.Helpers;
 using UnityEngine;
 
 public class GlobalCharactersManager : MonoBehaviour
@@ -8,6 +9,7 @@ public class GlobalCharactersManager : MonoBehaviour
     [SerializeField] private CharacterData workerData;
     [SerializeField] GameObject StaffAdorPrefab;
     [SerializeField] GameObject WorkerPrefab;
+    [SerializeField] private int workerIdCounter = 1;
 
     void Awake() {
         if (Instance == null) {
@@ -18,10 +20,7 @@ public class GlobalCharactersManager : MonoBehaviour
         }
         InitializePlayer();
         InitializeWorker();
-    }
-
-    void Start() {
-        //InitializePlayer();
+        InitializeWorker();
     }
 
     void InitializePlayer() {
@@ -44,15 +43,18 @@ public class GlobalCharactersManager : MonoBehaviour
         WorkerModel model = instance.GetComponent<WorkerModel>();
 
         if (model != null) {
-            model.Id = workerData.Id;
-            model.Name = workerData.Name;
+            model.Id = GetNewWorkerId();
+            model.Name = CharacterNameHelper.GetRandomName();
             model.Speed = workerData.Speed;
         } else {
             Debug.LogWarning("El prefab no tiene workerData asignado.");
         }
     }
 
-    // Metodos de cracion de Workers, StaffAdor lo instanciamos por defecto, el resto se van a generar aleatoriamente
+    public int GetNewWorkerId() {
+        workerIdCounter++;
+        return workerIdCounter;      
+    }
 }
 
 
