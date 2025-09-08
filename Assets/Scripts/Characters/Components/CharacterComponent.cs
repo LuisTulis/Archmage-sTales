@@ -2,5 +2,14 @@ using UnityEngine;
 
 public class CharacterComponent : MonoBehaviour
 {
-    public CharacterData characterData;
+    private CharacterLocomotion locomotion;
+
+    private void Start() {
+        locomotion = GetComponent<CharacterLocomotion>();
+        locomotion.InitializePatrolPoints();
+    }
+
+    private void Update() {
+        locomotion.IdleRandomWalk();
+    }
 }
