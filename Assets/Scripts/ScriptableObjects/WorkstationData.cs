@@ -11,5 +11,7 @@ public class WorkstationData : ScriptableObject
     public int Speed;
     public float profit;
     public CharacterComponent assignedWorker;
-    public bool status;
+    public string status;
+    public float karma;
+    public string description;
 }

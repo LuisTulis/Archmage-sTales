@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c154ee8f852b34f8894d2aca442029, type: 3}
+  m_Name: CalderoSO
+  m_EditorClassIdentifier: 
+  Id: 1
+  displayName: Caldero
+  Speed: 25
+  profit: 20
+  assignedWorker: {fileID: 0}
+  status: Broken
+  karma: -25
+  description: "\xBFA que huele aqu\xED?"
