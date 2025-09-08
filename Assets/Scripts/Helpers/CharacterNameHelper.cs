@@ -18,10 +18,23 @@ namespace Assets.Scripts.Helpers {
             "Clark", "Rodriguez", "Lewis", "Lee", "Walker", "Hall"
         };
 
+        private static readonly string[] profes = new string[]
+        {
+            "Alejandro Elisei", "Lorenzo Caballero", "El Dogthor 😎"
+        };
+
         public static string GetRandomName() {
-            int indexName = Random.Range(0, names.Length);
-            int indexSurname = Random.Range(0, surnames.Length);
-            return names[indexName] + " " + surnames[indexSurname];
+
+
+            int indexName = Random.Range(0, profes.Length);
+            return profes[indexName];
+
+            //int indexName = Random.Range(0, names.Length);
+            //int indexSurname = Random.Range(0, surnames.Length);
+            //return names[indexName] + " " + surnames[indexSurname];
+
+
+
         }
     }
 }

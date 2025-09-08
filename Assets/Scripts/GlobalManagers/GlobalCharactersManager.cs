@@ -1,4 +1,4 @@
-using Assets.Scripts.Helpers;
+﻿using Assets.Scripts.Helpers;
 using UnityEngine;
 
 public class GlobalCharactersManager : MonoBehaviour
@@ -21,6 +21,7 @@ public class GlobalCharactersManager : MonoBehaviour
         InitializePlayer();
         InitializeWorker();
         InitializeWorker();
+
     }
 
     void InitializePlayer() {
@@ -44,8 +45,17 @@ public class GlobalCharactersManager : MonoBehaviour
 
         if (model != null) {
             model.Id = GetNewWorkerId();
-            model.Name = CharacterNameHelper.GetRandomName();
             model.Speed = workerData.Speed;
+            if (model.Id == 3)
+            {
+                model.AsignatedStation = GameObject.Find("Mesa1").GetComponentInChildren<WorkStationBehaviour>();
+                model.Name = "Alejandro Elisei";
+            }
+            else if(model.Id == 2)
+            {
+                model.Name = "El Dogthor 😎";
+                model.AsignatedStation = GameObject.Find("Mesa2").GetComponentInChildren<WorkStationBehaviour>();
+            }
         } else {
             Debug.LogWarning("El prefab no tiene workerData asignado.");
         }

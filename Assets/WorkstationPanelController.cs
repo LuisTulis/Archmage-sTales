@@ -32,6 +32,7 @@ public class WorkstationPanelController : MonoBehaviour
         status.text = data.status;
         speed.text = data.Speed.ToString() + "s";
         karma.text = data.karma.ToString() + " karma";
+        worker.text = data.assignedWorker;
         panel.SetActive(true);
     }
 

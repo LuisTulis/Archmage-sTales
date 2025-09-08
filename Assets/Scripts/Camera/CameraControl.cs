@@ -79,7 +79,8 @@ public class CameraControl : MonoBehaviour {
     }
 
     private void LateUpdate() {
-        if (Keyboard.current.fKey.wasPressedThisFrame) {
+        if (Keyboard.current.fKey.wasPressedThisFrame)
+        {
             TrySelectTarget();
         }
 

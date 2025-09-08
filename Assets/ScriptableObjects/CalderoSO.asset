@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 1
   displayName: Caldero
-  Speed: 25
-  profit: 20
-  assignedWorker: {fileID: 0}
-  status: Broken
+  Speed: 60
+  profit: 1200
+  assignedWorker: "El Dogthor \U0001F60E"
+  status: Being used
   karma: -25
   description: "\xBFA que huele aqu\xED?"

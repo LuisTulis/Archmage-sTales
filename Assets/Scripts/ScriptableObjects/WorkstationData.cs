@@ -9,8 +9,8 @@ public class WorkstationData : ScriptableObject
     public string displayName;
     //public enum Type???
     public int Speed;
-    public float profit;
-    public CharacterComponent assignedWorker;
+    public int profit;
+    public string assignedWorker;
     public string status;
     public float karma;
     public string description;
