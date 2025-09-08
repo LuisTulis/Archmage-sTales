@@ -6,22 +6,16 @@ public class CharacterLocomotion : MonoBehaviour
 {
     [SerializeField] private string patrolParentName = "PatrolPoints";
     [SerializeField] private float reachThreshold = 0.5f;
-    [SerializeField] private float waitTimeAtPoint = 1f;
+    private float waitTimeAtPoint = 5f;
+
+    public float stopDistance = 10f;
+    private bool initialized = false;
 
     private List<Transform> patrolPoints = new List<Transform>();
     private int currentIndex = 0;
     private NavMeshAgent agent;
     private CharacterModel agentModel;
     private float waitTimer = 0f;
-
-    private void Awake() {
-        //agent = GetComponent<NavMeshAgent>();
-        //agentModel = GetComponent<CharacterModel>();
-        //if(agent != null) {
-        //    SetSpeed(agentModel.Speed);
-        //    Debug.Log("Speed" + agent.speed.ToString());
-        //}
-    }
 
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
@@ -66,16 +60,41 @@ public class CharacterLocomotion : MonoBehaviour
         }
     }
 
+
     public void IdleRandomWalk() {
         if (patrolPoints.Count == 0) return;
+
+        if (!initialized) {
+            currentIndex = Random.Range(0, patrolPoints.Count);
+
+            Vector3 randomOffset = Random.insideUnitSphere * stopDistance;
+            randomOffset.y = 0;
+            agent.SetDestination(patrolPoints[currentIndex].position + randomOffset);
+
+            initialized = true;
+            return;
+        }
 
         if (!agent.pathPending && agent.remainingDistance <= reachThreshold) {
             waitTimer += Time.deltaTime;
             if (waitTimer >= waitTimeAtPoint) {
                 waitTimer = 0f;
-                currentIndex = (currentIndex + 1) % patrolPoints.Count;
-                agent.SetDestination(patrolPoints[currentIndex].position);
+
+                int newIndex;
+                do {
+                    newIndex = Random.Range(0, patrolPoints.Count);
+                } while (newIndex == currentIndex && patrolPoints.Count > 1);
+
+                currentIndex = newIndex;
+
+                Vector3 randomOffset = Random.insideUnitSphere * stopDistance;
+                randomOffset.y = 0;
+                Vector3 targetPos = patrolPoints[currentIndex].position + randomOffset;
+
+                agent.SetDestination(targetPos);
             }
         }
     }
+
+
 }
