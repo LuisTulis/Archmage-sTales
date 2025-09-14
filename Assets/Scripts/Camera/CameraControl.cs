@@ -34,12 +34,16 @@ public class CameraControl : MonoBehaviour {
     [SerializeField][Range(0f, 0.1f)] private float edgeTolerance = 0.05f;
     [SerializeField] private bool useScreenEdge = true;
 
+    [Header("Map Limits")]
+    [SerializeField] private GameObject map;
+
     private Vector3 targetPosition;
 
     private float zoomHeight;
 
     private Vector3 horizontalVelocity;
     private Vector3 lastPosition;
+    private Bounds mapBounds;
 
     private void Awake() {
 
@@ -51,6 +55,21 @@ public class CameraControl : MonoBehaviour {
 
         cameraActions = new CameraControlActions();
         cameraTransform = this.GetComponentInChildren<Camera>().transform;
+    }
+
+
+    private void Start() {
+        if (map != null) {
+            Renderer mapRenderer = map.GetComponent<Renderer>();
+            if (mapRenderer != null) {
+                mapBounds = mapRenderer.bounds;
+            } else {
+                Collider mapCollider = map.GetComponent<Collider>();
+                if (mapCollider != null) {
+                    mapBounds = mapCollider.bounds;
+                }
+            }
+        }
     }
 
     private void OnEnable() {
@@ -97,6 +116,8 @@ public class CameraControl : MonoBehaviour {
             UpdateVelocity();
             UpdateCameraPosition();
             UpdateBasePosition();
+
+            ClampToMapBounds();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -231,6 +252,23 @@ public class CameraControl : MonoBehaviour {
                 cameraTarget = character.transform;
             }
         }
+    }
+
+    private void ClampToMapBounds() {
+        if (map == null) return;
+
+        Vector3 pos = transform.position;
+
+        // Usamos los bounds del mapa
+        float minX = mapBounds.min.x;
+        float maxX = mapBounds.max.x;
+        float minZ = mapBounds.min.z;
+        float maxZ = mapBounds.max.z;
+
+        pos.x = Mathf.Clamp(pos.x, minX, maxX);
+        pos.z = Mathf.Clamp(pos.z, minZ, maxZ);
+
+        transform.position = pos;
     }
 
 }
