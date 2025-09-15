@@ -11,10 +11,11 @@ public class CharacterComponent : MonoBehaviour
         locomotion.InitializePatrolPoints();
     }
 
-    private void Update() {
-        if(model.AsignatedStation != null)
+    private void Update() 
+    {
+        if (model.AsignatedStation != null)
         {
-            locomotion.MoveTo(model.AsignatedStation.transform.position);
+            locomotion.MoveTo(model.AsignatedStation.workerPosition.position);
             Work();
         }
         else
@@ -24,8 +25,21 @@ public class CharacterComponent : MonoBehaviour
     }
 
     private void Work()
-    {            
-        model.AsignatedStation.accessToWork(this.model.Name);
+    {
+        if (Vector3.Distance(this.transform.position, this.model.AsignatedStation.workerPosition.transform.position) < 2)
+        {
+            if (this.model.AsignatedStation.clientUsing == 2)
+            {
+                model.AsignatedStation.accessToWork(this.model.CharacterName);
+                this.transform.Rotate(new Vector3(0, 180 * Time.deltaTime, 0));
+            }
+            else
+            {
+
+                this.transform.rotation = model.AsignatedStation.workerPosition.rotation;
+            }
+
+        }
     }
 
 }

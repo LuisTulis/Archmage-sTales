@@ -11,6 +11,10 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     private WorkstationPanelController infoPanel;
     private GameManager gameManager;
     public string status;
+    public Transform workerPosition;
+    public Transform clientPosition;
+    public int clientUsing = 0;
+    public string assignedWorker;
 
     private void Awake()
     {
@@ -28,14 +32,12 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     public void accessToWork(string workerName)
     {
-        workstationData.assignedWorker = workerName;
         workstationData.status = this.status;
         if (this.status == "Idle")
         {
             this.status = "Being used";
             StartCoroutine(BeingUsed());
         }
-        Debug.Log(workstationData.displayName);
     }
     private IEnumerator BeingUsed()
     {
@@ -43,9 +45,10 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         yield return new WaitForSeconds(workstationData.Speed);
         gameManager.addGold(workstationData.profit);
         this.status = "Idle";
+        this.clientUsing = 0;
     }
 
-    
 
-    
+
+
 }
