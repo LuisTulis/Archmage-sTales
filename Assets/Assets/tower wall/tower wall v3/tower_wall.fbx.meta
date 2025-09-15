@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 11c59e305b396414eb4c5aeb75efe115
+guid: f22becc056d3423469e1ee9770cd6822
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: standardSurface1
-    second: {fileID: 2100000, guid: 90f6dcf32aae370409fc041d608df643, type: 2}
+      name: wall
+    second: {fileID: 2100000, guid: d34d0e74ba86384488cc7c498db1d292, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall_brick
+    second: {fileID: 2100000, guid: d21aa9984da3adb43ae7a7dee2526f51, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
