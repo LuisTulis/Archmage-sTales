@@ -1,17 +1,30 @@
+using System.Collections;
 using System.Xml.Linq;
-using TMPro;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour 
 {
-    public int horo;
-    public TMP_Text horo_mostrar;
+  
+        public int horo;
+        public TMP_Text horo_mostrar;
+        public GameObject feedbackPrefab;
+        public GameObject feedbackPlacement;
+        public GameObject canvas;
 
 
-    public void addGold(int amount)
-    {
-        horo += amount;
-        horo_mostrar.text = horo.ToString() + "$";
+        public void addGold(int amount)
+        {
+            StartCoroutine(goldCoroutine(amount));
+        }
+
+        IEnumerator goldCoroutine(int amount)
+        {
+            GameObject instance = Instantiate(feedbackPrefab, feedbackPlacement.transform.position, Quaternion.identity, canvas.transform);
+            instance.GetComponent<goldFeedback>().amount = amount;
+            yield return new WaitForSeconds(1);
+            horo += amount;
+            horo_mostrar.text = horo.ToString() + "$";
+        }
+
     }
-
-}

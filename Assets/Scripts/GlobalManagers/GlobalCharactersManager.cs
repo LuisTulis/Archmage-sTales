@@ -31,7 +31,7 @@ public class GlobalCharactersManager : MonoBehaviour
 
         if (model != null) {
             model.Id = staffAdorData.Id;
-            model.Name = staffAdorData.Name;
+            model.CharacterName = staffAdorData.Name;
             model.Speed = staffAdorData.Speed;
         } else {
             Debug.LogWarning("El prefab no tiene StaffAdorModel asignado.");
@@ -48,13 +48,11 @@ public class GlobalCharactersManager : MonoBehaviour
             model.Speed = workerData.Speed;
             if (model.Id == 3)
             {
-                model.AsignatedStation = GameObject.Find("Mesa1").GetComponentInChildren<WorkStationBehaviour>();
-                model.Name = "Alejandro Elisei";
+                model.CharacterName = "Alejandro Elisei";
             }
             else if(model.Id == 2)
             {
-                model.Name = "El Dogthor 😎";
-                model.AsignatedStation = GameObject.Find("Mesa2").GetComponentInChildren<WorkStationBehaviour>();
+                model.CharacterName = "El Dogthor 😎";
             }
         } else {
             Debug.LogWarning("El prefab no tiene workerData asignado.");
@@ -65,6 +63,8 @@ public class GlobalCharactersManager : MonoBehaviour
         workerIdCounter++;
         return workerIdCounter;      
     }
+
+   
 }
 
 
