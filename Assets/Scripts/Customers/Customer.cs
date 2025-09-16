@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -48,6 +49,10 @@ public class Customer : MonoBehaviour
 
     private void Update()
     {
+        if (Vector3.Distance(this.transform.position, GlobalCustomerManager.Instance.despawnPoint.position) < 3)
+        {
+            LeaveTheShop();
+        }
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
             //LeaveTheShop();
