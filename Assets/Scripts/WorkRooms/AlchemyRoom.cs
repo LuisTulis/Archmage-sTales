@@ -10,6 +10,9 @@ public class AlchemyRoom : MonoBehaviour {
     [SerializeField] private GameObject alchemyStation;
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject prePurchaseArea;
+    [SerializeField] private GameObject blockFrameDoor;
+    [SerializeField] private GameObject openFrameDoor;
+    [SerializeField] private GameObject emptyRoom;
 
     [Header("UI de Confirmación")]
     [SerializeField] private UnlockRoomUI unlockRoomUI;
@@ -77,6 +80,14 @@ public class AlchemyRoom : MonoBehaviour {
         if (door != null) {
             door.SetActive(false);
         }
+        if (blockFrameDoor != null)
+            blockFrameDoor.SetActive(false);
+
+        if (openFrameDoor != null)
+            openFrameDoor.SetActive(true);
+
+        if (emptyRoom != null)
+            emptyRoom.SetActive(false);
 
         if (prePurchaseArea != null)
             prePurchaseArea.SetActive(false);
