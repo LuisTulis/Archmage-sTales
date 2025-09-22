@@ -31,7 +31,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData e)
     {
-        infoPanel.Show(workstationData);
+        infoPanel.Show(this);
     }
 
     public void accessToWork(string workerName)

@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Helpers;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalCharactersManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class GlobalCharactersManager : MonoBehaviour
     [SerializeField] GameObject StaffAdorPrefab;
     [SerializeField] GameObject WorkerPrefab;
     [SerializeField] private int workerIdCounter = 1;
+    public List<GameObject> Workers;
 
     void Awake() {
         if (Instance == null) {
@@ -49,10 +51,12 @@ public class GlobalCharactersManager : MonoBehaviour
             if (model.Id == 3)
             {
                 model.CharacterName = "Alejandro Elisei";
+                Workers.Add(instance);
             }
             else if(model.Id == 2)
             {
                 model.CharacterName = "El Dogthor 😎";
+                Workers.Add(instance);
             }
         } else {
             Debug.LogWarning("El prefab no tiene workerData asignado.");
