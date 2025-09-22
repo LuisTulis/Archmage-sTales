@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,7 +12,7 @@ public class Customer : MonoBehaviour
     private List<Transform> patrolPoints = new List<Transform>();
     private int currentIndex = 0;
 
-    public List<stationType> objectives; 
+    public List<stationType> objectives;
     public float stopDistance = 10f;
     private bool initialized = false;
     [SerializeField] private float reachThreshold = 0.5f;
@@ -74,7 +72,7 @@ public class Customer : MonoBehaviour
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= reachThreshold)
         {
             waitTimer += Time.deltaTime;
-            
+
             if (waitTimer >= waitTimeAtPoint)
             {
                 waitTimer = 0f;
@@ -136,14 +134,14 @@ public class Customer : MonoBehaviour
         {
             LeaveTheShop();
         }
-        if(!leave)
+        if (!leave)
         {
             if (this.objectiveStation != null)
             {
                 if (objectiveStation.clientUsing == 0)
                 {
                     this.objectives.Remove(this.objectives[0]);
-                    if(this.objectives.Count == 0)
+                    if (this.objectives.Count == 0)
                     {
 
                         LeaveWithoutBuy();
@@ -169,7 +167,7 @@ public class Customer : MonoBehaviour
 
             }
         }
-       
+
     }
 
     private void MoveToObjectiveStation()

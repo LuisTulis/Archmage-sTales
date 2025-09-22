@@ -5,13 +5,14 @@ public class CharacterComponent : MonoBehaviour
     private CharacterLocomotion locomotion;
     private CharacterModel model;
 
-    private void Start() {
+    private void Start()
+    {
         locomotion = GetComponent<CharacterLocomotion>();
         model = GetComponent<CharacterModel>();
         locomotion.InitializePatrolPoints();
     }
 
-    private void Update() 
+    private void Update()
     {
         if (model.AsignatedStation != null)
         {
@@ -35,8 +36,7 @@ public class CharacterComponent : MonoBehaviour
             }
             else
             {
-
-                this.transform.rotation = model.AsignatedStation.workerPosition.rotation;
+                //this.transform.rotation = model.AsignatedStation.workerPosition.rotation;
             }
 
         }

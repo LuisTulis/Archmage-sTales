@@ -48,9 +48,15 @@ public class AlchemyTableFX : MonoBehaviour
             fireLight.range = baseRange + t * rangeAmp;
         }
     }
+    public void SetWorking(bool on)
+    {
+        if (isWorking == on) return;
+        SetOn(on);
+    }
 
     public void SetOn(bool on)
     {
+        isWorking = on;
         anim.SetBool("isOn", on);
 
         if (fireLight)

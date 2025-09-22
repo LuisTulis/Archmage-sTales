@@ -115,7 +115,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolParentName: PatrolPoints
   reachThreshold: 0.5
-  stopDistance: 10
 --- !u!114 &4997551068161454032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b719bde16b81515449f59bca94a23c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
 --- !u!1 &3590263769835384414
 GameObject:
   m_ObjectHideFlags: 0
