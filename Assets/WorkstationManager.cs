@@ -52,7 +52,29 @@ public class WorkstationManager : MonoBehaviour
             }
         }
     }
-    
+
+    public void AddStation(WorkStationBehaviour station) {
+        if (station == null) return;
+
+        if (!actualStations.Contains(station)) {
+            actualStations.Add(station);
+
+            bool addType = true;
+            foreach (stationType type in stationTypes) {
+                if (station.type == type) {
+                    addType = false;
+                    break;
+                }
+            }
+
+            if (addType) {
+                stationTypes.Add(station.type);
+                Debug.Log("Nuevo tipo de estación desbloqueado: " + station.type);
+            }
+        }
+    }
+
+
 }
 
 public enum stationType
