@@ -15,7 +15,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public Transform clientPosition;
     public int clientUsing = 0;
     public string assignedWorker;
-
+    public stationType type;
     private void Awake()
     {
         this.status = "Idle";
@@ -32,7 +32,6 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     public void accessToWork(string workerName)
     {
-        workstationData.status = this.status;
         if (this.status == "Idle")
         {
             this.status = "Being used";

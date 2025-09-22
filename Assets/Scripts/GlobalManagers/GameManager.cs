@@ -16,14 +16,15 @@ public class GameManager : MonoBehaviour
         public void addGold(int amount)
         {
             StartCoroutine(goldCoroutine(amount));
-        }
+            horo += amount;
+    }
+
 
         IEnumerator goldCoroutine(int amount)
         {
             GameObject instance = Instantiate(feedbackPrefab, feedbackPlacement.transform.position, Quaternion.identity, canvas.transform);
             instance.GetComponent<goldFeedback>().amount = amount;
             yield return new WaitForSeconds(1);
-            horo += amount;
             horo_mostrar.text = horo.ToString() + "$";
         }
 

@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32c154ee8f852b34f8894d2aca442029, type: 3}
-  m_Name: CalderoSO
+  m_Name: MesaDeAdivinacionLVL3
   m_EditorClassIdentifier: 
-  Id: 1
-  displayName: Caldero
-  Speed: 60
-  profit: 1200
-  assignedWorker: "El Dogthor \U0001F60E"
-  status: Being used
-  karma: -25
-  description: "\xBFA que huele aqu\xED?"
+  Id: 0
+  displayName: "Mesa de Adivinaci\xF3n 3"
+  Speed: 15
+  profit: 10
+  karma: 750
+  description: A que no adivinas que hace esta mesa?
+  upgradeCost: 0
