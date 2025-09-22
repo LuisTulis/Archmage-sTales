@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32c154ee8f852b34f8894d2aca442029, type: 3}
-  m_Name: MesaDeInvocacionSO
+  m_Name: CalderoLVL3
   m_EditorClassIdentifier: 
   Id: 1
-  displayName: "Mesa De Invocaci\xF3n"
-  Speed: 60
-  profit: 120
-  assignedWorker: {fileID: 0}
-  status: Idle
-  karma: 250
-  description: A veces es necesario un poco de ayuda extra
+  displayName: Caldero 3
+  Speed: 30
+  profit: 1200
+  karma: 1000
+  description: "\xBFA que huele aqu\xED?"
+  upgradeCost: 0

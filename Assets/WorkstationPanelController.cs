@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorkstationPanelController : MonoBehaviour
 {
+    public GameManager oro;
+    public Button upgradeButton;
     public GameObject panel;
     public GameObject workerPanel;
     [SerializeField] Camera cam;
@@ -16,17 +20,48 @@ public class WorkstationPanelController : MonoBehaviour
     [SerializeField] TMP_Text karma;
     [SerializeField] TMP_Text worker;
     [SerializeField] LayerMask interactableMask;
+    private WorkstationManager workstationManager;
     private WorkStationBehaviour selectedWorkstation;
     private bool nose = false;
     private string nombresito = "";
 
+    private void Awake()
+    {
+        this.workstationManager = GameObject.Find("WorkstationManager").GetComponent<WorkstationManager>();
+    }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Hide();
         }
+        try
+        {
+            if (selectedWorkstation.workstationData.karma > oro.horo)
+            {
+                upgradeButton.interactable = false;
+            }
+            else
+            {
+                upgradeButton.interactable = true;
+            }
+        }
+        catch {}
+        
 
+    }
+    public void updateStation()
+    {
+        Debug.Log(selectedWorkstation.ToString());
+        this.oro.addGold(-selectedWorkstation.workstationData.karma);
+        this.selectedWorkstation.workstationData = workstationManager.upgrade(selectedWorkstation.workstationData.name);
+        this.Show(selectedWorkstation.workstationData);
+        try
+        {
+            NavMeshSurface nm = GameObject.Find("Terrain").GetComponent<NavMeshSurface>();
+            nm.BuildNavMesh();
+        }
+        catch{ }
     }
     public void Show(WorkstationData data)
     {
@@ -44,9 +79,16 @@ public class WorkstationPanelController : MonoBehaviour
         title.text = data.displayName;
         desc.text = data.description;
         profit.text = data.profit + "$";
-        status.text = data.status;
+        status.text = selectedWorkstation.status;
         speed.text = data.Speed.ToString() + "s";
-        karma.text = data.karma.ToString() + " karma";
+        if(data.karma < 10000)
+        {
+            karma.text = "Upgrade: " + data.karma.ToString() + "$";
+        }
+        else
+        {
+            karma.text = "Max";
+        }
         if(nombresito == "")
         {
             worker.text = "Select Worker";

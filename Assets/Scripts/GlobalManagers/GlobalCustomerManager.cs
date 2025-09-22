@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalCustomerManager : MonoBehaviour
+
 {
     public static GlobalCustomerManager Instance { get; private set; }
 
@@ -23,7 +24,6 @@ public class GlobalCustomerManager : MonoBehaviour
         if (Instance == null) {
             Instance = this;
         }
-
         customers = new List<Customer>();
         spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval);
     }

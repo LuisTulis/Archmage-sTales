@@ -7,11 +7,9 @@ public class WorkstationData : ScriptableObject
 {
     public int Id;
     public string displayName;
-    //public enum Type???
     public int Speed;
     public int profit;
-    public string assignedWorker;
-    public string status;
-    public float karma;
+    public int karma;
     public string description;
+    public float upgradeCost;
 }

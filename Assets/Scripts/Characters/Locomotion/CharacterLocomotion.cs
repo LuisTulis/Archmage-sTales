@@ -8,9 +8,9 @@ public class CharacterLocomotion : MonoBehaviour
     [SerializeField] private float reachThreshold = 0.5f;
     private float waitTimeAtPoint = 5f;
 
-    public float stopDistance = 10f;
+    private float stopDistance = 2.5f;
     private bool initialized = false;
-
+    
     private List<Transform> patrolPoints = new List<Transform>();
     private int currentIndex = 0;
     private NavMeshAgent agent;
