@@ -3,7 +3,17 @@ guid: d9f03535030aa3b40bf44d6a8dfbdeee
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesa_Assets
+    second: {fileID: 2100000, guid: 291c060fbebb3c741a13d64fbbf907f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maderaMesa1
+    second: {fileID: 2100000, guid: 94e4bfef099b881459c33815670266c6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
