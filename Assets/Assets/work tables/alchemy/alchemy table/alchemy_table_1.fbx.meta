@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dee96deb037be4b4b86c5e182b6ef99f
+guid: 13e89290e78d06649ae89d475662150c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,22 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: madera
-    second: {fileID: 2100000, guid: 7ff182d52009d31459922446863baeee, type: 2}
+    second: {fileID: 2100000, guid: b3b84684d3cdc004c88bdba28d07bed0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: potions
-    second: {fileID: 2100000, guid: 7d3822c97983c734aac3ab5663748666, type: 2}
+    second: {fileID: 2100000, guid: 451ec5811cf4b7a4291a8a93ec779ce9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: recipe
-    second: {fileID: 2100000, guid: 93cd2090c7208054fa0d39d356eb6872, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: water
-    second: {fileID: 2100000, guid: cfb83d836f33b6b4f8f11fcab641e114, type: 2}
+    second: {fileID: 2100000, guid: 165f9550bad96ec44ac0b5b11d513167, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -52,7 +47,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1

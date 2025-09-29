@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 13e89290e78d06649ae89d475662150c
+guid: 90042f716ce1c754bb3a75e7a2025207
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,17 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: madera
-    second: {fileID: 2100000, guid: b3b84684d3cdc004c88bdba28d07bed0, type: 2}
+    second: {fileID: 2100000, guid: 9a5c6bd2842a93849a8b6503421c31bf, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: potions
-    second: {fileID: 2100000, guid: 451ec5811cf4b7a4291a8a93ec779ce9, type: 2}
+    second: {fileID: 2100000, guid: 4a6cb36f806cb9d4a9fd70552fb881d1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: recipe
-    second: {fileID: 2100000, guid: 165f9550bad96ec44ac0b5b11d513167, type: 2}
+    second: {fileID: 2100000, guid: 9362931aca7b2834c93f7a6801540417, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

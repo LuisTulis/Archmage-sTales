@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,8 +16,10 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public string assignedWorker;
     public stationType type;
 
+    public GameObject textIndicatorPrefab; 
+
     [Header("Table FX")]
-    private AlchemyTableFX fx;
+    private WorkstationFX fx;
 
     private void Awake()
     {
@@ -26,7 +29,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         gameManager.addGold(5);
         Debug.Log(this.transform.position);
 
-        fx = GetComponent<AlchemyTableFX>();
+        fx = GetComponent<WorkstationFX>();
     }
 
     public void OnPointerClick(PointerEventData e)
@@ -48,10 +51,23 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         Debug.Log("Entré");
         yield return new WaitForSeconds(workstationData.Speed);
         gameManager.addGold(workstationData.profit);
+        GameObject instance = Instantiate(textIndicatorPrefab, this.transform.position, Quaternion.identity, this.transform);
+        instance.GetComponent<goldFeedback2>().changeText(workstationData.profit.ToString());
         this.status = "Idle";
         this.clientUsing = 0;
         if (fx) fx.SetWorking(false);
     }
 
+    public void UpgradeFX(int level)
+    {
+        if (fx == null)
+        {
+            Debug.LogWarning("No WorkstationFX attached.");
+            return;
+        }
+
+        Debug.Log("Playing particle system.");
+        fx.ApplyUpgradeLevel(level);
+    }
 
 }
