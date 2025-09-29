@@ -16,7 +16,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public stationType type;
 
     [Header("Table FX")]
-    private AlchemyTableFX fx;
+    private WorkstationFX fx;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         gameManager.addGold(5);
         Debug.Log(this.transform.position);
 
-        fx = GetComponent<AlchemyTableFX>();
+        fx = GetComponent<WorkstationFX>();
     }
 
     public void OnPointerClick(PointerEventData e)
@@ -53,5 +53,16 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         if (fx) fx.SetWorking(false);
     }
 
+    public void UpgradeFX(int level)
+    {
+        if (fx == null)
+        {
+            Debug.LogWarning("No WorkstationFX attached.");
+            return;
+        }
+
+        Debug.Log("Playing particle system.");
+        fx.ApplyUpgradeLevel(level);
+    }
 
 }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 1
   displayName: Caldero 1
+  level: 1
   Speed: 50
   profit: 1200
   karma: 800
