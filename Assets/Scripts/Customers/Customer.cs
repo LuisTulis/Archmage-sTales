@@ -21,12 +21,18 @@ public class Customer : MonoBehaviour
 
     public bool leave = false;
 
+    public float attempt = 0;
+    public Vector3 targetPosition;
+
+    private CustomerObjective customerObjective;
     private void Awake()
     {
         objectives = new List<stationType>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         stationManager = GameObject.Find("WorkstationManager").GetComponent<WorkstationManager>();
         objectives.Add(stationManager.stationTypes[Random.Range(0, stationManager.stationTypes.Count)]);
+        customerObjective = this.gameObject.GetComponentInChildren<CustomerObjective>();
+        customerObjective.objective = objectives[0].ToString();
         InitializePatrolPoints();
         selectStation();
     }
@@ -44,7 +50,6 @@ public class Customer : MonoBehaviour
             if (patrolPoints.Count > 0)
             {
                 currentIndex = 0;
-                //navMeshAgent.SetDestination(patrolPoints[currentIndex].position);
             }
         }
         else
@@ -76,10 +81,21 @@ public class Customer : MonoBehaviour
             if (waitTimer >= waitTimeAtPoint)
             {
                 waitTimer = 0f;
+
                 if (objectiveStation == null)
                 {
-                    Debug.Log("Buscando mesa nueva");
-                    selectStation();
+                    if(attempt > 3)
+                    {
+                        Debug.Log("Irse sin pagar");
+                        LeaveWithoutBuy();
+                    }
+                    else
+                    {
+                        Debug.Log("Buscando mesa nueva");
+                        attempt += 1;
+                        selectStation();
+
+                    }
                 }
                 int newIndex;
                 do
@@ -141,9 +157,18 @@ public class Customer : MonoBehaviour
                 if (objectiveStation.clientUsing == 0)
                 {
                     this.objectives.Remove(this.objectives[0]);
+                    if(this.objectives.Count > 0)
+                    {
+                        this.customerObjective.objective = this.objectives[0].ToString();
+                    }
+                    else
+                    {
+                        this.customerObjective.objective = "";
+                    }
                     if (this.objectives.Count == 0)
                     {
-
+                        this.leave = true;
+                        this.objectiveStation = null;
                         LeaveWithoutBuy();
                     }
                     else
@@ -180,17 +205,22 @@ public class Customer : MonoBehaviour
     {
         this.leave = true;
         this.objectiveStation = null;
-        Debug.Log("Leave without buy");
+        this.objectives.Clear();
+        //StopMovement();
+        //Debug.Log("Leave without buy");
+        Debug.Log(GlobalCustomerManager.Instance.despawnPoint.position);
         MoveTo(GlobalCustomerManager.Instance.despawnPoint.position);
     }
 
     public void MoveTo(Vector3 destination)
     {
+        
         if (navMeshAgent != null)
         {
             NavMeshHit hitResult;
             if (NavMesh.SamplePosition(destination, out hitResult, NearestPointSearchRange, NavMesh.AllAreas))
             {
+                targetPosition = hitResult.position;
                 navMeshAgent.SetDestination(hitResult.position);
             }
         }

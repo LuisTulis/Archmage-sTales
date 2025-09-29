@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 1
   displayName: Caldero 1
-  Speed: 50
+  Speed: 1
   profit: 1200
   karma: 800
   description: "\xBFA que huele aqu\xED?"

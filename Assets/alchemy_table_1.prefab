@@ -1284,6 +1284,8 @@ MonoBehaviour:
   clientPosition: {fileID: 8502729254508029442}
   clientUsing: 0
   assignedWorker: 
+  type: 0
+  textIndicatorPrefab: {fileID: 2953653338555478829, guid: 93a62b358483f1f4b968c19573168f9a, type: 3}
 --- !u!23 &2185041088713032396
 MeshRenderer:
   m_ObjectHideFlags: 0
