@@ -93,7 +93,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: alchemy_table/cauldron_props/cauldron_spoon
+    path: AlchemyTable/Table/cauldron_props/cauldron_spoon
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -172,7 +172,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: alchemy_table/cauldron_props/cauldron_bubble
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -206,7 +206,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: alchemy_table/cauldron_props/cauldron_bubble1
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble1
   m_ScaleCurves: []
   m_FloatCurves:
   - serializedVersion: 2
@@ -253,7 +253,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: alchemy_table/cauldron_props/cauldron_bubble
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -283,7 +283,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: alchemy_table/cauldron_props/cauldron_bubble1
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble1
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -442,7 +442,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: alchemy_table/cauldron_props/cauldron_spoon
+    path: AlchemyTable/Table/cauldron_props/cauldron_spoon
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -526,7 +526,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: alchemy_table/cauldron_props/cauldron_spoon
+    path: AlchemyTable/Table/cauldron_props/cauldron_spoon
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -610,7 +610,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: alchemy_table/cauldron_props/cauldron_spoon
+    path: AlchemyTable/Table/cauldron_props/cauldron_spoon
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -694,7 +694,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: alchemy_table/cauldron_props/cauldron_bubble
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -778,7 +778,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: alchemy_table/cauldron_props/cauldron_bubble
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -862,7 +862,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: alchemy_table/cauldron_props/cauldron_bubble
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -910,7 +910,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: alchemy_table/cauldron_props/cauldron_bubble
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -949,7 +949,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: alchemy_table/cauldron_props/cauldron_bubble1
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble1
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -988,7 +988,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: alchemy_table/cauldron_props/cauldron_bubble1
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble1
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1027,7 +1027,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: alchemy_table/cauldron_props/cauldron_bubble1
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble1
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1057,7 +1057,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: alchemy_table/cauldron_props/cauldron_bubble1
+    path: AlchemyTable/Table/cauldron_props/cauldron_bubble1
     classID: 1
     script: {fileID: 0}
     flags: 0
