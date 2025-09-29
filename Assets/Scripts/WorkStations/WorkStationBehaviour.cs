@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,6 +15,8 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public int clientUsing = 0;
     public string assignedWorker;
     public stationType type;
+
+    public GameObject textIndicatorPrefab; 
 
     [Header("Table FX")]
     private WorkstationFX fx;
@@ -48,6 +51,8 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         Debug.Log("Entré");
         yield return new WaitForSeconds(workstationData.Speed);
         gameManager.addGold(workstationData.profit);
+        GameObject instance = Instantiate(textIndicatorPrefab, this.transform.position, Quaternion.identity, this.transform);
+        instance.GetComponent<goldFeedback2>().changeText(workstationData.profit.ToString());
         this.status = "Idle";
         this.clientUsing = 0;
         if (fx) fx.SetWorking(false);
