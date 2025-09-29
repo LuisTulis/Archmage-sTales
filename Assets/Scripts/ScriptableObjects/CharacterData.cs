@@ -4,6 +4,7 @@ using UnityEngine;
 public class CharacterData : ScriptableObject {
     public int Id;
     public string Name;
-    //public CharacterStats Stats;
     public int Speed;
+    public int HirePrice;
+    //public CharacterStats Stats;
 }
