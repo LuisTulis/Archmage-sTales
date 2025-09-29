@@ -7,6 +7,7 @@ public class WorkstationFX : MonoBehaviour
 {
     [Header("Control")]
     public bool isWorking;
+    public bool uniqueComponent;
 
     [Header("FX")]
     public Light fireLight;
@@ -22,6 +23,9 @@ public class WorkstationFX : MonoBehaviour
 
     [Header("Upgrade sparkles")]
     public ParticleSystem mainUpgradeSparkles;
+
+    [Header("Level 1")]
+    public GameObject levelOneObject;
 
     [Header("Level 2 upgrade")]
     public GameObject levelTwoObject;
@@ -112,12 +116,22 @@ public class WorkstationFX : MonoBehaviour
         {
             if (!levelTwoObject.activeSelf) levelTwoObject.SetActive(true);
             if (levelTwoSparkles != null) StartCoroutine(PlayOnceAndStop(levelTwoSparkles));
+            
+            if (uniqueComponent)
+            {
+                levelOneObject.SetActive(false);
+            }
         }
 
         if (level >= 3 && levelThreeObject != null)
         {
             if (!levelThreeObject.activeSelf) levelThreeObject.SetActive(true);
             if (levelThreeSparkles != null) StartCoroutine(PlayOnceAndStop(levelThreeSparkles));
+
+            if (uniqueComponent) 
+            {
+                levelTwoObject.SetActive(false);
+            }
         }
     }
 
