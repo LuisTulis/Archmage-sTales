@@ -55,6 +55,7 @@ public class WorkstationPanelController : MonoBehaviour
     public void updateStation()
     {
         Debug.Log(selectedWorkstation.ToString());
+        Debug.Log(selectedWorkstation.workstationData.karma.ToString());
         this.oro.addGold(-selectedWorkstation.workstationData.karma);
         this.selectedWorkstation.workstationData = workstationManager.upgrade(selectedWorkstation.workstationData.name);
         this.Show(selectedWorkstation);
