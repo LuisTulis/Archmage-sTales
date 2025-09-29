@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,8 +43,8 @@ public class WorkstationPanelController : MonoBehaviour
                 upgradeButton.interactable = true;
             }
         }
-        catch {}
-        
+        catch { }
+
 
     }
     public void updateStation()
@@ -57,9 +54,11 @@ public class WorkstationPanelController : MonoBehaviour
         this.selectedWorkstation.workstationData = workstationManager.upgrade(selectedWorkstation.workstationData.name);
         this.Show(selectedWorkstation);
 
+        selectedWorkstation.UpgradeFX(selectedWorkstation.workstationData.level);
     }
 
-    public void Show(WorkStationBehaviour workstation) {
+    public void Show(WorkStationBehaviour workstation)
+    {
         selectedWorkstation = workstation;
         var data = workstation.workstationData;
         nombresito = workstation.assignedWorker;
@@ -82,20 +81,26 @@ public class WorkstationPanelController : MonoBehaviour
 
     }
 
-    public void selectWorker(string name) {
+    public void selectWorker(string name)
+    {
         GameObject selectedWorkerGO = null;
-        foreach (var workerGO in GlobalCharactersManager.Instance.Workers) {
+        foreach (var workerGO in GlobalCharactersManager.Instance.Workers)
+        {
             var model = workerGO.GetComponent<CharacterModel>();
-            if (model != null && model.CharacterName == name) {
+            if (model != null && model.CharacterName == name)
+            {
                 selectedWorkerGO = workerGO;
                 break;
             }
         }
 
-        if (!string.IsNullOrEmpty(selectedWorkstation.assignedWorker)) {
-            foreach (var workerGO in GlobalCharactersManager.Instance.Workers) {
+        if (!string.IsNullOrEmpty(selectedWorkstation.assignedWorker))
+        {
+            foreach (var workerGO in GlobalCharactersManager.Instance.Workers)
+            {
                 var model = workerGO.GetComponent<CharacterModel>();
-                if (model != null && model.CharacterName == selectedWorkstation.assignedWorker) {
+                if (model != null && model.CharacterName == selectedWorkstation.assignedWorker)
+                {
                     model.AsignatedStation = null;
                     workerGO.GetComponent<CharacterLocomotion>().IdleRandomWalk();
                     break;
@@ -104,13 +109,16 @@ public class WorkstationPanelController : MonoBehaviour
         }
 
         WorkStationBehaviour[] workstations = GameObject.FindObjectsOfType<WorkStationBehaviour>();
-        foreach (WorkStationBehaviour workstation in workstations) {
-            if (workstation != selectedWorkstation && workstation.assignedWorker == name) {
+        foreach (WorkStationBehaviour workstation in workstations)
+        {
+            if (workstation != selectedWorkstation && workstation.assignedWorker == name)
+            {
                 workstation.assignedWorker = "";
             }
         }
 
-        if (selectedWorkerGO != null) {
+        if (selectedWorkerGO != null)
+        {
             var model = selectedWorkerGO.GetComponent<CharacterModel>();
             model.AsignatedStation = selectedWorkstation;
             selectedWorkstation.assignedWorker = name;

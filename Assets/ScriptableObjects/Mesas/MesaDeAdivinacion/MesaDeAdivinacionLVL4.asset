@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 0
   displayName: "Mesa de Adivinaci\xF3n 4"
+  level: 4
   Speed: 13
   profit: 10
   karma: 1500

@@ -32,7 +32,7 @@ public class CharacterComponent : MonoBehaviour
             if (this.model.AsignatedStation.clientUsing == 2)
             {
                 model.AsignatedStation.accessToWork(this.model.CharacterName);
-                this.transform.Rotate(new Vector3(0, 180 * Time.deltaTime, 0));
+                //this.transform.Rotate(new Vector3(0, 180 * Time.deltaTime, 0));
             }
             else
             {
