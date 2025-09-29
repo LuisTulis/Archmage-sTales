@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,8 +43,8 @@ public class WorkstationPanelController : MonoBehaviour
                 upgradeButton.interactable = true;
             }
         }
-        catch {}
-        
+        catch { }
+
 
     }
     public void updateStation()
@@ -55,48 +52,25 @@ public class WorkstationPanelController : MonoBehaviour
         Debug.Log(selectedWorkstation.ToString());
         this.oro.addGold(-selectedWorkstation.workstationData.karma);
         this.selectedWorkstation.workstationData = workstationManager.upgrade(selectedWorkstation.workstationData.name);
-        this.Show(selectedWorkstation.workstationData);
-        try
-        {
-            NavMeshSurface nm = GameObject.Find("Terrain").GetComponent<NavMeshSurface>();
-            nm.BuildNavMesh();
-        }
-        catch{ }
+        this.Show(selectedWorkstation);
+
+        selectedWorkstation.UpgradeFX(selectedWorkstation.workstationData.level);
     }
-    public void Show(WorkstationData data)
+
+    public void Show(WorkStationBehaviour workstation)
     {
-        nombresito = "";
-        WorkStationBehaviour[] workstations = GameObject.FindObjectsOfType<WorkStationBehaviour>();
-        foreach(WorkStationBehaviour workstation in workstations)
-        {
-            if(workstation.workstationData.Id == data.Id)
-            {
-                selectedWorkstation = workstation;
-                nombresito = selectedWorkstation.assignedWorker;
-                nose = true;
-            }
-        }
+        selectedWorkstation = workstation;
+        var data = workstation.workstationData;
+        nombresito = workstation.assignedWorker;
+        nose = true;
+
         title.text = data.displayName;
         desc.text = data.description;
         profit.text = data.profit + "$";
-        status.text = selectedWorkstation.status;
+        status.text = workstation.status;
         speed.text = data.Speed.ToString() + "s";
-        if(data.karma < 10000)
-        {
-            karma.text = "Upgrade: " + data.karma.ToString() + "$";
-        }
-        else
-        {
-            karma.text = "Max";
-        }
-        if(nombresito == "")
-        {
-            worker.text = "Select Worker";
-        }
-        else
-        {
-            worker.text = selectedWorkstation.assignedWorker;
-        }
+        karma.text = data.karma < 10000 ? "Upgrade: " + data.karma.ToString() + "$" : "Max";
+        worker.text = string.IsNullOrEmpty(nombresito) ? "Select Worker" : nombresito;
         panel.SetActive(true);
     }
 
@@ -109,47 +83,51 @@ public class WorkstationPanelController : MonoBehaviour
 
     public void selectWorker(string name)
     {
-        string otherName = "";
-        WorkStationBehaviour[] workstations = GameObject.FindObjectsOfType<WorkStationBehaviour>();
-        foreach(WorkStationBehaviour workstation in workstations)
+        GameObject selectedWorkerGO = null;
+        foreach (var workerGO in GlobalCharactersManager.Instance.Workers)
         {
-            
-            if(workstation.workstationData.Id == selectedWorkstation.workstationData.Id)
+            var model = workerGO.GetComponent<CharacterModel>();
+            if (model != null && model.CharacterName == name)
             {
-                otherName = workstation.assignedWorker;
-                Debug.Log(otherName);
+                selectedWorkerGO = workerGO;
+                break;
             }
-            else
+        }
+
+        if (!string.IsNullOrEmpty(selectedWorkstation.assignedWorker))
+        {
+            foreach (var workerGO in GlobalCharactersManager.Instance.Workers)
             {
-                if (workstation.assignedWorker == name)
+                var model = workerGO.GetComponent<CharacterModel>();
+                if (model != null && model.CharacterName == selectedWorkstation.assignedWorker)
                 {
-                    workstation.assignedWorker = "";
+                    model.AsignatedStation = null;
+                    workerGO.GetComponent<CharacterLocomotion>().IdleRandomWalk();
+                    break;
                 }
             }
         }
 
-        CharacterComponent[] workers = GameObject.FindObjectsOfType<CharacterComponent>();
-        foreach(CharacterComponent character in workers)
+        WorkStationBehaviour[] workstations = GameObject.FindObjectsOfType<WorkStationBehaviour>();
+        foreach (WorkStationBehaviour workstation in workstations)
         {
-            CharacterModel model = character.GetComponent<CharacterModel>();
+            if (workstation != selectedWorkstation && workstation.assignedWorker == name)
+            {
+                workstation.assignedWorker = "";
+            }
+        }
 
-            if(model.CharacterName == otherName)
-            {
-                model.AsignatedStation = null;
-                character.GetComponent<CharacterLocomotion>().IdleRandomWalk();
-            }
-            else if(model.CharacterName == name)
-            {
-                Debug.Log(selectedWorkstation);
-                model.AsignatedStation = selectedWorkstation;
-                selectedWorkstation.assignedWorker = name;
-            }
+        if (selectedWorkerGO != null)
+        {
+            var model = selectedWorkerGO.GetComponent<CharacterModel>();
+            model.AsignatedStation = selectedWorkstation;
+            selectedWorkstation.assignedWorker = name;
         }
 
         worker.text = selectedWorkstation.assignedWorker;
         workerPanel.SetActive(false);
-
     }
+
     public void showWorkers()
     {
 

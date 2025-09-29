@@ -21,14 +21,21 @@ public class CameraControl : MonoBehaviour {
     [Header("Verical Motion - Zoom")]
     [SerializeField] private float stepSize = 2f;
     [SerializeField] private float zoomDampening = 7.5f;
-    [SerializeField] private float minHeight = 5f;
+    [SerializeField] private float minHeight = 1f;
     [SerializeField] private float maxHeight = 50f;
     [SerializeField] private float zoomSpeed = 2f;
 
     [Header("Rotation")]
-    [SerializeField] private float maxRotationSpeed = 1f;
-    [SerializeField] private float minVerticalRotation = 0f;
-    [SerializeField] private float maxVerticalRotation = 60f;
+    [SerializeField] private float rotationSpeed = 2f;
+    [SerializeField] private float moveSpeed = 0.05f;
+    [SerializeField] private float minPitch = -60f;
+    [SerializeField] private float maxPitch = 60f;
+    [SerializeField] private Transform cameraRoot;
+    [SerializeField] private Transform cameraPivot;
+
+    private float yaw;
+    private float pitch;
+    private float pivotHeight = 0f;
 
     [Header("Screen Edge Motion")]
     [SerializeField][Range(0f, 0.1f)] private float edgeTolerance = 0.05f;
@@ -104,8 +111,10 @@ public class CameraControl : MonoBehaviour {
         }
 
         if (cameraTarget != null) {
-            transform.position = cameraTarget.position;
-            lastPosition = cameraTarget.position;
+            Vector3 targetPos = cameraTarget.position;
+            cameraRoot.position = new Vector3(targetPos.x, cameraRoot.position.y, targetPos.z);
+
+            lastPosition = cameraRoot.position;
         } else {
             GetKeyboardMovement();
 
@@ -122,11 +131,11 @@ public class CameraControl : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
             cameraTarget = null;
-            transform.position = lastPosition;
+            cameraRoot.position = new Vector3(lastPosition.x, cameraRoot.position.y, lastPosition.z);
         }
 
         if (Mathf.Abs(keyRotationDirection) > 0.01f) {
-            transform.Rotate(0f, keyRotationDirection * maxRotationSpeed * Time.deltaTime * 100f, 0f);
+            transform.Rotate(0f, keyRotationDirection * rotationSpeed * Time.deltaTime * 100f, 0f);
         }
     }
 
@@ -176,17 +185,19 @@ public class CameraControl : MonoBehaviour {
         if (Mouse.current.rightButton.isPressed && inputValue.control.device is Mouse) {
             Vector2 delta = inputValue.ReadValue<Vector2>();
 
-            float horizontalRotation = delta.x * maxRotationSpeed;
-            float verticalRotation = -delta.y * maxRotationSpeed;
+            // Yaw en Y (horizontal)
+            yaw += delta.x * rotationSpeed;
 
-            transform.Rotate(0f, horizontalRotation, 0f);
+            // Pitch en X (vertical)
+            pitch -= delta.y * rotationSpeed;
+            pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
-            float currentXRotation = transform.rotation.eulerAngles.x;
-            float clampedXRotation = Mathf.Clamp(currentXRotation + verticalRotation, minVerticalRotation, maxVerticalRotation);
-
-            transform.rotation = Quaternion.Euler(clampedXRotation, transform.rotation.eulerAngles.y, 0f);
+            // Aplicar rotaciones
+            cameraRoot.localRotation = Quaternion.Euler(0f, yaw, 0f);
+            cameraPivot.localRotation = Quaternion.Euler(pitch, 0f, 0f);
         }
     }
+
 
     private void OnRotateKeyPressed(InputAction.CallbackContext ctx) {
         if (ctx.control == Keyboard.current.qKey) {
@@ -207,21 +218,26 @@ public class CameraControl : MonoBehaviour {
         float value = -inputValue.ReadValue<Vector2>().y / 100f;
 
         if (Mathf.Abs(value) > 0.1f) {
-            zoomHeight = cameraTransform.localPosition.y + value * stepSize;
-            if (zoomHeight < minHeight) {
-                zoomHeight = minHeight;
-            } else if (zoomHeight > maxHeight) {
-                zoomHeight = maxHeight;
-            }
+            pivotHeight += value * stepSize;
+            pivotHeight = Mathf.Clamp(pivotHeight, minHeight, maxHeight);
         }
     }
 
     private void UpdateCameraPosition() {
-        Vector3 zoomTarget = new Vector3(cameraTransform.localPosition.x, zoomHeight, cameraTransform.localPosition.z);
-        zoomTarget -= zoomSpeed * (zoomHeight - cameraTransform.localPosition.y) * Vector3.forward;
+        // Aplicar zoom moviendo el pivot en Y
+        Vector3 targetPos = new Vector3(
+            cameraPivot.localPosition.x,
+            pivotHeight,
+            cameraPivot.localPosition.z
+        );
 
-        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, zoomTarget, Time.deltaTime * zoomDampening);
-        cameraTransform.LookAt(this.transform);
+        cameraPivot.localPosition = Vector3.Lerp(
+            cameraPivot.localPosition,
+            targetPos,
+            Time.deltaTime * zoomDampening
+        );
+
+        cameraTransform.LookAt(cameraPivot.position);
     }
 
     private void CheckMouseAtScreenEdge() {

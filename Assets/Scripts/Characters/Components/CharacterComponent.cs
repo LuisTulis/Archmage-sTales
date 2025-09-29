@@ -5,13 +5,14 @@ public class CharacterComponent : MonoBehaviour
     private CharacterLocomotion locomotion;
     private CharacterModel model;
 
-    private void Start() {
+    private void Start()
+    {
         locomotion = GetComponent<CharacterLocomotion>();
         model = GetComponent<CharacterModel>();
         locomotion.InitializePatrolPoints();
     }
 
-    private void Update() 
+    private void Update()
     {
         if (model.AsignatedStation != null)
         {
@@ -31,12 +32,11 @@ public class CharacterComponent : MonoBehaviour
             if (this.model.AsignatedStation.clientUsing == 2)
             {
                 model.AsignatedStation.accessToWork(this.model.CharacterName);
-                this.transform.Rotate(new Vector3(0, 180 * Time.deltaTime, 0));
+                //this.transform.Rotate(new Vector3(0, 180 * Time.deltaTime, 0));
             }
             else
             {
-
-                this.transform.rotation = model.AsignatedStation.workerPosition.rotation;
+                //this.transform.rotation = model.AsignatedStation.workerPosition.rotation;
             }
 
         }

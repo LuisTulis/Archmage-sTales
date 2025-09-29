@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Tilemaps;
 
 public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 {
@@ -16,6 +14,10 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public int clientUsing = 0;
     public string assignedWorker;
     public stationType type;
+
+    [Header("Table FX")]
+    private WorkstationFX fx;
+
     private void Awake()
     {
         this.status = "Idle";
@@ -23,17 +25,20 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         gameManager.addGold(5);
         Debug.Log(this.transform.position);
+
+        fx = GetComponent<WorkstationFX>();
     }
 
     public void OnPointerClick(PointerEventData e)
     {
-        infoPanel.Show(workstationData);
+        infoPanel.Show(this);
     }
 
     public void accessToWork(string workerName)
     {
         if (this.status == "Idle")
         {
+            if (fx) fx.SetWorking(true);
             this.status = "Being used";
             StartCoroutine(BeingUsed());
         }
@@ -45,9 +50,19 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         gameManager.addGold(workstationData.profit);
         this.status = "Idle";
         this.clientUsing = 0;
+        if (fx) fx.SetWorking(false);
     }
 
+    public void UpgradeFX(int level)
+    {
+        if (fx == null)
+        {
+            Debug.LogWarning("No WorkstationFX attached.");
+            return;
+        }
 
-
+        Debug.Log("Playing particle system.");
+        fx.ApplyUpgradeLevel(level);
+    }
 
 }
