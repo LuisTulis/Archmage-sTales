@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 9088920637164155299}
   - component: {fileID: 7447833661276158599}
   - component: {fileID: 7081351368387858702}
-  - component: {fileID: 442330794559331916}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Camera Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,10 +27,11 @@ Transform:
   m_GameObject: {fileID: 4976322153156679700}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3336533151339735531}
   m_Father: {fileID: 4101142457045182903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7447833661276158599
@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4976322153156679700}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -84,27 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &442330794559331916
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4976322153156679700}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5038284409187929752
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +115,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9088920637164155299}
-  - {fileID: 3336533151339735531}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2715919670523540605
@@ -152,19 +130,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTarget: {fileID: 0}
-  maxSpeed: 5
+  maxSpeed: 8
   acceleration: 10
   damping: 15
-  stepSize: 2
-  zoomDampening: 7.5
-  minHeight: 5
-  maxHeight: 50
-  zoomSpeed: 2
-  maxRotationSpeed: 1
-  minVerticalRotation: 0
-  maxVerticalRotation: 30
+  stepSize: 1
+  zoomDampening: 5
+  minHeight: -7.5
+  maxHeight: 15
+  zoomSpeed: -10
+  rotationSpeed: 0.1
+  moveSpeed: 0.05
+  minPitch: 20
+  maxPitch: 60
+  cameraRoot: {fileID: 4101142457045182903}
+  cameraPivot: {fileID: 9088920637164155299}
   edgeTolerance: 0.05
-  useScreenEdge: 1
+  useScreenEdge: 0
+  map: {fileID: 0}
 --- !u!1 &7275773301432372339
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +159,7 @@ GameObject:
   - component: {fileID: 6559907821387667408}
   - component: {fileID: 6551554015587281341}
   - component: {fileID: 629889997721208750}
+  - component: {fileID: 5239948290542354045}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -192,13 +175,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7275773301432372339}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0.21977898, y: 6.800791, z: -6.9795904}
+  m_LocalRotation: {x: 0.07010466, y: -0, z: -0, w: 0.99753964}
+  m_LocalPosition: {x: 0, y: 0.8, z: -4.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4101142457045182903}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_Father: {fileID: 9088920637164155299}
+  m_LocalEulerAnglesHint: {x: 8.04, y: 0, z: 0}
 --- !u!20 &6559907821387667408
 Camera:
   m_ObjectHideFlags: 0
@@ -259,6 +242,22 @@ AudioListener:
   m_GameObject: {fileID: 7275773301432372339}
   m_Enabled: 1
 --- !u!114 &629889997721208750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7275773301432372339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
+--- !u!114 &5239948290542354045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
