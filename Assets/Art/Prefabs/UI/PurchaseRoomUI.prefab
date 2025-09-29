@@ -360,8 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea0a57a4212f64a4d99cda4c2d0b089c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yesButton: {fileID: 8126583690804359316}
-  noButton: {fileID: 3320810575286338548}
+  roomNameText: {fileID: 0}
+  roomPriceText: {fileID: 0}
 --- !u!1 &4513105361308761094
 GameObject:
   m_ObjectHideFlags: 0

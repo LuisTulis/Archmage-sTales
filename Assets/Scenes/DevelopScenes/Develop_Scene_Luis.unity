@@ -10210,11 +10210,11 @@ PrefabInstance:
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: canvas
       value: 
-      objectReference: {fileID: 1468550257}
+      objectReference: {fileID: 648367188}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: horo_mostrar
       value: 
-      objectReference: {fileID: 978643316}
+      objectReference: {fileID: 314407366}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: feedbackPrefab
       value: 
@@ -10222,7 +10222,7 @@ PrefabInstance:
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: feedbackPlacement
       value: 
-      objectReference: {fileID: 1303564535}
+      objectReference: {fileID: 142285489}
     - target: {fileID: 6688503733680650043, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
