@@ -23,18 +23,15 @@ namespace Assets.Scripts.Helpers {
             "Alejandro Elisei", "Lorenzo Caballero", "El Dogthor 😎"
         };
 
-        public static string GetRandomName() {
-
-
+        public static string GetRandomProfeName() {
             int indexName = Random.Range(0, profes.Length);
             return profes[indexName];
+        }
 
-            //int indexName = Random.Range(0, names.Length);
-            //int indexSurname = Random.Range(0, surnames.Length);
-            //return names[indexName] + " " + surnames[indexSurname];
-
-
-
+        public static string GetRandomName() {
+            int indexName = Random.Range(0, names.Length);
+            int indexSurname = Random.Range(0, surnames.Length);
+            return names[indexName] + " " + surnames[indexSurname];
         }
     }
 }

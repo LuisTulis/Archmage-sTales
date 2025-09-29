@@ -25,6 +25,11 @@ public class WorkstationPanelController : MonoBehaviour
     private bool nose = false;
     private string nombresito = "";
 
+
+    [Header("Workers UI")]
+    [SerializeField] private Transform workersContainer;
+    [SerializeField] private GameObject workerEntryPrefab;
+
     private void Awake()
     {
         this.workstationManager = GameObject.Find("WorkstationManager").GetComponent<WorkstationManager>();
@@ -124,5 +129,26 @@ public class WorkstationPanelController : MonoBehaviour
     {
 
         this.workerPanel.SetActive(true);
+        PopulateWorkersList();
+    }
+
+    private void PopulateWorkersList() {
+        foreach (Transform child in workersContainer) {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var workerGO in GlobalCharactersManager.Instance.Workers) {
+            var model = workerGO.GetComponent<CharacterModel>();
+            if (model == null) continue;
+
+            GameObject entry = Instantiate(workerEntryPrefab, workersContainer);
+            TMP_Text nameText = entry.transform.Find("NameText").GetComponent<TMP_Text>();
+            Button selectButton = entry.transform.Find("SelectButton").GetComponent<Button>();
+
+            nameText.text = model.CharacterName;
+
+            string workerName = model.CharacterName;
+            selectButton.onClick.AddListener(() => selectWorker(workerName));
+        }
     }
 }
