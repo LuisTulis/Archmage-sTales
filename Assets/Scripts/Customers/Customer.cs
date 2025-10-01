@@ -33,6 +33,8 @@ public class Customer : MonoBehaviour
     {
         objectives = new List<stationType>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.speed = 2f;
+
         stationManager = GameObject.Find("WorkstationManager").GetComponent<WorkstationManager>();
         objectives.Add(stationManager.stationTypes[Random.Range(0, stationManager.stationTypes.Count)]);
         customerObjective = this.gameObject.GetComponentInChildren<CustomerObjective>();
@@ -43,7 +45,8 @@ public class Customer : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-    private void Start() {
+    private void Start()
+    {
         var randomNumber = Random.Range(0f, 1f);
         //isThief = randomNumber < 0.1f;
         isThief = true;

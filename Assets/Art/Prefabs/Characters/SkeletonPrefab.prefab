@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7928780282078821678
 Transform:
   m_ObjectHideFlags: 0
@@ -141,6 +141,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7928780282078821678}
+  - {fileID: 404508705409973851}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8316822353828721058
@@ -173,6 +174,8 @@ MonoBehaviour:
   speed: 0
   idle: 1
   workStation: {fileID: 0}
+  attackRange: 0
+  alreadyAttack: 0
 --- !u!114 &1100184540758664680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,8 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3722f3ba32d16924baba1d056a3a1b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolParentName: PatrolPoints
-  reachThreshold: 0.5
+  animator: {fileID: 0}
 --- !u!195 &-5373590406313120365
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -209,3 +211,81 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!1001 &150769412050180528
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1012341259757601221}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_Name
+      value: LowPolySkeleton@Sword And Shield Walk
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 82251e112d6b96a46815a774ea56a57d, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+--- !u!4 &404508705409973851 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0c48d7a9197926247afbbdce0083e3b4, type: 3}
+  m_PrefabInstance: {fileID: 150769412050180528}
+  m_PrefabAsset: {fileID: 0}
