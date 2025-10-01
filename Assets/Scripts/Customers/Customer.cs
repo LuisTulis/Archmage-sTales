@@ -25,6 +25,9 @@ public class Customer : MonoBehaviour
     public Vector3 targetPosition;
 
     private CustomerObjective customerObjective;
+
+    private Animator animator;
+
     private void Awake()
     {
         objectives = new List<stationType>();
@@ -35,6 +38,8 @@ public class Customer : MonoBehaviour
         customerObjective.objective = objectives[0].ToString();
         InitializePatrolPoints();
         selectStation();
+
+        animator = GetComponentInChildren<Animator>();
     }
 
     public void InitializePatrolPoints()
@@ -84,7 +89,7 @@ public class Customer : MonoBehaviour
 
                 if (objectiveStation == null)
                 {
-                    if(attempt > 3)
+                    if (attempt > 3)
                     {
                         Debug.Log("Irse sin pagar");
                         LeaveWithoutBuy();
@@ -157,7 +162,7 @@ public class Customer : MonoBehaviour
                 if (objectiveStation.clientUsing == 0)
                 {
                     this.objectives.Remove(this.objectives[0]);
-                    if(this.objectives.Count > 0)
+                    if (this.objectives.Count > 0)
                     {
                         this.customerObjective.objective = this.objectives[0].ToString();
                     }
@@ -193,6 +198,7 @@ public class Customer : MonoBehaviour
             }
         }
 
+        UpdateWalkingAnimation();
     }
 
     private void MoveToObjectiveStation()
@@ -214,7 +220,7 @@ public class Customer : MonoBehaviour
 
     public void MoveTo(Vector3 destination)
     {
-        
+
         if (navMeshAgent != null)
         {
             NavMeshHit hitResult;
@@ -231,6 +237,12 @@ public class Customer : MonoBehaviour
         GlobalCustomerManager.Instance.CustomerLeft(this);
     }
 
+    private void UpdateWalkingAnimation()
+    {
+        if (animator == null || navMeshAgent == null) return;
 
+        bool isWalking = navMeshAgent.velocity.magnitude > 0.1f;
+        animator.SetBool("walking", isWalking);
+    }
 
 }
