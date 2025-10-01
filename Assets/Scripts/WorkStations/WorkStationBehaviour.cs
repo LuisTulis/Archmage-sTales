@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,6 +14,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public Transform clientPosition;
     public int clientUsing = 0;
     public string assignedWorker;
+    public Customer assignedCustomer;
     public stationType type;
 
     public GameObject textIndicatorPrefab; 
@@ -49,9 +51,19 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     {
         Debug.Log("Entré");
         yield return new WaitForSeconds(workstationData.Speed);
-        gameManager.addGold(workstationData.profit);
+
+        int realProfit;
+
+        if(assignedCustomer.isThief) {
+            realProfit = (int)(workstationData.profit * -0.25f);
+
+        } else {
+            realProfit = workstationData.profit;
+        }
+        gameManager.addGold(realProfit);
+
         GameObject instance = Instantiate(textIndicatorPrefab, this.transform.position, Quaternion.identity, this.transform);
-        instance.GetComponent<goldFeedback2>().changeText(workstationData.profit.ToString());
+        instance.GetComponent<goldFeedback2>().changeText(realProfit.ToString());
         this.status = "Idle";
         this.clientUsing = 0;
         if (fx) fx.SetWorking(false);
