@@ -5,6 +5,8 @@ using UnityEngine.InputSystem.Controls;
 
 public class WorkstationManager : MonoBehaviour
 {
+    public static WorkstationManager Instance { get; private set; }
+
     public List<WorkStationBehaviour> actualStations;
     public List<stationType> stationTypes;
 
@@ -28,6 +30,13 @@ public class WorkstationManager : MonoBehaviour
     }
     private void Awake()
     {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else {
+            Destroy(gameObject);
+        }
+
         actualStations = new List<WorkStationBehaviour>();
         stationTypes = new List<stationType>();
         WorkStationBehaviour[] stations = FindObjectsOfType<WorkStationBehaviour>();

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2494732550030526516}
   - component: {fileID: 2173854035400510820}
   - component: {fileID: 1653795835701214857}
-  - component: {fileID: 7208664589815240691}
   - component: {fileID: 4997551068161454032}
+  - component: {fileID: -8014903439305185811}
   m_Layer: 0
   m_Name: Worker
   m_TagString: Untagged
@@ -101,20 +101,6 @@ MonoBehaviour:
   speed: 0
   idle: 1
   workStation: {fileID: 0}
---- !u!114 &7208664589815240691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 170231451591073183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110c12f3e305faf4f9790b5e37f4ba18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolParentName: PatrolPoints
-  reachThreshold: 0.5
 --- !u!114 &4997551068161454032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +113,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b719bde16b81515449f59bca94a23c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8014903439305185811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170231451591073183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f4b74bff0237c84ea2e3713d6acd91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolParentName: PatrolPoints
+  reachThreshold: 0.5
+  patrolParentName: PatrolPoints
+  reachThreshold: 0.5
 --- !u!1 &3590263769835384414
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-public class StaffAdorComponent : CharacterComponent {
+public class StaffAdorComponent : BaseWorkerComponent {
 
 }
 

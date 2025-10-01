@@ -39,6 +39,12 @@ public class WorkerSignalUI : MonoBehaviour {
     private void OnHireCandidate(WorkerModel candidate) {
         Debug.Log($"Contrataste a {candidate.CharacterName} por {candidate.salary}");
 
+        if (GameManager.Instance.horo < candidate.salary) {
+            Debug.Log("No tienes suficiente oro para contratar a este trabajador.");
+            return;
+        }
+
+        GameManager.Instance.addGold(-candidate.salary);
         GlobalCharactersManager.Instance.HireWorker(candidate);
 
         PopulateCandidates();
