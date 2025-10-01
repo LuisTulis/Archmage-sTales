@@ -71,9 +71,29 @@ public class WorkstationPanelController : MonoBehaviour
 
         title.text = data.displayName;
         desc.text = data.description;
-        profit.text = data.profit + "$";
+        if (oro.costoso)
+        {
+            Debug.Log("AA");
+            profit.text = data.profit *.5f + "$";
+            profit.color = new Color(1, 1, 0.02830189f);
+        }
+        else
+        {
+            profit.text = data.profit + "$";
+            profit.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
+        }
         status.text = workstation.status;
-        speed.text = data.Speed.ToString() + "s";
+        if(oro.aletargamiento)
+        {
+            Debug.Log("AA");
+            speed.text = (data.Speed * 2).ToString() + "s";
+            speed.color = new Color(1, 0.02830189f, 0.02830189f);
+        }
+        else
+        {
+            speed.text = data.Speed.ToString() + "s" ;
+            speed.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
+        }
         karma.text = data.karma < 10000 ? "Upgrade: " + data.karma.ToString() + "$" : "Max";
         worker.text = string.IsNullOrEmpty(nombresito) ? "Select Worker" : nombresito;
         panel.SetActive(true);

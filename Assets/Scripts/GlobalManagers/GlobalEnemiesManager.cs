@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class GlobalEnemiesManager : MonoBehaviour {
-    private static GlobalEnemiesManager Instance;
+    public static GlobalEnemiesManager Instance;
 
     [Header("Enemy Prefabs")]
     [SerializeField] private GameObject skeletonPrefab;

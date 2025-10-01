@@ -8,6 +8,7 @@ public class WorkstationManager : MonoBehaviour
     public static WorkstationManager Instance { get; private set; }
 
     public List<WorkStationBehaviour> actualStations;
+    public List<WorkStationBehaviour> activeStations;
     public List<stationType> stationTypes;
 
     [SerializeField]
@@ -45,6 +46,11 @@ public class WorkstationManager : MonoBehaviour
         {
             bool addType = true;
             actualStations.Add(station);
+
+            if(!station.isBroken)
+            {
+                activeStations.Add(station);
+            }
             foreach(stationType type in stationTypes) 
             {
                 if(station.type == type)
@@ -57,7 +63,7 @@ public class WorkstationManager : MonoBehaviour
             if(addType)
             {
                 stationTypes.Add(station.type);
-                Debug.Log(station.type);
+                //Debug.Log(station.type);
             }
         }
     }

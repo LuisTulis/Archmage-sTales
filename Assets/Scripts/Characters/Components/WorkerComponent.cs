@@ -99,6 +99,9 @@ public class WorkerComponent : BaseWorkerComponent
         isWorking = false;
         isKidnapped = true;
         kidnapper = skeleton;
+        model.AsignatedStation.assignedWorker = "";
+        model.AsignatedStation.StopAllCoroutines();
+        model.AsignatedStation = null;
     }
 
     public override void Despawn()

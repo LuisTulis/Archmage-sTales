@@ -58,7 +58,7 @@ public class GlobalCharactersManager : MonoBehaviour {
 
     public void GenerateCandidates() {
         Candidates.Clear();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             Candidates.Add(CreateWorkerData());
         }
     }

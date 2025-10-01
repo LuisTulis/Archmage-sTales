@@ -19,7 +19,7 @@ public class ThugComponent : EnemyComponent {
 
         float distance = Vector3.Distance(transform.position, target.transform.position);
 
-        if (distance > model.AttackRange + 0.5f) {
+        if (distance > model.AttackRange + .75f) {
             locomotion.MoveTo(target.transform.position);
         }
         else if (!model.AlreadyAttack) {
@@ -29,9 +29,9 @@ public class ThugComponent : EnemyComponent {
     }
 
     protected override void SetTarget() {
-        if (WorkstationManager.Instance.actualStations.Count > 0) {
-            var randomIndex = Random.Range(0, WorkstationManager.Instance.actualStations.Count);
-            var targetStation = WorkstationManager.Instance.actualStations[randomIndex];
+        if (WorkstationManager.Instance.activeStations.Count > 0) {
+            var randomIndex = Random.Range(0, WorkstationManager.Instance.activeStations.Count);
+            var targetStation = WorkstationManager.Instance.activeStations[randomIndex];
             target = targetStation.gameObject;
         } else {
             Debug.Log("No workstations available to attack.");

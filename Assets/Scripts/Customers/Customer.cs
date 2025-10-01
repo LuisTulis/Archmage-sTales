@@ -48,8 +48,11 @@ public class Customer : MonoBehaviour
     private void Start()
     {
         var randomNumber = Random.Range(0f, 1f);
-        //isThief = randomNumber < 0.1f;
-        isThief = true;
+        isThief = randomNumber < 0.05f;
+        if (isThief)
+        {
+            customerObjective.image.color = new Color(1, 0, 0);
+        }
     }
 
     public void InitializePatrolPoints()
@@ -99,7 +102,7 @@ public class Customer : MonoBehaviour
 
                 if (objectiveStation == null)
                 {
-                    if (attempt > 3)
+                    if (attempt > 5)
                     {
                         Debug.Log("Irse sin pagar");
                         LeaveWithoutBuy();
@@ -108,6 +111,8 @@ public class Customer : MonoBehaviour
                     {
                         Debug.Log("Buscando mesa nueva");
                         attempt += 1;
+                        var randomNumber = Random.Range(0f, 1f);
+                        isThief = randomNumber < 0.05f;
                         selectStation();
 
                     }
@@ -123,6 +128,12 @@ public class Customer : MonoBehaviour
                 Vector3 randomOffset = Random.insideUnitSphere * stopDistance;
                 randomOffset.y = 0;
                 Vector3 targetPos = patrolPoints[currentIndex].position + randomOffset;
+                if (attempt > 3)
+                {
+                    Debug.Log("Irse sin pagar");
+                    targetPos = GlobalCustomerManager.Instance.despawnPoint.position;
+                    LeaveWithoutBuy();
+                }
 
                 navMeshAgent.SetDestination(targetPos);
             }
@@ -131,9 +142,8 @@ public class Customer : MonoBehaviour
 
     private void selectStation()
     {
-        WorkStationBehaviour[] stations = GameObject.FindObjectsOfType<WorkStationBehaviour>();
         List<WorkStationBehaviour> emptyStations = new List<WorkStationBehaviour>();
-        foreach (WorkStationBehaviour station in stations)
+        foreach (WorkStationBehaviour station in stationManager.activeStations)
         {
             if (station.clientUsing == 0 && this.objectives[0] == station.type)
             {
@@ -145,7 +155,6 @@ public class Customer : MonoBehaviour
 
             this.objectiveStation = emptyStations[Random.Range(0, emptyStations.Count)];
             objectiveStation.clientUsing = 1;
-            Debug.Log(objectiveStation.type);
 
             MoveToObjectiveStation();
         }
@@ -221,11 +230,15 @@ public class Customer : MonoBehaviour
     public void LeaveWithoutBuy()
     {
         this.leave = true;
-        this.objectiveStation = null;
+        if(this.objectiveStation != null)
+        {
+
+            this.objectiveStation.StopAllCoroutines();
+            this.objectiveStation.assignedCustomer = null;
+            this.objectiveStation.clientUsing = 0;
+            this.objectiveStation = null;
+        }
         this.objectives.Clear();
-        //StopMovement();
-        //Debug.Log("Leave without buy");
-        Debug.Log(GlobalCustomerManager.Instance.despawnPoint.position);
         MoveTo(GlobalCustomerManager.Instance.despawnPoint.position);
     }
 
