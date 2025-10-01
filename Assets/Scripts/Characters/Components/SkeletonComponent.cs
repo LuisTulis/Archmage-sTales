@@ -29,12 +29,23 @@ public class SkeletonComponent : EnemyComponent {
     }
 
     protected override void SetTarget() {
-        if (GlobalCharactersManager.Instance.Workers.Count > 0) {
-            var randomIndex = Random.Range(0, GlobalCharactersManager.Instance.Workers.Count);
-            target = GlobalCharactersManager.Instance.Workers[randomIndex];
+        bool targetAssigned = false;
+
+        float chance = Random.value;
+
+        if (chance <= 0.3f && GlobalCustomerManager.Instance.customers.Count > 0) {
+            int randomIndex = Random.Range(0, GlobalCustomerManager.Instance.customers.Count);
+            target = GlobalCustomerManager.Instance.customers[randomIndex].gameObject;
+            targetAssigned = true;
         }
 
-        else {
+        if (!targetAssigned && GlobalCharactersManager.Instance.Workers.Count > 0) {
+            int randomIndex = Random.Range(0, GlobalCharactersManager.Instance.Workers.Count);
+            target = GlobalCharactersManager.Instance.Workers[randomIndex];
+            targetAssigned = true;
+        }
+
+        if (!targetAssigned) {
             model.AlreadyAttack = true;
             Despawn();
         }
@@ -43,7 +54,17 @@ public class SkeletonComponent : EnemyComponent {
     protected override void Attack() {
         if (target != null) {
             Debug.Log($"{gameObject.name} is attacking {target.name}");
-            target.GetComponent<WorkerComponent>().Despawn();
+
+            var workerComp = target.GetComponent<WorkerComponent>();
+            var customerComp = target.GetComponent<Customer>();
+
+            if (workerComp != null && !workerComp.isKidnapped) {
+                workerComp.BeKidnapped(this.transform);
+            } else if (customerComp != null) {
+                customerComp.LeaveWithoutBuy();
+            } else {
+                Debug.LogWarning($"{target.name} no tiene componente Worker ni Customer.");
+            }
         } else {
             Debug.Log($"{gameObject.name} has no target to attack.");
         }

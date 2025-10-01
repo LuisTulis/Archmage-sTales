@@ -18,6 +18,7 @@ public class Customer : MonoBehaviour
     [SerializeField] private float reachThreshold = 0.5f;
     private float waitTimeAtPoint = 5f;
     public float waitTimer = 0f;
+    public bool isThief;
 
     public bool leave = false;
 
@@ -40,6 +41,12 @@ public class Customer : MonoBehaviour
         selectStation();
 
         animator = GetComponentInChildren<Animator>();
+    }
+
+    private void Start() {
+        var randomNumber = Random.Range(0f, 1f);
+        //isThief = randomNumber < 0.1f;
+        isThief = true;
     }
 
     public void InitializePatrolPoints()
@@ -184,6 +191,7 @@ public class Customer : MonoBehaviour
                 else if (Vector3.Distance(this.transform.position, objectiveStation.transform.position) < 3)
                 {
                     objectiveStation.clientUsing = 2;
+                    objectiveStation.assignedCustomer = this;
                 }
                 else
                 {
@@ -207,7 +215,7 @@ public class Customer : MonoBehaviour
         //LeaveWithoutBuy();
     }
 
-    private void LeaveWithoutBuy()
+    public void LeaveWithoutBuy()
     {
         this.leave = true;
         this.objectiveStation = null;

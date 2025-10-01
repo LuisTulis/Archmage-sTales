@@ -10122,7 +10122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: horo
-      value: 0
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: canvas
