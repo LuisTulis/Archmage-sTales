@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2494732550030526516}
   - component: {fileID: 2173854035400510820}
   - component: {fileID: -3803689125998298543}
-  - component: {fileID: -7725131577569055132}
   - component: {fileID: 1031133593100464894}
+  - component: {fileID: -5630613945437296227}
   m_Layer: 0
   m_Name: StaffAdor
   m_TagString: Untagged
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 170231451591073183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40d5ae88934d0e3429e7842ab5031618, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d34671b1ec80e343aad970ccc3bfa60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   patrolParentName: PatrolPoints
@@ -123,9 +123,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 170231451591073183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d34671b1ec80e343aad970ccc3bfa60, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f4b74bff0237c84ea2e3713d6acd91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolParentName: PatrolPoints
+  reachThreshold: 0.5
+  patrolParentName: PatrolPoints
+  reachThreshold: 0.5
 --- !u!1001 &4120178089518716770
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,42 +1,34 @@
 using System.Collections;
 using UnityEngine;
 
-public class WorkerComponent : CharacterComponent
-{
+public class WorkerComponent : BaseWorkerComponent {
     private Animator animator;
     private string isPulling = "isPulling";
     private string isOpening = "isOpening";
 
-    private float minDelay = 3f;
-    private float maxDelay = 6f;
+    //private float minDelay = 3f;
+    //private float maxDelay = 6f;
 
     private float animChance = 0.5f;
 
     private Coroutine workRoutine;
     private bool prevIsWorking = false;
 
-    private void Start()
-    {
-        base.Start();
+    protected override void Awake() {
+        base.Awake();
         if (animator == null) animator = GetComponentInChildren<Animator>();
     }
 
-    private void Update()
-    {
+    protected override void Update() {
         base.Update();
 
-        if (isWorking != prevIsWorking)
-        {
+        if (isWorking != prevIsWorking) {
             prevIsWorking = isWorking;
 
-            if (isWorking)
-            {
+            if (isWorking) {
                 workRoutine = StartCoroutine(RandomWorkRoutine());
-            }
-            else
-            {
-                if (workRoutine != null)
-                {
+            } else {
+                if (workRoutine != null) {
                     StopCoroutine(workRoutine);
                     workRoutine = null;
                 }
@@ -44,10 +36,8 @@ public class WorkerComponent : CharacterComponent
         }
     }
 
-    private IEnumerator RandomWorkRoutine()
-    {
-        while (isWorking)
-        {
+    private IEnumerator RandomWorkRoutine() {
+        while (isWorking) {
             animator.SetBool(isPulling, false);
             animator.SetBool(isOpening, false);
 
@@ -66,17 +56,19 @@ public class WorkerComponent : CharacterComponent
         }
     }
 
-    private float GetAnimationLength(string animName)
-    {
-        if (animator.runtimeAnimatorController != null)
-        {
-            foreach (var clip in animator.runtimeAnimatorController.animationClips)
-            {
+    private float GetAnimationLength(string animName) {
+        if (animator.runtimeAnimatorController != null) {
+            foreach (var clip in animator.runtimeAnimatorController.animationClips) {
                 if (clip.name == animName)
                     return clip.length;
             }
         }
         return 5f;
+    }
+
+    public override void Despawn() {
+        GlobalCharactersManager.Instance.FireWorker(this.gameObject.GetComponent<WorkerModel>());
+        base.Despawn();
     }
 }
 
