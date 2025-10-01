@@ -12,6 +12,9 @@ public class WorkerComponent : BaseWorkerComponent
     private Coroutine workRoutine;
     private bool prevIsWorking = false;
 
+    public bool isKidnapped = false;
+    private Transform kidnapper;
+
     protected override void Awake()
     {
         base.Awake();
@@ -21,6 +24,17 @@ public class WorkerComponent : BaseWorkerComponent
     protected override void Update()
     {
         base.Update();
+
+        if (isKidnapped && kidnapper != null)
+        {
+            locomotion.MoveTo(kidnapper.position - new Vector3(0, 0, 1.5f));
+            float distanceToDespawn = Vector3.Distance(transform.position, GlobalLocomotionManager.Instance.despawnPoint.position);
+            if (distanceToDespawn < 1f)
+            {
+                Despawn();
+            }
+            return;
+        }
 
         if (isWorking != prevIsWorking)
         {
@@ -73,6 +87,18 @@ public class WorkerComponent : BaseWorkerComponent
             }
         }
         return 5f;
+    }
+
+    public void BeKidnapped(Transform skeleton)
+    {
+        if (workRoutine != null)
+        {
+            StopCoroutine(workRoutine);
+            workRoutine = null;
+        }
+        isWorking = false;
+        isKidnapped = true;
+        kidnapper = skeleton;
     }
 
     public override void Despawn()

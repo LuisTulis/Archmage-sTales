@@ -90,7 +90,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: walking
+  m_Name: Walking
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -228,13 +228,13 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: isOpening
+  - m_Name: isPulling
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: isPulling
+  - m_Name: isOpening
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -429,7 +429,7 @@ AnimatorStateMachine:
     m_Position: {x: 310, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6622076262087864206}
-    m_Position: {x: -280, y: 350, z: 0}
+    m_Position: {x: -280, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2541793633842775829}
     m_Position: {x: -270, y: 220, z: 0}
@@ -438,10 +438,7 @@ AnimatorStateMachine:
     m_Position: {x: 310, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2836980585941466111}
-    m_Position: {x: -280, y: 420, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 171044747143214528}
-    m_Position: {x: -280, y: 480, z: 0}
+    m_Position: {x: -280, y: 470, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

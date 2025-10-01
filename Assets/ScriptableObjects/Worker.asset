@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 1
   Name: Worker
-  Speed: 3
+  Speed: 2
+  HirePrice: 0

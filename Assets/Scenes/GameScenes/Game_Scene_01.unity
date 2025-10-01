@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1822,8 +1822,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0$
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13078,7 +13078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283887662644353648, guid: d8dff2c5ba40f324d8203406310f1eed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1
+      value: -0.811
       objectReference: {fileID: 0}
     - target: {fileID: 4283887662644353648, guid: d8dff2c5ba40f324d8203406310f1eed, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13086,7 +13086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283887662644353648, guid: d8dff2c5ba40f324d8203406310f1eed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.81
+      value: 4.33
       objectReference: {fileID: 0}
     - target: {fileID: 4283887662644353648, guid: d8dff2c5ba40f324d8203406310f1eed, type: 3}
       propertyPath: m_LocalRotation.w

@@ -14,7 +14,7 @@ public class GlobalCustomerManager : MonoBehaviour
     [SerializeField]
     private List<Customer> customerPrefabs;
 
-    private List<Customer> customers;
+    public List<Customer> customers;
     private int maxCustomersInScene = 5;
     private float spawnTimer;
     private float minSpawnInterval = 10f;
