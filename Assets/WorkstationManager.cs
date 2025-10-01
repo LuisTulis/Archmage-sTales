@@ -5,7 +5,10 @@ using UnityEngine.InputSystem.Controls;
 
 public class WorkstationManager : MonoBehaviour
 {
+    public static WorkstationManager Instance { get; private set; }
+
     public List<WorkStationBehaviour> actualStations;
+    public List<WorkStationBehaviour> activeStations;
     public List<stationType> stationTypes;
 
     [SerializeField]
@@ -28,6 +31,13 @@ public class WorkstationManager : MonoBehaviour
     }
     private void Awake()
     {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else {
+            Destroy(gameObject);
+        }
+
         actualStations = new List<WorkStationBehaviour>();
         stationTypes = new List<stationType>();
         WorkStationBehaviour[] stations = FindObjectsOfType<WorkStationBehaviour>();
@@ -36,6 +46,11 @@ public class WorkstationManager : MonoBehaviour
         {
             bool addType = true;
             actualStations.Add(station);
+
+            if(!station.isBroken)
+            {
+                activeStations.Add(station);
+            }
             foreach(stationType type in stationTypes) 
             {
                 if(station.type == type)

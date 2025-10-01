@@ -14,6 +14,7 @@ public class GlobalCharactersManager : MonoBehaviour {
     [Header("State")]
     [SerializeField] private int workerIdCounter = 1;
     public List<GameObject> Workers = new List<GameObject>();
+    public GameObject StaffAdor;
     public List<WorkerModel> Candidates = new List<WorkerModel>();
 
     void Awake() {
@@ -38,6 +39,8 @@ public class GlobalCharactersManager : MonoBehaviour {
             model.Id = staffAdorData.Id;
             model.CharacterName = staffAdorData.Name;
             model.Speed = staffAdorData.Speed;
+
+            StaffAdor = instance;
         } else {
             Debug.LogWarning("El prefab no tiene StaffAdorModel asignado.");
         }
@@ -55,7 +58,7 @@ public class GlobalCharactersManager : MonoBehaviour {
 
     public void GenerateCandidates() {
         Candidates.Clear();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             Candidates.Add(CreateWorkerData());
         }
     }
@@ -74,6 +77,13 @@ public class GlobalCharactersManager : MonoBehaviour {
         }
 
         Candidates.Remove(candidate);
+    }
+
+    public void FireWorker(WorkerModel worker) {
+        GameObject workerToRemove = Workers.Find(w => w.GetComponent<WorkerModel>().Id == worker.Id);
+        if (workerToRemove != null) {
+            Workers.Remove(workerToRemove);
+        }
     }
 
     public int GetNewWorkerId() {

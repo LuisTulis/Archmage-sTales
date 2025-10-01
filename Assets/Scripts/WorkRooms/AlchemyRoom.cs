@@ -99,7 +99,9 @@ public class AlchemyRoom : MonoBehaviour {
             if (ws != null) {
                 WorkstationManager manager = FindObjectOfType<WorkstationManager>();
                 if (manager != null)
+                    ws.isBroken = false;
                     manager.AddStation(ws);
+                    manager.activeStations.Add(ws);
             }
         }
 

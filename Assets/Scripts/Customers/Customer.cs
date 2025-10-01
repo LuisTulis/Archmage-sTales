@@ -18,6 +18,7 @@ public class Customer : MonoBehaviour
     [SerializeField] private float reachThreshold = 0.5f;
     private float waitTimeAtPoint = 5f;
     public float waitTimer = 0f;
+    public bool isThief;
 
     public bool leave = false;
 
@@ -25,6 +26,9 @@ public class Customer : MonoBehaviour
     public Vector3 targetPosition;
 
     private CustomerObjective customerObjective;
+
+    private Animator animator;
+
     private void Awake()
     {
         objectives = new List<stationType>();
@@ -35,6 +39,17 @@ public class Customer : MonoBehaviour
         customerObjective.objective = objectives[0].ToString();
         InitializePatrolPoints();
         selectStation();
+
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    private void Start() {
+        var randomNumber = Random.Range(0f, 1f);
+        isThief = randomNumber < 0.05f;
+        if (isThief)
+        {
+            customerObjective.image.color = new Color(1, 0, 0);
+        }
     }
 
     public void InitializePatrolPoints()
@@ -84,9 +99,20 @@ public class Customer : MonoBehaviour
 
                 if (objectiveStation == null)
                 {
-                    
-                    attempt += 1;
-                    selectStation();
+                    if (attempt > 5)
+                    {
+                        Debug.Log("Irse sin pagar");
+                        LeaveWithoutBuy();
+                    }
+                    else
+                    {
+                        Debug.Log("Buscando mesa nueva");
+                        attempt += 1;
+                        var randomNumber = Random.Range(0f, 1f);
+                        isThief = randomNumber < 0.05f;
+                        selectStation();
+
+                    }
                 }
                 int newIndex;
                 do
@@ -113,9 +139,8 @@ public class Customer : MonoBehaviour
 
     private void selectStation()
     {
-        WorkStationBehaviour[] stations = GameObject.FindObjectsOfType<WorkStationBehaviour>();
         List<WorkStationBehaviour> emptyStations = new List<WorkStationBehaviour>();
-        foreach (WorkStationBehaviour station in stations)
+        foreach (WorkStationBehaviour station in stationManager.activeStations)
         {
             if (station.clientUsing == 0 && this.objectives[0] == station.type)
             {
@@ -127,7 +152,6 @@ public class Customer : MonoBehaviour
 
             this.objectiveStation = emptyStations[Random.Range(0, emptyStations.Count)];
             objectiveStation.clientUsing = 1;
-            //Debug.Log(objectiveStation.type);
 
             MoveToObjectiveStation();
         }
@@ -154,7 +178,7 @@ public class Customer : MonoBehaviour
                 if (objectiveStation.clientUsing == 0)
                 {
                     this.objectives.Remove(this.objectives[0]);
-                    if(this.objectives.Count > 0)
+                    if (this.objectives.Count > 0)
                     {
                         this.customerObjective.objective = this.objectives[0].ToString();
                     }
@@ -176,6 +200,7 @@ public class Customer : MonoBehaviour
                 else if (Vector3.Distance(this.transform.position, objectiveStation.transform.position) < 3)
                 {
                     objectiveStation.clientUsing = 2;
+                    objectiveStation.assignedCustomer = this;
                 }
                 else
                 {
@@ -190,6 +215,7 @@ public class Customer : MonoBehaviour
             }
         }
 
+        UpdateWalkingAnimation();
     }
 
     private void MoveToObjectiveStation()
@@ -198,20 +224,24 @@ public class Customer : MonoBehaviour
         //LeaveWithoutBuy();
     }
 
-    private void LeaveWithoutBuy()
+    public void LeaveWithoutBuy()
     {
         this.leave = true;
-        this.objectiveStation = null;
+        if(this.objectiveStation != null)
+        {
+
+            this.objectiveStation.StopAllCoroutines();
+            this.objectiveStation.assignedCustomer = null;
+            this.objectiveStation.clientUsing = 0;
+            this.objectiveStation = null;
+        }
         this.objectives.Clear();
-        //StopMovement();
-        //Debug.Log("Leave without buy");
-        //Debug.Log(GlobalCustomerManager.Instance.despawnPoint.position);
         MoveTo(GlobalCustomerManager.Instance.despawnPoint.position);
     }
 
     public void MoveTo(Vector3 destination)
     {
-        
+
         if (navMeshAgent != null)
         {
             NavMeshHit hitResult;
@@ -228,6 +258,12 @@ public class Customer : MonoBehaviour
         GlobalCustomerManager.Instance.CustomerLeft(this);
     }
 
+    private void UpdateWalkingAnimation()
+    {
+        if (animator == null || navMeshAgent == null) return;
 
+        bool isWalking = navMeshAgent.velocity.magnitude > 0.1f;
+        animator.SetBool("walking", isWalking);
+    }
 
 }

@@ -14,8 +14,8 @@ public class GlobalCustomerManager : MonoBehaviour
     [SerializeField]
     private List<Customer> customerPrefabs;
 
-    private List<Customer> customers;
-    private int maxCustomersInScene = 5;
+    public List<Customer> customers;
+    public int maxCustomersInScene = 5;
     private float spawnTimer;
     private float minSpawnInterval = 10f;
     private float maxSpawnInterval = 20f;
@@ -43,7 +43,7 @@ public class GlobalCustomerManager : MonoBehaviour
     }
 
     private void SpawnCustomer() {
-        if (customers.Count < maxCustomersInScene && customerPrefabs.Count > 0) {
+        if (customers.Count < maxCustomersInScene && customerPrefabs.Count > 0 && GameManager.Instance.isOpen) {
             int randomIndex = Random.Range(0, customerPrefabs.Count);
             Customer randomCustomer = customerPrefabs[randomIndex];
             Customer newCustomer = Instantiate(randomCustomer, spawnPoint.position, Quaternion.identity);
