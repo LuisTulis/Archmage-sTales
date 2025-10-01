@@ -109,14 +109,13 @@ public class WorkstationFX : MonoBehaviour
 
     public void ApplyUpgradeLevel(int level)
     {
-        Debug.Log("Playando main particles: " + mainUpgradeSparkles != null);
         if (mainUpgradeSparkles != null) StartCoroutine(PlayOnceAndStop(mainUpgradeSparkles));
 
         if (level >= 2 && levelTwoObject != null)
         {
             if (!levelTwoObject.activeSelf) levelTwoObject.SetActive(true);
             if (levelTwoSparkles != null) StartCoroutine(PlayOnceAndStop(levelTwoSparkles));
-            
+
             if (uniqueComponent)
             {
                 levelOneObject.SetActive(false);
@@ -128,7 +127,7 @@ public class WorkstationFX : MonoBehaviour
             if (!levelThreeObject.activeSelf) levelThreeObject.SetActive(true);
             if (levelThreeSparkles != null) StartCoroutine(PlayOnceAndStop(levelThreeSparkles));
 
-            if (uniqueComponent) 
+            if (uniqueComponent)
             {
                 levelTwoObject.SetActive(false);
             }

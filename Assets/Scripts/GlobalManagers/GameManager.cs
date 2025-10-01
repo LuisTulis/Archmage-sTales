@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Xml.Linq;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class GameManager : MonoBehaviour 
+public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public ParticleSystem rain;
 
     public int horo;
     public TMP_Text horo_mostrar;
@@ -20,15 +20,38 @@ public class GameManager : MonoBehaviour
 
     public bool aletargamiento = false;
     public bool costoso = false;
-    private void Awake() {
-        if (Instance == null) {
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        } else {
+        }
+        else
+        {
             Destroy(gameObject);
+        }
+
+        if (rain != null)
+        {
+            rain.Stop();
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J) || actualHour > 120 || (!isOpen && actualHour > 30))
+        {
+            Open(!this.isOpen);
+            actualHour = 0;
+        }
+        //if (isOpen)
+        //{
+        actualHour += Time.deltaTime;
+        //}
+
+    }
 
     public void addGold(int amount)
     {
@@ -39,9 +62,9 @@ public class GameManager : MonoBehaviour
     public void Open(bool open)
     {
         isOpen = open;
-        if(isOpen)
+        if (isOpen)
         {
-            if(dayCount != 1)
+            if (dayCount != 1)
             {
                 float random = Random.Range(0f, 1f);
                 Vector3 randomPosition = new Vector3(Random.Range(10, 20), 0, Random.Range(-30, 20));
@@ -49,13 +72,13 @@ public class GameManager : MonoBehaviour
                 {
                     GlobalEnemiesManager.Instance.SpawnSkeleton(randomPosition);
                 }
-                else if(random < .2f)
+                else if (random < .2f)
                 {
                     GlobalEnemiesManager.Instance.SpawnThug(randomPosition);
                 }
 
             }
-            if(dayCount % 4 == 3)
+            if (dayCount % 4 == 3)
             {
                 float dayRandom = Random.Range(0f, 1f);
                 if (dayRandom < .33f)
@@ -63,7 +86,7 @@ public class GameManager : MonoBehaviour
                     light.color = new Color(1, 1, 0, 1);
                     costoso = true;
                 }
-                else if(dayRandom < .66f)
+                else if (dayRandom < .66f)
                 {
                     light.color = new Color(1, 0.5f, 0.5f, 1);
                     aletargamiento = true;
@@ -72,6 +95,7 @@ public class GameManager : MonoBehaviour
                 {
                     light.color = new Color(0.25f, 0.75f, 1f, 1);
                     GlobalCustomerManager.Instance.maxCustomersInScene = 2;
+                    rain.Play();
                 }
             }
             else
@@ -80,13 +104,14 @@ public class GameManager : MonoBehaviour
                 aletargamiento = false;
                 costoso = false;
                 GlobalCustomerManager.Instance.maxCustomersInScene = 5;
+                rain.Stop();
             }
             GlobalCharactersManager.Instance.GenerateCandidates();
             dayCount += 1;
         }
         else
         {
-            foreach(Customer customer in GlobalCustomerManager.Instance.customers)
+            foreach (Customer customer in GlobalCustomerManager.Instance.customers)
             {
                 customer.LeaveWithoutBuy();
             }
@@ -104,18 +129,6 @@ public class GameManager : MonoBehaviour
         Debug.Log(horo);
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            Open(!this.isOpen);
-        }
-        if(isOpen)
-        {
-            actualHour += Time.deltaTime;
-        }
-        
-    }
     public void removeGold(int amount)
     {
         if (horo - amount < 0)

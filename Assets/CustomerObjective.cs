@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,16 +25,19 @@ public class CustomerObjective : MonoBehaviour
     void Update()
     {
         lookAtCamera();
-        if(objective != "")
+        if (objective != "")
         {
             this.image.enabled = true;
-            switch(objective)
+            switch (objective)
             {
                 case "caldero":
                     this.image.sprite = images[0];
                     break;
                 case "adivinacion":
                     this.image.sprite = images[1];
+                    break;
+                case "invocacion":
+                    this.image.sprite = images[2];
                     break;
 
             }
