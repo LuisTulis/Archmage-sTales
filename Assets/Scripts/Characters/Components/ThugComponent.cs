@@ -1,50 +1,64 @@
 using UnityEngine;
 
-public class ThugComponent : EnemyComponent {
+public class ThugComponent : EnemyComponent
+{
 
     protected ThugModel model;
 
-    private void Start() {
+    private void Start()
+    {
         model = GetComponent<ThugModel>();
         SetTarget();
     }
 
-    private void Update() {
+    private void Update()
+    {
         if (model.AlreadyAttack) return;
 
-        if (target == null) {
+        if (target == null)
+        {
             SetTarget();
             return;
         }
 
         float distance = Vector3.Distance(transform.position, target.transform.position);
 
-        if (distance > model.AttackRange + .75f) {
+        if (distance > model.AttackRange + .75f)
+        {
             locomotion.MoveTo(target.transform.position);
         }
-        else if (!model.AlreadyAttack) {
+        else if (!model.AlreadyAttack)
+        {
             locomotion.StopMovement();
             Attack();
         }
     }
 
-    protected override void SetTarget() {
-        if (WorkstationManager.Instance.activeStations.Count > 0) {
+    protected override void SetTarget()
+    {
+        if (WorkstationManager.Instance.activeStations.Count > 0)
+        {
             var randomIndex = Random.Range(0, WorkstationManager.Instance.activeStations.Count);
             var targetStation = WorkstationManager.Instance.activeStations[randomIndex];
-            target = targetStation.gameObject;
-        } else {
+            target = targetStation.clientPosition.gameObject;
+        }
+        else
+        {
             Debug.Log("No workstations available to attack.");
             model.AlreadyAttack = true;
             Despawn();
         }
     }
 
-    protected override void Attack() {
-        if (target != null) {
+    protected override void Attack()
+    {
+        if (target != null)
+        {
             Debug.Log($"{gameObject.name} is attacking {target.name}");
             GameManager.Instance.removeGold(model.StealAmount);
-        } else {
+        }
+        else
+        {
             Debug.Log($"{gameObject.name} has no target to attack.");
         }
 
@@ -52,18 +66,22 @@ public class ThugComponent : EnemyComponent {
         Despawn();
     }
 
-    public override void Despawn() {
-        if (locomotion != null) {
+    public override void Despawn()
+    {
+        if (locomotion != null)
+        {
             StartCoroutine(MoveToDespawnAndDestroy());
         }
     }
 
-    private System.Collections.IEnumerator MoveToDespawnAndDestroy() {
+    private System.Collections.IEnumerator MoveToDespawnAndDestroy()
+    {
         Vector3 despawnPos = GlobalLocomotionManager.Instance.despawnPoint.position;
 
         locomotion.MoveTo(despawnPos);
 
-        while (Vector3.Distance(transform.position, despawnPos) > 0.1f) {
+        while (Vector3.Distance(transform.position, despawnPos) > 0.1f)
+        {
             yield return null;
         }
 
