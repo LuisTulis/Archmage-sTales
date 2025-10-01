@@ -1,34 +1,39 @@
 using System.Collections;
 using UnityEngine;
 
-public class WorkerComponent : BaseWorkerComponent {
+public class WorkerComponent : BaseWorkerComponent
+{
     private Animator animator;
     private string isPulling = "isPulling";
     private string isOpening = "isOpening";
-
-    //private float minDelay = 3f;
-    //private float maxDelay = 6f;
 
     private float animChance = 0.5f;
 
     private Coroutine workRoutine;
     private bool prevIsWorking = false;
 
-    protected override void Awake() {
+    protected override void Awake()
+    {
         base.Awake();
         if (animator == null) animator = GetComponentInChildren<Animator>();
     }
 
-    protected override void Update() {
+    protected override void Update()
+    {
         base.Update();
 
-        if (isWorking != prevIsWorking) {
+        if (isWorking != prevIsWorking)
+        {
             prevIsWorking = isWorking;
 
-            if (isWorking) {
+            if (isWorking)
+            {
                 workRoutine = StartCoroutine(RandomWorkRoutine());
-            } else {
-                if (workRoutine != null) {
+            }
+            else
+            {
+                if (workRoutine != null)
+                {
                     StopCoroutine(workRoutine);
                     workRoutine = null;
                 }
@@ -36,8 +41,10 @@ public class WorkerComponent : BaseWorkerComponent {
         }
     }
 
-    private IEnumerator RandomWorkRoutine() {
-        while (isWorking) {
+    private IEnumerator RandomWorkRoutine()
+    {
+        while (isWorking)
+        {
             animator.SetBool(isPulling, false);
             animator.SetBool(isOpening, false);
 
@@ -45,8 +52,7 @@ public class WorkerComponent : BaseWorkerComponent {
             if (playPull) animator.SetBool(isPulling, true);
             else animator.SetBool(isOpening, true);
 
-            string animName = playPull ? "Pulling Lever" : "Opening";
-            float animLength = GetAnimationLength(animName);
+            float animLength = GetAnimationLength(playPull ? "Pulling Lever" : "Opening");
             yield return new WaitForSeconds(animLength);
 
             animator.SetBool(isPulling, false);
@@ -56,9 +62,12 @@ public class WorkerComponent : BaseWorkerComponent {
         }
     }
 
-    private float GetAnimationLength(string animName) {
-        if (animator.runtimeAnimatorController != null) {
-            foreach (var clip in animator.runtimeAnimatorController.animationClips) {
+    private float GetAnimationLength(string animName)
+    {
+        if (animator.runtimeAnimatorController != null)
+        {
+            foreach (var clip in animator.runtimeAnimatorController.animationClips)
+            {
                 if (clip.name == animName)
                     return clip.length;
             }
@@ -66,7 +75,8 @@ public class WorkerComponent : BaseWorkerComponent {
         return 5f;
     }
 
-    public override void Despawn() {
+    public override void Despawn()
+    {
         GlobalCharactersManager.Instance.FireWorker(this.gameObject.GetComponent<WorkerModel>());
         base.Despawn();
     }
