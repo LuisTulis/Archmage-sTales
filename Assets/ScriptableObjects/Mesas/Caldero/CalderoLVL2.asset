@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Caldero 2
   level: 2
   Speed: 40
-  profit: 1200
+  profit: 600
   karma: 900
   description: "\xBFA que huele aqu\xED?"
   upgradeCost: 0
