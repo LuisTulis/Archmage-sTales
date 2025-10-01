@@ -230,12 +230,13 @@ public class Customer : MonoBehaviour
     public void LeaveWithoutBuy()
     {
         this.leave = true;
-        if(this.objectiveStation != null)
+        if (this.objectiveStation != null)
         {
 
             this.objectiveStation.StopAllCoroutines();
             this.objectiveStation.assignedCustomer = null;
             this.objectiveStation.clientUsing = 0;
+            this.objectiveStation.status = "Idle";
             this.objectiveStation = null;
         }
         this.objectives.Clear();
