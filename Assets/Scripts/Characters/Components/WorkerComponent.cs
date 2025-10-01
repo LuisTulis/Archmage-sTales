@@ -1,25 +1,25 @@
 using System.Collections;
 using UnityEngine;
 
-public class WorkerComponent : CharacterComponent {
+public class WorkerComponent : BaseWorkerComponent {
     private Animator animator;
     private string isPulling = "isPulling";
     private string isOpening = "isOpening";
 
-    private float minDelay = 3f;
-    private float maxDelay = 6f;
+    //private float minDelay = 3f;
+    //private float maxDelay = 6f;
 
     private float animChance = 0.5f;
 
     private Coroutine workRoutine;
     private bool prevIsWorking = false;
 
-    private void Start() {
-        base.Start();
+    protected override void Awake() {
+        base.Awake();
         if (animator == null) animator = GetComponentInChildren<Animator>();
     }
 
-    private void Update() {
+    protected override void Update() {
         base.Update();
 
         if (isWorking != prevIsWorking) {
