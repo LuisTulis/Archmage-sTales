@@ -18,6 +18,7 @@ public class Customer : MonoBehaviour
     [SerializeField] private float reachThreshold = 0.5f;
     private float waitTimeAtPoint = 5f;
     public float waitTimer = 0f;
+    public bool isThief;
 
     public bool leave = false;
 
@@ -25,6 +26,9 @@ public class Customer : MonoBehaviour
     public Vector3 targetPosition;
 
     private CustomerObjective customerObjective;
+
+    private Animator animator;
+
     private void Awake()
     {
         objectives = new List<stationType>();
@@ -35,6 +39,14 @@ public class Customer : MonoBehaviour
         customerObjective.objective = objectives[0].ToString();
         InitializePatrolPoints();
         selectStation();
+
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    private void Start() {
+        var randomNumber = Random.Range(0f, 1f);
+        //isThief = randomNumber < 0.1f;
+        isThief = true;
     }
 
     public void InitializePatrolPoints()
@@ -84,7 +96,7 @@ public class Customer : MonoBehaviour
 
                 if (objectiveStation == null)
                 {
-                    if(attempt > 3)
+                    if (attempt > 3)
                     {
                         Debug.Log("Irse sin pagar");
                         LeaveWithoutBuy();
@@ -157,7 +169,7 @@ public class Customer : MonoBehaviour
                 if (objectiveStation.clientUsing == 0)
                 {
                     this.objectives.Remove(this.objectives[0]);
-                    if(this.objectives.Count > 0)
+                    if (this.objectives.Count > 0)
                     {
                         this.customerObjective.objective = this.objectives[0].ToString();
                     }
@@ -179,6 +191,7 @@ public class Customer : MonoBehaviour
                 else if (Vector3.Distance(this.transform.position, objectiveStation.transform.position) < 3)
                 {
                     objectiveStation.clientUsing = 2;
+                    objectiveStation.assignedCustomer = this;
                 }
                 else
                 {
@@ -193,6 +206,7 @@ public class Customer : MonoBehaviour
             }
         }
 
+        UpdateWalkingAnimation();
     }
 
     private void MoveToObjectiveStation()
@@ -201,7 +215,7 @@ public class Customer : MonoBehaviour
         //LeaveWithoutBuy();
     }
 
-    private void LeaveWithoutBuy()
+    public void LeaveWithoutBuy()
     {
         this.leave = true;
         this.objectiveStation = null;
@@ -214,7 +228,7 @@ public class Customer : MonoBehaviour
 
     public void MoveTo(Vector3 destination)
     {
-        
+
         if (navMeshAgent != null)
         {
             NavMeshHit hitResult;
@@ -231,6 +245,12 @@ public class Customer : MonoBehaviour
         GlobalCustomerManager.Instance.CustomerLeft(this);
     }
 
+    private void UpdateWalkingAnimation()
+    {
+        if (animator == null || navMeshAgent == null) return;
 
+        bool isWalking = navMeshAgent.velocity.magnitude > 0.1f;
+        animator.SetBool("walking", isWalking);
+    }
 
 }
