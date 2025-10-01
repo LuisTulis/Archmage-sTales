@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J) || actualHour > 120 || (!isOpen && actualHour > 30))
+        if (Input.GetKeyDown(KeyCode.J) || actualHour > 180 || (!isOpen && actualHour > 30))
         {
             Open(!this.isOpen);
             actualHour = 0;
