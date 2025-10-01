@@ -48,7 +48,7 @@ public class WorkstationManager : MonoBehaviour
             if(addType)
             {
                 stationTypes.Add(station.type);
-                Debug.Log(station.type);
+                //Debug.Log(station.type);
             }
         }
     }

@@ -84,18 +84,9 @@ public class Customer : MonoBehaviour
 
                 if (objectiveStation == null)
                 {
-                    if(attempt > 3)
-                    {
-                        Debug.Log("Irse sin pagar");
-                        LeaveWithoutBuy();
-                    }
-                    else
-                    {
-                        Debug.Log("Buscando mesa nueva");
-                        attempt += 1;
-                        selectStation();
-
-                    }
+                    
+                    attempt += 1;
+                    selectStation();
                 }
                 int newIndex;
                 do
@@ -108,6 +99,12 @@ public class Customer : MonoBehaviour
                 Vector3 randomOffset = Random.insideUnitSphere * stopDistance;
                 randomOffset.y = 0;
                 Vector3 targetPos = patrolPoints[currentIndex].position + randomOffset;
+                if (attempt > 3)
+                {
+                    Debug.Log("Irse sin pagar");
+                    targetPos = GlobalCustomerManager.Instance.despawnPoint.position;
+                    LeaveWithoutBuy();
+                }
 
                 navMeshAgent.SetDestination(targetPos);
             }
@@ -130,7 +127,7 @@ public class Customer : MonoBehaviour
 
             this.objectiveStation = emptyStations[Random.Range(0, emptyStations.Count)];
             objectiveStation.clientUsing = 1;
-            Debug.Log(objectiveStation.type);
+            //Debug.Log(objectiveStation.type);
 
             MoveToObjectiveStation();
         }
@@ -208,7 +205,7 @@ public class Customer : MonoBehaviour
         this.objectives.Clear();
         //StopMovement();
         //Debug.Log("Leave without buy");
-        Debug.Log(GlobalCustomerManager.Instance.despawnPoint.position);
+        //Debug.Log(GlobalCustomerManager.Instance.despawnPoint.position);
         MoveTo(GlobalCustomerManager.Instance.despawnPoint.position);
     }
 

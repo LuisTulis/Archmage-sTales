@@ -16,6 +16,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public stationType type;
 
     public GameObject textIndicatorPrefab; 
+    
 
     [Header("Table FX")]
     private WorkstationFX fx;
@@ -48,6 +49,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     private IEnumerator BeingUsed()
     {
         Debug.Log("Entré");
+        float seconds = gameManager.aletargamiento ? workstationData.Speed : workstationData.Speed * 2;
         yield return new WaitForSeconds(workstationData.Speed);
         gameManager.addGold(workstationData.profit);
         GameObject instance = Instantiate(textIndicatorPrefab, this.transform.position, Quaternion.identity, this.transform);
