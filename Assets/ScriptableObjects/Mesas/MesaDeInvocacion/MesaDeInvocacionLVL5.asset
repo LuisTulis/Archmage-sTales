@@ -17,6 +17,6 @@ MonoBehaviour:
   level: 5
   Speed: 60
   profit: 120
-  karma: 250
+  karma: 10000000
   description: A veces es necesario un poco de ayuda extra
   upgradeCost: 0
