@@ -16805,6 +16805,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6224378810917302414}
+  - component: {fileID: 2050748485662889567}
   m_Layer: 0
   m_Name: AlchemyTable
   m_TagString: Untagged
@@ -16833,6 +16834,27 @@ Transform:
   - {fileID: 1088603818486933130}
   m_Father: {fileID: 4283887662644353648}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2050748485662889567
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6713388340831447604}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f32b0be512a58b4a97636dc779baa3b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6743127436745423864
 GameObject:
   m_ObjectHideFlags: 0
@@ -20164,10 +20186,13 @@ MonoBehaviour:
   flickerSpeed: 2
   mainUpgradeSparkles: {fileID: 6871566687942584794}
   levelOneObject: {fileID: 6713388340831447604}
+  animLevel1: {fileID: 2050748485662889567}
   levelTwoObject: {fileID: 8525022828961114452}
   levelTwoSparkles: {fileID: 652148970562340474}
+  animLevel2: {fileID: 9193388556090052789}
   levelThreeObject: {fileID: 8420238698900933214}
   levelThreeSparkles: {fileID: 7709367850142872796}
+  animLevel3: {fileID: 5151331936748690522}
   anim: {fileID: 7327058573976350516}
 --- !u!114 &-2576143004762365994
 MonoBehaviour:
@@ -20200,6 +20225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4572267824019618896}
+  - component: {fileID: 5151331936748690522}
   m_Layer: 0
   m_Name: AlchemyTable 3
   m_TagString: Untagged
@@ -20228,6 +20254,27 @@ Transform:
   - {fileID: 8644513660877045429}
   m_Father: {fileID: 4283887662644353648}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &5151331936748690522
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8420238698900933214}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f32b0be512a58b4a97636dc779baa3b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8494482834508957716
 GameObject:
   m_ObjectHideFlags: 0
@@ -20320,6 +20367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 930058947175293186}
+  - component: {fileID: 9193388556090052789}
   m_Layer: 0
   m_Name: AlchemyTable 2
   m_TagString: Untagged
@@ -20348,6 +20396,27 @@ Transform:
   - {fileID: 7188585219828831976}
   m_Father: {fileID: 4283887662644353648}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &9193388556090052789
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525022828961114452}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f32b0be512a58b4a97636dc779baa3b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8525670574970303050
 GameObject:
   m_ObjectHideFlags: 0

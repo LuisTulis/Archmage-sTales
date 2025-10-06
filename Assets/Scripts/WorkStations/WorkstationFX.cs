@@ -50,8 +50,6 @@ public class WorkstationFX : MonoBehaviour
 
     public void Update()
     {
-        SetOn(isWorking);
-
         if (isWorking && fireLight)
         {
             float n = Mathf.PerlinNoise(Time.time * flickerSpeed, perlinSeed);

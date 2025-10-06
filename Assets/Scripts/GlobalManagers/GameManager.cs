@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public int horo;
     public TMP_Text horo_mostrar;
+    public TMP_Text dia_mostrar;
+    public TMP_Text tipo_mostrar;
     public GameObject feedbackPrefab;
     public GameObject feedbackPlacement;
     public GameObject canvas;
@@ -20,6 +22,9 @@ public class GameManager : MonoBehaviour
 
     public bool aletargamiento = false;
     public bool costoso = false;
+
+    public int openTime = 180;
+    public int closeTime = 30;
 
     private void Awake()
     {
@@ -41,15 +46,25 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J) || actualHour > 180 || (!isOpen && actualHour > 30))
+        if (Input.GetKeyDown(KeyCode.J) || actualHour > openTime || (!isOpen && actualHour > closeTime))
         {
             Open(!this.isOpen);
             actualHour = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            addGold(1000);
         }
         //if (isOpen)
         //{
         actualHour += Time.deltaTime;
         //}
+
+        int hour = isOpen ? 6 + (int)(actualHour * 18 / openTime) : (int)(actualHour * 6 / closeTime);
+
+        string hourString = hour < 10 ? "0" + hour.ToString() : hour.ToString();
+
+        dia_mostrar.text = "Día " + dayCount.ToString() + " " + hourString + ":00";
 
     }
 
@@ -84,16 +99,19 @@ public class GameManager : MonoBehaviour
                 if (dayRandom < .33f)
                 {
                     light.color = new Color(1, 1, 0, 1);
+                    tipo_mostrar.text = "Trabajadores torpes";
                     costoso = true;
                 }
                 else if (dayRandom < .66f)
                 {
                     light.color = new Color(1, 0.5f, 0.5f, 1);
                     aletargamiento = true;
+                    tipo_mostrar.text = "Maldición de sueño";
                 }
                 else
                 {
                     light.color = new Color(0.25f, 0.75f, 1f, 1);
+                    tipo_mostrar.text = "Día lluvioso";
                     GlobalCustomerManager.Instance.maxCustomersInScene = 2;
                     rain.Play();
                 }
@@ -105,6 +123,8 @@ public class GameManager : MonoBehaviour
                 costoso = false;
                 GlobalCustomerManager.Instance.maxCustomersInScene = 5;
                 rain.Stop();
+
+                tipo_mostrar.text = "Día normal";
             }
             GlobalCharactersManager.Instance.GenerateCandidates();
             dayCount += 1;
