@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -21,7 +20,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public bool isBroken = false;
 
     [Header("Table FX")]
-    private WorkstationFX fx;
+    public WorkstationFX fx;
 
     private void Awake()
     {
@@ -56,10 +55,13 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
         int realProfit;
 
-        if(assignedCustomer.isThief) {
+        if (assignedCustomer.isThief)
+        {
             realProfit = (int)(workstationData.profit * -0.25f);
 
-        } else {
+        }
+        else
+        {
             realProfit = workstationData.profit;
         }
         realProfit = gameManager.costoso ? (int)(realProfit * .5f) : realProfit;

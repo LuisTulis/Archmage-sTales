@@ -61,6 +61,7 @@ public class WorkstationPanelController : MonoBehaviour
         this.Show(selectedWorkstation);
 
         selectedWorkstation.UpgradeFX(selectedWorkstation.workstationData.level);
+        selectedWorkstation.fx.SetOn(true);
     }
 
     public void Show(WorkStationBehaviour workstation)
@@ -74,7 +75,7 @@ public class WorkstationPanelController : MonoBehaviour
         if (oro.costoso)
         {
             Debug.Log("AA");
-            profit.text = data.profit *.5f + "$";
+            profit.text = data.profit * .5f + "$";
             profit.color = new Color(1, 1, 0.02830189f);
         }
         else
@@ -83,7 +84,7 @@ public class WorkstationPanelController : MonoBehaviour
             profit.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
         }
         status.text = workstation.status;
-        if(oro.aletargamiento)
+        if (oro.aletargamiento)
         {
             Debug.Log("AA");
             speed.text = (data.Speed * 2).ToString() + "s";
@@ -91,7 +92,7 @@ public class WorkstationPanelController : MonoBehaviour
         }
         else
         {
-            speed.text = data.Speed.ToString() + "s" ;
+            speed.text = data.Speed.ToString() + "s";
             speed.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
         }
         karma.text = data.karma < 10000 ? "Upgrade: " + data.karma.ToString() + "$" : "Max";
@@ -106,31 +107,39 @@ public class WorkstationPanelController : MonoBehaviour
 
     }
 
-    public void selectWorker(string name) {
+    public void selectWorker(string name)
+    {
         GameObject selectedWorkerGO = null;
 
         // Primero revisamos la lista de Workers
-        foreach (var workerGO in GlobalCharactersManager.Instance.Workers) {
+        foreach (var workerGO in GlobalCharactersManager.Instance.Workers)
+        {
             var model = workerGO.GetComponent<CharacterModel>();
-            if (model != null && model.CharacterName == name) {
+            if (model != null && model.CharacterName == name)
+            {
                 selectedWorkerGO = workerGO;
                 break;
             }
         }
 
         // Si no se encontró, revisamos StaffAdor
-        if (selectedWorkerGO == null && GlobalCharactersManager.Instance.StaffAdor != null) {
+        if (selectedWorkerGO == null && GlobalCharactersManager.Instance.StaffAdor != null)
+        {
             var staffModel = GlobalCharactersManager.Instance.StaffAdor.GetComponent<CharacterModel>();
-            if (staffModel != null && staffModel.CharacterName == name) {
+            if (staffModel != null && staffModel.CharacterName == name)
+            {
                 selectedWorkerGO = GlobalCharactersManager.Instance.StaffAdor;
             }
         }
 
         // Liberar trabajador previamente asignado a la estación
-        if (!string.IsNullOrEmpty(selectedWorkstation.assignedWorker)) {
-            foreach (var workerGO in GlobalCharactersManager.Instance.Workers) {
+        if (!string.IsNullOrEmpty(selectedWorkstation.assignedWorker))
+        {
+            foreach (var workerGO in GlobalCharactersManager.Instance.Workers)
+            {
                 var model = workerGO.GetComponent<CharacterModel>();
-                if (model != null && model.CharacterName == selectedWorkstation.assignedWorker) {
+                if (model != null && model.CharacterName == selectedWorkstation.assignedWorker)
+                {
                     model.AsignatedStation = null;
                     workerGO.GetComponent<RandomWalkLocomotion>().IdleRandomWalk();
                     break;
@@ -138,9 +147,11 @@ public class WorkstationPanelController : MonoBehaviour
             }
 
             // Revisar StaffAdor también
-            if (GlobalCharactersManager.Instance.StaffAdor != null) {
+            if (GlobalCharactersManager.Instance.StaffAdor != null)
+            {
                 var staffModel = GlobalCharactersManager.Instance.StaffAdor.GetComponent<CharacterModel>();
-                if (staffModel != null && staffModel.CharacterName == selectedWorkstation.assignedWorker) {
+                if (staffModel != null && staffModel.CharacterName == selectedWorkstation.assignedWorker)
+                {
                     staffModel.AsignatedStation = null;
                     GlobalCharactersManager.Instance.StaffAdor.GetComponent<RandomWalkLocomotion>().IdleRandomWalk();
                 }
@@ -149,14 +160,17 @@ public class WorkstationPanelController : MonoBehaviour
 
         // Limpiar otras estaciones que tengan asignado este trabajador
         WorkStationBehaviour[] workstations = GameObject.FindObjectsOfType<WorkStationBehaviour>();
-        foreach (WorkStationBehaviour workstation in workstations) {
-            if (workstation != selectedWorkstation && workstation.assignedWorker == name) {
+        foreach (WorkStationBehaviour workstation in workstations)
+        {
+            if (workstation != selectedWorkstation && workstation.assignedWorker == name)
+            {
                 workstation.assignedWorker = "";
             }
         }
 
         // Asignar trabajador seleccionado a la estación
-        if (selectedWorkerGO != null) {
+        if (selectedWorkerGO != null)
+        {
             var model = selectedWorkerGO.GetComponent<CharacterModel>();
             model.AsignatedStation = selectedWorkstation;
             selectedWorkstation.assignedWorker = name;
@@ -174,8 +188,10 @@ public class WorkstationPanelController : MonoBehaviour
         PopulateWorkersList();
     }
 
-    private void PopulateWorkersList() {
-        foreach (Transform child in workersContainer) {
+    private void PopulateWorkersList()
+    {
+        foreach (Transform child in workersContainer)
+        {
             Destroy(child.gameObject);
         }
 
@@ -183,18 +199,20 @@ public class WorkstationPanelController : MonoBehaviour
 
         allCharacters.AddRange(GlobalCharactersManager.Instance.Workers);
 
-        if (GlobalCharactersManager.Instance.StaffAdor != null) {
+        if (GlobalCharactersManager.Instance.StaffAdor != null)
+        {
             allCharacters.Add(GlobalCharactersManager.Instance.StaffAdor);
         }
 
-        foreach (var characterGO in allCharacters) {
+        foreach (var characterGO in allCharacters)
+        {
             var model = characterGO.GetComponent<CharacterModel>();
             if (model == null) continue;
 
             GameObject entry = Instantiate(workerEntryPrefab, workersContainer);
             TMP_Text nameText = entry.transform.Find("NameText").GetComponent<TMP_Text>();
             Button selectButton = entry.transform.Find("SelectButton").GetComponent<Button>();
-            if(model.AsignatedStation != null)
+            if (model.AsignatedStation != null)
             {
                 entry.GetComponent<Image>().color = new Color(1, 0, .75f, .4f);
             }
