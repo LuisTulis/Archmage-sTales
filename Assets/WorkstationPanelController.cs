@@ -194,6 +194,10 @@ public class WorkstationPanelController : MonoBehaviour
             GameObject entry = Instantiate(workerEntryPrefab, workersContainer);
             TMP_Text nameText = entry.transform.Find("NameText").GetComponent<TMP_Text>();
             Button selectButton = entry.transform.Find("SelectButton").GetComponent<Button>();
+            if(model.AsignatedStation != null)
+            {
+                entry.GetComponent<Image>().color = new Color(1, 0, .75f, .4f);
+            }
 
             nameText.text = model.CharacterName;
 

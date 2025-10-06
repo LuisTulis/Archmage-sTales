@@ -236,6 +236,7 @@ public class Customer : MonoBehaviour
             this.objectiveStation.StopAllCoroutines();
             this.objectiveStation.assignedCustomer = null;
             this.objectiveStation.clientUsing = 0;
+            this.objectiveStation.status = "Idle";
             this.objectiveStation = null;
         }
         this.objectives.Clear();
