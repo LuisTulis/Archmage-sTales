@@ -230,7 +230,7 @@ public class Customer : MonoBehaviour
     public void LeaveWithoutBuy()
     {
         this.leave = true;
-        if(this.objectiveStation != null)
+        if (this.objectiveStation != null)
         {
 
             this.objectiveStation.StopAllCoroutines();
