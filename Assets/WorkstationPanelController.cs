@@ -61,7 +61,6 @@ public class WorkstationPanelController : MonoBehaviour
         this.Show(selectedWorkstation);
 
         selectedWorkstation.UpgradeFX(selectedWorkstation.workstationData.level);
-        selectedWorkstation.fx.SetOn(true);
     }
 
     public void Show(WorkStationBehaviour workstation)
