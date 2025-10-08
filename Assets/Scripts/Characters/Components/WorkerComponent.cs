@@ -42,7 +42,10 @@ public class WorkerComponent : BaseWorkerComponent
 
             if (isWorking)
             {
-                workRoutine = StartCoroutine(RandomWorkRoutine());
+                if (!model.AsignatedStation.sittingWorkstation)
+                {
+                    workRoutine = StartCoroutine(RandomWorkRoutine());
+                }
             }
             else
             {

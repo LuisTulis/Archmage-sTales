@@ -193,6 +193,7 @@ public class Customer : MonoBehaviour
                     {
                         this.leave = true;
                         this.objectiveStation = null;
+                        animator.SetBool("buying", false);
                         LeaveWithoutBuy();
                     }
                     else
@@ -204,6 +205,8 @@ public class Customer : MonoBehaviour
                 {
                     objectiveStation.clientUsing = 2;
                     objectiveStation.assignedCustomer = this;
+
+                    this.GetIntoBuyingPosition();
                 }
                 else
                 {
@@ -232,7 +235,6 @@ public class Customer : MonoBehaviour
         this.leave = true;
         if (this.objectiveStation != null)
         {
-
             this.objectiveStation.StopAllCoroutines();
             this.objectiveStation.assignedCustomer = null;
             this.objectiveStation.clientUsing = 0;
@@ -268,6 +270,19 @@ public class Customer : MonoBehaviour
 
         bool isWalking = navMeshAgent.velocity.magnitude > 0.1f;
         animator.SetBool("walking", isWalking);
+    }
+
+    private void GetIntoBuyingPosition()
+    {
+        Vector3 targetPos = objectiveStation.clientPosition.position;
+        targetPos.y = transform.position.y;
+        transform.position = targetPos;
+
+        Vector3 direction = objectiveStation.workDirection.position - transform.position;
+        direction.y = 0f;
+        transform.rotation = Quaternion.LookRotation(direction);
+
+        animator.SetBool("buying", objectiveStation.sittingWorkstation);
     }
 
 }
