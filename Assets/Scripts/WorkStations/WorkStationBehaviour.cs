@@ -22,6 +22,10 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     [Header("Table FX")]
     public WorkstationFX fx;
 
+    [Header("Aux for animations")]
+    public Transform workDirection;
+    public bool sittingWorkstation;
+
     private void Awake()
     {
         this.status = "Idle";

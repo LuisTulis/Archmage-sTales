@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class CharacterLocomotion : MonoBehaviour
-{    
+{
     protected NavMeshAgent agent;
     protected CharacterModel agentModel;
     public Animator animator;
@@ -14,10 +14,12 @@ public class CharacterLocomotion : MonoBehaviour
         agentModel = GetComponent<CharacterModel>();
     }
 
-    private void Start() {
+    private void Start()
+    {
         agent = GetComponent<NavMeshAgent>();
         agentModel = GetComponent<CharacterModel>();
-        if (agent != null) {
+        if (agent != null)
+        {
             SetSpeed(agentModel.Speed);
         }
     }
@@ -52,6 +54,12 @@ public class CharacterLocomotion : MonoBehaviour
 
         bool isWalking = agent.velocity.magnitude > 0.1f;
         animator.SetBool("walking", isWalking);
+    }
+
+    public void SittingAnimation(bool sitting)
+    {
+        if (animator == null) return;
+        animator.SetBool("sitting", sitting);
     }
 
 }
