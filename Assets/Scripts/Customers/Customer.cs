@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class Customer : MonoBehaviour
 {
-    private WorkstationManager stationManager;
+    private GlobalWorkstationManager stationManager;
     private NavMeshAgent navMeshAgent;
     private WorkStationBehaviour objectiveStation;
     [SerializeField] private float NearestPointSearchRange = 10f;
@@ -35,7 +35,7 @@ public class Customer : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = 2f;
 
-        stationManager = GameObject.Find("WorkstationManager").GetComponent<WorkstationManager>();
+        stationManager = GameObject.Find("GlobalWorkstationManager").GetComponent<GlobalWorkstationManager>();
         objectives.Add(stationManager.stationTypes[Random.Range(0, stationManager.stationTypes.Count)]);
         customerObjective = this.gameObject.GetComponentInChildren<CustomerObjective>();
         customerObjective.objective = objectives[0].ToString();
@@ -204,7 +204,7 @@ public class Customer : MonoBehaviour
                 else if (Vector3.Distance(this.transform.position, objectiveStation.transform.position) < 3)
                 {
                     objectiveStation.clientUsing = 2;
-                    objectiveStation.assignedCustomer = this;
+                    //objectiveStation.assignedCustomer = this;
 
                     this.GetIntoBuyingPosition();
                 }
@@ -261,7 +261,7 @@ public class Customer : MonoBehaviour
 
     private void LeaveTheShop()
     {
-        GlobalCustomerManager.Instance.CustomerLeft(this);
+        //GlobalCustomerManager.Instance.CustomerLeft(this);
     }
 
     private void UpdateWalkingAnimation()

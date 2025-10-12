@@ -13,7 +13,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public Transform clientPosition;
     public int clientUsing = 0;
     public string assignedWorker;
-    public Customer assignedCustomer;
+    public CustomerComponent assignedCustomer;
     public stationType type;
 
     public GameObject textIndicatorPrefab;
@@ -35,6 +35,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         Debug.Log(this.transform.position);
 
         fx = GetComponent<WorkstationFX>();
+
     }
 
     public void OnPointerClick(PointerEventData e)
@@ -59,7 +60,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
         int realProfit;
 
-        if (assignedCustomer.isThief)
+        if (assignedCustomer.GetComponent<CustomerModel>().thief)
         {
             realProfit = (int)(workstationData.profit * -0.25f);
 

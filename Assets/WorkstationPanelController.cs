@@ -18,7 +18,7 @@ public class WorkstationPanelController : MonoBehaviour
     [SerializeField] TMP_Text karma;
     [SerializeField] TMP_Text worker;
     [SerializeField] LayerMask interactableMask;
-    private WorkstationManager workstationManager;
+    private GlobalWorkstationManager workstationManager;
     private WorkStationBehaviour selectedWorkstation;
     private string nombresito = "";
 
@@ -29,7 +29,7 @@ public class WorkstationPanelController : MonoBehaviour
 
     private void Awake()
     {
-        this.workstationManager = GameObject.Find("WorkstationManager").GetComponent<WorkstationManager>();
+        this.workstationManager = GameObject.Find("GlobalWorkstationManager").GetComponent<GlobalWorkstationManager>();
     }
     private void Update()
     {
@@ -124,7 +124,7 @@ public class WorkstationPanelController : MonoBehaviour
         // Si no se encontró, revisamos StaffAdor
         if (selectedWorkerGO == null && GlobalCharactersManager.Instance.StaffAdor != null)
         {
-            var staffModel = GlobalCharactersManager.Instance.StaffAdor.GetComponent<CharacterModel>();
+            var staffModel = GlobalCharactersManager.Instance.StaffAdor.GetComponent<StaffAdorModel>();
             if (staffModel != null && staffModel.CharacterName == name)
             {
                 selectedWorkerGO = GlobalCharactersManager.Instance.StaffAdor;
@@ -136,7 +136,7 @@ public class WorkstationPanelController : MonoBehaviour
         {
             foreach (var workerGO in GlobalCharactersManager.Instance.Workers)
             {
-                var model = workerGO.GetComponent<CharacterModel>();
+                var model = workerGO.GetComponent<WorkerModel>();
                 if (model != null && model.CharacterName == selectedWorkstation.assignedWorker)
                 {
                     model.AsignatedStation = null;
@@ -148,7 +148,7 @@ public class WorkstationPanelController : MonoBehaviour
             // Revisar StaffAdor también
             if (GlobalCharactersManager.Instance.StaffAdor != null)
             {
-                var staffModel = GlobalCharactersManager.Instance.StaffAdor.GetComponent<CharacterModel>();
+                var staffModel = GlobalCharactersManager.Instance.StaffAdor.GetComponent<StaffAdorModel>();
                 if (staffModel != null && staffModel.CharacterName == selectedWorkstation.assignedWorker)
                 {
                     staffModel.AsignatedStation = null;
@@ -170,7 +170,7 @@ public class WorkstationPanelController : MonoBehaviour
         // Asignar trabajador seleccionado a la estación
         if (selectedWorkerGO != null)
         {
-            var model = selectedWorkerGO.GetComponent<CharacterModel>();
+            var model = selectedWorkerGO.GetComponent<BaseWorkerModel>();
             model.AsignatedStation = selectedWorkstation;
             selectedWorkstation.assignedWorker = name;
         }
@@ -205,7 +205,7 @@ public class WorkstationPanelController : MonoBehaviour
 
         foreach (var characterGO in allCharacters)
         {
-            var model = characterGO.GetComponent<CharacterModel>();
+            var model = characterGO.GetComponent<BaseWorkerModel>();
             if (model == null) continue;
 
             GameObject entry = Instantiate(workerEntryPrefab, workersContainer);

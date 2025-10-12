@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 7647876773997550200}
   - component: {fileID: 2494732550030526516}
   - component: {fileID: 2173854035400510820}
-  - component: {fileID: 7321626711700203320}
+  - component: {fileID: 3893787844347929088}
+  - component: {fileID: 6320273474468213088}
+  - component: {fileID: 4658557098812413489}
   m_Layer: 0
   m_Name: Customer 5
   m_TagString: Untagged
@@ -81,7 +83,7 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7321626711700203320
+--- !u!114 &3893787844347929088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,18 +92,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 170231451591073183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55029b83dd8bf334eac6009d0eaadc19, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f4b74bff0237c84ea2e3713d6acd91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NearestPointSearchRange: 10
-  patrolParentName: PatrolPoints
-  objectives: 
-  stopDistance: 10
+  agent: {fileID: 0}
+  animator: {fileID: 0}
   reachThreshold: 0.5
-  waitTimer: 0
+--- !u!114 &6320273474468213088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170231451591073183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc9280a4d6419c94fb2e109ddab8089f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  characterName: 
+  speed: 0
+  idle: 1
+--- !u!114 &4658557098812413489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170231451591073183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 565a2ba3c45ed5f4fb99ae72151cdf93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 0}
   leave: 0
-  attempt: 0
-  targetPosition: {x: 0, y: 0, z: 0}
+  objectiveStation: {fileID: 0}
+  objectives: 
 --- !u!1001 &1189163474153846195
 PrefabInstance:
   m_ObjectHideFlags: 0

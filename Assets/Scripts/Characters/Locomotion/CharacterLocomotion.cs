@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class CharacterLocomotion : MonoBehaviour
 {
-    protected NavMeshAgent agent;
+    public NavMeshAgent agent;
     protected CharacterModel agentModel;
     public Animator animator;
 
