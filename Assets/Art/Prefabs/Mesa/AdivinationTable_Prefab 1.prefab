@@ -140477,12 +140477,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1055288348403391465}
   - component: {fileID: 7993672055999628195}
-  - component: {fileID: 5284098765383279743}
-  - component: {fileID: 7371802884638902192}
+  - component: {fileID: 2030138782228208197}
   - component: {fileID: 2874282722765813527}
   - component: {fileID: 4135745041711963237}
   - component: {fileID: 5213369929097481249}
-  - component: {fileID: 2030138782228208197}
+  - component: {fileID: 7371802884638902192}
   m_Layer: 0
   m_Name: AdivinationTable_Prefab 1
   m_TagString: Untagged
@@ -140554,39 +140553,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &5284098765383279743
-MeshFilter:
+--- !u!65 &2030138782228208197
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8406347682521423268}
-  m_Mesh: {fileID: 0}
---- !u!114 &7371802884638902192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8406347682521423268}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdca4e35720e5944b9a7373b473c1e17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  workstationData: {fileID: 11400000, guid: 8ca1098d720980749ace057b49c4382a, type: 2}
-  status: 
-  workerPosition: {fileID: 2120445008239930720}
-  clientPosition: {fileID: 1406865999168609190}
-  clientUsing: 0
-  assignedWorker: 
-  assignedCustomer: {fileID: 0}
-  type: 0
-  textIndicatorPrefab: {fileID: 2953653338555478829, guid: 93a62b358483f1f4b968c19573168f9a, type: 3}
-  isBroken: 0
-  fx: {fileID: 0}
-  workDirection: {fileID: 5561991935203536805}
-  sittingWorkstation: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0.56, y: 2.02, z: -2.3}
 --- !u!114 &2874282722765813527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140655,27 +140642,31 @@ MonoBehaviour:
   levelThreeObject: {fileID: 7037551975919646378}
   levelThreeSparkles: {fileID: 7183432027639682022}
   anim: {fileID: 0}
---- !u!65 &2030138782228208197
-BoxCollider:
+--- !u!114 &7371802884638902192
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8406347682521423268}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0.56, y: 2.02, z: -2.3}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdca4e35720e5944b9a7373b473c1e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  workstationData: {fileID: 11400000, guid: 8ca1098d720980749ace057b49c4382a, type: 2}
+  status: 
+  workerPosition: {fileID: 2120445008239930720}
+  clientPosition: {fileID: 1406865999168609190}
+  clientUsing: 0
+  assignedWorker: 
+  assignedCustomer: {fileID: 0}
+  type: 0
+  textIndicatorPrefab: {fileID: 2953653338555478829, guid: 93a62b358483f1f4b968c19573168f9a, type: 3}
+  isBroken: 0
+  fx: {fileID: 0}
+  workDirection: {fileID: 5561991935203536805}
+  sittingWorkstation: 1
 --- !u!1 &9009446854267238517
 GameObject:
   m_ObjectHideFlags: 0

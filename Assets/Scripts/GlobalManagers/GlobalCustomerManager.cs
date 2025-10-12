@@ -1,4 +1,4 @@
-using System.Collections;
+using Assets.Scripts.Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,19 +12,21 @@ public class GlobalCustomerManager : MonoBehaviour
     public bool ShopIsOpen = true;
 
     [SerializeField]
-    private List<Customer> customerPrefabs;
+    private List<CustomerComponent> customerPrefabs;
 
-    public List<Customer> customers;
+    public List<CustomerComponent> customers;
     public int maxCustomersInScene = 5;
     private float spawnTimer;
     private float minSpawnInterval = 10f;
     private float maxSpawnInterval = 20f;
 
+    [SerializeField] private int customerIdCounter = 1;
+
     private void Awake() {
         if (Instance == null) {
             Instance = this;
         }
-        customers = new List<Customer>();
+        customers = new List<CustomerComponent>();
         spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval);
     }
 
@@ -45,14 +47,34 @@ public class GlobalCustomerManager : MonoBehaviour
     private void SpawnCustomer() {
         if (customers.Count < maxCustomersInScene && customerPrefabs.Count > 0 && GameManager.Instance.isOpen) {
             int randomIndex = Random.Range(0, customerPrefabs.Count);
-            Customer randomCustomer = customerPrefabs[randomIndex];
-            Customer newCustomer = Instantiate(randomCustomer, spawnPoint.position, Quaternion.identity);
+            CustomerComponent randomCustomer = customerPrefabs[randomIndex];
+            Debug.Log("Spawning customer: " + randomCustomer);
+            CustomerComponent newCustomer = Instantiate(randomCustomer, spawnPoint.position, Quaternion.identity);
+
+            newCustomer.model.Id = GetNewCustomerId();
+            newCustomer.model.CharacterName = CharacterNameHelper.GetRandomName();
+            newCustomer.model.Speed = 2;
+            newCustomer.model.mental = 50;
+            newCustomer.model.waitingTime = 0f;
+
+
+            var randomNumber = Random.Range(0f, 1f);
+            newCustomer.model.thief = randomNumber < 0.05f;
+
+
+
             customers.Add(newCustomer);
         }
     }
 
-    public void CustomerLeft(Customer customer) {
+    public void CustomerLeft(CustomerComponent customer) {
         customers.Remove(customer);
         Destroy(customer.gameObject);
+    }
+
+
+    public int GetNewCustomerId() {
+        customerIdCounter++;
+        return customerIdCounter;
     }
 }

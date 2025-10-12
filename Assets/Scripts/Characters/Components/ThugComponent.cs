@@ -36,10 +36,10 @@ public class ThugComponent : EnemyComponent
 
     protected override void SetTarget()
     {
-        if (WorkstationManager.Instance.activeStations.Count > 0)
+        if (GlobalWorkstationManager.Instance.activeStations.Count > 0)
         {
-            var randomIndex = Random.Range(0, WorkstationManager.Instance.activeStations.Count);
-            var targetStation = WorkstationManager.Instance.activeStations[randomIndex];
+            var randomIndex = Random.Range(0, GlobalWorkstationManager.Instance.activeStations.Count);
+            var targetStation = GlobalWorkstationManager.Instance.activeStations[randomIndex];
             target = targetStation.clientPosition.gameObject;
         }
         else

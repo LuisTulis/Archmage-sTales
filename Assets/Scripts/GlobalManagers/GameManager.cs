@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            foreach (Customer customer in GlobalCustomerManager.Instance.customers)
+            foreach (CustomerComponent customer in GlobalCustomerManager.Instance.customers)
             {
                 customer.LeaveWithoutBuy();
             }

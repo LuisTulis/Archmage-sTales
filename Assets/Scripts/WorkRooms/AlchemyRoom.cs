@@ -97,7 +97,7 @@ public class AlchemyRoom : MonoBehaviour {
 
             WorkStationBehaviour ws = alchemyStation.GetComponentInChildren<WorkStationBehaviour>();
             if (ws != null) {
-                WorkstationManager manager = FindObjectOfType<WorkstationManager>();
+                GlobalWorkstationManager manager = FindObjectOfType<GlobalWorkstationManager>();
                 if (manager != null)
                     ws.isBroken = false;
                     manager.AddStation(ws);

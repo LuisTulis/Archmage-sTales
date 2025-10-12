@@ -4,13 +4,13 @@ public class BaseWorkerComponent : CharacterComponent
 {
 
     protected RandomWalkLocomotion locomotion;
-    protected CharacterModel model;
+    protected BaseWorkerModel model;
     public bool isWorking;
 
     protected virtual void Awake()
     {
         locomotion = GetComponent<RandomWalkLocomotion>();
-        model = GetComponent<CharacterModel>();
+        model = GetComponent<BaseWorkerModel>();
     }
 
     protected virtual void Update()

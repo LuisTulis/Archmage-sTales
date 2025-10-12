@@ -1,4 +1,5 @@
-public class StaffAdorModel : CharacterModel
+public class StaffAdorModel : BaseWorkerModel
 {
+
 
 }

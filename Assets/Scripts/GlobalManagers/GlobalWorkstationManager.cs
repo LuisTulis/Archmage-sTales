@@ -1,11 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
 
-public class WorkstationManager : MonoBehaviour
+public class GlobalWorkstationManager : MonoBehaviour
 {
-    public static WorkstationManager Instance { get; private set; }
+    public static GlobalWorkstationManager Instance { get; private set; }
 
     public List<WorkStationBehaviour> actualStations;
     public List<WorkStationBehaviour> activeStations;
@@ -39,6 +37,7 @@ public class WorkstationManager : MonoBehaviour
         }
 
         actualStations = new List<WorkStationBehaviour>();
+        activeStations = new List<WorkStationBehaviour>();
         stationTypes = new List<stationType>();
         WorkStationBehaviour[] stations = FindObjectsOfType<WorkStationBehaviour>();
 
