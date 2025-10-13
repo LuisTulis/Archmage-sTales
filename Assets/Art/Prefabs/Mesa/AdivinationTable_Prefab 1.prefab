@@ -72876,11 +72876,11 @@ Transform:
   m_GameObject: {fileID: 6064024814473940978}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15090054, y: -1.1254001, z: -0.6873045}
+  m_LocalPosition: {x: -0.18199915, y: 0.09000003, z: 13.616993}
   m_LocalScale: {x: 1, y: 0.39999998, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4923421972863796640}
+  m_Father: {fileID: 1114634129949288788}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &4024063238360264999
 ParticleSystem:
@@ -73018,8 +73018,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.1
-      minScalar: 0.5
+      scalar: 0.2
+      minScalar: 0.6
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -73072,7 +73072,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.41424885, g: 0.8207547, b: 0.78687924, a: 1}
+      maxColor: {r: 0.4764151, g: 1, b: 0.95811325, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 0.97088087, b: 0, a: 1}
@@ -73136,8 +73136,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
-      minScalar: 7
+      scalar: 6
+      minScalar: 8
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -74160,7 +74160,7 @@ ParticleSystem:
         key0: {r: 1, g: 1, b: 1, a: 0}
         key1: {r: 0.16509432, g: 1, b: 0.94270265, a: 1}
         key2: {r: 0, g: 0.1745282, b: 0.8490566, a: 0.29411766}
-        key3: {r: 1, g: 1, b: 1, a: 0.78387904}
+        key3: {r: 1, g: 1, b: 1, a: 1}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
@@ -74190,7 +74190,7 @@ ParticleSystem:
         key0: {r: 1, g: 1, b: 1, a: 0}
         key1: {r: 0.61024445, g: 0.042452812, b: 1, a: 1}
         key2: {r: 1, g: 0.93564695, b: 0.0990566, a: 0}
-        key3: {r: 1, g: 1, b: 1, a: 0.9647059}
+        key3: {r: 1, g: 1, b: 1, a: 1}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
@@ -130833,7 +130833,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4634000660044822947}
   - {fileID: 2204887616860484240}
   - {fileID: 1354386798172855875}
   - {fileID: 7108184929476485091}
@@ -140902,6 +140901,9 @@ PrefabInstance:
       addedObject: {fileID: 6989826137251628200}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d9f03535030aa3b40bf44d6a8dfbdeee, type: 3}
       insertIndex: 1
+      addedObject: {fileID: 4634000660044822947}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d9f03535030aa3b40bf44d6a8dfbdeee, type: 3}
+      insertIndex: 2
       addedObject: {fileID: 4923421972863796640}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9f03535030aa3b40bf44d6a8dfbdeee, type: 3}
