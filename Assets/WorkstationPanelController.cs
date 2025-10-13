@@ -165,12 +165,16 @@ public class WorkstationPanelController : MonoBehaviour
             if (workstation != selectedWorkstation && workstation.assignedWorker == name)
             {
                 workstation.assignedWorker = "";
+                workstation.StopAllCoroutines();
+                workstation.fx.SetWorking(false);
+                workstation.status = "Idle";
             }
         }
 
         // Asignar trabajador seleccionado a la estación
         if (selectedWorkerGO != null)
         {
+            selectedWorkerGO.GetComponent<BaseWorkerComponent>().LeaveWorkSation();
             var model = selectedWorkerGO.GetComponent<BaseWorkerModel>();
             model.AsignatedStation = selectedWorkstation;
             selectedWorkstation.assignedWorker = name;

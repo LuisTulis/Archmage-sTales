@@ -34,7 +34,8 @@ public class CustomerComponent : CharacterComponent
 
 
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
 
         locomotion = GetComponent<RandomWalkLocomotion>();
         model = GetComponent<CustomerModel>();
@@ -59,6 +60,8 @@ public class CustomerComponent : CharacterComponent
     }
 
     private void Update() {
+        UpdateWalkingAnimation();
+
         if (Vector3.Distance(this.transform.position, GlobalCustomerManager.Instance.despawnPoint.position) < 3) {
             LeaveTheShop();
         }
@@ -71,7 +74,6 @@ public class CustomerComponent : CharacterComponent
             HandleWaitingBehaviour();
         }
 
-        UpdateWalkingAnimation();
 
         // FIXME: Deberia ser una posibilidad de volverse ladron, cuanto mas bajo el mental.
         if (model.mental < 5) {
@@ -118,7 +120,6 @@ public class CustomerComponent : CharacterComponent
             if (objectives.Count == 0) {
                 leave = true;
                 objectiveStation = null;
-                animator.SetBool("buying", false);
                 LeaveWithoutBuy();
             } else {
                 selectStation();
@@ -194,13 +195,15 @@ public class CustomerComponent : CharacterComponent
 
         if (this.objectiveStation != null) {
             this.objectiveStation.StopAllCoroutines();
-            this.objectiveStation.assignedCustomer = null;
+            this.objectiveStation.fx.SetWorking(false);
             this.objectiveStation.clientUsing = 0;
             this.objectiveStation.status = "Idle";
+            this.objectiveStation.assignedCustomer = null;
             this.objectiveStation = null;
         }
 
         this.objectives.Clear();
+        animator.SetBool("buying", false);
         locomotion.MoveTo(GlobalCustomerManager.Instance.despawnPoint.position);
     }
 
@@ -258,6 +261,15 @@ public class CustomerComponent : CharacterComponent
             objectiveStation.assignedCustomer = this;
             MoveToObjectiveStation();
         }
+    }
+
+    public override Dictionary<string, string> GetStats() {
+        var stats = new Dictionary<string, string>
+        {
+            { "Name", model.CharacterName },
+            { "Speed", model.Speed.ToString("F1") },
+        };
+        return stats;
     }
 
 

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SkeletonComponent : EnemyComponent
@@ -89,7 +90,7 @@ public class SkeletonComponent : EnemyComponent
     private void ASD()
     {
         var workerComp = target.GetComponent<WorkerComponent>();
-        var customerComp = target.GetComponent<Customer>();
+        var customerComp = target.GetComponent<CustomerComponent>();
 
         if (workerComp != null && !workerComp.isKidnapped)
         {
@@ -145,5 +146,14 @@ public class SkeletonComponent : EnemyComponent
                 return clip.length;
         }
         return 5f;
+    }
+
+    public override Dictionary<string, string> GetStats() {
+        var stats = new Dictionary<string, string>
+        {
+            { "Name", model.CharacterName },
+            { "Speed", model.Speed.ToString("F1") }
+        };
+        return stats;
     }
 }

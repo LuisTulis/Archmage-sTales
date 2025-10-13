@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.Helpers;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GlobalCharactersManager : MonoBehaviour {
     public static GlobalCharactersManager Instance { get; private set; }
@@ -17,6 +19,11 @@ public class GlobalCharactersManager : MonoBehaviour {
     public GameObject StaffAdor;
     public List<WorkerModel> Candidates = new List<WorkerModel>();
 
+    public CharacterComponent SelectedCharacter;
+
+    public event Action<CharacterComponent> OnCharacterSelected;
+    public event Action<CharacterComponent> OnCharacterDeselected;
+
     void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -29,6 +36,13 @@ public class GlobalCharactersManager : MonoBehaviour {
         GenerateCandidates();
     }
 
+    private void Update() {
+        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame) {
+            if (SelectedCharacter != null) {
+                DeselectCharacter();
+            }
+        }
+    }
     public int getAllSalary()
     {
         int salary = 0;
@@ -63,7 +77,7 @@ public class GlobalCharactersManager : MonoBehaviour {
         tempWorker.Id = GetNewWorkerId();
         tempWorker.Speed = workerData.Speed;
         tempWorker.CharacterName = CharacterNameHelper.GetRandomName();
-        tempWorker.salary = Random.Range(50, 150);
+        tempWorker.salary = UnityEngine.Random.Range(50, 150);
         return tempWorker;
     }
 
@@ -100,5 +114,29 @@ public class GlobalCharactersManager : MonoBehaviour {
     public int GetNewWorkerId() {
         workerIdCounter++;
         return workerIdCounter;
+    }
+
+    public void SelectCharacter(CharacterComponent character) {
+        if (SelectedCharacter == character)
+            return;
+
+        if (SelectedCharacter != null) {
+            SelectedCharacter.OnDeselect();
+            OnCharacterDeselected?.Invoke(SelectedCharacter);
+        }
+
+        SelectedCharacter = character;
+        SelectedCharacter.OnSelect();
+        OnCharacterSelected?.Invoke(SelectedCharacter);
+    }
+
+    public void DeselectCharacter() {
+        if (SelectedCharacter == null) return;
+
+        SelectedCharacter.OnDeselect();
+        OnCharacterDeselected?.Invoke(SelectedCharacter);
+        SelectedCharacter = null;
+
+        CameraControl.Instance.cameraTarget = null;
     }
 }
