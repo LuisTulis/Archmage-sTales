@@ -1,12 +1,14 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public ParticleSystem rain;
 
+    public int oro_inicial; 
     public int horo;
     public TMP_Text horo_mostrar;
     public TMP_Text dia_mostrar;
@@ -14,7 +16,9 @@ public class GameManager : MonoBehaviour
     public GameObject feedbackPrefab;
     public GameObject feedbackPlacement;
     public GameObject canvas;
+    public GameObject dailyStatistics;
 
+    public bool isPlaying = true;
     public bool isOpen = true;
     public int dayCount;
     public float actualHour;
@@ -23,9 +27,22 @@ public class GameManager : MonoBehaviour
     public bool aletargamiento = false;
     public bool costoso = false;
 
+
     public int openTime = 180;
     public int closeTime = 30;
 
+    public int gastosMesas = 0;
+    public int gastosEmpleadosDiario = 0;
+    public int deudaEmpleados = 0;
+    public int perdidas = 0;
+    public TMP_Text mostrar_ganancia;
+    public TMP_Text mostrar_perdida;
+    public TMP_Text mostrar_mesa;
+    public TMP_Text mostrar_salario;
+    public TMP_Text mostrar_deuda;
+    public TMP_Text mostrar_total;
+    public Toggle toggle_salario;
+    public Toggle toggle_deuda;
     private void Awake()
     {
         if (Instance == null)
@@ -42,11 +59,12 @@ public class GameManager : MonoBehaviour
         {
             rain.Stop();
         }
+        oro_inicial = 0;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J) || actualHour > openTime || (!isOpen && actualHour > closeTime))
+        if(Input.GetKeyDown(KeyCode.J) || actualHour > openTime || (!isOpen && actualHour > closeTime))
         {
             Open(!this.isOpen);
             actualHour = 0;
@@ -55,10 +73,10 @@ public class GameManager : MonoBehaviour
         {
             addGold(1000);
         }
-        //if (isOpen)
-        //{
-        actualHour += Time.deltaTime;
-        //}
+        if(isPlaying)
+        {
+            actualHour += Time.deltaTime;
+        }
 
         int hour = isOpen ? 6 + (int)(actualHour * 18 / openTime) : (int)(actualHour * 6 / closeTime);
 
@@ -128,15 +146,82 @@ public class GameManager : MonoBehaviour
             }
             GlobalCharactersManager.Instance.GenerateCandidates();
             dayCount += 1;
+            oro_inicial = horo;
         }
         else
         {
+            showDailyStatistics();
             foreach (CustomerComponent customer in GlobalCustomerManager.Instance.customers)
             {
                 customer.LeaveWithoutBuy();
             }
             light.color = new Color(0, 0, 1, 1);
         }
+    }
+
+    public void showDailyStatistics()
+    {
+        isPlaying = false;
+        int ganancia = horo - oro_inicial + (perdidas + gastosMesas);
+        mostrar_ganancia.text = "Ganancia: " + ganancia.ToString();
+        mostrar_perdida.text = "Perdidas: -" + perdidas.ToString();
+        mostrar_mesa.text = "Gastos en mesas: -" + gastosMesas.ToString();
+        int salario_actual = GlobalCharactersManager.Instance.getAllSalary();
+        mostrar_salario.text = "Salario de empleados: -" + salario_actual.ToString();
+        mostrar_deuda.text = "Deudas: -" + deudaEmpleados.ToString();
+
+        int total = ganancia - perdidas - gastosMesas;
+
+        if(toggle_salario.isOn)
+        {
+            if(horo > salario_actual)
+            {
+                total -= salario_actual;
+            }
+            else
+            {
+                toggle_salario.isOn = false;
+            }
+        }
+        if (toggle_deuda.isOn)
+        {
+            int horo_aux = toggle_salario.isOn ? horo - salario_actual : horo;
+            if (horo_aux > deudaEmpleados)
+            {
+                total -= deudaEmpleados;
+            }
+            else
+            {
+                toggle_deuda.isOn = false;
+            }
+        }
+
+        mostrar_total.text = "Total: " + total.ToString();
+
+        this.dailyStatistics.SetActive(true);
+
+    }
+
+    public void hideDailyStatistics()
+    {
+        this.gastosMesas = 0;
+        this.perdidas = 0;
+        isPlaying = true;
+        int salario = GlobalCharactersManager.Instance.getAllSalary();
+        if (toggle_deuda.isOn)
+        {
+            addGold(-deudaEmpleados);
+        }
+        if(toggle_salario.isOn)
+        {
+            addGold(-salario);
+        }
+        else
+        {
+            deudaEmpleados += salario;
+        }
+
+        this.dailyStatistics.SetActive(false);
     }
 
     IEnumerator goldCoroutine(int amount)

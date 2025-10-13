@@ -21,17 +21,11 @@ public class goldFeedback : MonoBehaviour
         firstPosition = this.transform.position.y;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator changeColor()
     {
         while (this.text.color.a < 1)
         {
-            this.text.color += new Color(0, 0, 0, Time.deltaTime);
+            this.text.color += new Color(0, 0, 0, Time.deltaTime * 0.5f);
             this.transform.position = new Vector3(this.transform.position.x, this.firstPosition + (this.text.color.a * yDifference), this.transform.position.z);
             yield return null;
         }

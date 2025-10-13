@@ -71,6 +71,10 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         }
         realProfit = gameManager.costoso ? (int)(realProfit * .5f) : realProfit;
         gameManager.addGold(realProfit);
+        if(realProfit < 0)
+        {
+            GameManager.Instance.perdidas += realProfit;
+        }
 
         GameObject instance = Instantiate(textIndicatorPrefab, this.transform.position, Quaternion.identity, this.transform);
         instance.GetComponent<goldFeedback2>().changeText(realProfit.ToString());

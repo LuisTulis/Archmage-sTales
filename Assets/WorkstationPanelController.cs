@@ -57,6 +57,7 @@ public class WorkstationPanelController : MonoBehaviour
         Debug.Log(selectedWorkstation.ToString());
         Debug.Log(selectedWorkstation.workstationData.karma.ToString());
         this.oro.addGold(-selectedWorkstation.workstationData.karma);
+        GameManager.Instance.gastosMesas += selectedWorkstation.workstationData.karma;
         this.selectedWorkstation.workstationData = workstationManager.upgrade(selectedWorkstation.workstationData.name);
         this.Show(selectedWorkstation);
 
