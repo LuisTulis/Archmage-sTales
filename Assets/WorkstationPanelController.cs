@@ -26,6 +26,7 @@ public class WorkstationPanelController : MonoBehaviour
     [Header("Workers UI")]
     [SerializeField] private Transform workersContainer;
     [SerializeField] private GameObject workerEntryPrefab;
+    [SerializeField] private Sprite[] stationTypeImage;
 
     private void Awake()
     {
@@ -219,6 +220,24 @@ public class WorkstationPanelController : MonoBehaviour
             if (model.AsignatedStation != null)
             {
                 entry.GetComponent<Image>().color = new Color(1, 0, .75f, .4f);
+                entry.GetComponentsInChildren<Image>()[2].color = new Color(1, 1, 1, 1);
+                if (model.AsignatedStation.type.ToString() == "caldero")
+                {
+                    entry.GetComponentsInChildren<Image>()[2].sprite = stationTypeImage[0];
+                }
+                else if(model.AsignatedStation.type.ToString() == "adivinacion")
+                {
+                    entry.GetComponentsInChildren<Image>()[2].sprite = stationTypeImage[1];
+                }
+                else
+                {
+                    entry.GetComponentsInChildren<Image>()[2].sprite = stationTypeImage[2];
+                }
+
+            }
+            else
+            {
+                entry.GetComponentsInChildren<Image>()[2].color = new Color(1, 1, 1, 0);
             }
 
             nameText.text = model.CharacterName;
