@@ -45,6 +45,7 @@ public class WorkerSignalUI : MonoBehaviour {
         }
 
         GameManager.Instance.addGold(-candidate.salary);
+        GameManager.Instance.perdidas += candidate.salary;
         GlobalCharactersManager.Instance.HireWorker(candidate);
 
         PopulateCandidates();

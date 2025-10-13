@@ -56,6 +56,7 @@ public class ThugComponent : EnemyComponent
         {
             Debug.Log($"{gameObject.name} is attacking {target.name}");
             GameManager.Instance.removeGold(model.StealAmount);
+            GameManager.Instance.perdidas += model.StealAmount;
         }
         else
         {
