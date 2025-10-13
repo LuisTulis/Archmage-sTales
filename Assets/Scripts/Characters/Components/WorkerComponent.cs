@@ -103,12 +103,7 @@ public class WorkerComponent : BaseWorkerComponent
         isKidnapped = true;
         kidnapper = skeleton;
 
-        if (model.AsignatedStation != null)
-        {
-            model.AsignatedStation.assignedWorker = "";
-            model.AsignatedStation.StopAllCoroutines();
-            model.AsignatedStation = null;
-        }
+        LeaveWorkSation();
     }
 
     public override void Despawn()

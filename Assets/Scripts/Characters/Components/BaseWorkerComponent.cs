@@ -15,7 +15,10 @@ public class BaseWorkerComponent : CharacterComponent
 
     protected virtual void Update()
     {
-        locomotion.WalkingAnimation();
+        locomotion.WalkingAnimation(isWorking);
+
+        // Fixme cuando tengamos un boton de deseleccionar trabajador, (que vuelva a estar idle)
+        // debrai llamar a LeaveWorkStation
 
         if (model.AsignatedStation != null)
         {
@@ -30,21 +33,24 @@ public class BaseWorkerComponent : CharacterComponent
 
     private void Work()
     {
-        if (Vector3.Distance(this.transform.position, this.model.AsignatedStation.workerPosition.transform.position) < 3)
-        {
-            if (this.model.AsignatedStation.clientUsing == 2)
-            {
+        if (Vector3.Distance(this.transform.position, this.model.AsignatedStation.workerPosition.transform.position) < 3) {
+            if (this.model.AsignatedStation.clientUsing == 2) {
                 model.AsignatedStation.accessToWork(this.model.CharacterName);
                 this.isWorking = true;
-
                 this.GetIntoWorkingPosition(this.model.AsignatedStation.workerPosition);
-            }
-            else
-            {
+            } else {
                 this.isWorking = false;
                 locomotion.SittingAnimation(false);
             }
 
+        }
+    }
+
+    public void LeaveWorkSation() {
+        if (model.AsignatedStation != null) {
+            model.AsignatedStation.assignedWorker = "";
+            model.AsignatedStation.StopAllCoroutines();
+            model.AsignatedStation = null;
         }
     }
 

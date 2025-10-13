@@ -57,6 +57,7 @@ public class WorkstationPanelController : MonoBehaviour
         Debug.Log(selectedWorkstation.ToString());
         Debug.Log(selectedWorkstation.workstationData.karma.ToString());
         this.oro.addGold(-selectedWorkstation.workstationData.karma);
+        GameManager.Instance.gastosMesas += selectedWorkstation.workstationData.karma;
         this.selectedWorkstation.workstationData = workstationManager.upgrade(selectedWorkstation.workstationData.name);
         this.Show(selectedWorkstation);
 
@@ -164,12 +165,16 @@ public class WorkstationPanelController : MonoBehaviour
             if (workstation != selectedWorkstation && workstation.assignedWorker == name)
             {
                 workstation.assignedWorker = "";
+                workstation.StopAllCoroutines();
+                workstation.fx.SetWorking(false);
+                workstation.status = "Idle";
             }
         }
 
         // Asignar trabajador seleccionado a la estación
         if (selectedWorkerGO != null)
         {
+            selectedWorkerGO.GetComponent<BaseWorkerComponent>().LeaveWorkSation();
             var model = selectedWorkerGO.GetComponent<BaseWorkerModel>();
             model.AsignatedStation = selectedWorkstation;
             selectedWorkstation.assignedWorker = name;

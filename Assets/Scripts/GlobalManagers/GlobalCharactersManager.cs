@@ -43,7 +43,18 @@ public class GlobalCharactersManager : MonoBehaviour {
             }
         }
     }
+    public int getAllSalary()
+    {
+        int salary = 0;
 
+        foreach (GameObject worker in Workers)
+        {
+            salary += worker.GetComponent<WorkerModel>().salary;
+        }
+
+
+        return salary;
+    }
     void InitializePlayer() {
         GameObject instance = Instantiate(StaffAdorPrefab, Vector3.zero, Quaternion.identity);
 

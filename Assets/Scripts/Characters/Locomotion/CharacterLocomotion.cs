@@ -48,12 +48,12 @@ public class CharacterLocomotion : MonoBehaviour
         }
     }
 
-    public void WalkingAnimation()
+    public void WalkingAnimation(bool isWorking)
     {
         if (animator == null || agent == null) return;
 
         bool isWalking = agent.velocity.magnitude > 0.1f;
-        animator.SetBool("walking", isWalking);
+        animator.SetBool("walking", isWalking && !isWorking);
     }
 
     public void SittingAnimation(bool sitting)
