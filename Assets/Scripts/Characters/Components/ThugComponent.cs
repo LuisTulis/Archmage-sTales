@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ThugComponent : EnemyComponent
@@ -86,5 +87,14 @@ public class ThugComponent : EnemyComponent
         }
 
         base.Despawn();
+    }
+
+    public override Dictionary<string, string> GetStats() {
+        var stats = new Dictionary<string, string>
+        {
+            { "Name", model.CharacterName },
+            { "Speed", model.Speed.ToString("F1") }
+        };
+        return stats;
     }
 }

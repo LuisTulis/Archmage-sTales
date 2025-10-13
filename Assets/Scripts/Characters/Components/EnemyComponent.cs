@@ -6,7 +6,8 @@ public abstract class EnemyComponent : CharacterComponent {
     [SerializeField] protected GameObject target;
 
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         locomotion = GetComponent<EnemyLocomotion>();
     }
 

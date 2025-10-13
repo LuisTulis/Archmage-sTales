@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseWorkerComponent : CharacterComponent
@@ -6,9 +7,8 @@ public class BaseWorkerComponent : CharacterComponent
     protected RandomWalkLocomotion locomotion;
     protected BaseWorkerModel model;
     public bool isWorking;
-
-    protected virtual void Awake()
-    {
+    protected override void Awake() {
+        base.Awake();
         locomotion = GetComponent<RandomWalkLocomotion>();
         model = GetComponent<BaseWorkerModel>();
     }
@@ -59,6 +59,18 @@ public class BaseWorkerComponent : CharacterComponent
         transform.rotation = Quaternion.LookRotation(direction);
 
         locomotion.SittingAnimation(this.model.AsignatedStation.sittingWorkstation);
+    }
+
+    public override Dictionary<string, string> GetStats() {
+        var stats = new Dictionary<string, string>
+        {
+            { "Name", model.CharacterName },
+            { "Speed", model.Speed.ToString("F1") },
+            { "Working", isWorking ? "Yes" : "No" }
+        };
+
+        Debug.Log("Getting stats for worker: " + model.CharacterName);
+        return stats;
     }
 
 }

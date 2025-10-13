@@ -34,7 +34,8 @@ public class CustomerComponent : CharacterComponent
 
 
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
 
         locomotion = GetComponent<RandomWalkLocomotion>();
         model = GetComponent<CustomerModel>();
@@ -258,6 +259,15 @@ public class CustomerComponent : CharacterComponent
             objectiveStation.assignedCustomer = this;
             MoveToObjectiveStation();
         }
+    }
+
+    public override Dictionary<string, string> GetStats() {
+        var stats = new Dictionary<string, string>
+        {
+            { "Name", model.CharacterName },
+            { "Speed", model.Speed.ToString("F1") },
+        };
+        return stats;
     }
 
 
