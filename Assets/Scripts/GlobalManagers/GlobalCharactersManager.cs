@@ -59,7 +59,7 @@ public class GlobalCharactersManager : MonoBehaviour {
         GameObject instance = Instantiate(StaffAdorPrefab, Vector3.zero, Quaternion.identity);
 
         StaffAdorModel model = instance.GetComponent<StaffAdorModel>();
-
+        model.Stats = new WorkerStats(true);
         if (model != null) {
             model.Id = staffAdorData.Id;
             model.CharacterName = staffAdorData.Name;
@@ -78,6 +78,7 @@ public class GlobalCharactersManager : MonoBehaviour {
         tempWorker.Speed = workerData.Speed;
         tempWorker.CharacterName = CharacterNameHelper.GetRandomName();
         tempWorker.salary = UnityEngine.Random.Range(50, 150);
+        tempWorker.Stats = new WorkerStats(false);
         return tempWorker;
     }
 
@@ -85,6 +86,14 @@ public class GlobalCharactersManager : MonoBehaviour {
         Candidates.Clear();
         for (int i = 0; i < 3; i++) {
             Candidates.Add(CreateWorkerData());
+        }
+    }
+
+    public void changeMental(int amount)
+    {
+        foreach(GameObject worker in Workers)
+        {
+            worker.GetComponent<WorkerModel>().mental += amount;
         }
     }
 
@@ -97,6 +106,8 @@ public class GlobalCharactersManager : MonoBehaviour {
             model.Speed = candidate.Speed;
             model.CharacterName = candidate.CharacterName;
             model.salary = candidate.salary;
+            model.Stats = candidate.Stats;
+            model.mental = 50;
 
             Workers.Add(instance);
         }

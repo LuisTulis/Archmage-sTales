@@ -43,20 +43,38 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         infoPanel.Show(this);
     }
 
-    public void accessToWork(string workerName)
+    public void accessToWork(BaseWorkerModel workerModel)
     {
         if (this.status == "Idle")
         {
             if (fx) fx.SetWorking(true);
             this.status = "Being used";
-            StartCoroutine(BeingUsed());
+            StartCoroutine(BeingUsed(workerModel));
         }
     }
-    private IEnumerator BeingUsed()
+    private IEnumerator BeingUsed(BaseWorkerModel workerModel)
     {
-        Debug.Log("Entré");
-        float seconds = gameManager.aletargamiento ? workstationData.Speed : workstationData.Speed * 2;
-        yield return new WaitForSeconds(workstationData.Speed);
+        float seconds = gameManager.aletargamiento ? workstationData.Speed * 2 : workstationData.Speed;
+        
+        switch(this.type.ToString())
+        {
+            case "adivinacion":
+                Debug.Log(workerModel.Stats.adivinationStat * 5 / 100);
+                seconds -= seconds * (workerModel.Stats.adivinationStat * 5f / 100f);
+                break;
+            case "invocacion":
+                seconds -= seconds * (workerModel.Stats.summonStat * 5 / 100);
+                break;
+            case "caldero":
+                seconds -= seconds * (workerModel.Stats.alchemyStat * 5 / 100);
+                break;
+            case "encantamiento":
+                seconds -= seconds * (workerModel.Stats.enchantStat * 5 / 100);
+                break;
+        }
+        Debug.Log("WORKSTATION FINAL SECONDS: " + seconds + ", ORIGINAL SECODNS: " + workstationData.Speed);
+
+        yield return new WaitForSeconds(seconds);
 
         int realProfit;
 
