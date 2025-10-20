@@ -212,13 +212,20 @@ public class GameManager : MonoBehaviour
         {
             addGold(-deudaEmpleados);
         }
+        if(deudaEmpleados > 0)
+        {
+            GlobalCharactersManager.Instance.changeMental(-5);
+        }
+
         if(toggle_salario.isOn)
         {
             addGold(-salario);
+            GlobalCharactersManager.Instance.changeMental(10);
         }
         else
         {
             deudaEmpleados += salario;
+            GlobalCharactersManager.Instance.changeMental(-20);
         }
 
         this.dailyStatistics.SetActive(false);

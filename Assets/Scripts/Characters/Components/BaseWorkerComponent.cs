@@ -16,7 +16,7 @@ public class BaseWorkerComponent : CharacterComponent
     protected virtual void Update()
     {
         locomotion.WalkingAnimation(isWorking);
-
+        
         // Fixme cuando tengamos un boton de deseleccionar trabajador, (que vuelva a estar idle)
         // debrai llamar a LeaveWorkStation
 
@@ -35,7 +35,37 @@ public class BaseWorkerComponent : CharacterComponent
     {
         if (Vector3.Distance(this.transform.position, this.model.AsignatedStation.workerPosition.transform.position) < 3) {
             if (this.model.AsignatedStation.clientUsing == 2) {
-                model.AsignatedStation.accessToWork(this.model.CharacterName);
+                if(Random.Range(0,9) == 1)
+                {
+                    switch (this.model.AsignatedStation.type.ToString())
+                    {
+                        case "adivinacion":
+                            if(this.model.Stats.adivinationStat < 5)
+                            {
+                                this.model.Stats.adivinationStat += 1;
+                            }
+                            break;
+                        case "invocacion":
+                            if (this.model.Stats.summonStat < 5)
+                            {
+                                this.model.Stats.summonStat += 1;
+                            }
+                            break;
+                        case "caldero":
+                            if (this.model.Stats.alchemyStat < 5)
+                            {
+                                this.model.Stats.alchemyStat += 1;
+                            }
+                            break;
+                        case "encantamiento":
+                            if (this.model.Stats.enchantStat < 5)
+                            {
+                                this.model.Stats.enchantStat += 1;
+                            }
+                            break;
+                    }
+                }
+                model.AsignatedStation.accessToWork(this.model);
                 this.isWorking = true;
                 this.GetIntoWorkingPosition(this.model.AsignatedStation.workerPosition);
             } else {
@@ -68,10 +98,15 @@ public class BaseWorkerComponent : CharacterComponent
     }
 
     public override Dictionary<string, string> GetStats() {
+        Debug.Log(model.Stats.ToString());
         var stats = new Dictionary<string, string>
         {
             { "Name", model.CharacterName },
             { "Speed", model.Speed.ToString("F1") },
+            { "Summoning", model.Stats.summonStat.ToString() },
+            { "Adivination", model.Stats.adivinationStat.ToString() },
+            { "Alchemy", model.Stats.alchemyStat.ToString() },
+            { "Enchanting", model.Stats.enchantStat.ToString() },
             { "Working", isWorking ? "Yes" : "No" }
         };
 

@@ -54,6 +54,12 @@ public class CharacterStatsPanel : MonoBehaviour {
         ClearStats();
     }
 
+    public void auxHidePanel()
+    {
+        panelRoot.SetActive(false);
+        ClearStats();
+    }
+
     private void ClearStats() {
         foreach (Transform child in statsGrid)
             Destroy(child.gameObject);

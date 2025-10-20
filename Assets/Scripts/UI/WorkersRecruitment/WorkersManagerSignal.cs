@@ -27,4 +27,9 @@ public class WorkersManagerSignal : MonoBehaviour {
             isUIActive = state;
         }
     }
+
+    public void forceClose()
+    {
+        ToggleUI(false);
+    }
 }

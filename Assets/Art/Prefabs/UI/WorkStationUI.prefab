@@ -1926,8 +1926,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.25, y: 1.5, z: 2.25}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2699433483493676903}
+  m_Children: []
   m_Father: {fileID: 5561272685938994481}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2094,16 +2093,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4030704336450752821}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 2.025, y: 1.3499999, z: 2.025}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 5131724429226525741}
+  m_Father: {fileID: 5561272685938994481}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 180.7}
+  m_AnchoredPosition: {x: 0, y: 492.555}
   m_SizeDelta: {x: 957.3, y: 123.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5530130854829854054
@@ -2653,6 +2652,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2699433483493676903}
   - {fileID: 5131724429226525741}
   - {fileID: 2434267447523220683}
   - {fileID: 4194434844773252060}
@@ -2761,6 +2761,7 @@ MonoBehaviour:
     m_Bits: 8
   workersContainer: {fileID: 5851518134315773823}
   workerEntryPrefab: {fileID: 1075717181571669017, guid: 81fe4e59ec91c704eb2890144a9f2df3, type: 3}
+  stationTypeImage: []
 --- !u!1 &5002661438700727610
 GameObject:
   m_ObjectHideFlags: 0

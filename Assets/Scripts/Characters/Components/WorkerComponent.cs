@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Experimental;
 using UnityEngine;
 
 public class WorkerComponent : BaseWorkerComponent
@@ -25,6 +26,18 @@ public class WorkerComponent : BaseWorkerComponent
     {
         base.Update();
 
+        if(model is WorkerModel wm)
+        {
+            if(wm.mental < 0)
+            {
+                BeKidnapped(GlobalLocomotionManager.Instance.despawnPoint);
+                float distanceToDespawn = Vector3.Distance(transform.position, GlobalLocomotionManager.Instance.despawnPoint.position);
+                if (distanceToDespawn < 2f)
+                {
+                    Despawn();
+                }
+            }
+        }
         if (isKidnapped && kidnapper != null)
         {
             locomotion.MoveTo(kidnapper.position - new Vector3(0, 0, 1.5f));
