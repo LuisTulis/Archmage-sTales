@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public int gastosEmpleadosDiario = 0;
     public int deudaEmpleados = 0;
     public int perdidas = 0;
+    private bool addDebt = false;
     public TMP_Text mostrar_ganancia;
     public TMP_Text mostrar_perdida;
     public TMP_Text mostrar_mesa;
@@ -150,7 +151,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            showDailyStatistics();
+            showDailyStatistics(true);
             foreach (CustomerComponent customer in GlobalCustomerManager.Instance.customers)
             {
                 customer.LeaveWithoutBuy();
@@ -159,8 +160,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void showDailyStatistics()
+    public void showDailyStatistics(bool showCheckboxPay)
     {
+        addDebt = !showCheckboxPay;
         isPlaying = false;
         int ganancia = horo - oro_inicial + (perdidas + gastosMesas);
         mostrar_ganancia.text = "Ganancia: " + ganancia.ToString();
@@ -172,7 +174,10 @@ public class GameManager : MonoBehaviour
 
         int total = ganancia - perdidas - gastosMesas;
 
-        if(toggle_salario.isOn)
+        toggle_salario.gameObject.SetActive(showCheckboxPay);
+        toggle_deuda.gameObject.SetActive(showCheckboxPay);
+
+        if (toggle_salario.gameObject.activeSelf && toggle_salario.isOn)
         {
             if(horo > salario_actual)
             {
@@ -183,7 +188,7 @@ public class GameManager : MonoBehaviour
                 toggle_salario.isOn = false;
             }
         }
-        if (toggle_deuda.isOn)
+        if (toggle_deuda.gameObject.activeSelf && toggle_deuda.isOn)
         {
             int horo_aux = toggle_salario.isOn ? horo - salario_actual : horo;
             if (horo_aux > deudaEmpleados)
@@ -204,30 +209,31 @@ public class GameManager : MonoBehaviour
 
     public void hideDailyStatistics()
     {
-        this.gastosMesas = 0;
-        this.perdidas = 0;
+        if(!addDebt) {
+            this.gastosMesas = 0;
+            this.perdidas = 0;
+            int salario = GlobalCharactersManager.Instance.getAllSalary();
+            if (toggle_deuda.isOn)
+            {
+                addGold(-deudaEmpleados);
+            }
+            if(deudaEmpleados > 0)
+            {
+                GlobalCharactersManager.Instance.changeMental(-5);
+            }
+
+            if(toggle_salario.isOn)
+            {
+                addGold(-salario);
+                GlobalCharactersManager.Instance.changeMental(10);
+            }
+            else
+            {
+                deudaEmpleados += salario;
+                GlobalCharactersManager.Instance.changeMental(-20);
+            }
+        }
         isPlaying = true;
-        int salario = GlobalCharactersManager.Instance.getAllSalary();
-        if (toggle_deuda.isOn)
-        {
-            addGold(-deudaEmpleados);
-        }
-        if(deudaEmpleados > 0)
-        {
-            GlobalCharactersManager.Instance.changeMental(-5);
-        }
-
-        if(toggle_salario.isOn)
-        {
-            addGold(-salario);
-            GlobalCharactersManager.Instance.changeMental(10);
-        }
-        else
-        {
-            deudaEmpleados += salario;
-            GlobalCharactersManager.Instance.changeMental(-20);
-        }
-
         this.dailyStatistics.SetActive(false);
     }
 

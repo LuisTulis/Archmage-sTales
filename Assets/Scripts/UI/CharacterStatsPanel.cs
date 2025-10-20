@@ -56,6 +56,7 @@ public class CharacterStatsPanel : MonoBehaviour {
 
     public void auxHidePanel()
     {
+        GlobalCharactersManager.Instance.SelectedCharacter = null;
         panelRoot.SetActive(false);
         ClearStats();
     }
