@@ -1,40 +1,46 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class UnlockRoomUI : MonoBehaviour {
+public class UnlockRoomUI : MonoBehaviour
+{
     [Header("Referencias de UI")]
     [SerializeField] private TextMeshProUGUI roomNameText;
     [SerializeField] private TextMeshProUGUI roomPriceText;
 
-    private AlchemyRoom currentRoom;
+    private AlchemyRoom prePurchaseRoom;
 
-    void Start() {
+    void Start()
+    {
         gameObject.SetActive(false);
     }
 
-    public void Show(AlchemyRoom room) {
-        currentRoom = room;
+    public void Show(AlchemyRoom room)
+    {
+        prePurchaseRoom = room;
 
-        if (roomNameText != null)
-            roomNameText.text = room.RoomName;
-
-        if (roomPriceText != null)
-            roomPriceText.text = "$ " + room.RoomPrice.ToString();
+        // Setear los precios de las salas acá
 
         gameObject.SetActive(true);
     }
 
-    public void OnYes() {
-        if (currentRoom != null)
-            currentRoom.ConfirmUnlock();
+    public void UnlockRoom(string roomName)
+    {
+        PrePurchaseWorkstation workstation = prePurchaseRoom.workstations.Find(w => w.RoomName.Equals(roomName));
+        if (prePurchaseRoom != null)
+        {
+            Debug.Log("Comprando nueva sala: " + workstation.RoomName);
+            prePurchaseRoom.ConfirmUnlock(workstation);
+        }
+        else
+        {
+            Debug.Log("ERROR: prePurchaseRoom is missing.");
+        }
 
-        gameObject.SetActive(false);
+        OnClose();
     }
 
-    public void OnNo() {
-        if (currentRoom != null)
-            currentRoom.CancelUnlock();
-
+    public void OnClose()
+    {
         gameObject.SetActive(false);
     }
 }

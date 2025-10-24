@@ -1,13 +1,13 @@
+using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 
-public class AlchemyRoom : MonoBehaviour {
-    [Header("Datos de la Sala")]
-    [SerializeField] private string roomName = "Alchemy Room";
-    [SerializeField] private int roomPrice = 20;
+public class AlchemyRoom : MonoBehaviour
+{
+
+    [SerializeField] public List<PrePurchaseWorkstation> workstations;
 
     [Header("Referencias de la Sala")]
-    [SerializeField] private GameObject alchemyStation;
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject prePurchaseArea;
     [SerializeField] private GameObject blockFrameDoor;
@@ -18,29 +18,29 @@ public class AlchemyRoom : MonoBehaviour {
     [SerializeField] private UnlockRoomUI unlockRoomUI;
 
     [Header("NavMesh")]
-    [SerializeField] private NavMeshSurface navMeshSurface; 
+    [SerializeField] private NavMeshSurface navMeshSurface;
 
-    private bool isUnlocked = false;
+    [SerializeField] private bool isUnlocked = false;
 
-    public string RoomName => roomName;
-    public int RoomPrice => roomPrice;
-
-    void Start() {
-        if (alchemyStation != null)
-            alchemyStation.gameObject.SetActive(false);
-
-        if (prePurchaseArea != null && prePurchaseArea.GetComponent<Collider>() == null) {
+    void Start()
+    {
+        if (prePurchaseArea != null && prePurchaseArea.GetComponent<Collider>() == null)
+        {
             prePurchaseArea.AddComponent<BoxCollider>();
         }
     }
 
-    void Update() {
-        if (!isUnlocked && Input.GetMouseButtonDown(0)) {
+    void Update()
+    {
+        if (!isUnlocked && Input.GetMouseButtonDown(0))
+        {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit)) {
-                if (hit.collider.gameObject == prePurchaseArea) {
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.gameObject == prePurchaseArea)
+                {
                     if (unlockRoomUI != null)
                         unlockRoomUI.Show(this);
                 }
@@ -48,19 +48,25 @@ public class AlchemyRoom : MonoBehaviour {
         }
     }
 
-    public void ConfirmUnlock() {
+    public void ConfirmUnlock(PrePurchaseWorkstation prePurchaseWorkstation)
+    {
         if (isUnlocked) return;
 
         GameManager gm = FindObjectOfType<GameManager>();
 
-        if (gm != null) {
-            if (gm.horo >= roomPrice) {
-                gm.horo -= roomPrice;
+        if (gm != null)
+        {
+            if (gm.horo >= prePurchaseWorkstation.RoomPrice)
+            {
+                gm.horo -= prePurchaseWorkstation.RoomPrice;
                 gm.horo_mostrar.text = gm.horo.ToString() + "$";
 
-                UnlockRoom();
-            } else {
-                if (gm.feedbackPrefab != null) {
+                UnlockRoom(prePurchaseWorkstation.Workstation);
+            }
+            else
+            {
+                if (gm.feedbackPrefab != null)
+                {
                     GameObject instance = Instantiate(
                         gm.feedbackPrefab,
                         gm.feedbackPlacement.transform.position,
@@ -73,11 +79,13 @@ public class AlchemyRoom : MonoBehaviour {
         }
     }
 
-    private void UnlockRoom() {
+    private void UnlockRoom(GameObject workstation)
+    {
         if (isUnlocked) return;
         isUnlocked = true;
 
-        if (door != null) {
+        if (door != null)
+        {
             door.SetActive(false);
         }
         if (blockFrameDoor != null)
@@ -92,29 +100,29 @@ public class AlchemyRoom : MonoBehaviour {
         if (prePurchaseArea != null)
             prePurchaseArea.SetActive(false);
 
-        if (alchemyStation != null) {
-            alchemyStation.SetActive(true);
+        if (workstation != null)
+        {
+            workstation.SetActive(true);
 
-            WorkStationBehaviour ws = alchemyStation.GetComponentInChildren<WorkStationBehaviour>();
-            if (ws != null) {
+            WorkStationBehaviour ws = workstation.GetComponentInChildren<WorkStationBehaviour>();
+            if (ws != null)
+            {
                 GlobalWorkstationManager manager = FindObjectOfType<GlobalWorkstationManager>();
                 if (manager != null)
                     ws.isBroken = false;
-                    manager.AddStation(ws);
-                    manager.activeStations.Add(ws);
+                manager.AddStation(ws);
+                manager.activeStations.Add(ws);
             }
         }
 
         if (navMeshSurface != null)
             navMeshSurface.BuildNavMesh();
-        else {
+        else
+        {
             NavMeshSurface nm = GameObject.Find("Terrain")?.GetComponent<NavMeshSurface>();
             if (nm != null)
                 nm.BuildNavMesh();
         }
     }
 
-
-    public void CancelUnlock() {
-    }
 }
