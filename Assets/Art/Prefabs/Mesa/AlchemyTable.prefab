@@ -10494,7 +10494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWorking: 0
-  uniqueComponent: 1
+  uniqueComponent: 0
   fireLight: {fileID: 2470873698778584695}
   steam: {fileID: 8852558423244722227}
   baseIntensity: 2
@@ -10533,6 +10533,7 @@ MonoBehaviour:
   isBroken: 0
   fx: {fileID: 0}
   workDirection: {fileID: 4832965198187361079}
+  sittingWorkstation: 0
 --- !u!1 &8550200114099843455
 GameObject:
   m_ObjectHideFlags: 0
