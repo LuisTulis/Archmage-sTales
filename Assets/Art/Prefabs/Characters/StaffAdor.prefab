@@ -79,9 +79,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.84, z: 0}
 --- !u!114 &-3803689125998298543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   speed: 0
   idle: 1
   workStation: {fileID: 0}
+  successRate: 0
 --- !u!114 &1031133593100464894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4b74bff0237c84ea2e3713d6acd91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   animator: {fileID: 0}
   reachThreshold: 0.5
 --- !u!114 &-7725131577569055132
@@ -126,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWorking: 0
+  isKidnapped: 0
 --- !u!1001 &4120178089518716770
 PrefabInstance:
   m_ObjectHideFlags: 0
