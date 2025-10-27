@@ -95,5 +95,6 @@ public enum stationType
 {
     adivinacion,
     caldero,
-    invocacion
+    invocacion,
+    encantamiento
 }

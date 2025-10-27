@@ -15,8 +15,8 @@ MonoBehaviour:
   Id: 1
   displayName: Caldero 4
   level: 4
-  Speed: 20
-  profit: 1000
+  Speed: 22
+  profit: 115
   karma: 1100
-  description: "\xBFA que huele aqu\xED?"
+  description: "Creo que necesitamos a un acid\xF3logo..."
   upgradeCost: 0

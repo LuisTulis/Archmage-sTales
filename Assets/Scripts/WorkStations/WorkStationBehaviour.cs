@@ -26,6 +26,11 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public Transform workDirection;
     public bool sittingWorkstation;
 
+    public GameObject ProgressBarPrefab;
+    private GameObject actualProgress;
+
+    public float elapsed = 0;
+
     private void Awake()
     {
         this.status = "Idle";
@@ -49,11 +54,15 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         {
             if (fx) fx.SetWorking(true);
             this.status = "Being used";
+            actualProgress = Instantiate(ProgressBarPrefab, clientPosition.position, Quaternion.identity, transform);
+            actualProgress.transform.position += new Vector3(0, 5, 0);
+            elapsed = 0;
             StartCoroutine(BeingUsed(workerModel));
         }
     }
     private IEnumerator BeingUsed(BaseWorkerModel workerModel)
     {
+
         float seconds = gameManager.aletargamiento ? workstationData.Speed * 2 : workstationData.Speed;
         
         switch(this.type.ToString())
@@ -72,9 +81,18 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
                 seconds -= seconds * (workerModel.Stats.enchantStat * 5 / 100);
                 break;
         }
-        Debug.Log("WORKSTATION FINAL SECONDS: " + seconds + ", ORIGINAL SECODNS: " + workstationData.Speed);
 
-        yield return new WaitForSeconds(seconds);
+        while (elapsed < seconds)
+        {
+            elapsed += Time.deltaTime;
+            if(actualProgress != null)
+            {
+                actualProgress.GetComponent<progressBar>().progress = elapsed * 100 / seconds;
+            }
+            yield return null;
+        }
+
+        //yield return new WaitForSeconds(seconds);
 
         int realProfit;
 
@@ -94,7 +112,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
             GameManager.Instance.perdidas += realProfit;
         }
 
-        GameObject instance = Instantiate(textIndicatorPrefab, this.transform.position, Quaternion.identity, this.transform);
+        GameObject instance = Instantiate(textIndicatorPrefab, this.clientPosition.position, Quaternion.identity, this.transform);
         instance.GetComponent<goldFeedback2>().changeText(realProfit.ToString());
         this.status = "Idle";
         this.clientUsing = 0;

@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: "Mesa de Adivinaci\xF3n 2"
   level: 2
   Speed: 18
-  profit: 10
+  profit: 50
   karma: 250
-  description: A que no adivinas que hace esta mesa?
+  description: Veo ganancias en nuestro futuro.
   upgradeCost: 0

@@ -67,6 +67,7 @@ public class WorkstationPanelController : MonoBehaviour
 
     public void Show(WorkStationBehaviour workstation)
     {
+        GameManager.Instance.UIOpen = true;
         selectedWorkstation = workstation;
         var data = workstation.workstationData;
         nombresito = workstation.assignedWorker;
@@ -105,6 +106,7 @@ public class WorkstationPanelController : MonoBehaviour
     {
         this.panel.SetActive(false);
         this.workerPanel.SetActive(false);
+        GameManager.Instance.UIOpen = false;
 
     }
 
@@ -229,9 +231,13 @@ public class WorkstationPanelController : MonoBehaviour
                 {
                     entry.GetComponentsInChildren<Image>()[2].sprite = stationTypeImage[1];
                 }
-                else
+                else if (model.AsignatedStation.type.ToString() == "invocacion")
                 {
                     entry.GetComponentsInChildren<Image>()[2].sprite = stationTypeImage[2];
+                }
+                else
+                {
+                    entry.GetComponentsInChildren<Image>()[2].sprite = stationTypeImage[3];
                 }
 
             }
