@@ -39,6 +39,9 @@ public class CustomerObjective : MonoBehaviour
                 case "invocacion":
                     this.image.sprite = images[2];
                     break;
+                case "encantamiento":
+                    this.image.sprite = images[3];
+                    break;
 
             }
         }

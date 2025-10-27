@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: "Mesa de Adivinaci\xF3n 5"
   level: 5
   Speed: 10
-  profit: 10
+  profit: 100
   karma: 2147483647
-  description: A que no adivinas que hace esta mesa?
+  description: Te lo dije, no habias adivinado.
   upgradeCost: 0

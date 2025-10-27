@@ -15,8 +15,8 @@ MonoBehaviour:
   Id: 1
   displayName: Caldero 5
   level: 5
-  Speed: 10
-  profit: 1000
+  Speed: 20
+  profit: 200
   karma: 2034023
-  description: "\xBFA que huele aqu\xED?"
+  description: Asombrosa ambrosia.
   upgradeCost: 0

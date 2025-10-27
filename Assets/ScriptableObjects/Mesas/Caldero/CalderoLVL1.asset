@@ -15,8 +15,8 @@ MonoBehaviour:
   Id: 1
   displayName: Caldero 1
   level: 1
-  Speed: 50
-  profit: 500
+  Speed: 30
+  profit: 35
   karma: 800
-  description: "\xBFA que huele aqu\xED?"
+  description: Nuevas pociones anti-sed ya a la venta
   upgradeCost: 0

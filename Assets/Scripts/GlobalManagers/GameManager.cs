@@ -44,6 +44,10 @@ public class GameManager : MonoBehaviour
     public TMP_Text mostrar_total;
     public Toggle toggle_salario;
     public Toggle toggle_deuda;
+
+    public bool UIOpen = false;
+
+    private GameObject grupoTextoDia;
     private void Awake()
     {
         if (Instance == null)
@@ -61,6 +65,7 @@ public class GameManager : MonoBehaviour
             rain.Stop();
         }
         oro_inicial = 0;
+        grupoTextoDia = GameObject.Find("GrupoDia");
     }
 
     private void Update()
@@ -80,6 +85,15 @@ public class GameManager : MonoBehaviour
         }
 
         int hour = isOpen ? 6 + (int)(actualHour * 18 / openTime) : (int)(actualHour * 6 / closeTime);
+
+        if (isOpen && actualHour < 3 && grupoTextoDia.transform.localPosition.y > 0)
+        {
+            grupoTextoDia.transform.localPosition -= new Vector3(0, 1, 0);
+        }
+        if (isOpen && actualHour > 5 && actualHour < 7)
+        {
+            grupoTextoDia.transform.localPosition += new Vector3(0, 1, 0);
+        }
 
         string hourString = hour < 10 ? "0" + hour.ToString() : hour.ToString();
 

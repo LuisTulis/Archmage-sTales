@@ -26,6 +26,8 @@ public class WorkersManagerSignal : MonoBehaviour {
             workerSignalUI.SetActive(state);
             isUIActive = state;
         }
+
+        GameManager.Instance.UIOpen = state;
     }
 
     public void forceClose()
