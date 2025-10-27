@@ -13,6 +13,7 @@ public class WorkerComponent : BaseWorkerComponent
     private Coroutine workRoutine;
     private bool prevIsWorking = false;
 
+    public bool isFired = false;
     public bool isKidnapped = false;
     private Transform kidnapper;
 
@@ -44,6 +45,14 @@ public class WorkerComponent : BaseWorkerComponent
             float distanceToDespawn = Vector3.Distance(transform.position, GlobalLocomotionManager.Instance.despawnPoint.position);
             if (distanceToDespawn < 1f)
             {
+                Despawn();
+            }
+            return;
+        }
+        if (isFired) {
+            locomotion.MoveTo(GlobalLocomotionManager.Instance.despawnPoint.position);
+            float distanceToDespawn = Vector3.Distance(transform.position, GlobalLocomotionManager.Instance.despawnPoint.position);
+            if (distanceToDespawn < 1f) {
                 Despawn();
             }
             return;
@@ -115,6 +124,17 @@ public class WorkerComponent : BaseWorkerComponent
         isWorking = false;
         isKidnapped = true;
         kidnapper = skeleton;
+
+        LeaveWorkSation();
+    }
+
+    public void BeFired() {
+        if (workRoutine != null) {
+            StopCoroutine(workRoutine);
+            workRoutine = null;
+        }
+        isWorking = false;
+        isFired = true;
 
         LeaveWorkSation();
     }
