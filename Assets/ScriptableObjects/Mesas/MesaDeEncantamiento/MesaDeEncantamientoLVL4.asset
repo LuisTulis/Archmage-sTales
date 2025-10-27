@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32c154ee8f852b34f8894d2aca442029, type: 3}
-  m_Name: MesaDeAdivinacionLVL3
+  m_Name: MesaDeEncantamientoLVL4
   m_EditorClassIdentifier: 
-  Id: 0
-  displayName: "Mesa de Adivinaci\xF3n 3"
-  level: 3
-  Speed: 15
-  profit: 70
-  karma: 750
-  description: Alerta, spoiler
+  Id: 1
+  displayName: Mesa De Encantamiento 4
+  level: 4
+  Speed: 12
+  profit: 100
+  karma: 250
+  description: "Encantamientos con garant\xEDa ilimitada (o casi)"
   upgradeCost: 0

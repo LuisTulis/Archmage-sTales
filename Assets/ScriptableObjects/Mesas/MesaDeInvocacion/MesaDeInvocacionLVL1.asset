@@ -15,8 +15,8 @@ MonoBehaviour:
   Id: 1
   displayName: "Mesa De Invocaci\xF3n 1"
   level: 1
-  Speed: 60
-  profit: 120
+  Speed: 30
+  profit: 500
   karma: 250
   description: A veces es necesario un poco de ayuda extra
   upgradeCost: 0

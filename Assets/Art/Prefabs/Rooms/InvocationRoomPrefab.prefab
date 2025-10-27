@@ -309,7 +309,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4044874063941002001, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8739738407876402608, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
     - {fileID: 8315824966324566123, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
@@ -377,6 +378,7 @@ MonoBehaviour:
   emptyRoom: {fileID: 2982540624938054053}
   unlockRoomUI: {fileID: 0}
   navMeshSurface: {fileID: 0}
+  isUnlocked: 0
 --- !u!4 &3127264164745160876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1431634492733474142, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}

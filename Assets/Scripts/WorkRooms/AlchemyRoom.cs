@@ -21,22 +21,22 @@ public class AlchemyRoom : MonoBehaviour
     [SerializeField] private NavMeshSurface navMeshSurface;
 
     [SerializeField] private bool isUnlocked = false;
-
+    private GameManager gameManager;
     void Start()
     {
         if (prePurchaseArea != null && prePurchaseArea.GetComponent<Collider>() == null)
         {
             prePurchaseArea.AddComponent<BoxCollider>();
         }
+        gameManager = GameManager.Instance;
     }
 
     void Update()
     {
-        if (!isUnlocked && Input.GetMouseButtonDown(0))
+        if (!isUnlocked && Input.GetMouseButtonDown(0) && !gameManager.UIOpen)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.gameObject == prePurchaseArea)
@@ -123,6 +123,7 @@ public class AlchemyRoom : MonoBehaviour
             if (nm != null)
                 nm.BuildNavMesh();
         }
+        gameManager.UIOpen = false;
     }
 
 }
