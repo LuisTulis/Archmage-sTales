@@ -78,8 +78,10 @@ public class BaseWorkerComponent : CharacterComponent
 
     public void LeaveWorkSation() {
         if (model.AsignatedStation != null) {
-            model.AsignatedStation.assignedWorker = "";
             model.AsignatedStation.StopAllCoroutines();
+            model.AsignatedStation.fx.SetWorking(false);
+            model.AsignatedStation.status = "Idle";
+            model.AsignatedStation.assignedWorker = "";
             model.AsignatedStation = null;
         }
     }

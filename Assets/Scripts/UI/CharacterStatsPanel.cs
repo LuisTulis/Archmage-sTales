@@ -9,6 +9,8 @@ public class CharacterStatsPanel : MonoBehaviour {
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private TMP_Text characterNameText;
     [SerializeField] private Button followButton;
+    [SerializeField] private Button dismissButton;
+
 
     private void Start() {
         panelRoot.SetActive(false);
@@ -17,6 +19,10 @@ public class CharacterStatsPanel : MonoBehaviour {
 
         if (followButton != null)
             followButton.onClick.AddListener(OnFollowButtonClicked);
+
+        if (dismissButton != null) {
+            dismissButton.gameObject.SetActive(false);
+        }
     }
 
     private void OnDestroy() {
@@ -27,6 +33,10 @@ public class CharacterStatsPanel : MonoBehaviour {
 
         if (followButton != null)
             followButton.onClick.RemoveListener(OnFollowButtonClicked);
+
+
+        if (dismissButton != null)
+            dismissButton.onClick.RemoveAllListeners();
     }
 
     private void ShowCharacterStats(CharacterComponent character) {
@@ -47,6 +57,8 @@ public class CharacterStatsPanel : MonoBehaviour {
             statGO.transform.Find("StatName").GetComponent<TMP_Text>().text = kvp.Key;
             statGO.transform.Find("StatValue").GetComponent<TMP_Text>().text = kvp.Value;
         }
+
+        HandleDismissButton(character);
     }
 
     private void HidePanel(CharacterComponent character) {
@@ -74,5 +86,24 @@ public class CharacterStatsPanel : MonoBehaviour {
         if (selected == null) return;
 
         CameraControl.Instance.cameraTarget = selected.transform;
+    }
+
+    private void HandleDismissButton(CharacterComponent character) {
+        if (dismissButton == null) return;
+
+        dismissButton.gameObject.SetActive(false);
+        dismissButton.onClick.RemoveAllListeners();
+
+        if (character is WorkerComponent worker && character is not StaffAdorComponent) {
+            dismissButton.gameObject.SetActive(true);
+            dismissButton.onClick.AddListener(() => OnDismissButtonClicked(worker));
+        }
+    }
+
+    private void OnDismissButtonClicked(WorkerComponent worker) {
+        Debug.Log($"Despedido el trabajador: {worker.name}");
+
+        worker.BeFired();
+        auxHidePanel();
     }
 }
