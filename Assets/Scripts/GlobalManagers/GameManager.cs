@@ -132,19 +132,19 @@ public class GameManager : MonoBehaviour
                 float dayRandom = Random.Range(0f, 1f);
                 if (dayRandom < .33f)
                 {
-                    StartCoroutine(ChangeLightColor(new Color(1, 1, 0, 1)));
+                    StartCoroutine(OpenCloseShop(new Color(1, 1, 0, 1)));
                     tipo_mostrar.text = "Trabajadores torpes";
                     costoso = true;
                 }
                 else if (dayRandom < .66f)
                 {
-                    StartCoroutine(ChangeLightColor(new Color(1, 0.5f, 0.5f, 1)));
+                    StartCoroutine(OpenCloseShop(new Color(1, 0.5f, 0.5f, 1)));
                     aletargamiento = true;
                     tipo_mostrar.text = "Maldición de sueño";
                 }
                 else
                 {
-                    StartCoroutine(ChangeLightColor(new Color(0.25f, 0.75f, 1f, 1)));
+                    StartCoroutine(OpenCloseShop(new Color(0.25f, 0.75f, 1f, 1)));
                     tipo_mostrar.text = "Día lluvioso";
                     GlobalCustomerManager.Instance.maxCustomersInScene = 2;
                     rain.Play();
@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(ChangeLightColor(new Color(1, 1, 1, 1)));
+                StartCoroutine(OpenCloseShop(new Color(1, 1, 1, 1)));
                 aletargamiento = false;
                 costoso = false;
                 GlobalCustomerManager.Instance.maxCustomersInScene = 5;
@@ -166,12 +166,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            showDailyStatistics(true);
             foreach (CustomerComponent customer in GlobalCustomerManager.Instance.customers)
             {
                 customer.LeaveWithoutBuy();
             }
-            StartCoroutine(ChangeLightColor(new Color(0, 0, 1, 1)));
+            StartCoroutine(OpenCloseShop(new Color(0, 0, 1, 1), 5f, true));
         }
     }
 
@@ -258,7 +257,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Entré al coroutine");
         GameObject instance = Instantiate(feedbackPrefab, feedbackPlacement.transform.position, Quaternion.identity, canvas.transform);
         instance.GetComponent<goldFeedback>().amount = amount;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         horo_mostrar.text = horo.ToString() + "$";
         Debug.Log(horo);
     }
@@ -273,7 +272,7 @@ public class GameManager : MonoBehaviour
         horo -= amount;
     }
 
-    private IEnumerator ChangeLightColor(Color newColor, float duration = 5)
+    private IEnumerator OpenCloseShop(Color newColor, float duration = 5, bool close = false)
     {
         Color startColor = light.color;
         float elapsed = 0f;
@@ -286,6 +285,11 @@ public class GameManager : MonoBehaviour
         }
 
         light.color = newColor;
+
+        if (close)
+        {
+            showDailyStatistics(true);
+        }
     }
 
 }
