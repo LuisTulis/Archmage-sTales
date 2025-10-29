@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public ParticleSystem rain;
 
-    public int oro_inicial; 
+    public int oro_inicial;
     public int horo;
     public TMP_Text horo_mostrar;
     public TMP_Text dia_mostrar;
@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public bool UIOpen = false;
 
     private GameObject grupoTextoDia;
+
     private void Awake()
     {
         if (Instance == null)
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.J) || actualHour > openTime || (!isOpen && actualHour > closeTime))
+        if (Input.GetKeyDown(KeyCode.J) || actualHour > openTime || (!isOpen && actualHour > closeTime))
         {
             Open(!this.isOpen);
             actualHour = 0;
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
         {
             addGold(1000);
         }
-        if(isPlaying)
+        if (isPlaying)
         {
             actualHour += Time.deltaTime;
         }
@@ -131,19 +132,19 @@ public class GameManager : MonoBehaviour
                 float dayRandom = Random.Range(0f, 1f);
                 if (dayRandom < .33f)
                 {
-                    light.color = new Color(1, 1, 0, 1);
+                    StartCoroutine(ChangeLightColor(new Color(1, 1, 0, 1)));
                     tipo_mostrar.text = "Trabajadores torpes";
                     costoso = true;
                 }
                 else if (dayRandom < .66f)
                 {
-                    light.color = new Color(1, 0.5f, 0.5f, 1);
+                    StartCoroutine(ChangeLightColor(new Color(1, 0.5f, 0.5f, 1)));
                     aletargamiento = true;
                     tipo_mostrar.text = "Maldición de sueño";
                 }
                 else
                 {
-                    light.color = new Color(0.25f, 0.75f, 1f, 1);
+                    StartCoroutine(ChangeLightColor(new Color(0.25f, 0.75f, 1f, 1)));
                     tipo_mostrar.text = "Día lluvioso";
                     GlobalCustomerManager.Instance.maxCustomersInScene = 2;
                     rain.Play();
@@ -151,7 +152,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                light.color = new Color(1, 1, 1, 1);
+                StartCoroutine(ChangeLightColor(new Color(1, 1, 1, 1)));
                 aletargamiento = false;
                 costoso = false;
                 GlobalCustomerManager.Instance.maxCustomersInScene = 5;
@@ -170,7 +171,7 @@ public class GameManager : MonoBehaviour
             {
                 customer.LeaveWithoutBuy();
             }
-            light.color = new Color(0, 0, 1, 1);
+            StartCoroutine(ChangeLightColor(new Color(0, 0, 1, 1)));
         }
     }
 
@@ -193,7 +194,7 @@ public class GameManager : MonoBehaviour
 
         if (toggle_salario.gameObject.activeSelf && toggle_salario.isOn)
         {
-            if(horo > salario_actual)
+            if (horo > salario_actual)
             {
                 total -= salario_actual;
             }
@@ -223,7 +224,8 @@ public class GameManager : MonoBehaviour
 
     public void hideDailyStatistics()
     {
-        if(!addDebt) {
+        if (!addDebt)
+        {
             this.gastosMesas = 0;
             this.perdidas = 0;
             int salario = GlobalCharactersManager.Instance.getAllSalary();
@@ -231,12 +233,12 @@ public class GameManager : MonoBehaviour
             {
                 addGold(-deudaEmpleados);
             }
-            if(deudaEmpleados > 0)
+            if (deudaEmpleados > 0)
             {
                 GlobalCharactersManager.Instance.changeMental(-5);
             }
 
-            if(toggle_salario.isOn)
+            if (toggle_salario.isOn)
             {
                 addGold(-salario);
                 GlobalCharactersManager.Instance.changeMental(10);
@@ -269,6 +271,21 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(goldCoroutine(amount));
         horo -= amount;
+    }
+
+    private IEnumerator ChangeLightColor(Color newColor, float duration = 5)
+    {
+        Color startColor = light.color;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            light.color = Color.Lerp(startColor, newColor, elapsed / duration);
+            yield return null;
+        }
+
+        light.color = newColor;
     }
 
 }
