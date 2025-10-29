@@ -31,21 +31,10 @@ public class AlchemyRoom : MonoBehaviour
         gameManager = GameManager.Instance;
     }
 
-    void Update()
+    public void OnMouseDown()
     {
-        if (!isUnlocked && Input.GetMouseButtonDown(0) && !gameManager.UIOpen)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.gameObject == prePurchaseArea)
-                {
-                    if (unlockRoomUI != null)
-                        unlockRoomUI.Show(this);
-                }
-            }
-        }
+        if (!isUnlocked && !gameManager.UIOpen && unlockRoomUI != null)
+            unlockRoomUI.Show(this);
     }
 
     public void ConfirmUnlock(PrePurchaseWorkstation prePurchaseWorkstation)
