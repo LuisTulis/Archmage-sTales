@@ -4,51 +4,52 @@ using UnityEngine;
 public class HighlightOnHover : MonoBehaviour
 {
 
-    [SerializeField] public Color highlightEmission = Color.yellow;
-    [SerializeField] public float intensity = 2f;
+    public Color highlightEmission = Color.yellow;
+    public float intensity = 2f;
 
-    private List<Material> materials = new List<Material>();
-    private List<Color> originalEmissions = new List<Color>();
+    private readonly List<Material> materials = new();
+    private readonly List<Color> originalEmissions = new();
+
+    private static readonly string EMISSION_COLOR = "_EmissionColor";
+    private static readonly string EMISSION_KEYWORD = "_EMISSION";
 
     void Start()
     {
         Renderer[] renderers = GetComponentsInChildren<Renderer>(includeInactive: true);
 
-        if (renderers.Length == 0)
+        foreach (Renderer renderer in renderers)
         {
-            Debug.LogWarning($"{name}: no renderers found in children.");
-            return;
-        }
+            Material material = renderer.material;
 
-        foreach (Renderer r in renderers)
-        {
-            Material mat = r.material;
-
-            if (mat.HasProperty("_EmissionColor"))
+            if (material.HasProperty(EMISSION_COLOR))
             {
-                materials.Add(mat);
-                originalEmissions.Add(mat.GetColor("_EmissionColor"));
+                materials.Add(material);
+                originalEmissions.Add(material.GetColor(EMISSION_COLOR));
             }
         }
     }
 
     private void OnMouseEnter()
     {
-        for (int i = 0; i < materials.Count; i++)
-        {
-            Material mat = materials[i];
-            mat.EnableKeyword("_EMISSION");
-            mat.SetColor("_EmissionColor", highlightEmission * intensity);
-        }
+        HandleOnHover(true);
     }
 
     private void OnMouseExit()
     {
+        HandleOnHover(false);
+    }
+
+    private void HandleOnHover(bool onEnter)
+    {
         for (int i = 0; i < materials.Count; i++)
         {
             Material mat = materials[i];
-            mat.SetColor("_EmissionColor", originalEmissions[i]);
-            mat.DisableKeyword("_EMISSION");
+            mat.SetColor(EMISSION_COLOR, onEnter ? highlightEmission * intensity : originalEmissions[i]);
+
+            if (onEnter)
+                mat.EnableKeyword(EMISSION_KEYWORD);
+            else
+                mat.DisableKeyword(EMISSION_KEYWORD);
         }
     }
 }

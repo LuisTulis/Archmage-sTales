@@ -140481,6 +140481,7 @@ GameObject:
   - component: {fileID: 4135745041711963237}
   - component: {fileID: 5213369929097481249}
   - component: {fileID: 7371802884638902192}
+  - component: {fileID: 7298266322614917487}
   m_Layer: 0
   m_Name: AdivinationTable_Prefab 1
   m_TagString: Untagged
@@ -140496,7 +140497,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8406347682521423268}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9989554, z: -0, w: -0.045696136}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: -5.343, y: -1.4289978, z: 0.799}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -140509,7 +140510,7 @@ Transform:
   - {fileID: 9131887410934962575}
   - {fileID: 5561991935203536805}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 5.238, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!65 &2030138782228208197
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -140529,8 +140530,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0.56, y: 2.02, z: -2.3}
+  m_Size: {x: 5.5, y: 2.8, z: 5.25}
+  m_Center: {x: 0.5, y: 2.9, z: -2.525}
 --- !u!114 &2874282722765813527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140626,6 +140627,20 @@ MonoBehaviour:
   sittingWorkstation: 1
   ProgressBarPrefab: {fileID: 6013330182357969918, guid: 0e3d4cda952f2294aa529c600c0b1773, type: 3}
   elapsed: 0
+--- !u!114 &7298266322614917487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8406347682521423268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac03026fe53d12c45b168222f9cd1179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightEmission: {r: 0.6132076, g: 0.5945776, b: 0.30891776, a: 1}
+  intensity: 0.75
 --- !u!1 &9009446854267238517
 GameObject:
   m_ObjectHideFlags: 0
