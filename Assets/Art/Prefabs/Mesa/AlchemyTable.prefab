@@ -10346,6 +10346,7 @@ GameObject:
   - component: {fileID: 7327058573976350516}
   - component: {fileID: 5239178985567498159}
   - component: {fileID: -2576143004762365994}
+  - component: {fileID: 6725975645485286180}
   m_Layer: 0
   m_Name: AlchemyTable
   m_TagString: Untagged
@@ -10458,8 +10459,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.07, y: 2.8, z: 2.96}
-  m_Center: {x: 2.67, y: 1.91, z: -3.22}
+  m_Size: {x: 5.49, y: 2.8, z: 5.21}
+  m_Center: {x: 0.5, y: 1.91, z: -3.12}
 --- !u!95 &7327058573976350516
 Animator:
   serializedVersion: 5
@@ -10535,6 +10536,21 @@ MonoBehaviour:
   workDirection: {fileID: 4832965198187361079}
   sittingWorkstation: 0
   ProgressBarPrefab: {fileID: 6013330182357969918, guid: 0e3d4cda952f2294aa529c600c0b1773, type: 3}
+  elapsed: 0
+--- !u!114 &6725975645485286180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354124315174315728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac03026fe53d12c45b168222f9cd1179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightEmission: {r: 0.6132076, g: 0.5945776, b: 0.30891776, a: 1}
+  intensity: 0.75
 --- !u!1 &8550200114099843455
 GameObject:
   m_ObjectHideFlags: 0
