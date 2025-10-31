@@ -52,19 +52,19 @@ public class AlchemyRoom : MonoBehaviour
 
                 UnlockRoom(prePurchaseWorkstation.Workstation);
             }
-            else
-            {
-                if (gm.feedbackPrefab != null)
-                {
-                    GameObject instance = Instantiate(
-                        gm.feedbackPrefab,
-                        gm.feedbackPlacement.transform.position,
-                        Quaternion.identity,
-                        gm.canvas.transform
-                    );
-                    instance.GetComponent<goldFeedback>().amount = 0;
-                }
-            }
+            //else
+            //{
+            //    if (gm.feedbackPrefab != null)
+            //    {
+            //        GameObject instance = Instantiate(
+            //            gm.feedbackPrefab,
+            //            gm.feedbackPlacement.transform.position,
+            //            Quaternion.identity,
+            //            gm.canvas.transform
+            //        );
+            //        instance.GetComponent<goldFeedback>().amount = 0;
+            //    }
+            //}
         }
     }
 
@@ -87,7 +87,7 @@ public class AlchemyRoom : MonoBehaviour
             emptyRoom.SetActive(false);
 
         if (prePurchaseArea != null)
-            prePurchaseArea.SetActive(false);
+            prePurchaseArea.GetComponent<BoxCollider>().enabled = false;
 
         if (workstation != null)
         {

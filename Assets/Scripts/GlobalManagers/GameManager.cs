@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
     public bool UIOpen = false;
 
     private GameObject grupoTextoDia;
+    private bool bajarTexto = true;
+    private float upTextHour = 0;
 
     private void Awake()
     {
@@ -86,7 +88,31 @@ public class GameManager : MonoBehaviour
         }
 
         int hour = isOpen ? 6 + (int)(actualHour * 18 / openTime) : (int)(actualHour * 6 / closeTime);
+        
 
+        if(isOpen)
+        {
+            if(bajarTexto)
+            {
+                if(grupoTextoDia.transform.localPosition.y > 0)
+                {
+                    grupoTextoDia.transform.localPosition -= new Vector3(0, 1, 0);
+                    upTextHour = actualHour + 3;
+                }
+                else
+                {
+                    bajarTexto = false;
+                }
+            }
+            else
+            {
+                if(actualHour > upTextHour && grupoTextoDia.transform.localPosition.y < 150)
+                {
+                    grupoTextoDia.transform.localPosition += new Vector3(0, 1, 0);
+                }
+            }
+        }
+        
         if (isOpen && actualHour < 3 && grupoTextoDia.transform.localPosition.y > 0)
         {
             grupoTextoDia.transform.localPosition -= new Vector3(0, 1, 0);
@@ -113,6 +139,7 @@ public class GameManager : MonoBehaviour
         isOpen = open;
         if (isOpen)
         {
+            bajarTexto = true;
             if (dayCount != 1)
             {
                 float random = Random.Range(0f, 1f);
