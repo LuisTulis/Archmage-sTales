@@ -18,6 +18,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     public GameObject textIndicatorPrefab;
     public bool isBroken = false;
+    public float karma = 0;
 
     [Header("Table FX")]
     public WorkstationFX fx;
@@ -27,7 +28,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public bool sittingWorkstation;
 
     public GameObject ProgressBarPrefab;
-    private GameObject actualProgress;
+    public GameObject actualProgress;
 
     public float elapsed = 0;
 

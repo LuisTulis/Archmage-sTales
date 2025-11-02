@@ -25,7 +25,7 @@ public class GlobalWorkstationManager : MonoBehaviour
                 return nivel;
             }
         }
-        return niveles[0];
+        return null;
     }
     private void Awake()
     {

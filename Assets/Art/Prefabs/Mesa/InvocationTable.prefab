@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 117114991914306914}
   - component: {fileID: 6707599000383148300}
   - component: {fileID: 6404302423961105784}
+  - component: {fileID: 5479676535402494109}
   m_Layer: 0
   m_Name: InvocationTable
   m_TagString: Untagged
@@ -89,6 +90,8 @@ MonoBehaviour:
   workDirection: {fileID: 645833293684741562}
   sittingWorkstation: 0
   ProgressBarPrefab: {fileID: 6013330182357969918, guid: 0e3d4cda952f2294aa529c600c0b1773, type: 3}
+  actualProgress: {fileID: 0}
+  elapsed: 0
 --- !u!95 &6707599000383148300
 Animator:
   serializedVersion: 5
@@ -138,6 +141,20 @@ MonoBehaviour:
   levelThreeObject: {fileID: 0}
   levelThreeSparkles: {fileID: 4329410964121981154}
   anim: {fileID: 6707599000383148300}
+--- !u!114 &5479676535402494109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99686077801212562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac03026fe53d12c45b168222f9cd1179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightEmission: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  intensity: 2
 --- !u!1 &857081627246088893
 GameObject:
   m_ObjectHideFlags: 0

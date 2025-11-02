@@ -140483,7 +140483,7 @@ GameObject:
   - component: {fileID: 7371802884638902192}
   - component: {fileID: 7298266322614917487}
   m_Layer: 0
-  m_Name: AdivinationTable_Prefab 1
+  m_Name: EnchantmentTable_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140626,6 +140626,7 @@ MonoBehaviour:
   workDirection: {fileID: 5561991935203536805}
   sittingWorkstation: 1
   ProgressBarPrefab: {fileID: 6013330182357969918, guid: 0e3d4cda952f2294aa529c600c0b1773, type: 3}
+  actualProgress: {fileID: 0}
   elapsed: 0
 --- !u!114 &7298266322614917487
 MonoBehaviour:
