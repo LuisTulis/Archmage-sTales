@@ -198,6 +198,7 @@ public class CustomerComponent : CharacterComponent
             this.objectiveStation.fx.SetWorking(false);
             this.objectiveStation.clientUsing = 0;
             this.objectiveStation.status = "Idle";
+            Destroy(this.objectiveStation.actualProgress);
             this.objectiveStation.assignedCustomer = null;
             this.objectiveStation = null;
         }

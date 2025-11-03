@@ -82,6 +82,10 @@ public class BaseWorkerComponent : CharacterComponent
             model.AsignatedStation.fx.SetWorking(false);
             model.AsignatedStation.status = "Idle";
             model.AsignatedStation.assignedWorker = "";
+            if (model.AsignatedStation.actualProgress != null)
+            {
+                Destroy(model.AsignatedStation.actualProgress);
+            }
             model.AsignatedStation = null;
         }
     }
