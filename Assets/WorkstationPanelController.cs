@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +24,6 @@ public class WorkstationPanelController : MonoBehaviour
     private GlobalWorkstationManager workstationManager;
     private WorkStationBehaviour selectedWorkstation;
     private string nombresito = "";
-
 
     [Header("Workers UI")]
     [SerializeField] private Transform workersContainer;
@@ -253,7 +251,7 @@ public class WorkstationPanelController : MonoBehaviour
                 {
                     entry.GetComponentsInChildren<Image>()[2].sprite = stationTypeImage[0];
                 }
-                else if(model.AsignatedStation.type.ToString() == "adivinacion")
+                else if (model.AsignatedStation.type.ToString() == "adivinacion")
                 {
                     entry.GetComponentsInChildren<Image>()[2].sprite = stationTypeImage[1];
                 }
@@ -283,5 +281,5 @@ public class WorkstationPanelController : MonoBehaviour
     {
         selectedWorkstation.karma = karmaBar.value;
     }
-    
+
 }

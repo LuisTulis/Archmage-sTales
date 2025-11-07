@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 using TMPro;
-using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterStatsPanel : MonoBehaviour {
+public class CharacterStatsPanel : MonoBehaviour
+{
     [SerializeField] private GameObject statPrefab;
     [SerializeField] private Transform statsGrid;
     [SerializeField] private GameObject panelRoot;
@@ -11,8 +12,15 @@ public class CharacterStatsPanel : MonoBehaviour {
     [SerializeField] private Button followButton;
     [SerializeField] private Button dismissButton;
 
+    [SerializeField] private GameObject mentalSection;
+    [SerializeField] private TMP_Text mentalText;
 
-    private void Start() {
+    [SerializeField] private GameObject statusSection;
+    [SerializeField] private TMP_Text statusText;
+    [SerializeField] private Image statusImg;
+
+    private void Start()
+    {
         panelRoot.SetActive(false);
         GlobalCharactersManager.Instance.OnCharacterSelected += ShowCharacterStats;
         GlobalCharactersManager.Instance.OnCharacterDeselected += HidePanel;
@@ -20,12 +28,14 @@ public class CharacterStatsPanel : MonoBehaviour {
         if (followButton != null)
             followButton.onClick.AddListener(OnFollowButtonClicked);
 
-        if (dismissButton != null) {
+        if (dismissButton != null)
+        {
             dismissButton.gameObject.SetActive(false);
         }
     }
 
-    private void OnDestroy() {
+    private void OnDestroy()
+    {
         if (GlobalCharactersManager.Instance == null) return;
         GlobalCharactersManager.Instance.OnCharacterSelected -= ShowCharacterStats;
         GlobalCharactersManager.Instance.OnCharacterDeselected -= HidePanel;
@@ -39,20 +49,56 @@ public class CharacterStatsPanel : MonoBehaviour {
             dismissButton.onClick.RemoveAllListeners();
     }
 
-    private void ShowCharacterStats(CharacterComponent character) {
+    private void ShowCharacterStats(CharacterComponent character)
+    {
         ClearStats();
         panelRoot.SetActive(true);
 
         Dictionary<string, string> stats = character.GetStats();
 
-        if (stats.ContainsKey("Name")) {
+        if (stats.ContainsKey("Name"))
+        {
             characterNameText.text = stats["Name"];
             stats.Remove("Name");
-        } else {
+        }
+        else
+        {
             characterNameText.text = "Unknown";
         }
 
-        foreach (var kvp in stats) {
+        if (character is not StaffAdorComponent)
+        {
+            if (character is WorkerComponent worker)
+            {
+                mentalSection.SetActive(true);
+                mentalText.text = "Mental: " + worker.GetComponent<WorkerModel>().mental.ToString();
+
+                // TODO: get image from workstation type
+
+                //statusSection.SetActive(true);
+                //var stationType = character.GetComponent<BaseWorkerModel>().AsignatedStation?.type;
+                //statusImg.sprite = stationType.image;
+            }
+
+            if (character is CustomerComponent customer)
+            {
+                mentalSection.SetActive(true);
+                mentalText.text = "Mental: " + customer.GetComponent<CustomerModel>().mental.ToString();
+
+                statusSection.SetActive(true);
+                statusImg.sprite = customer.GetComponentInChildren<CustomerObjective>().image.sprite;
+            }
+
+        }
+        else
+        {
+            mentalSection.SetActive(false);
+            statusSection.SetActive(false);
+        }
+
+
+        foreach (var kvp in stats)
+        {
             GameObject statGO = Instantiate(statPrefab, statsGrid);
             statGO.transform.Find("StatName").GetComponent<TMP_Text>().text = kvp.Key;
             statGO.transform.Find("StatValue").GetComponent<TMP_Text>().text = kvp.Value;
@@ -61,7 +107,8 @@ public class CharacterStatsPanel : MonoBehaviour {
         HandleDismissButton(character);
     }
 
-    private void HidePanel(CharacterComponent character) {
+    private void HidePanel(CharacterComponent character)
+    {
         panelRoot.SetActive(false);
         ClearStats();
     }
@@ -73,7 +120,8 @@ public class CharacterStatsPanel : MonoBehaviour {
         ClearStats();
     }
 
-    private void ClearStats() {
+    private void ClearStats()
+    {
         foreach (Transform child in statsGrid)
             Destroy(child.gameObject);
 
@@ -81,26 +129,30 @@ public class CharacterStatsPanel : MonoBehaviour {
             characterNameText.text = string.Empty;
     }
 
-    private void OnFollowButtonClicked() {
+    private void OnFollowButtonClicked()
+    {
         var selected = GlobalCharactersManager.Instance.SelectedCharacter;
         if (selected == null) return;
 
         CameraControl.Instance.cameraTarget = selected.transform;
     }
 
-    private void HandleDismissButton(CharacterComponent character) {
+    private void HandleDismissButton(CharacterComponent character)
+    {
         if (dismissButton == null) return;
 
         dismissButton.gameObject.SetActive(false);
         dismissButton.onClick.RemoveAllListeners();
 
-        if (character is WorkerComponent worker && character is not StaffAdorComponent) {
+        if (character is WorkerComponent worker && character is not StaffAdorComponent)
+        {
             dismissButton.gameObject.SetActive(true);
             dismissButton.onClick.AddListener(() => OnDismissButtonClicked(worker));
         }
     }
 
-    private void OnDismissButtonClicked(WorkerComponent worker) {
+    private void OnDismissButtonClicked(WorkerComponent worker)
+    {
         Debug.Log($"Despedido el trabajador: {worker.name}");
 
         worker.BeFired();

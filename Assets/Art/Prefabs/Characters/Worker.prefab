@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWorking: 0
+  isFired: 0
   isKidnapped: 0
 --- !u!114 &-8014903439305185811
 MonoBehaviour:
