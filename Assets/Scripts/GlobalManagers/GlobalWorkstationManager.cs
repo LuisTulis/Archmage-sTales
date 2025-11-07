@@ -7,7 +7,7 @@ public class GlobalWorkstationManager : MonoBehaviour
 
     public List<WorkStationBehaviour> actualStations;
     public List<WorkStationBehaviour> activeStations;
-    public List<stationType> stationTypes;
+    public List<StationType> stationTypes;
 
     [SerializeField]
     private WorkstationData[] niveles;
@@ -29,16 +29,19 @@ public class GlobalWorkstationManager : MonoBehaviour
     }
     private void Awake()
     {
-        if (Instance == null) {
+        if (Instance == null)
+        {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        } else {
+        }
+        else
+        {
             Destroy(gameObject);
         }
 
         actualStations = new List<WorkStationBehaviour>();
         activeStations = new List<WorkStationBehaviour>();
-        stationTypes = new List<stationType>();
+        stationTypes = new List<StationType>();
         WorkStationBehaviour[] stations = FindObjectsOfType<WorkStationBehaviour>();
 
         foreach (WorkStationBehaviour station in stations)
@@ -46,20 +49,20 @@ public class GlobalWorkstationManager : MonoBehaviour
             bool addType = true;
             actualStations.Add(station);
 
-            if(!station.isBroken)
+            if (!station.isBroken)
             {
                 activeStations.Add(station);
             }
-            foreach(stationType type in stationTypes) 
+            foreach (StationType type in stationTypes)
             {
-                if(station.type == type)
+                if (station.type == type)
                 {
                     addType = false;
                     break;
                 }
 
             }
-            if(addType)
+            if (addType)
             {
                 stationTypes.Add(station.type);
                 //Debug.Log(station.type);
@@ -67,21 +70,26 @@ public class GlobalWorkstationManager : MonoBehaviour
         }
     }
 
-    public void AddStation(WorkStationBehaviour station) {
+    public void AddStation(WorkStationBehaviour station)
+    {
         if (station == null) return;
 
-        if (!actualStations.Contains(station)) {
+        if (!actualStations.Contains(station))
+        {
             actualStations.Add(station);
 
             bool addType = true;
-            foreach (stationType type in stationTypes) {
-                if (station.type == type) {
+            foreach (StationType type in stationTypes)
+            {
+                if (station.type == type)
+                {
                     addType = false;
                     break;
                 }
             }
 
-            if (addType) {
+            if (addType)
+            {
                 stationTypes.Add(station.type);
                 Debug.Log("Nuevo tipo de estación desbloqueado: " + station.type);
             }
@@ -91,7 +99,7 @@ public class GlobalWorkstationManager : MonoBehaviour
 
 }
 
-public enum stationType
+public enum StationType
 {
     adivinacion,
     caldero,

@@ -7,21 +7,20 @@ public class CustomerObjective : MonoBehaviour
     public Sprite[] images;
     public string objective;
     public Image image;
-    // Start is called before the first frame update
+
     void Awake()
     {
         if (cameraTransform == null)
         {
             cameraTransform = Camera.main.transform;
         }
-        //this.image = GetComponent<Image>();
     }
 
     void lookAtCamera()
     {
         transform.rotation = Quaternion.LookRotation(cameraTransform.forward, cameraTransform.up);
     }
-    // Update is called once per frame
+
     void Update()
     {
         lookAtCamera();
@@ -47,7 +46,8 @@ public class CustomerObjective : MonoBehaviour
         }
         else
         {
-            this.image.enabled = false;
+            this.image.sprite = images[4];
+            //this.image.enabled = false;
         }
     }
 }

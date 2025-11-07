@@ -14,7 +14,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public int clientUsing = 0;
     public string assignedWorker;
     public CustomerComponent assignedCustomer;
-    public stationType type;
+    public StationType type;
 
     public GameObject textIndicatorPrefab;
     public bool isBroken = false;
@@ -65,8 +65,8 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     {
 
         float seconds = gameManager.aletargamiento ? workstationData.Speed * 2 : workstationData.Speed;
-        
-        switch(this.type.ToString())
+
+        switch (this.type.ToString())
         {
             case "adivinacion":
                 Debug.Log(workerModel.Stats.adivinationStat * 5 / 100);
@@ -86,7 +86,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         while (elapsed < seconds)
         {
             elapsed += Time.deltaTime;
-            if(actualProgress != null)
+            if (actualProgress != null)
             {
                 actualProgress.GetComponent<progressBar>().progress = elapsed * 100 / seconds;
             }
@@ -108,7 +108,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         }
         realProfit = gameManager.costoso ? (int)(realProfit * .5f) : realProfit;
         gameManager.addGold(realProfit);
-        if(realProfit < 0)
+        if (realProfit < 0)
         {
             GameManager.Instance.perdidas += realProfit;
         }

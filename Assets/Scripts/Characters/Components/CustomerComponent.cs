@@ -10,9 +10,8 @@ public class CustomerComponent : CharacterComponent
     public bool leave = false;
     public WorkStationBehaviour objectiveStation;
 
-
     private GlobalWorkstationManager stationManager;
-    public List<stationType> objectives;
+    public List<StationType> objectives;
     private CustomerObjective customerObjective;
 
     private Animator animator;
@@ -21,7 +20,6 @@ public class CustomerComponent : CharacterComponent
     private float attemptCooldown = 10f;
     private float attemptTimer = 0f;
     private int maxSearchAttempts = 5;
-
 
     private int attendAttempts = 0;
     private float attendTimer = 0f;
@@ -32,63 +30,70 @@ public class CustomerComponent : CharacterComponent
     private bool isBlinking = false;
     private Coroutine blinkingCoroutine;
 
-
-
-    protected override void Awake() {
+    protected override void Awake()
+    {
         base.Awake();
 
         locomotion = GetComponent<RandomWalkLocomotion>();
         model = GetComponent<CustomerModel>();
         animator = GetComponentInChildren<Animator>();
 
-        objectives = new List<stationType>();
+        objectives = new List<StationType>();
         stationManager = GameObject.Find("GlobalWorkstationManager").GetComponent<GlobalWorkstationManager>();
 
         objectives.Add(stationManager.stationTypes[Random.Range(0, stationManager.stationTypes.Count)]);
         customerObjective = this.gameObject.GetComponentInChildren<CustomerObjective>();
         customerObjective.objective = objectives[0].ToString();
 
-
         selectStation();
-
     }
 
-    private void Start() {
-        if (model.thief) {
+    private void Start()
+    {
+        if (model.thief)
+        {
             customerObjective.image.color = new Color(1, 0, 0);
         }
     }
 
-    private void Update() {
+    private void Update()
+    {
         UpdateWalkingAnimation();
 
-        if (Vector3.Distance(this.transform.position, GlobalCustomerManager.Instance.despawnPoint.position) < 3) {
+        if (Vector3.Distance(this.transform.position, GlobalCustomerManager.Instance.despawnPoint.position) < 3)
+        {
             LeaveTheShop();
         }
 
-        if(leave) return;
+        if (leave) return;
 
-        if(objectiveStation != null) {
+        if (objectiveStation != null)
+        {
             HandleStationLogic();
-        } else {
+        }
+        else
+        {
             HandleWaitingBehaviour();
         }
 
 
         // FIXME: Deberia ser una posibilidad de volverse ladron, cuanto mas bajo el mental.
-        if (model.mental < 5) {
+        if (model.mental < 5)
+        {
             model.thief = true;
             customerObjective.image.color = new Color(1, 0, 0);
         }
     }
 
-    private void HandleWaitingBehaviour() {
+    private void HandleWaitingBehaviour()
+    {
         locomotion.IdleRandomWalk();
 
         model.waitingTime += Time.deltaTime;
         attemptTimer += Time.deltaTime;
 
-        if (attemptTimer >= attemptCooldown) {
+        if (attemptTimer >= attemptCooldown)
+        {
             attemptTimer = 0f;
             searchAttempts++;
             model.mental -= mentalDecayRate;
@@ -96,65 +101,85 @@ public class CustomerComponent : CharacterComponent
 
             selectStation();
 
-            if (objectiveStation == null && searchAttempts >= 3 && !isBlinking) {
+            if (objectiveStation == null && searchAttempts >= 3 && !isBlinking)
+            {
                 blinkingCoroutine = StartCoroutine(BlinkObjectiveIcon());
             }
         }
 
-        if (searchAttempts >= maxSearchAttempts || model.mental <= 0) {
+        if (searchAttempts >= maxSearchAttempts || model.mental <= 0)
+        {
             Debug.Log($"{name} se va por frustración buscando estación.");
             LeaveWithoutBuy();
         }
     }
 
-    private void HandleStationLogic() {
-        if (objectiveStation.clientUsing == 0) {
+    private void HandleStationLogic()
+    {
+        if (objectiveStation.clientUsing == 0)
+        {
             objectives.RemoveAt(0);
 
-            if (objectives.Count > 0) {
+            if (objectives.Count > 0)
+            {
                 customerObjective.objective = objectives[0].ToString();
-            } else {
+            }
+            else
+            {
                 customerObjective.objective = "";
             }
 
-            if (objectives.Count == 0) {
+            if (objectives.Count == 0)
+            {
                 leave = true;
                 objectiveStation = null;
                 LeaveWithoutBuy();
-            } else {
+            }
+            else
+            {
                 selectStation();
             }
-        } else if (Vector3.Distance(transform.position, objectiveStation.transform.position) < 3) {
+        }
+        else if (Vector3.Distance(transform.position, objectiveStation.transform.position) < 3)
+        {
             objectiveStation.clientUsing = 2;
             objectiveStation.assignedCustomer = this;
             GetIntoBuyingPosition();
 
-            if (string.IsNullOrEmpty(objectiveStation.assignedWorker) && objectiveStation.status == "Idle") {
+            if (string.IsNullOrEmpty(objectiveStation.assignedWorker) && objectiveStation.status == "Idle")
+            {
                 model.waitingTime += Time.deltaTime;
                 attendTimer += Time.deltaTime;
 
-                if (attendTimer >= attendCooldown) {
+                if (attendTimer >= attendCooldown)
+                {
                     attendTimer = 0f;
                     attendAttempts++;
                     model.mental -= mentalDecayRate;
                     Debug.Log($"{name} está esperando atención en {objectiveStation.name} (Intento #{attendAttempts}) | Mental: {model.mental}");
 
-                    if (attendAttempts >= 3 && !isBlinking) {
+                    if (attendAttempts >= 3 && !isBlinking)
+                    {
                         blinkingCoroutine = StartCoroutine(BlinkObjectiveIcon());
                     }
                 }
 
-                if (attendAttempts >= maxAttendAttempts || model.mental <= 0) {
+                if (attendAttempts >= maxAttendAttempts || model.mental <= 0)
+                {
                     Debug.Log($"{name} se va por falta de atención en {objectiveStation.name}.");
                     LeaveWithoutBuy();
+                    customerObjective.objective = "";
                 }
             }
-        } else {
+        }
+        else
+        {
             MoveToObjectiveStation();
         }
     }
 
-    private IEnumerator BlinkObjectiveIcon() {
+    private IEnumerator BlinkObjectiveIcon()
+    {
         isBlinking = true;
         var img = customerObjective.image;
         Color originalColor = img.color;
@@ -167,11 +192,13 @@ public class CustomerComponent : CharacterComponent
                (objectiveStation == null && searchAttempts >= 3) ||
                objectiveStation != null &&
                string.IsNullOrEmpty(objectiveStation.assignedWorker) &&
-               objectiveStation.status == "Idle") {
+               objectiveStation.status == "Idle")
+        {
             t += Time.deltaTime * 2f;
             img.color = Color.Lerp(toBlack ? originalColor : blinkColor, toBlack ? blinkColor : originalColor, t);
 
-            if (t >= 1f) {
+            if (t >= 1f)
+            {
                 t = 0f;
                 toBlack = !toBlack;
             }
@@ -184,16 +211,20 @@ public class CustomerComponent : CharacterComponent
     }
 
 
-    private void MoveToObjectiveStation() {
-        if (objectiveStation != null) {
+    private void MoveToObjectiveStation()
+    {
+        if (objectiveStation != null)
+        {
             locomotion.MoveTo(this.objectiveStation.clientPosition.transform.position);
         }
     }
 
-    public void LeaveWithoutBuy() {
+    public void LeaveWithoutBuy()
+    {
         this.leave = true;
 
-        if (this.objectiveStation != null) {
+        if (this.objectiveStation != null)
+        {
             this.objectiveStation.StopAllCoroutines();
             this.objectiveStation.fx.SetWorking(false);
             this.objectiveStation.clientUsing = 0;
@@ -208,18 +239,21 @@ public class CustomerComponent : CharacterComponent
         locomotion.MoveTo(GlobalCustomerManager.Instance.despawnPoint.position);
     }
 
-    private void LeaveTheShop() {
+    private void LeaveTheShop()
+    {
         GlobalCustomerManager.Instance.CustomerLeft(this);
     }
 
-    private void UpdateWalkingAnimation() {
+    private void UpdateWalkingAnimation()
+    {
         if (animator == null) return;
 
         bool isWalking = locomotion.agent.velocity.magnitude > 0.1f;
         animator.SetBool("walking", isWalking);
     }
 
-    private void GetIntoBuyingPosition() {
+    private void GetIntoBuyingPosition()
+    {
         Vector3 targetPos = objectiveStation.clientPosition.position;
         targetPos.y = transform.position.y;
         transform.position = targetPos;
@@ -231,9 +265,11 @@ public class CustomerComponent : CharacterComponent
         animator.SetBool("buying", objectiveStation.sittingWorkstation);
     }
 
-    private void selectStation() {
+    private void selectStation()
+    {
 
-        if (objectiveStation != null && objectiveStation.clientUsing == 1) {
+        if (objectiveStation != null && objectiveStation.clientUsing == 1)
+        {
             objectiveStation.clientUsing = 0;
             objectiveStation.assignedCustomer = null;
             objectiveStation.status = "Idle";
@@ -242,13 +278,17 @@ public class CustomerComponent : CharacterComponent
 
         List<WorkStationBehaviour> emptyStations = new List<WorkStationBehaviour>();
 
-        foreach (WorkStationBehaviour station in stationManager.activeStations) {
-            if (station.clientUsing == 0 && this.objectives[0] == station.type) {
+        foreach (WorkStationBehaviour station in stationManager.activeStations)
+        {
+            if (station.clientUsing == 0 && this.objectives[0] == station.type)
+            {
                 emptyStations.Add(station);
             }
         }
-        if (emptyStations.Count != 0) {
-            if (isBlinking && blinkingCoroutine != null) {
+        if (emptyStations.Count != 0)
+        {
+            if (isBlinking && blinkingCoroutine != null)
+            {
                 StopCoroutine(blinkingCoroutine);
                 customerObjective.image.color = Color.white;
                 isBlinking = false;
@@ -264,7 +304,8 @@ public class CustomerComponent : CharacterComponent
         }
     }
 
-    public override Dictionary<string, string> GetStats() {
+    public override Dictionary<string, string> GetStats()
+    {
         var stats = new Dictionary<string, string>
         {
             { "Name", model.CharacterName },
