@@ -235,7 +235,7 @@ public class CustomerComponent : CharacterComponent
         }
 
         this.objectives.Clear();
-        animator.SetBool("buying", false);
+        animator.SetBool("sitting", false);
         locomotion.MoveTo(GlobalCustomerManager.Instance.despawnPoint.position);
     }
 
@@ -262,7 +262,7 @@ public class CustomerComponent : CharacterComponent
         direction.y = 0f;
         transform.rotation = Quaternion.LookRotation(direction);
 
-        animator.SetBool("buying", objectiveStation.sittingWorkstation);
+        animator.SetBool("sitting", objectiveStation.sittingWorkstation);
     }
 
     private void selectStation()
