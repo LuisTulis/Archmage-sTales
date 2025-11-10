@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class WorkstationPanelController : MonoBehaviour
+public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
 {
 
     public GameManager oro;
@@ -29,6 +32,8 @@ public class WorkstationPanelController : MonoBehaviour
     [SerializeField] private Transform workersContainer;
     [SerializeField] private GameObject workerEntryPrefab;
     [SerializeField] private Sprite[] stationTypeImage;
+    public bool canClose = true;
+
 
     private void Awake()
     {
@@ -55,6 +60,29 @@ public class WorkstationPanelController : MonoBehaviour
 
 
     }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        bool close = true;
+        var ray = Camera.main.ScreenPointToRay(eventData.position);
+        RaycastHit[] hits = Physics.RaycastAll(ray, 2000f, 3, QueryTriggerInteraction.Ignore);
+
+        foreach(var hit in hits)
+        {
+            Debug.Log(hit.collider.gameObject);
+            var ws = hit.collider.GetComponentInParent<WorkStationBehaviour>();
+            if (ws != null)
+            {
+                Show(ws);
+                close = false; 
+                break;
+            }
+        }
+        if(close)
+        {
+            Hide();
+        }
+
+    }
     public void updateStation()
     {
         Debug.Log(selectedWorkstation.ToString());
@@ -69,6 +97,7 @@ public class WorkstationPanelController : MonoBehaviour
 
     public void Show(WorkStationBehaviour workstation)
     {
+
         GameManager.Instance.UIOpen = true;
         selectedWorkstation = workstation;
         var data = workstation.workstationData;
@@ -282,4 +311,9 @@ public class WorkstationPanelController : MonoBehaviour
         selectedWorkstation.karma = karmaBar.value;
     }
 
+
+    public void tryToClose()
+    {
+            Hide();
+    }
 }

@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text mostrar_salario;
     public TMP_Text mostrar_deuda;
     public TMP_Text mostrar_total;
+    public TMP_Text mostrar_ahorro;
     public Toggle toggle_salario;
     public Toggle toggle_deuda;
 
@@ -207,6 +208,8 @@ public class GameManager : MonoBehaviour
     {
         addDebt = !showCheckboxPay;
         isPlaying = false;
+        mostrar_ahorro.text = "Ahorro: " + oro_inicial.ToString();
+
         int ganancia = horo - oro_inicial + (perdidas + gastosMesas);
         mostrar_ganancia.text = "Ganancia: " + ganancia.ToString();
         mostrar_perdida.text = "Perdidas: -" + perdidas.ToString();
@@ -215,7 +218,7 @@ public class GameManager : MonoBehaviour
         mostrar_salario.text = "Salario de empleados: -" + salario_actual.ToString();
         mostrar_deuda.text = "Deudas: -" + deudaEmpleados.ToString();
 
-        int total = ganancia - perdidas - gastosMesas;
+        int total = horo;
 
         toggle_salario.gameObject.SetActive(showCheckboxPay);
         toggle_deuda.gameObject.SetActive(showCheckboxPay);
@@ -244,7 +247,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        mostrar_total.text = "Total: " + total.ToString();
+        mostrar_total.text = "Subtotal: " + total.ToString();
 
         this.dailyStatistics.SetActive(true);
 
@@ -278,6 +281,7 @@ public class GameManager : MonoBehaviour
             }
         }
         isPlaying = true;
+        this.UIOpen = false;
         this.dailyStatistics.SetActive(false);
     }
 

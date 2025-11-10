@@ -21,6 +21,7 @@ public class UnlockRoomUI : MonoBehaviour
         // Setear los precios de las salas acá
 
         gameObject.SetActive(true);
+        GameManager.Instance.UIOpen = true;
     }
 
     public void UnlockRoom(string roomName)
@@ -42,5 +43,6 @@ public class UnlockRoomUI : MonoBehaviour
     public void OnClose()
     {
         gameObject.SetActive(false);
+        GameManager.Instance.UIOpen = false;
     }
 }

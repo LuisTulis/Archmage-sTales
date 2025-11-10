@@ -17,12 +17,16 @@ public class OpenSign : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (shopStateText != null)
-        {
-            shopStateText.text = (gameManager.isOpen ? "Close" : "Open") + " shop?";
-        }
+        if(GameManager.Instance.UIOpen != true)
+        { 
+            if (shopStateText != null)
+            {
+                shopStateText.text = (gameManager.isOpen ? "Close" : "Open") + " shop?";
+            }
 
-        openCloseUI.enabled = true;
+            GameManager.Instance.UIOpen = true;
+            openCloseUI.enabled = true;
+        }
     }
 
     public void OnConfirm()
@@ -33,6 +37,7 @@ public class OpenSign : MonoBehaviour
 
     public void OnClose()
     {
+        GameManager.Instance.UIOpen = false;
         openCloseUI.enabled = false;
     }
 
