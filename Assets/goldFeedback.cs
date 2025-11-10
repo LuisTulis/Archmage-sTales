@@ -16,6 +16,7 @@ public class goldFeedback : MonoBehaviour
         goldCount = GameObject.Find("Orito");
         text = this.GetComponent<TMP_Text>();
         text.text = amount.ToString() + "$";
+        text.color = amount < 0 ? new Color(1, 0, 0, 0) : new Color(0, 1, 0, 0);
         StartCoroutine(changeColor());
         yDifference = goldCount.transform.position.y - this.transform.position.y;
         firstPosition = this.transform.position.y;

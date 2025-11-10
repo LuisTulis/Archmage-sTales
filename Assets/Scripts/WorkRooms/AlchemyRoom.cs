@@ -34,7 +34,10 @@ public class AlchemyRoom : MonoBehaviour
     public void OnMouseDown()
     {
         if (!isUnlocked && !gameManager.UIOpen && unlockRoomUI != null)
+        {
             unlockRoomUI.Show(this);
+
+        }
     }
 
     public void ConfirmUnlock(PrePurchaseWorkstation prePurchaseWorkstation)
@@ -52,19 +55,6 @@ public class AlchemyRoom : MonoBehaviour
 
                 UnlockRoom(prePurchaseWorkstation.Workstation);
             }
-            //else
-            //{
-            //    if (gm.feedbackPrefab != null)
-            //    {
-            //        GameObject instance = Instantiate(
-            //            gm.feedbackPrefab,
-            //            gm.feedbackPlacement.transform.position,
-            //            Quaternion.identity,
-            //            gm.canvas.transform
-            //        );
-            //        instance.GetComponent<goldFeedback>().amount = 0;
-            //    }
-            //}
         }
     }
 

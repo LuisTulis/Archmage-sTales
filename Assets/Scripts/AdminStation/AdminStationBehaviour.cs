@@ -5,6 +5,10 @@ using UnityEngine;
 public class AdminStationBehaviour : MonoBehaviour
 {
     private void OnMouseDown() {
-        GameManager.Instance.showDailyStatistics(false);
+        if(GameManager.Instance.UIOpen == false)
+        {
+            GameManager.Instance.showDailyStatistics(false);
+            GameManager.Instance.UIOpen = true;
+        }
     }
 }

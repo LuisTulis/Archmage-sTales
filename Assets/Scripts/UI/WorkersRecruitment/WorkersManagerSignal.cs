@@ -21,13 +21,18 @@ public class WorkersManagerSignal : MonoBehaviour {
         ToggleUI(true);
     }
 
-    private void ToggleUI(bool state) {
-        if (workerSignalUI != null) {
-            workerSignalUI.SetActive(state);
-            isUIActive = state;
-        }
+    private void ToggleUI(bool state) 
+    {
+        if(GameManager.Instance.UIOpen == false)
+        {
+            if (workerSignalUI != null)
+            {
+                workerSignalUI.SetActive(state);
+                isUIActive = state;
+            }
 
-        GameManager.Instance.UIOpen = state;
+            GameManager.Instance.UIOpen = state;
+        }        
     }
 
     public void forceClose()
