@@ -195,7 +195,9 @@ public class GameManager : MonoBehaviour
         {
             foreach (CustomerComponent customer in GlobalCustomerManager.Instance.customers)
             {
-                customer.LeaveWithoutBuy();
+                if(customer.objectiveStation == null) {
+                    customer.LeaveWithoutBuy();
+                }
             }
             StartCoroutine(OpenCloseShop(new Color(0, 0, 1, 1), 5f, true));
         }
