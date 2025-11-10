@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
         {
             if (horo > salario_actual)
             {
-                total -= salario_actual;
+                total -= salario_actual;    
             }
             else
             {
@@ -240,6 +240,7 @@ public class GameManager : MonoBehaviour
             if (horo_aux > deudaEmpleados)
             {
                 total -= deudaEmpleados;
+                deudaEmpleados = 0;
             }
             else
             {
@@ -279,6 +280,7 @@ public class GameManager : MonoBehaviour
                 deudaEmpleados += salario;
                 GlobalCharactersManager.Instance.changeMental(-20);
             }
+
         }
         isPlaying = true;
         this.UIOpen = false;

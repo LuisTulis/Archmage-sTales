@@ -93,7 +93,24 @@ public class GlobalCharactersManager : MonoBehaviour {
     {
         foreach(GameObject worker in Workers)
         {
-            worker.GetComponent<WorkerModel>().mental += amount;
+            WorkerModel mental = worker.GetComponent<WorkerModel>();
+            mental.mental += amount;
+            if(mental.mental < 0)
+            {
+                worker.GetComponentInChildren<WorkerStatus>().setStatus(0);
+            }
+            else
+            {
+                if(amount > 0)
+                {
+
+                    worker.GetComponentInChildren<WorkerStatus>().setStatus(2);
+                }
+                else
+                {
+                    worker.GetComponentInChildren<WorkerStatus>().setStatus(1);
+                }
+            }
         }
     }
 
@@ -150,4 +167,6 @@ public class GlobalCharactersManager : MonoBehaviour {
 
         CameraControl.Instance.cameraTarget = null;
     }
+
+    
 }

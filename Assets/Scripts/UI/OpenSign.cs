@@ -33,6 +33,7 @@ public class OpenSign : MonoBehaviour
     {
         gameManager.Open(!gameManager.isOpen);
         openCloseUI.enabled = false;
+        GameManager.Instance.UIOpen = false;
     }
 
     public void OnClose()
