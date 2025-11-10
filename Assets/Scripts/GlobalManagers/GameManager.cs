@@ -77,7 +77,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J) || actualHour > openTime || (!isOpen && actualHour > closeTime))
         {
             Open(!this.isOpen);
-            actualHour = 0;
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -137,6 +136,7 @@ public class GameManager : MonoBehaviour
 
     public void Open(bool open)
     {
+        actualHour = 0;
         isOpen = open;
         if (isOpen)
         {
