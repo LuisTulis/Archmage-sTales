@@ -36,5 +36,5 @@ public abstract class CharacterComponent : MonoBehaviour, ISelectable, IPointerC
             rend.material.color = Color.white;
     }
 
-    public abstract Dictionary<string, string> GetStats();
+    public abstract Dictionary<string, object> GetStats();
 }

@@ -9,6 +9,7 @@ public class CharacterStatsPanel : MonoBehaviour
     [SerializeField] private Transform statsGrid;
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private TMP_Text characterNameText;
+    [SerializeField] private Image iconImage;
     [SerializeField] private Button followButton;
     [SerializeField] private Button dismissButton;
 
@@ -54,11 +55,11 @@ public class CharacterStatsPanel : MonoBehaviour
         ClearStats();
         panelRoot.SetActive(true);
 
-        Dictionary<string, string> stats = character.GetStats();
+        Dictionary<string, object> stats = character.GetStats();
 
         if (stats.ContainsKey("Name"))
         {
-            characterNameText.text = stats["Name"];
+            characterNameText.text = stats["Name"].ToString();
             stats.Remove("Name");
         }
         else
@@ -97,11 +98,15 @@ public class CharacterStatsPanel : MonoBehaviour
         }
 
 
-        foreach (var kvp in stats)
-        {
+        foreach (var kvp in stats) {
+            if (kvp.Key == "Icon" && kvp.Value is Sprite icon) {
+                iconImage.sprite = icon;
+                continue;
+            }
+
             GameObject statGO = Instantiate(statPrefab, statsGrid);
             statGO.transform.Find("StatName").GetComponent<TMP_Text>().text = kvp.Key;
-            statGO.transform.Find("StatValue").GetComponent<TMP_Text>().text = kvp.Value;
+            statGO.transform.Find("StatValue").GetComponent<TMP_Text>().text = kvp.Value.ToString();
         }
 
         HandleDismissButton(character);

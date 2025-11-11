@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.21571317, g: 0.30549502, b: 0.3320055, a: 1}
+  m_IndirectSpecularColor: {r: 0.21570486, g: 0.30548182, b: 0.33199334, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -27323,6 +27323,7 @@ MonoBehaviour:
   statsGrid: {fileID: 3044262588668686221}
   panelRoot: {fileID: 825289871403173421}
   characterNameText: {fileID: 3044970338554715853}
+  portraitImage: {fileID: 409768410641387979}
   followButton: {fileID: 6459293299721239032}
   dismissButton: {fileID: 529525155}
   mentalSection: {fileID: 717939346}

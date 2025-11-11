@@ -304,12 +304,13 @@ public class CustomerComponent : CharacterComponent
         }
     }
 
-    public override Dictionary<string, string> GetStats()
+    public override Dictionary<string, object> GetStats()
     {
-        var stats = new Dictionary<string, string>
+        var stats = new Dictionary<string, object>
         {
             { "Name", model.CharacterName },
             { "Speed", model.Speed.ToString("F1") },
+            { "Icon", model.Icon }
         };
         return stats;
     }

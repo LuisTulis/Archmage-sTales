@@ -101,6 +101,7 @@ MonoBehaviour:
   characterName: 
   speed: 0
   idle: 1
+  icon: {fileID: 21300000, guid: 5fe2a211e75f68d48839e86407dcbeb0, type: 3}
   workStation: {fileID: 0}
   successRate: 0
 --- !u!114 &4997551068161454032
@@ -362,6 +363,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 017d2332307ede84291355a10722b0c1, type: 3}
   - {fileID: 21300000, guid: d95310eca1c531742b9f3ad1a00f9261, type: 3}
   image: {fileID: 5570653959358573281}
+  time: 0
 --- !u!4 &5345458510823282711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5039734374579858682, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}

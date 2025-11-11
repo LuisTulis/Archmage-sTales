@@ -116,6 +116,7 @@ MonoBehaviour:
   characterName: 
   speed: 0
   idle: 1
+  icon: {fileID: 21300000, guid: 0a40108cca91dc84e9aa58faae188c12, type: 3}
 --- !u!114 &8317391104286841311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +410,10 @@ PrefabInstance:
     - target: {fileID: 2984814672346321074, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
       propertyPath: m_Name
       value: Objectives
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984814672346321074, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039734374579858682, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
       propertyPath: m_LocalPosition.x
