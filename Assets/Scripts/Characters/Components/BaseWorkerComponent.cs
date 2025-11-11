@@ -103,9 +103,8 @@ public class BaseWorkerComponent : CharacterComponent
         locomotion.SittingAnimation(this.model.AsignatedStation.sittingWorkstation);
     }
 
-    public override Dictionary<string, string> GetStats() {
-        Debug.Log(model.Stats.ToString());
-        var stats = new Dictionary<string, string>
+    public override Dictionary<string, object> GetStats() {
+        var stats = new Dictionary<string, object>
         {
             { "Name", model.CharacterName },
             { "Speed", model.Speed.ToString("F1") },
@@ -113,7 +112,8 @@ public class BaseWorkerComponent : CharacterComponent
             { "Adivination", model.Stats.adivinationStat.ToString() },
             { "Alchemy", model.Stats.alchemyStat.ToString() },
             { "Enchanting", model.Stats.enchantStat.ToString() },
-            { "Working", isWorking ? "Yes" : "No" }
+            { "Working", isWorking ? "Yes" : "No" },
+            { "Icon", model.Icon }
         };
 
         Debug.Log("Getting stats for worker: " + model.CharacterName);

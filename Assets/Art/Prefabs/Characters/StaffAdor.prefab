@@ -98,6 +98,7 @@ MonoBehaviour:
   characterName: 
   speed: 0
   idle: 1
+  icon: {fileID: 21300000, guid: 6cf2b428ed4b815438f8537406baa3f5, type: 3}
   workStation: {fileID: 0}
   successRate: 0
 --- !u!114 &1031133593100464894
@@ -128,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWorking: 0
+  isFired: 0
   isKidnapped: 0
 --- !u!1001 &4120178089518716770
 PrefabInstance:

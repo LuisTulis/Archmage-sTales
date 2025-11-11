@@ -90,11 +90,12 @@ public class ThugComponent : EnemyComponent
         base.Despawn();
     }
 
-    public override Dictionary<string, string> GetStats() {
-        var stats = new Dictionary<string, string>
+    public override Dictionary<string, object> GetStats() {
+        var stats = new Dictionary<string, object>
         {
             { "Name", model.CharacterName },
-            { "Speed", model.Speed.ToString("F1") }
+            { "Speed", model.Speed.ToString("F1") },
+            { "Icon", model.Icon }
         };
         return stats;
     }

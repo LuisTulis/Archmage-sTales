@@ -271,6 +271,7 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
 
             GameObject entry = Instantiate(workerEntryPrefab, workersContainer);
             TMP_Text nameText = entry.transform.Find("NameText").GetComponent<TMP_Text>();
+            Image icon = entry.transform.Find("Image").GetComponent<Image>();
             Button selectButton = entry.transform.Find("SelectButton").GetComponent<Button>();
             if (model.AsignatedStation != null)
             {
@@ -300,6 +301,7 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
             }
 
             nameText.text = model.CharacterName;
+            icon.sprite = model.Icon;
 
             string characterName = model.CharacterName; // Capturar variable local para closure
             selectButton.onClick.AddListener(() => selectWorker(characterName));
