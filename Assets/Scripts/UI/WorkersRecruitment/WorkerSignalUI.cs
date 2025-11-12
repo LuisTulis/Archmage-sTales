@@ -24,15 +24,15 @@ public class WorkerSignalUI : MonoBehaviour {
 
             TMP_Text nameText = entry.transform.Find("NameText").GetComponent<TMP_Text>();
             TMP_Text statsText = entry.transform.Find("StatsText").GetComponent<TMP_Text>();
+            TMP_Text speedText = entry.transform.Find("SpeedText").GetComponent<TMP_Text>();
             TMP_Text priceText = entry.transform.Find("PriceText").GetComponent<TMP_Text>();
             Image icon = entry.transform.Find("Image").GetComponent<Image>();
             Button hireButton = entry.transform.Find("HireButton").GetComponent<Button>();
 
             nameText.text = candidate.CharacterName;
-            // FIXME: agregar icono al candidato de worker aun no generado
-            //icon.sprite = candidate.Icon;
-            statsText.text = $"Velocidad: {candidate.Speed}";
-            priceText.text = $"Precio: {candidate.salary}";
+            statsText.text = $"Alq: {candidate.Stats.alchemyStat} - Inv: {candidate.Stats.summonStat} - Enc: {candidate.Stats.enchantStat} - Adv: {candidate.Stats.adivinationStat}";
+            speedText.text = $"Velocidad: {candidate.Speed}";
+            priceText.text = $"Salario: {candidate.salary}";
 
             WorkerModel candidateCopy = candidate;
             hireButton.onClick.AddListener(() => OnHireCandidate(candidateCopy));

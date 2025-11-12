@@ -11,7 +11,7 @@ public class GlobalCharactersManager : MonoBehaviour {
     [SerializeField] private CharacterData staffAdorData;
     [SerializeField] private CharacterData workerData;
     [SerializeField] GameObject StaffAdorPrefab;
-    [SerializeField] GameObject WorkerPrefab;
+    [SerializeField] List<GameObject> WorkerPrefab;
 
     [Header("State")]
     [SerializeField] private int workerIdCounter = 1;
@@ -115,7 +115,8 @@ public class GlobalCharactersManager : MonoBehaviour {
     }
 
     public void HireWorker(WorkerModel candidate) {
-        GameObject instance = Instantiate(WorkerPrefab, Vector3.zero, Quaternion.identity);
+        var randomIndex = UnityEngine.Random.Range(0, WorkerPrefab.Count);
+        GameObject instance = Instantiate(WorkerPrefab[randomIndex], Vector3.zero, Quaternion.identity);
 
         WorkerModel model = instance.GetComponent<WorkerModel>();
         if (model != null) {
