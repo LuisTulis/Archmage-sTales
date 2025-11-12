@@ -45,7 +45,9 @@ public class GlobalCustomerManager : MonoBehaviour
     }
 
     private void SpawnCustomer() {
-        if (customers.Count < maxCustomersInScene && customerPrefabs.Count > 0 && GameManager.Instance.isOpen) {
+        if (customers.Count < maxCustomersInScene &&
+            customerPrefabs.Count > 0 && GameManager.Instance.isOpen &&
+            GlobalWorkstationManager.Instance.activeStations.Count > 0) {
             int randomIndex = Random.Range(0, customerPrefabs.Count);
             CustomerComponent randomCustomer = customerPrefabs[randomIndex];
             Debug.Log("Spawning customer: " + randomCustomer);

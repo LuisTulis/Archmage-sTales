@@ -125,7 +125,7 @@ public class WorkerComponent : BaseWorkerComponent
         isKidnapped = true;
         kidnapper = skeleton;
 
-        LeaveWorkSation();
+        LeaveWorkStation();
     }
 
     public void BeFired() {
@@ -136,7 +136,7 @@ public class WorkerComponent : BaseWorkerComponent
         isWorking = false;
         isFired = true;
 
-        LeaveWorkSation();
+        LeaveWorkStation();
     }
 
     public override void Despawn()

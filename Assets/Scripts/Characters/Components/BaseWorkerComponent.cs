@@ -5,7 +5,7 @@ public class BaseWorkerComponent : CharacterComponent
 {
 
     protected RandomWalkLocomotion locomotion;
-    protected BaseWorkerModel model;
+    public BaseWorkerModel model;
     public bool isWorking;
     protected override void Awake() {
         base.Awake();
@@ -65,7 +65,7 @@ public class BaseWorkerComponent : CharacterComponent
                             break;
                     }
                 }
-                model.AsignatedStation.accessToWork(this.model);
+                model.AsignatedStation.accessToWork(this);
                 this.isWorking = true;
                 this.GetIntoWorkingPosition(this.model.AsignatedStation.workerPosition);
             } else {
@@ -76,12 +76,12 @@ public class BaseWorkerComponent : CharacterComponent
         }
     }
 
-    public void LeaveWorkSation() {
+    public void LeaveWorkStation() {
         if (model.AsignatedStation != null) {
             model.AsignatedStation.StopAllCoroutines();
             model.AsignatedStation.fx.SetWorking(false);
             model.AsignatedStation.status = "Idle";
-            model.AsignatedStation.assignedWorker = "";
+            model.AsignatedStation.assignedWorkerName = null;
             if (model.AsignatedStation.actualProgress != null)
             {
                 Destroy(model.AsignatedStation.actualProgress);

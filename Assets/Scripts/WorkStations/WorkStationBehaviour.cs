@@ -12,7 +12,8 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     public Transform workerPosition;
     public Transform clientPosition;
     public int clientUsing = 0;
-    public string assignedWorker;
+    public string assignedWorkerName;
+    public BaseWorkerComponent assignedWorker;
     public CustomerComponent assignedCustomer;
     public StationType type;
 
@@ -29,6 +30,8 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     public GameObject ProgressBarPrefab;
     public GameObject actualProgress;
+
+    public AlchemyRoom prepurchaseRoom;
 
     public float elapsed = 0;
 
@@ -49,7 +52,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         infoPanel.Show(this);
     }
 
-    public void accessToWork(BaseWorkerModel workerModel)
+    public void accessToWork(BaseWorkerComponent workerComponent)
     {
         if (this.status == "Idle")
         {
@@ -58,10 +61,11 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
             actualProgress = Instantiate(ProgressBarPrefab, clientPosition.position, Quaternion.identity, transform);
             actualProgress.transform.position += new Vector3(0, 5, 0);
             elapsed = 0;
-            StartCoroutine(BeingUsed(workerModel));
+            assignedWorker = workerComponent;
+            StartCoroutine(BeingUsed(workerComponent));
         }
     }
-    private IEnumerator BeingUsed(BaseWorkerModel workerModel)
+    private IEnumerator BeingUsed(BaseWorkerComponent workerComponent)
     {
 
         float seconds = gameManager.aletargamiento ? workstationData.Speed * 2 : workstationData.Speed;
@@ -69,17 +73,17 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         switch (this.type.ToString())
         {
             case "adivinacion":
-                Debug.Log(workerModel.Stats.adivinationStat * 5 / 100);
-                seconds -= seconds * (workerModel.Stats.adivinationStat * 5f / 100f);
+                Debug.Log(workerComponent.model.Stats.adivinationStat * 5 / 100);
+                seconds -= seconds * (workerComponent.model.Stats.adivinationStat * 5f / 100f);
                 break;
             case "invocacion":
-                seconds -= seconds * (workerModel.Stats.summonStat * 5 / 100);
+                seconds -= seconds * (workerComponent.model.Stats.summonStat * 5 / 100);
                 break;
             case "caldero":
-                seconds -= seconds * (workerModel.Stats.alchemyStat * 5 / 100);
+                seconds -= seconds * (workerComponent.model.Stats.alchemyStat * 5 / 100);
                 break;
             case "encantamiento":
-                seconds -= seconds * (workerModel.Stats.enchantStat * 5 / 100);
+                seconds -= seconds * (workerComponent.model.Stats.enchantStat * 5 / 100);
                 break;
         }
 
@@ -130,6 +134,10 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
         Debug.Log("Playing particle system.");
         fx.ApplyUpgradeLevel(level);
+    }
+
+    public void CloseRoom() {
+        prepurchaseRoom.LockRoom(this.gameObject);
     }
 
 }

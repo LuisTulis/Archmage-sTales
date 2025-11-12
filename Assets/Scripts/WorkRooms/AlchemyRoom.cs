@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AlchemyRoom : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class AlchemyRoom : MonoBehaviour
 
     [SerializeField] private bool isUnlocked = false;
     private GameManager gameManager;
+
+    [SerializeField] private GameObject leaveRoomPoint;
     void Start()
     {
         if (prePurchaseArea != null && prePurchaseArea.GetComponent<Collider>() == null)
@@ -91,6 +94,7 @@ public class AlchemyRoom : MonoBehaviour
                     ws.isBroken = false;
                 manager.AddStation(ws);
                 manager.activeStations.Add(ws);
+                ws.prepurchaseRoom = this;
             }
         }
 
@@ -101,6 +105,77 @@ public class AlchemyRoom : MonoBehaviour
             NavMeshSurface nm = GameObject.Find("Terrain")?.GetComponent<NavMeshSurface>();
             if (nm != null)
                 nm.BuildNavMesh();
+        }
+        gameManager.UIOpen = false;
+    }
+
+    public void LockRoom(GameObject workstation) {
+        if (GlobalWorkstationManager.Instance.activeStations.Count <= 1) {
+            Debug.LogWarning("No se puede cerrar la sala: es la última estación disponible.");
+            return;
+        }
+
+        if (!isUnlocked) return;
+        isUnlocked = false;
+
+
+        if (door != null)
+            door.SetActive(true);
+
+        if (blockFrameDoor != null)
+            blockFrameDoor.SetActive(true);
+
+        if (openFrameDoor != null)
+            openFrameDoor.SetActive(false);
+
+        if (emptyRoom != null)
+            emptyRoom.SetActive(true);
+
+        if (prePurchaseArea != null)
+            prePurchaseArea.GetComponent<BoxCollider>().enabled = true;
+
+
+        if (workstation != null) {
+            workstation.SetActive(false);
+
+            WorkStationBehaviour ws = workstation.GetComponentInChildren<WorkStationBehaviour>();
+            if (ws != null) {
+                GlobalWorkstationManager manager = FindObjectOfType<GlobalWorkstationManager>();
+                if (manager != null) {
+                    manager.RemoveStation(ws);
+                    manager.activeStations.Remove(ws);
+
+                    if (ws.assignedCustomer != null && leaveRoomPoint != null) {
+                        var customer = ws.assignedCustomer;
+                        var agent = customer.GetComponent<NavMeshAgent>();
+
+                        if (agent != null)
+                            agent.Warp(leaveRoomPoint.transform.position);
+                        else
+                            customer.transform.position = leaveRoomPoint.transform.position;
+
+                        ws.assignedCustomer.LeaveWithoutBuy();
+
+                        ws.assignedCustomer = null;
+                        ws.prepurchaseRoom = null;
+                    }
+
+                    if (ws.assignedWorker != null) {
+                        var worker = ws.assignedWorker;
+                        var agent = worker.GetComponent<NavMeshAgent>();
+
+                        if (agent != null)
+                            agent.Warp(leaveRoomPoint.transform.position);
+                        else
+                            worker.transform.position = leaveRoomPoint.transform.position;
+                        ws.assignedWorker.isWorking = false;
+                        ws.assignedWorker.LeaveWorkStation();
+                        ws.assignedWorker = null;
+                        ws.assignedWorkerName = "";
+
+                    }
+                }
+            }
         }
         gameManager.UIOpen = false;
     }

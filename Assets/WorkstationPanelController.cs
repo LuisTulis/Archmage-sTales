@@ -26,7 +26,7 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
     [SerializeField] Slider karmaBar;
     private GlobalWorkstationManager workstationManager;
     private WorkStationBehaviour selectedWorkstation;
-    private string nombresito = "";
+    private string asignatedWorkerName = "";
 
     [Header("Workers UI")]
     [SerializeField] private Transform workersContainer;
@@ -101,7 +101,7 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         GameManager.Instance.UIOpen = true;
         selectedWorkstation = workstation;
         var data = workstation.workstationData;
-        nombresito = workstation.assignedWorker;
+        asignatedWorkerName = workstation.assignedWorkerName;
 
         WorkstationData nextLevel = workstationManager.upgrade(selectedWorkstation.workstationData.name);
         this.karmaBar.value = workstation.karma;
@@ -151,7 +151,7 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
             speed.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
         }
         karma.text = data.karma < 10000 ? "Upgrade: " + data.karma.ToString() + "$" : "Max";
-        worker.text = string.IsNullOrEmpty(nombresito) ? "Select Worker" : nombresito;
+        worker.text = string.IsNullOrEmpty(asignatedWorkerName) ? "Select Worker" : asignatedWorkerName;
         panel.SetActive(true);
     }
 
@@ -189,12 +189,12 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         }
 
         // Liberar trabajador previamente asignado a la estación
-        if (!string.IsNullOrEmpty(selectedWorkstation.assignedWorker))
+        if (!string.IsNullOrEmpty(selectedWorkstation.assignedWorkerName))
         {
             foreach (var workerGO in GlobalCharactersManager.Instance.Workers)
             {
                 var model = workerGO.GetComponent<WorkerModel>();
-                if (model != null && model.CharacterName == selectedWorkstation.assignedWorker)
+                if (model != null && model.CharacterName == selectedWorkstation.assignedWorkerName)
                 {
                     model.AsignatedStation = null;
                     workerGO.GetComponent<RandomWalkLocomotion>().IdleRandomWalk();
@@ -206,7 +206,7 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
             if (GlobalCharactersManager.Instance.StaffAdor != null)
             {
                 var staffModel = GlobalCharactersManager.Instance.StaffAdor.GetComponent<StaffAdorModel>();
-                if (staffModel != null && staffModel.CharacterName == selectedWorkstation.assignedWorker)
+                if (staffModel != null && staffModel.CharacterName == selectedWorkstation.assignedWorkerName)
                 {
                     staffModel.AsignatedStation = null;
                     GlobalCharactersManager.Instance.StaffAdor.GetComponent<RandomWalkLocomotion>().IdleRandomWalk();
@@ -218,9 +218,9 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         WorkStationBehaviour[] workstations = GameObject.FindObjectsOfType<WorkStationBehaviour>();
         foreach (WorkStationBehaviour workstation in workstations)
         {
-            if (workstation != selectedWorkstation && workstation.assignedWorker == name)
+            if (workstation != selectedWorkstation && workstation.assignedWorkerName == name)
             {
-                workstation.assignedWorker = "";
+                workstation.assignedWorkerName = "";
                 workstation.StopAllCoroutines();
                 workstation.fx.SetWorking(false);
                 workstation.status = "Idle";
@@ -230,13 +230,13 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         // Asignar trabajador seleccionado a la estación
         if (selectedWorkerGO != null)
         {
-            selectedWorkerGO.GetComponent<BaseWorkerComponent>().LeaveWorkSation();
+            selectedWorkerGO.GetComponent<BaseWorkerComponent>().LeaveWorkStation();
             var model = selectedWorkerGO.GetComponent<BaseWorkerModel>();
             model.AsignatedStation = selectedWorkstation;
-            selectedWorkstation.assignedWorker = name;
+            selectedWorkstation.assignedWorkerName = name;
         }
 
-        worker.text = selectedWorkstation.assignedWorker;
+        worker.text = selectedWorkstation.assignedWorkerName;
         workerPanel.SetActive(false);
     }
 
@@ -318,4 +318,10 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
     {
             Hide();
     }
+
+    public void DeleteWorkstation() {
+        selectedWorkstation.CloseRoom();
+    }
+    
+
 }

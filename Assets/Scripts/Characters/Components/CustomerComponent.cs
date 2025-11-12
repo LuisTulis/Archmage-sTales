@@ -146,7 +146,7 @@ public class CustomerComponent : CharacterComponent
             objectiveStation.assignedCustomer = this;
             GetIntoBuyingPosition();
 
-            if (string.IsNullOrEmpty(objectiveStation.assignedWorker) && objectiveStation.status == "Idle")
+            if (string.IsNullOrEmpty(objectiveStation.assignedWorkerName) && objectiveStation.status == "Idle")
             {
                 model.waitingTime += Time.deltaTime;
                 attendTimer += Time.deltaTime;
@@ -191,7 +191,7 @@ public class CustomerComponent : CharacterComponent
         while (!leave &&
                (objectiveStation == null && searchAttempts >= 3) ||
                objectiveStation != null &&
-               string.IsNullOrEmpty(objectiveStation.assignedWorker) &&
+               string.IsNullOrEmpty(objectiveStation.assignedWorkerName) &&
                objectiveStation.status == "Idle")
         {
             t += Time.deltaTime * 2f;
