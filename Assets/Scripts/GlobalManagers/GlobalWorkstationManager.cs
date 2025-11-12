@@ -96,6 +96,29 @@ public class GlobalWorkstationManager : MonoBehaviour
         }
     }
 
+    public void RemoveStation(WorkStationBehaviour station) {
+        if (station == null) return;
+
+        if (actualStations.Contains(station)) {
+            actualStations.Remove(station);
+            Debug.Log("Estación removida: " + station.name);
+
+            bool stillHasType = false;
+            foreach (var s in actualStations) {
+                if (s.type == station.type) {
+                    stillHasType = true;
+                    break;
+                }
+            }
+
+            if (!stillHasType && stationTypes.Contains(station.type)) {
+                stationTypes.Remove(station.type);
+                Debug.Log("Tipo de estación removido: " + station.type);
+            }
+        }
+    }
+
+
 
 }
 
