@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -52,6 +53,9 @@ public class GameManager : MonoBehaviour
     private bool bajarTexto = true;
     private float upTextHour = 0;
 
+    public GameObject pauseMenu;
+    public bool isPaused = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -72,29 +76,58 @@ public class GameManager : MonoBehaviour
         grupoTextoDia = GameObject.Find("GrupoDia");
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        isPaused = false;
+        pauseMenu = FindObjectOfType<PauseMenu>(true).gameObject;
+    }
+
     private void Update()
     {
+        // PAUSE MENU
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseMenu)
+            {
+                isPaused = !isPaused;
+                pauseMenu.SetActive(isPaused);
+            }
+        }
+
+        // HACK TO OPEN/CLOSE THE SHOP
         if (Input.GetKeyDown(KeyCode.J) || actualHour > openTime || (!isOpen && actualHour > closeTime))
         {
             Open(!this.isOpen);
         }
+
+        // HACK TO GET MONEY
         if (Input.GetKeyDown(KeyCode.C))
         {
             addGold(1000);
         }
+
         if (isPlaying)
         {
             actualHour += Time.deltaTime;
         }
 
         int hour = isOpen ? 6 + (int)(actualHour * 18 / openTime) : (int)(actualHour * 6 / closeTime);
-        
 
-        if(isOpen)
+        if (isOpen)
         {
-            if(bajarTexto)
+            if (bajarTexto)
             {
-                if(grupoTextoDia.transform.localPosition.y > 0)
+                if (grupoTextoDia.transform.localPosition.y > 0)
                 {
                     grupoTextoDia.transform.localPosition -= new Vector3(0, 1, 0);
                     upTextHour = actualHour + 3;
@@ -106,13 +139,13 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if(actualHour > upTextHour && grupoTextoDia.transform.localPosition.y < 150)
+                if (actualHour > upTextHour && grupoTextoDia.transform.localPosition.y < 150)
                 {
                     grupoTextoDia.transform.localPosition += new Vector3(0, 1, 0);
                 }
             }
         }
-        
+
         if (isOpen && actualHour < 3 && grupoTextoDia.transform.localPosition.y > 0)
         {
             grupoTextoDia.transform.localPosition -= new Vector3(0, 1, 0);
@@ -196,7 +229,8 @@ public class GameManager : MonoBehaviour
         {
             foreach (CustomerComponent customer in GlobalCustomerManager.Instance.customers)
             {
-                if(customer.objectiveStation == null) {
+                if (customer.objectiveStation == null)
+                {
                     customer.LeaveWithoutBuy();
                 }
             }
@@ -227,7 +261,7 @@ public class GameManager : MonoBehaviour
         {
             if (horo > salario_actual)
             {
-                total -= salario_actual;    
+                total -= salario_actual;
             }
             else
             {
