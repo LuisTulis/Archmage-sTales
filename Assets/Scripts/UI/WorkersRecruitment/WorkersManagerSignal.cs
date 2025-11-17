@@ -43,6 +43,7 @@ public class WorkersManagerSignal : MonoBehaviour
 
     public void forceClose()
     {
+        GameManager.Instance.UIOpen = false;
         ToggleUI(false);
     }
 }
