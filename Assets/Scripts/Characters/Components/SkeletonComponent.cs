@@ -70,6 +70,9 @@ public class SkeletonComponent : EnemyComponent
         if (target != null)
         {
             Debug.Log($"{gameObject.name} is attacking {target.name}");
+
+            AudioManager.Instance.PlaySound("skeleton");
+
             StartCoroutine(PerformAttackAndDespawn());
         }
         else
@@ -148,7 +151,8 @@ public class SkeletonComponent : EnemyComponent
         return 5f;
     }
 
-    public override Dictionary<string, object> GetStats() {
+    public override Dictionary<string, object> GetStats()
+    {
         var stats = new Dictionary<string, object>
         {
             { "Name", model.CharacterName },

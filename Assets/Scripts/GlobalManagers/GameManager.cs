@@ -76,8 +76,10 @@ public class GameManager : MonoBehaviour
         {
             rain.Stop();
         }
-        oro_inicial = 0;
+
         grupoTextoDia = GameObject.Find("GrupoDia");
+
+        oro_inicial = 50;
     }
 
     private void OnEnable()
@@ -94,24 +96,31 @@ public class GameManager : MonoBehaviour
     {
         isPaused = false;
         pauseMenu = FindObjectOfType<PauseMenu>(true).gameObject;
+
+        if (light == null)
+        {
+            light = FindObjectOfType<Light>();
+        }
     }
 
     private void Update()
     {
 
-        if(goldCooldown > 0)
+        if (goldCooldown > 0)
         {
             goldCooldown -= Time.deltaTime * 4f;
         }
         else
         {
-            if(goldQueue.Count  > 0)
+            if (goldQueue.Count > 0)
             {
+                AudioManager.Instance.PlaySound(goldQueue[0] > 0 ? "GanarDinero" : "GastarDinero");
+
                 StartCoroutine(goldCoroutine(goldQueue[0]));
                 goldQueue.RemoveAt(0);
                 goldCooldown += 1;
             }
-               
+
         }
         // PAUSE MENU
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -178,6 +187,7 @@ public class GameManager : MonoBehaviour
 
         dia_mostrar.text = "Día " + dayCount.ToString() + " " + hourString + ":00";
 
+        AudioManager.Instance.HandleAmbience(hour);
     }
 
     public void addGold(int amount)

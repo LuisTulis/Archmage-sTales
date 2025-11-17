@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -13,6 +14,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource ambienceSource;
 
     public static AudioManager Instance;
+
+    private bool isDayAmbiencePlaying = false;
 
     private void Awake()
     {
@@ -136,6 +139,44 @@ public class AudioManager : MonoBehaviour
         SetMusicVolume(music);
         SetAmbienceVolume(ambience);
         MuteAll(muted);
+    }
+
+    public void HandleAmbience(float hour)
+    {
+        bool shouldBeDay = hour >= 6 && hour < 18;
+
+        if (shouldBeDay == isDayAmbiencePlaying)
+            return;
+
+        isDayAmbiencePlaying = shouldBeDay;
+
+        StartCoroutine(ChangeAmbience(
+            shouldBeDay ? "day_ambience" : "night_ambience"
+        ));
+    }
+
+    private IEnumerator ChangeAmbience(string clip)
+    {
+        AudioClip audioClip = this.FindAmbienceClip(clip);
+        if (audioClip == null) yield break;
+
+        // Fade OUT
+        while (ambienceSource.volume > 0f)
+        {
+            ambienceSource.volume -= Time.deltaTime * 1f;
+            yield return null;
+        }
+
+        ambienceSource.clip = audioClip;
+        ambienceSource.loop = true;
+        ambienceSource.Play();
+
+        // Fade IN
+        while (ambienceSource.volume < 1f)
+        {
+            ambienceSource.volume += Time.deltaTime * 1f;
+            yield return null;
+        }
     }
 
 }

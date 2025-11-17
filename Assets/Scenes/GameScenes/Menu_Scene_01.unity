@@ -1585,11 +1585,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d191b3bf9b38b48bf728451ca47b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundClips: []
+  soundClips:
+  - {fileID: 8300000, guid: 5306162305072a3409ea7e34319055be, type: 3}
+  - {fileID: 8300000, guid: 85dd1b9c0ff5e3644a3dd4f73a9c9489, type: 3}
+  - {fileID: 8300000, guid: e103d56fe54e9dd4bbb95190fa4c62ed, type: 3}
+  - {fileID: 8300000, guid: ccf90858d22fd714f8a19cf1e7340910, type: 3}
+  - {fileID: 8300000, guid: 2f8aee0b32a127c46905bb088eb168ef, type: 3}
+  - {fileID: 8300000, guid: d1bb3dbe260e98d428e7dc7f518d4a11, type: 3}
   musicClips:
   - {fileID: 8300000, guid: f9a38d72e46887045b5d3ba0ea319984, type: 3}
   - {fileID: 8300000, guid: 201ce32e28e8f804086cc06f44912361, type: 3}
-  ambienceClips: []
+  ambienceClips:
+  - {fileID: 8300000, guid: d525150d56d02b041966427096e5984d, type: 3}
+  - {fileID: 8300000, guid: dd2acd9cd2d790942b4cb0e6a1bb17c7, type: 3}
+  - {fileID: 8300000, guid: a3478c3b0fae87548895f1676cfe222d, type: 3}
   audioMixer: {fileID: 24100000, guid: 32422a7329221ae4080d6b136fafb513, type: 2}
   sfxSource: {fileID: 313000724}
   musicSource: {fileID: 313000728}

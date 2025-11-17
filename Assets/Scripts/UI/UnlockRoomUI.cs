@@ -22,6 +22,8 @@ public class UnlockRoomUI : MonoBehaviour
 
         gameObject.SetActive(true);
         GameManager.Instance.UIOpen = true;
+
+        AudioManager.Instance.PlaySound("Madera1");
     }
 
     public void UnlockRoom(string roomName)

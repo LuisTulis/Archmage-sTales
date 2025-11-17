@@ -17,8 +17,8 @@ public class OpenSign : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(GameManager.Instance.UIOpen != true)
-        { 
+        if (GameManager.Instance.UIOpen != true)
+        {
             if (shopStateText != null)
             {
                 shopStateText.text = (gameManager.isOpen ? "Close" : "Open") + " shop?";
@@ -26,6 +26,8 @@ public class OpenSign : MonoBehaviour
 
             GameManager.Instance.UIOpen = true;
             openCloseUI.enabled = true;
+
+            AudioManager.Instance.PlaySound("Madera1");
         }
     }
 

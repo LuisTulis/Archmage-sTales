@@ -1,29 +1,34 @@
 using UnityEngine;
 
-public class WorkersManagerSignal : MonoBehaviour {
+public class WorkersManagerSignal : MonoBehaviour
+{
     [Header("UI Reference")]
     [SerializeField] private GameObject workerSignalUI;
 
     private bool isUIActive = false;
 
-    private void Start() {
+    private void Start()
+    {
         if (workerSignalUI != null)
             workerSignalUI.SetActive(false);
     }
 
-    private void Update() {
-        if (isUIActive && Input.GetKeyDown(KeyCode.Escape)) {
+    private void Update()
+    {
+        if (isUIActive && Input.GetKeyDown(KeyCode.Escape))
+        {
             ToggleUI(false);
         }
     }
 
-    private void OnMouseDown() {
+    private void OnMouseDown()
+    {
         ToggleUI(true);
     }
 
-    private void ToggleUI(bool state) 
+    private void ToggleUI(bool state)
     {
-        if(GameManager.Instance.UIOpen == false)
+        if (GameManager.Instance.UIOpen == false)
         {
             if (workerSignalUI != null)
             {
@@ -32,7 +37,8 @@ public class WorkersManagerSignal : MonoBehaviour {
             }
 
             GameManager.Instance.UIOpen = state;
-        }        
+            AudioManager.Instance.PlaySound("Madera1");
+        }
     }
 
     public void forceClose()
