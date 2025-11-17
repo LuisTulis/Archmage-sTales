@@ -59,6 +59,7 @@ public class AlchemyRoom : MonoBehaviour
                 //gm.horo_mostrar.text = gm.horo.ToString() + "$";
 
                 UnlockRoom(prePurchaseWorkstation.Workstation);
+                AudioManager.Instance.PlaySound("ComprarSala");
             }
         }
     }
@@ -189,6 +190,7 @@ public class AlchemyRoom : MonoBehaviour
             }
         }
         gameManager.UIOpen = false;
+        AudioManager.Instance.PlaySound("CerrarSala");
     }
 
 }
