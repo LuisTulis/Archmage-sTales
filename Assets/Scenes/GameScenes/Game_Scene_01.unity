@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.21570486, g: 0.30548182, b: 0.33199334, a: 1}
+  m_IndirectSpecularColor: {r: 0.21571317, g: 0.30549502, b: 0.3320055, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8484,26 +8484,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2030138782228208197, guid: 0b14e99a677ca3d439cfe350c171402f, type: 3}
-      propertyPath: m_Size.x
-      value: 5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2030138782228208197, guid: 0b14e99a677ca3d439cfe350c171402f, type: 3}
-      propertyPath: m_Size.z
-      value: 5.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2030138782228208197, guid: 0b14e99a677ca3d439cfe350c171402f, type: 3}
-      propertyPath: m_Center.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2030138782228208197, guid: 0b14e99a677ca3d439cfe350c171402f, type: 3}
-      propertyPath: m_Center.y
-      value: 2.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2030138782228208197, guid: 0b14e99a677ca3d439cfe350c171402f, type: 3}
-      propertyPath: m_Center.z
-      value: -2.525
-      objectReference: {fileID: 0}
     - target: {fileID: 13759776365454179, guid: 91d9397fdc87efa41beec3df30a5685e, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -10915,6 +10895,26 @@ PrefabInstance:
     - target: {fileID: 9211648329477161468, guid: 91d9397fdc87efa41beec3df30a5685e, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030138782228208197, guid: 0b14e99a677ca3d439cfe350c171402f, type: 3}
+      propertyPath: m_Size.x
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030138782228208197, guid: 0b14e99a677ca3d439cfe350c171402f, type: 3}
+      propertyPath: m_Size.z
+      value: 5.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030138782228208197, guid: 0b14e99a677ca3d439cfe350c171402f, type: 3}
+      propertyPath: m_Center.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030138782228208197, guid: 0b14e99a677ca3d439cfe350c171402f, type: 3}
+      propertyPath: m_Center.y
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030138782228208197, guid: 0b14e99a677ca3d439cfe350c171402f, type: 3}
+      propertyPath: m_Center.z
+      value: -2.525
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24949,6 +24949,22 @@ PrefabInstance:
       propertyPath: prePurchaseArea
       value: 
       objectReference: {fileID: 643026389}
+    - target: {fileID: 1281516947089249047, guid: ea76403d035b66041b96081758eb7d87, type: 3}
+      propertyPath: workstations.Array.data[0].roomPrice
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281516947089249047, guid: ea76403d035b66041b96081758eb7d87, type: 3}
+      propertyPath: workstations.Array.data[1].roomPrice
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281516947089249047, guid: ea76403d035b66041b96081758eb7d87, type: 3}
+      propertyPath: workstations.Array.data[2].roomPrice
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281516947089249047, guid: ea76403d035b66041b96081758eb7d87, type: 3}
+      propertyPath: workstations.Array.data[3].roomPrice
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 1294487872457439721, guid: ea76403d035b66041b96081758eb7d87, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -50935,6 +50951,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1202773960}
     m_Modifications:
+    - target: {fileID: 1217721261368095492, guid: eabc10b03fdedbe43b1f5ffdc9f0bf7e, type: 3}
+      propertyPath: m_text
+      value: $ 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388640082982565712, guid: eabc10b03fdedbe43b1f5ffdc9f0bf7e, type: 3}
+      propertyPath: m_text
+      value: $ 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2725335551909062981, guid: eabc10b03fdedbe43b1f5ffdc9f0bf7e, type: 3}
+      propertyPath: m_text
+      value: $ 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3067147324320361569, guid: eabc10b03fdedbe43b1f5ffdc9f0bf7e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -40,7 +40,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         this.status = "Idle";
         infoPanel = GameObject.Find("WorkStationUI").GetComponent<WorkstationPanelController>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.addGold(5);
+        //gameManager.addGold(5);
         Debug.Log(this.transform.position);
 
         fx = GetComponent<WorkstationFX>();

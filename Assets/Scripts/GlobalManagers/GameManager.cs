@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     public bool aletargamiento = false;
     public bool costoso = false;
+    public List<int> goldQueue;
+    public float goldCooldown = 0;
 
 
     public int openTime = 180;
@@ -58,6 +61,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        goldQueue = new List<int>();
         if (Instance == null)
         {
             Instance = this;
@@ -94,6 +98,21 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+
+        if(goldCooldown > 0)
+        {
+            goldCooldown -= Time.deltaTime * 4f;
+        }
+        else
+        {
+            if(goldQueue.Count  > 0)
+            {
+                StartCoroutine(goldCoroutine(goldQueue[0]));
+                goldQueue.RemoveAt(0);
+                goldCooldown += 1;
+            }
+               
+        }
         // PAUSE MENU
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -163,7 +182,7 @@ public class GameManager : MonoBehaviour
 
     public void addGold(int amount)
     {
-        StartCoroutine(goldCoroutine(amount));
+        goldQueue.Add(amount);
         horo += amount;
     }
 
@@ -274,7 +293,6 @@ public class GameManager : MonoBehaviour
             if (horo_aux > deudaEmpleados)
             {
                 total -= deudaEmpleados;
-                deudaEmpleados = 0;
             }
             else
             {
@@ -298,6 +316,7 @@ public class GameManager : MonoBehaviour
             if (toggle_deuda.isOn)
             {
                 addGold(-deudaEmpleados);
+                deudaEmpleados = 0;
             }
             if (deudaEmpleados > 0)
             {
