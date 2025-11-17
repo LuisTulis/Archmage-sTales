@@ -53,8 +53,8 @@ public class AlchemyRoom : MonoBehaviour
         {
             if (gm.horo >= prePurchaseWorkstation.RoomPrice)
             {
-                gm.horo -= prePurchaseWorkstation.RoomPrice;
-                gm.horo_mostrar.text = gm.horo.ToString() + "$";
+                gm.addGold(-prePurchaseWorkstation.RoomPrice);
+                //gm.horo_mostrar.text = gm.horo.ToString() + "$";
 
                 UnlockRoom(prePurchaseWorkstation.Workstation);
             }
