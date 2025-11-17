@@ -9,6 +9,7 @@ public class menu : MonoBehaviour
     public GameObject options;
     public GameObject howToPlay;
     public GameObject credits;
+    public GameObject exit;
 
     public AudioMixer mixer;
 
@@ -38,6 +39,7 @@ public class menu : MonoBehaviour
         options.SetActive(true);
         howToPlay.SetActive(false);
         credits.SetActive(false);
+        AudioManager.Instance.PlaySound("Click");
     }
 
     public void OnHowToPlay()
@@ -46,6 +48,7 @@ public class menu : MonoBehaviour
         options.SetActive(false);
         howToPlay.SetActive(true);
         credits.SetActive(false);
+        AudioManager.Instance.PlaySound("Click");
     }
 
     public void OnCredits()
@@ -54,6 +57,7 @@ public class menu : MonoBehaviour
         options.SetActive(false);
         howToPlay.SetActive(false);
         credits.SetActive(true);
+        AudioManager.Instance.PlaySound("Click");
     }
 
     public void Back()
@@ -62,10 +66,17 @@ public class menu : MonoBehaviour
         options.SetActive(false);
         howToPlay.SetActive(false);
         credits.SetActive(false);
+        AudioManager.Instance.PlaySound("Click");
+    }
+
+    public void OnExit()
+    {
+        Application.Quit();
     }
 
     public void OnNewGame()
     {
+        AudioManager.Instance.PlaySound("Click");
         SceneManager.LoadScene("Game_Scene_01");
 
         AudioManager.Instance.StopMusic();
@@ -74,6 +85,7 @@ public class menu : MonoBehaviour
 
     public void OnContinue()
     {
+        AudioManager.Instance.PlaySound("Click");
         SceneManager.LoadScene("Game_Scene_01");
 
         AudioManager.Instance.StopMusic();
