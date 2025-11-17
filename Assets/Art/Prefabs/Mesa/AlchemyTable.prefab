@@ -10527,15 +10527,19 @@ MonoBehaviour:
   workerPosition: {fileID: 6406521002032829551}
   clientPosition: {fileID: 2052674638064381419}
   clientUsing: 0
-  assignedWorker: 
+  assignedWorkerName: 
+  assignedWorker: {fileID: 0}
   assignedCustomer: {fileID: 0}
   type: 1
   textIndicatorPrefab: {fileID: 0}
   isBroken: 0
+  karma: 0
   fx: {fileID: 0}
   workDirection: {fileID: 4832965198187361079}
   sittingWorkstation: 0
   ProgressBarPrefab: {fileID: 6013330182357969918, guid: 0e3d4cda952f2294aa529c600c0b1773, type: 3}
+  actualProgress: {fileID: 0}
+  prepurchaseRoom: {fileID: 0}
   elapsed: 0
 --- !u!114 &6725975645485286180
 MonoBehaviour:
