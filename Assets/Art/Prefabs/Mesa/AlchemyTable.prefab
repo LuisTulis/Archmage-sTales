@@ -10531,7 +10531,7 @@ MonoBehaviour:
   assignedWorker: {fileID: 0}
   assignedCustomer: {fileID: 0}
   type: 1
-  textIndicatorPrefab: {fileID: 0}
+  textIndicatorPrefab: {fileID: 2953653338555478829, guid: 93a62b358483f1f4b968c19573168f9a, type: 3}
   isBroken: 0
   karma: 0
   fx: {fileID: 0}
