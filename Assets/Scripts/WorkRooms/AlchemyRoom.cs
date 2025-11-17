@@ -25,6 +25,9 @@ public class AlchemyRoom : MonoBehaviour
     private GameManager gameManager;
 
     [SerializeField] private GameObject leaveRoomPoint;
+
+    [SerializeField] private ParticleSystem purchaseParticle;
+
     void Start()
     {
         if (prePurchaseArea != null && prePurchaseArea.GetComponent<Collider>() == null)
@@ -39,7 +42,6 @@ public class AlchemyRoom : MonoBehaviour
         if (!isUnlocked && !gameManager.UIOpen && unlockRoomUI != null)
         {
             unlockRoomUI.Show(this);
-
         }
     }
 
@@ -107,10 +109,14 @@ public class AlchemyRoom : MonoBehaviour
                 nm.BuildNavMesh();
         }
         gameManager.UIOpen = false;
+
+        purchaseParticle.Play(true);
     }
 
-    public void LockRoom(GameObject workstation) {
-        if (GlobalWorkstationManager.Instance.activeStations.Count <= 1) {
+    public void LockRoom(GameObject workstation)
+    {
+        if (GlobalWorkstationManager.Instance.activeStations.Count <= 1)
+        {
             Debug.LogWarning("No se puede cerrar la sala: es la última estación disponible.");
             return;
         }
@@ -135,17 +141,21 @@ public class AlchemyRoom : MonoBehaviour
             prePurchaseArea.GetComponent<BoxCollider>().enabled = true;
 
 
-        if (workstation != null) {
+        if (workstation != null)
+        {
             workstation.SetActive(false);
 
             WorkStationBehaviour ws = workstation.GetComponentInChildren<WorkStationBehaviour>();
-            if (ws != null) {
+            if (ws != null)
+            {
                 GlobalWorkstationManager manager = FindObjectOfType<GlobalWorkstationManager>();
-                if (manager != null) {
+                if (manager != null)
+                {
                     manager.RemoveStation(ws);
                     manager.activeStations.Remove(ws);
 
-                    if (ws.assignedCustomer != null && leaveRoomPoint != null) {
+                    if (ws.assignedCustomer != null && leaveRoomPoint != null)
+                    {
                         var customer = ws.assignedCustomer;
                         var agent = customer.GetComponent<NavMeshAgent>();
 
@@ -160,7 +170,8 @@ public class AlchemyRoom : MonoBehaviour
                         ws.prepurchaseRoom = null;
                     }
 
-                    if (ws.assignedWorker != null) {
+                    if (ws.assignedWorker != null)
+                    {
                         var worker = ws.assignedWorker;
                         var agent = worker.GetComponent<NavMeshAgent>();
 
