@@ -21,6 +21,10 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingCoroutine;
     private bool isTyping = false;
 
+    private float bounceHeight = 7f;       
+    private float bounceDuration = 0.12f;   
+    private int charsPerBounce = 5;
+    private bool isBouncing = false;
 
     private bool tutorialDialogue = true;
     public bool workerDialogue = false;
@@ -77,14 +81,54 @@ public class DialogueManager : MonoBehaviour
 
         for (int i = 0; i < fullText.Length; i++)
         {
+            if (currentDialogue.ids[currentIndex] != -1)
+            {
+                if (i % charsPerBounce == 0)
+                {
+                    if (!isBouncing)
+                    {
+                        StartCoroutine(BounceOnce());
+                    }
+                }
+            }
             dialogueText.text += fullText[i];
+
             AudioManager.Instance.PlaySound("AddText");
             yield return new WaitForSeconds(delay);
         }
-
+        
         isTyping = false;
     }
+    IEnumerator BounceOnce()
+    {
+        isBouncing = true;
+        RectTransform characterTransform = character.GetComponent<RectTransform>();
+        Vector2 startPos = currentDialogue.positions[currentIndex];
+        Vector2 upPos = startPos + Vector2.up * bounceHeight;
 
+        float halfDuration = bounceDuration / 2f;
+        float t = 0f;
+
+        while (t < halfDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            float lerp = t / halfDuration;
+            characterTransform.anchoredPosition = Vector2.Lerp(startPos, upPos, lerp);
+            yield return null;
+        }
+
+        t = 0f;
+        while (t < halfDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            float lerp = t / halfDuration;
+            characterTransform.anchoredPosition = Vector2.Lerp(upPos, startPos, lerp);
+            yield return null;
+        }
+
+        characterTransform.anchoredPosition = currentDialogue.positions[currentIndex];
+        isBouncing = false;
+    }
     public void NextLine()
     {
         if (isTyping)
