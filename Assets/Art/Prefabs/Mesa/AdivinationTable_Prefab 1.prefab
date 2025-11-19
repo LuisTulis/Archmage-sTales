@@ -72965,7 +72965,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1.92
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -73018,7 +73018,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
+      scalar: 0.9
       minScalar: 0.6
       maxCurve:
         serializedVersion: 2
@@ -73136,7 +73136,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 6
+      scalar: 5
       minScalar: 8
       maxCurve:
         serializedVersion: 2
@@ -73719,7 +73719,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 30
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -140617,7 +140617,8 @@ MonoBehaviour:
   workerPosition: {fileID: 2120445008239930720}
   clientPosition: {fileID: 1406865999168609190}
   clientUsing: 0
-  assignedWorker: 
+  assignedWorkerName: 
+  assignedWorker: {fileID: 0}
   assignedCustomer: {fileID: 0}
   type: 0
   textIndicatorPrefab: {fileID: 2953653338555478829, guid: 93a62b358483f1f4b968c19573168f9a, type: 3}
@@ -140628,6 +140629,7 @@ MonoBehaviour:
   sittingWorkstation: 1
   ProgressBarPrefab: {fileID: 6013330182357969918, guid: 0e3d4cda952f2294aa529c600c0b1773, type: 3}
   actualProgress: {fileID: 0}
+  prepurchaseRoom: {fileID: 0}
   elapsed: 0
 --- !u!114 &7298266322614917487
 MonoBehaviour:
