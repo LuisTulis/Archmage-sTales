@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     public List<int> goldQueue;
     public float goldCooldown = 0;
 
-
     public int openTime = 180;
     public int closeTime = 30;
 
@@ -50,7 +49,7 @@ public class GameManager : MonoBehaviour
     public Toggle toggle_salario;
     public Toggle toggle_deuda;
 
-    public bool UIOpen = false;
+    public bool UIOpen = true;
 
     private GameObject grupoTextoDia;
     private bool bajarTexto = true;
@@ -59,6 +58,8 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public bool isPaused = false;
 
+    public Dialogue tutorial;
+    private bool tutorialShowed = false;
     private void Awake()
     {
         goldQueue = new List<int>();
@@ -79,7 +80,8 @@ public class GameManager : MonoBehaviour
 
         grupoTextoDia = GameObject.Find("GrupoDia");
 
-        oro_inicial = 50;
+        oro_inicial = 0;
+        horo = 0;
     }
 
     private void OnEnable()
@@ -96,7 +98,6 @@ public class GameManager : MonoBehaviour
     {
         isPaused = false;
         pauseMenu = FindObjectOfType<PauseMenu>(true).gameObject;
-
         if (light == null)
         {
             light = FindObjectOfType<Light>();
@@ -150,6 +151,11 @@ public class GameManager : MonoBehaviour
         }
 
         int hour = isOpen ? 6 + (int)(actualHour * 18 / openTime) : (int)(actualHour * 6 / closeTime);
+        if(hour == 7 && !tutorialShowed)
+        {
+            DialogueManager.Instance.showDialoge(tutorial);
+            tutorialShowed = true;
+        }
 
         if (isOpen)
         {

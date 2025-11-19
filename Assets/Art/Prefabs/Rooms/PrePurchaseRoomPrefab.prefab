@@ -192,6 +192,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8298904754901764060}
     - target: {fileID: 4044874063941002001, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
+      propertyPath: workstations.Array.data[0].roomPrice
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044874063941002001, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
+      propertyPath: workstations.Array.data[2].roomPrice
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044874063941002001, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
+      propertyPath: workstations.Array.data[3].roomPrice
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044874063941002001, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
       propertyPath: workstations.Array.data[1].workstation
       value: 
       objectReference: {fileID: 1912323573845910961}
