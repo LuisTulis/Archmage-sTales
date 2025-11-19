@@ -78,6 +78,7 @@ public class DialogueManager : MonoBehaviour
         for (int i = 0; i < fullText.Length; i++)
         {
             dialogueText.text += fullText[i];
+            AudioManager.Instance.PlaySound("AddText");
             yield return new WaitForSeconds(delay);
         }
 
