@@ -8,6 +8,10 @@ public class UnlockRoomUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI roomPriceText;
 
     private AlchemyRoom prePurchaseRoom;
+    private float closeCooldown = 0;
+
+    public Dialogue afterBuyDialogue;
+    private bool firstBuy = true;
 
     void Start()
     {
@@ -16,6 +20,7 @@ public class UnlockRoomUI : MonoBehaviour
 
     public void Show(AlchemyRoom room)
     {
+        closeCooldown = 1f;
         prePurchaseRoom = room;
 
         // Setear los precios de las salas acá
@@ -25,7 +30,13 @@ public class UnlockRoomUI : MonoBehaviour
 
         AudioManager.Instance.PlaySound("Madera1");
     }
-
+    private void Update()
+    {
+        if(closeCooldown > 0)
+        {
+            closeCooldown -= Time.deltaTime;
+        }
+    }
     public void UnlockRoom(string roomName)
     {
         PrePurchaseWorkstation workstation = prePurchaseRoom.workstations.Find(w => w.RoomName.Equals(roomName));
@@ -39,12 +50,21 @@ public class UnlockRoomUI : MonoBehaviour
             Debug.Log("ERROR: prePurchaseRoom is missing.");
         }
 
+        if(firstBuy)
+        {
+            firstBuy = false;
+            DialogueManager.Instance.showDialoge(afterBuyDialogue);
+        }
+
         OnClose();
     }
 
     public void OnClose()
     {
-        gameObject.SetActive(false);
-        GameManager.Instance.UIOpen = false;
+        if(!(closeCooldown > 0))
+        {
+            gameObject.SetActive(false);
+            GameManager.Instance.UIOpen = false;
+        }
     }
 }

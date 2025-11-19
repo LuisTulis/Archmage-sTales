@@ -20,7 +20,11 @@ public class GlobalCustomerManager : MonoBehaviour
     private float minSpawnInterval = 10f;
     private float maxSpawnInterval = 20f;
 
+    private bool firstCustomerLeft = true;
+
     [SerializeField] private int customerIdCounter = 1;
+
+    public Dialogue workerTutorial;
 
     private void Awake() {
         if (Instance == null) {
@@ -47,7 +51,7 @@ public class GlobalCustomerManager : MonoBehaviour
     private void SpawnCustomer() {
         if (customers.Count < maxCustomersInScene &&
             customerPrefabs.Count > 0 && GameManager.Instance.isOpen &&
-            GlobalWorkstationManager.Instance.activeStations.Count > 0) {
+            GlobalWorkstationManager.Instance.activeStations.Count > 0 && GameManager.Instance.isPlaying) {
             int randomIndex = Random.Range(0, customerPrefabs.Count);
             CustomerComponent randomCustomer = customerPrefabs[randomIndex];
             Debug.Log("Spawning customer: " + randomCustomer);
@@ -72,6 +76,12 @@ public class GlobalCustomerManager : MonoBehaviour
     public void CustomerLeft(CustomerComponent customer) {
         customers.Remove(customer);
         Destroy(customer.gameObject);
+        if(firstCustomerLeft)
+        {
+            firstCustomerLeft = false;
+            DialogueManager.Instance.workerDialogue = true;
+            DialogueManager.Instance.showDialoge(workerTutorial);
+        }
     }
 
 
