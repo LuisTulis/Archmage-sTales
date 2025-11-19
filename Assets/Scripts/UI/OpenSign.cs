@@ -17,7 +17,7 @@ public class OpenSign : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameManager.Instance.UIOpen != true)
+        if (GameManager.Instance.UIOpen == false)
         {
             if (shopStateText != null)
             {

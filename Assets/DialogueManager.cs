@@ -62,6 +62,7 @@ public class DialogueManager : MonoBehaviour
             character.sprite = currentCharacter.image;
             character.transform.localPosition = currentDialogue.positions[currentIndex];
             character.transform.localScale = new Vector3(currentDialogue.orientations[currentIndex], 1, 1);
+            character.transform.localPosition -= new Vector3(0, -128, 0);
         }
         else
         {
