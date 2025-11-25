@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7059335139617524854}
   - component: {fileID: 5958312594878084427}
-  - component: {fileID: 117114991914306914}
   - component: {fileID: 6707599000383148300}
   - component: {fileID: 6404302423961105784}
+  - component: {fileID: 117114991914306914}
   - component: {fileID: 5479676535402494109}
+  - component: {fileID: 6298279805465292224}
   m_Layer: 0
   m_Name: InvocationTable
   m_TagString: Untagged
@@ -65,33 +66,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0323147, y: 1, z: 1.7833301}
   m_Center: {x: 0.36541638, y: 0, z: 0.8972035}
---- !u!114 &117114991914306914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 99686077801212562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdca4e35720e5944b9a7373b473c1e17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  workstationData: {fileID: 11400000, guid: 71909644c57330047a3a5f671fb6aeb6, type: 2}
-  status: 
-  workerPosition: {fileID: 1212428793115793239}
-  clientPosition: {fileID: 645833293684741562}
-  clientUsing: 0
-  assignedWorker: 
-  assignedCustomer: {fileID: 0}
-  type: 2
-  textIndicatorPrefab: {fileID: 2953653338555478829, guid: 93a62b358483f1f4b968c19573168f9a, type: 3}
-  isBroken: 1
-  fx: {fileID: 0}
-  workDirection: {fileID: 645833293684741562}
-  sittingWorkstation: 0
-  ProgressBarPrefab: {fileID: 6013330182357969918, guid: 0e3d4cda952f2294aa529c600c0b1773, type: 3}
-  elapsed: 0
 --- !u!95 &6707599000383148300
 Animator:
   serializedVersion: 5
@@ -141,6 +115,38 @@ MonoBehaviour:
   levelThreeObject: {fileID: 2150285040621642796}
   levelThreeSparkles: {fileID: 4329410964121981154}
   anim: {fileID: 6707599000383148300}
+--- !u!114 &117114991914306914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99686077801212562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdca4e35720e5944b9a7373b473c1e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  workstationData: {fileID: 11400000, guid: 71909644c57330047a3a5f671fb6aeb6, type: 2}
+  status: 
+  workerPosition: {fileID: 1212428793115793239}
+  clientPosition: {fileID: 645833293684741562}
+  clientUsing: 0
+  assignedWorkerName: 
+  assignedWorker: {fileID: 0}
+  assignedCustomer: {fileID: 0}
+  type: 2
+  textIndicatorPrefab: {fileID: 2953653338555478829, guid: 93a62b358483f1f4b968c19573168f9a, type: 3}
+  isBroken: 1
+  karma: 0
+  fx: {fileID: 0}
+  workDirection: {fileID: 645833293684741562}
+  sittingWorkstation: 0
+  ProgressBarPrefab: {fileID: 6013330182357969918, guid: 0e3d4cda952f2294aa529c600c0b1773, type: 3}
+  actualProgress: {fileID: 0}
+  prepurchaseRoom: {fileID: 0}
+  elapsed: 0
+  audioSource: {fileID: 6298279805465292224}
 --- !u!114 &5479676535402494109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +161,102 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlightEmission: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   intensity: 2
+--- !u!82 &6298279805465292224
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99686077801212562}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1435873251954690496, guid: 32422a7329221ae4080d6b136fafb513, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.25
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &857081627246088893
 GameObject:
   m_ObjectHideFlags: 0
