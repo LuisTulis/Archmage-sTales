@@ -37511,7 +37511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: escenaProgra.orientations.Array.data[6]
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: escenaProgra.orientations.Array.data[7]
@@ -37619,11 +37619,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: escenaProgra.orientations.Array.data[11]
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: escenaProgra.orientations.Array.data[12]
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: escenaProgra.orientations.Array.data[13]
@@ -37799,11 +37799,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: escenaProgra.secondaryOrientations.Array.data[6]
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: escenaProgra.secondaryOrientations.Array.data[7]
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: escenaProgra.secondaryOrientations.Array.data[8]
@@ -37867,15 +37867,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: escenaProgra.secondaryOrientations.Array.data[11]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
-      propertyPath: escenaProgra.secondaryOrientations.Array.data[12]
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
-      propertyPath: escenaProgra.secondaryOrientations.Array.data[13]
+      propertyPath: escenaProgra.secondaryOrientations.Array.data[12]
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
+      propertyPath: escenaProgra.secondaryOrientations.Array.data[13]
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3037216031314877113, guid: 57c753b941593b244b4ebc33de3b7935, type: 3}
       propertyPath: escenaProgra.secondaryOrientations.Array.data[14]
