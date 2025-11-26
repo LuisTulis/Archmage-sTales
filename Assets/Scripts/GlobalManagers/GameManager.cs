@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
 
     public Dialogue tutorial;
     private bool tutorialShowed = false;
+
+    public Dialogue escenaProgra;
+    private bool escenaPrograFlag = true;
     private void Awake()
     {
         goldQueue = new List<int>();
@@ -130,6 +133,14 @@ public class GameManager : MonoBehaviour
             {
                 isPaused = !isPaused;
                 pauseMenu.SetActive(isPaused);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if(escenaPrograFlag)
+            {
+                escenaPrograFlag = false;
+                DialogueManager.Instance.showDialoge(escenaProgra);
             }
         }
 

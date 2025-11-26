@@ -86,7 +86,7 @@ public class menu : MonoBehaviour
     public void OnContinue()
     {
         AudioManager.Instance.PlaySound("Click");
-        SceneManager.LoadScene("Game_Scene_01");
+        SceneManager.LoadScene("esteeselprototipo");
 
         AudioManager.Instance.StopMusic();
         AudioManager.Instance.PlayMusic("TheWanderer");

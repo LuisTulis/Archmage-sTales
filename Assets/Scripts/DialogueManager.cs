@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject DialogueUI;
     public TMP_Text dialogueText;
     public Image character;
+    public Image secondCharacter;
     public TMP_Text characterName;
     public Character[] characters;
 
@@ -68,6 +69,19 @@ public class DialogueManager : MonoBehaviour
         {
             characterName.text = "";
             character.transform.localPosition = new Vector3(0, -5000, 0);
+        }
+
+        if (currentDialogue.secondaryIds[currentIndex] != -1)
+        {
+            Character currentSecondaryCharacter = characters[currentDialogue.secondaryIds[currentIndex]];
+            secondCharacter.sprite = currentSecondaryCharacter.image;
+            secondCharacter.transform.localPosition = currentDialogue.secondaryPositions[currentIndex];
+            secondCharacter.transform.localScale = new Vector3(currentDialogue.secondaryOrientations[currentIndex], 1, 1);
+            //secondCharacter.transform.localPosition -= new Vector3(0, -128, 0);
+        }
+        else
+        {
+            secondCharacter.transform.localPosition = new Vector3(0, -5000, 0);
         }
        
         typingCoroutine = StartCoroutine(TypeText(currentDialogue.lines[currentIndex]));
@@ -179,6 +193,9 @@ public class Dialogue
     public string[] lines;
     public Vector3[] positions;
     public int[] orientations;
+    public int[] secondaryIds;
+    public Vector3[] secondaryPositions;
+    public int[] secondaryOrientations;
 }
 
 [System.Serializable]
