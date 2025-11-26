@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,8 +20,8 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingCoroutine;
     private bool isTyping = false;
 
-    private float bounceHeight = 7f;       
-    private float bounceDuration = 0.12f;   
+    private float bounceHeight = 7f;
+    private float bounceDuration = 0.12f;
     private int charsPerBounce = 5;
     private bool isBouncing = false;
 
@@ -83,7 +81,7 @@ public class DialogueManager : MonoBehaviour
         {
             secondCharacter.transform.localPosition = new Vector3(0, -5000, 0);
         }
-       
+
         typingCoroutine = StartCoroutine(TypeText(currentDialogue.lines[currentIndex]));
     }
 
@@ -111,7 +109,7 @@ public class DialogueManager : MonoBehaviour
             AudioManager.Instance.PlaySound("AddText");
             yield return new WaitForSeconds(delay);
         }
-        
+
         isTyping = false;
     }
     IEnumerator BounceOnce()
