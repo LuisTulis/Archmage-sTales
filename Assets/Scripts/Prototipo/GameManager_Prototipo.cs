@@ -23,6 +23,9 @@ public class GameManager_Prototipo : MonoBehaviour
     public int openTime = 180;
     public int closeTime = 30;
 
+    public GameObject pauseMenu;
+    public bool isPaused;
+
     private void Awake()
     {
         if (Instance == null)
@@ -35,6 +38,8 @@ public class GameManager_Prototipo : MonoBehaviour
             Destroy(gameObject);
         }
 
+        isPaused = false;
+        pauseMenu = FindObjectOfType<PauseMenu>(true).gameObject;
     }
 
     private void Update()
@@ -48,9 +53,19 @@ public class GameManager_Prototipo : MonoBehaviour
         {
             addGold(1000);
         }
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             GlobalCharactersManager_Prototipo.Instance.crearparaelprototipo();
+        }
+
+        // PAUSE MENU
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseMenu)
+            {
+                isPaused = !isPaused;
+                pauseMenu.SetActive(isPaused);
+            }
         }
 
         //if (isOpen)
