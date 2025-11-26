@@ -32,11 +32,28 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Sprite[] stationTypeImage;
     public bool canClose = true;
 
+    private GameObject preSelectedWorker;
+
+    [Header("Worker stats panel")]
+    [SerializeField] private GameObject statsPanel;
+
+    [SerializeField] private Image characterImage;
+    [SerializeField] private TMP_Text workerStatsName;
+    [SerializeField] private TMP_Text workerStatsMental;
+    [SerializeField] private Image statusIcon;
+
+    [SerializeField] private TMP_Text speedText;
+    [SerializeField] private TMP_Text workingText;
+    [SerializeField] private TMP_Text enchantationText;
+    [SerializeField] private TMP_Text alchemyText;
+    [SerializeField] private TMP_Text invocationText;
+    [SerializeField] private TMP_Text adivinationText;
 
     private void Awake()
     {
         this.workstationManager = GameObject.Find("GlobalWorkstationManager").GetComponent<GlobalWorkstationManager>();
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -55,9 +72,8 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
             }
         }
         catch { }
-
-
     }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         bool close = true;
@@ -77,7 +93,10 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         }
         if (close)
         {
-            Hide();
+            if (!workerPanel.activeSelf)
+            {
+                Hide();
+            }
         }
 
     }
@@ -159,7 +178,62 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         this.panel.SetActive(false);
         this.workerPanel.SetActive(false);
         GameManager.Instance.UIOpen = false;
+    }
 
+    public void PreSelectWorker(string name)
+    {
+        GameObject selectedWorkerGO = null;
+
+        // Primero revisamos la lista de Workers
+        foreach (var workerGO in GlobalCharactersManager.Instance.Workers)
+        {
+            var model = workerGO.GetComponent<CharacterModel>();
+            if (model != null && model.CharacterName == name)
+            {
+                selectedWorkerGO = workerGO;
+                break;
+            }
+        }
+
+        // Si no se encontró, revisamos StaffAdor
+        if (selectedWorkerGO == null && GlobalCharactersManager.Instance.StaffAdor != null)
+        {
+            var staffModel = GlobalCharactersManager.Instance.StaffAdor.GetComponent<StaffAdorModel>();
+            if (staffModel != null && staffModel.CharacterName == name)
+            {
+                selectedWorkerGO = GlobalCharactersManager.Instance.StaffAdor;
+            }
+        }
+
+        // Setear las stats en el stat panel
+        BaseWorkerModel workerModel = selectedWorkerGO.GetComponent<BaseWorkerModel>();
+        CharacterModel character = selectedWorkerGO.GetComponent<CharacterModel>();
+
+        characterImage.sprite = character.Icon;
+
+        workerStatsName.text = workerModel.CharacterName;
+        //workerStatsMental.text = character.Mental.ToString();
+
+        speedText.text = $"Speed: {workerModel.Speed}";
+        workingText.text = "Working: " + (character.Idle ? "No" : "Yes");
+
+        enchantationText.text = $"Enchantation: {workerModel.Stats.enchantStat}";
+        alchemyText.text = $"Alchemy: {workerModel.Stats.alchemyStat}";
+        invocationText.text = $"Invocation: {workerModel.Stats.summonStat}";
+        adivinationText.text = $"Adivination: {workerModel.Stats.adivinationStat}";
+
+        var type = workerModel?.AsignatedStation?.type;
+
+        if (type == StationType.caldero)
+            statusIcon.sprite = stationTypeImage[0];
+        else if (type == StationType.adivinacion)
+            statusIcon.sprite = stationTypeImage[1];
+        else if (type == StationType.invocacion)
+            statusIcon.sprite = stationTypeImage[2];
+        else if (type == StationType.encantamiento)
+            statusIcon.sprite = stationTypeImage[3];
+        else
+            statusIcon.sprite = stationTypeImage[4];
     }
 
     public void selectWorker(string name)
@@ -304,7 +378,12 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
 
             string characterName = model.CharacterName; // Capturar variable local para closure
             selectButton.onClick.AddListener(() => selectWorker(characterName));
+
+            entry.GetComponent<Button>().onClick.AddListener(() => PreSelectWorker(characterName));
         }
+
+
+        PreSelectWorker("Staff Ador");
     }
 
     public void ChangeKarma()
