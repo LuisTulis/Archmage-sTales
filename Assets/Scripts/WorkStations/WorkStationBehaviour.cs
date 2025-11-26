@@ -35,6 +35,9 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     public float elapsed = 0;
 
+    [Header("SFX")]
+    public AudioSource audioSource;
+
     private void Awake()
     {
         this.status = "Idle";
@@ -44,7 +47,6 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         Debug.Log(this.transform.position);
 
         fx = GetComponent<WorkstationFX>();
-
     }
 
     public void OnPointerClick(PointerEventData e)
@@ -75,15 +77,19 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
             case "adivinacion":
                 Debug.Log(workerComponent.model.Stats.adivinationStat * 5 / 100);
                 seconds -= seconds * (workerComponent.model.Stats.adivinationStat * 5f / 100f);
+                PlaySfx("FairySound");
                 break;
             case "invocacion":
                 seconds -= seconds * (workerComponent.model.Stats.summonStat * 5 / 100);
+                PlaySfx("MagicEnchantment");
                 break;
             case "caldero":
                 seconds -= seconds * (workerComponent.model.Stats.alchemyStat * 5 / 100);
+                PlaySfx("BoilingCauldron");
                 break;
             case "encantamiento":
                 seconds -= seconds * (workerComponent.model.Stats.enchantStat * 5 / 100);
+                PlaySfx("MagicEnchantment");
                 break;
         }
 
@@ -122,6 +128,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         this.status = "Idle";
         this.clientUsing = 0;
         if (fx) fx.SetWorking(false);
+        StopSfx();
     }
 
     public void UpgradeFX(int level)
@@ -136,8 +143,21 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         fx.ApplyUpgradeLevel(level);
     }
 
-    public void CloseRoom() {
+    public void CloseRoom()
+    {
         prepurchaseRoom.LockRoom(this.gameObject);
+    }
+
+    private void PlaySfx(string clipName)
+    {
+        audioSource.clip = AudioManager.Instance.FindSoundClip(clipName);
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    private void StopSfx()
+    {
+        audioSource.Stop();
     }
 
 }

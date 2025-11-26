@@ -40,6 +40,19 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning($"Sound clip {soundName} not found!");
     }
 
+    public void PlaySoundLoop(string soundName)
+    {
+        AudioClip clip = FindSoundClip(soundName);
+        if (clip != null)
+        {
+            sfxSource.clip = clip;
+            sfxSource.loop = true;
+            sfxSource.Play();
+        }
+        else
+            Debug.LogWarning($"Sound clip {soundName} not found!");
+    }
+
     public void PlayMusic(string clipName, bool loop = true)
     {
         AudioClip clip = FindMusicClip(clipName);
@@ -97,6 +110,11 @@ public class AudioManager : MonoBehaviour
     public void StopMusic()
     {
         this.musicSource.Stop();
+    }
+
+    public void StopSfxLoop()
+    {
+        this.sfxSource.Stop();
     }
 
     public void SetSoundVolume(float value)
