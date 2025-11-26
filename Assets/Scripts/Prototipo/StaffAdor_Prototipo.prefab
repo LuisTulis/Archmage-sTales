@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 7647876773997550200}
   - component: {fileID: 2494732550030526516}
   - component: {fileID: 2173854035400510820}
-  - component: {fileID: 1031133593100464894}
-  - component: {fileID: -7725131577569055132}
-  - component: {fileID: 8387629800797120918}
+  - component: {fileID: 5873660192788932315}
+  - component: {fileID: 9101943263021730536}
+  - component: {fileID: 8498918216409530437}
   m_Layer: 0
-  m_Name: StaffAdor
+  m_Name: StaffAdor_Prototipo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,7 +82,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.84, z: 0}
---- !u!114 &1031133593100464894
+--- !u!114 &5873660192788932315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,13 +91,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 170231451591073183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4b74bff0237c84ea2e3713d6acd91e, type: 3}
+  m_Script: {fileID: 11500000, guid: 295988aed86a35247ada1eaa2aa4de00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   animator: {fileID: 0}
   reachThreshold: 0.5
---- !u!114 &-7725131577569055132
+--- !u!114 &9101943263021730536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,14 +106,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 170231451591073183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d34671b1ec80e343aad970ccc3bfa60, type: 3}
+  m_Script: {fileID: 11500000, guid: 6dc48638318293344ba04b5d1645eebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 0}
   isWorking: 0
   isFired: 0
   isKidnapped: 0
---- !u!114 &8387629800797120918
+--- !u!114 &8498918216409530437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,14 +122,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 170231451591073183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d728ed8fb4e1ffc44b6d990d6ada67f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d8e13e2be5ece54c86a10e9d3149b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
   characterName: 
   speed: 0
   idle: 1
-  icon: {fileID: 21300000, guid: 6cf2b428ed4b815438f8537406baa3f5, type: 3}
+  workStation: {fileID: 0}
   workStation: {fileID: 0}
   successRate: 0
 --- !u!1001 &4120178089518716770
