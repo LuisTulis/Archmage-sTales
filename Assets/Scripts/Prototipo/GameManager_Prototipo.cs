@@ -31,7 +31,7 @@ public class GameManager_Prototipo : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -93,11 +93,11 @@ public class GameManager_Prototipo : MonoBehaviour
                 Vector3 randomPosition = new Vector3(Random.Range(10, 20), 0, Random.Range(-30, 20));
                 if (random < .1f)
                 {
-                    GlobalEnemiesManager.Instance.SpawnSkeleton(randomPosition);
+                    GlobalEnemiesManagerPrototipo.Instance.SpawnSkeleton(randomPosition);
                 }
                 else if (random < .2f)
                 {
-                    GlobalEnemiesManager.Instance.SpawnThug(randomPosition);
+                    GlobalEnemiesManagerPrototipo.Instance.SpawnThug(randomPosition);
                 }
 
             }
