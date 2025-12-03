@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
 {
-
     public GameManager oro;
     public Button upgradeButton;
     public GameObject panel;
@@ -16,6 +15,7 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
     [SerializeField] TMP_Text desc;
     [SerializeField] TMP_Text profit;
     [SerializeField] TMP_Text profit_actual;
+    private int profit_actual_int;
     [SerializeField] TMP_Text status;
     [SerializeField] TMP_Text speed;
     [SerializeField] TMP_Text karma;
@@ -123,31 +123,35 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
 
         WorkstationData nextLevel = workstationManager.upgrade(selectedWorkstation.workstationData.name);
         this.karmaBar.value = workstation.karma;
+        var multiplicador_karma = workstation.karma * -.035f;
+        profit_actual_int = data.profit + (int)(data.profit * multiplicador_karma);
         title.text = data.displayName;
         desc.text = data.description;
         if (oro.costoso)
         {
-            profit.text = data.profit * .5f + "$";
-            profit_actual.text = profit.text;
+            profit_actual_int = (int)(profit_actual_int * .5f);
+            profit.text = "¤"+data.profit * .5f;
+            profit_actual.text = "¤" + profit_actual_int.ToString();
             if (nextLevel != null)
             {
-                profit.text += " -> " + nextLevel.profit * .5f + "$";
+                profit.text += " -> " + "¤" + nextLevel.profit * .5f;
             }
             profit.color = new Color(1, 1, 0.02830189f);
             profit_actual.color = new Color(1, 1, 0.02830189f);
         }
         else
         {
-            profit.text = data.profit + "$";
-            profit_actual.text = profit.text;
+            profit.text = "¤" + data.profit;
+            profit_actual.text = "¤" + profit_actual_int.ToString();
 
             if (nextLevel != null)
             {
-                profit.text += " -> " + nextLevel.profit + "$";
+                profit.text += " -> " + "¤" + nextLevel.profit;
             }
             profit.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
             profit.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
         }
+
         status.text = workstation.status;
         if (oro.aletargamiento)
         {
@@ -168,7 +172,7 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
             }
             speed.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
         }
-        karma.text = data.karma < 10000 ? "Upgrade: " + data.karma.ToString() + "$" : "Max";
+        karma.text = data.karma < 10000 ? "Upgrade: " + "¤" + data.karma.ToString(): "Max";
         worker.text = string.IsNullOrEmpty(asignatedWorkerName) ? "Select Worker" : asignatedWorkerName;
         panel.SetActive(true);
     }
@@ -389,6 +393,11 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
     public void ChangeKarma()
     {
         selectedWorkstation.karma = karmaBar.value;
+        var new_profit = selectedWorkstation.workstationData.profit;
+        new_profit = GameManager.Instance.costoso ? (int)(new_profit * .5f) : new_profit;
+
+        profit_actual.text = "¤" + (new_profit + (int)(new_profit * selectedWorkstation.karma * -.035));
+
     }
 
 

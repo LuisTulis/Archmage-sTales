@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 {
     public WorkstationData workstationData;
-
     private WorkstationPanelController infoPanel;
     private GameManager gameManager;
     public string status;
@@ -37,6 +36,8 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     [Header("SFX")]
     public AudioSource audioSource;
+
+    public int floor;
 
     private void Awake()
     {
@@ -95,11 +96,15 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
         while (elapsed < seconds)
         {
-            elapsed += Time.deltaTime;
-            if (actualProgress != null)
+            if(GameManager.Instance.isPlaying && !GameManager.Instance.isPaused)
             {
-                actualProgress.GetComponent<progressBar>().progress = elapsed * 100 / seconds;
+                elapsed += Time.deltaTime;
+                if (actualProgress != null)
+                {
+                    actualProgress.GetComponent<progressBar>().progress = elapsed * 100 / seconds;
+                }
             }
+            
             yield return null;
         }
 
@@ -117,6 +122,8 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
             realProfit = workstationData.profit;
         }
         realProfit = gameManager.costoso ? (int)(realProfit * .5f) : realProfit;
+        realProfit = realProfit + (int)(realProfit * (karma * -0.035f));
+        gameManager.realKarma += karma / 10;
         gameManager.addGold(realProfit);
         if (realProfit < 0)
         {

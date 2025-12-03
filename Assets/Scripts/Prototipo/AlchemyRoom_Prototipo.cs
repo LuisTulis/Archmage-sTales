@@ -56,7 +56,7 @@ public class AlchemyRoom_Prototipo : MonoBehaviour {
         if (gm != null) {
             if (gm.horo >= roomPrice) {
                 gm.horo -= roomPrice;
-                gm.horo_mostrar.text = gm.horo.ToString() + "$";
+                gm.horo_mostrar.text = "¤" + gm.horo.ToString();
 
                 UnlockRoom();
             } else {

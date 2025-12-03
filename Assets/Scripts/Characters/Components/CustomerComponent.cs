@@ -26,7 +26,8 @@ public class CustomerComponent : CharacterComponent
     private float attendCooldown = 8f;
     private int maxAttendAttempts = 5;
 
-    private int mentalDecayRate = 1;
+    private int minMentalDecayRate = 1;
+    private int maxMentalDecayRate = 7;
     private bool isBlinking = false;
     private Coroutine blinkingCoroutine;
 
@@ -50,8 +51,13 @@ public class CustomerComponent : CharacterComponent
 
     private void Start()
     {
+        if(GameManager.Instance.dayCount < 2)
+        {
+            model.thief = false;
+        }
         if (model.thief)
         {
+            
             customerObjective.image.color = new Color(1, 0, 0);
         }
     }
@@ -78,7 +84,7 @@ public class CustomerComponent : CharacterComponent
 
 
         // FIXME: Deberia ser una posibilidad de volverse ladron, cuanto mas bajo el mental.
-        if (model.mental < 5)
+        if (model.mental < 15)
         {
             model.thief = true;
             customerObjective.image.color = new Color(1, 0, 0);
@@ -96,22 +102,26 @@ public class CustomerComponent : CharacterComponent
         {
             attemptTimer = 0f;
             searchAttempts++;
-            model.mental -= mentalDecayRate;
+            model.mental -= Random.Range(minMentalDecayRate, maxMentalDecayRate);
             Debug.Log($"{name} intenta buscar estación (Intento #{searchAttempts}) | Mental: {model.mental}");
 
             selectStation();
 
-            if (objectiveStation == null && searchAttempts >= 3 && !isBlinking)
+            if (objectiveStation == null && model.mental < 40 && searchAttempts >= 3 && !isBlinking)
             {
                 blinkingCoroutine = StartCoroutine(BlinkObjectiveIcon());
             }
-        }
+            var randomValue = Random.Range(0, (model.mental * 2));
+            Debug.Log("Intento por irse del local: " + randomValue + "     maximo: " + (model.mental * 2));
 
-        if (searchAttempts >= maxSearchAttempts || model.mental <= 0)
-        {
-            Debug.Log($"{name} se va por frustración buscando estación.");
-            LeaveWithoutBuy();
+            if (searchAttempts >= 3 && randomValue == 0)
+            {
+                Debug.Log($"{name} se va por frustración buscando estación.");
+
+                LeaveWithoutBuy();
+            }
         }
+       
     }
 
     private void HandleStationLogic()
@@ -155,21 +165,23 @@ public class CustomerComponent : CharacterComponent
                 {
                     attendTimer = 0f;
                     attendAttempts++;
-                    model.mental -= mentalDecayRate;
+                    model.mental -= Random.Range(minMentalDecayRate, maxMentalDecayRate);
                     Debug.Log($"{name} está esperando atención en {objectiveStation.name} (Intento #{attendAttempts}) | Mental: {model.mental}");
 
-                    if (attendAttempts >= 3 && !isBlinking)
+                    if (attendAttempts >= 3 && model.mental < 40 && !isBlinking)
                     {
                         blinkingCoroutine = StartCoroutine(BlinkObjectiveIcon());
                     }
+                    var randomValue = Random.Range(0, (model.mental * 2));
+                    Debug.Log("Intento por irse del local: " + randomValue + "     maximo: " + (model.mental * 2));
+                    if (attendAttempts >= 3 && randomValue == 0)
+                    {
+                        Debug.Log($"{name} se va por falta de atención en {objectiveStation.name}.");
+                        LeaveWithoutBuy();
+                        customerObjective.objective = "";
+                    }
                 }
-
-                if (attendAttempts >= maxAttendAttempts || model.mental <= 0)
-                {
-                    Debug.Log($"{name} se va por falta de atención en {objectiveStation.name}.");
-                    LeaveWithoutBuy();
-                    customerObjective.objective = "";
-                }
+                
             }
         }
         else
@@ -241,6 +253,8 @@ public class CustomerComponent : CharacterComponent
 
     private void LeaveTheShop()
     {
+        GameManager.Instance.reputacion += (this.model.mental - 25)/10;
+        Debug.Log("mental: " + this.model.mental);
         GlobalCustomerManager.Instance.CustomerLeft(this);
     }
 

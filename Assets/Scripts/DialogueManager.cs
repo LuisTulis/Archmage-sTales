@@ -15,7 +15,7 @@ public class DialogueManager : MonoBehaviour
 
     public float charsPerSecond = 30f;
 
-    private Dialogue currentDialogue;
+    public Dialogue currentDialogue;
     private int currentIndex = 0;
     private Coroutine typingCoroutine;
     private bool isTyping = false;
@@ -179,6 +179,7 @@ public class DialogueManager : MonoBehaviour
                     GlobalCustomerManager.Instance.maxCustomersInScene = 5;
                 }
                 currentIndex = 0;
+                currentDialogue = null;
             }
         }
     }
