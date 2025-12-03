@@ -20,7 +20,7 @@ public class UnlockRoomUI : MonoBehaviour
 
     public void Show(AlchemyRoom room)
     {
-        closeCooldown = 1f;
+        closeCooldown = .1f;
         prePurchaseRoom = room;
 
         // Setear los precios de las salas acá

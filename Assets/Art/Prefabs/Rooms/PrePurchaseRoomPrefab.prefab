@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6382528602895203949}
   - component: {fileID: 3912310530292291666}
   - component: {fileID: 132636073821072651}
+  - component: {fileID: 2173614965348749734}
   m_Layer: 0
   m_Name: door
   m_TagString: Untagged
@@ -83,6 +84,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &2173614965348749734
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4705596311614948098}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.17300001, y: 1.628, z: 1.322}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &3020397304151617542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -245,6 +262,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4158509289536310002, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5559274648531370964}
+    - targetCorrespondingSourceObject: {fileID: 157982253117189761, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3173135781226884233}
   m_SourcePrefab: {fileID: 100100000, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
 --- !u!1 &1179773171712686836 stripped
 GameObject:
@@ -286,6 +306,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlightEmission: {r: 0.6132076, g: 0.5945776, b: 0.30891776, a: 1}
   intensity: 0.75
+--- !u!1 &3160365157400223367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 157982253117189761, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
+  m_PrefabInstance: {fileID: 3020397304151617542}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &3173135781226884233
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3160365157400223367}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!4 &4194175769474397528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1431634492733474142, guid: 0a20d42569e6a1844bb162b9c207490e, type: 3}
