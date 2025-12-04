@@ -28096,6 +28096,7 @@ MonoBehaviour:
     useDescription: Repele a los enemigos que puedan acercarse.
     dayDuration: 5
     uses: 1
+  activeItems: 
   maxItemAmount: 3
   itemPrefab: {fileID: 3101487236250108953, guid: 57916b0dd51869749a93f98fc45c5432, type: 3}
   backpack: {fileID: 550612761}

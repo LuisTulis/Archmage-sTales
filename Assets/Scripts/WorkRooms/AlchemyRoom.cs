@@ -34,6 +34,9 @@ public class AlchemyRoom : MonoBehaviour
         {
             prePurchaseArea.AddComponent<BoxCollider>();
         }
+        blockFrameDoor.SetActive(true);
+        door.SetActive(true);
+
         gameManager = GameManager.Instance;
     }
 
@@ -48,20 +51,15 @@ public class AlchemyRoom : MonoBehaviour
     public void ConfirmUnlock(PrePurchaseWorkstation prePurchaseWorkstation)
     {
         if (isUnlocked) return;
-
-        GameManager gm = FindObjectOfType<GameManager>();
-
-        if (gm != null)
+        if (GameManager.Instance.horo >= prePurchaseWorkstation.RoomPrice)
         {
-            if (gm.horo >= prePurchaseWorkstation.RoomPrice)
-            {
-                gm.addGold(-prePurchaseWorkstation.RoomPrice);
-                //gm.horo_mostrar.text = gm.horo.ToString() + "$";
+            GameManager.Instance.addGold(-prePurchaseWorkstation.RoomPrice);
+            //gm.horo_mostrar.text = gm.horo.ToString() + "¤";
 
-                UnlockRoom(prePurchaseWorkstation.Workstation);
-                AudioManager.Instance.PlaySound("ComprarSala");
-            }
+            UnlockRoom(prePurchaseWorkstation.Workstation);
+            AudioManager.Instance.PlaySound("ComprarSala");
         }
+        
     }
 
     private void UnlockRoom(GameObject workstation)
@@ -101,14 +99,14 @@ public class AlchemyRoom : MonoBehaviour
             }
         }
 
-        if (navMeshSurface != null)
-            navMeshSurface.BuildNavMesh();
-        else
-        {
-            NavMeshSurface nm = GameObject.Find("Terrain")?.GetComponent<NavMeshSurface>();
-            if (nm != null)
-                nm.BuildNavMesh();
-        }
+        //if (navMeshSurface != null)
+        //    navMeshSurface.BuildNavMesh();
+        //else
+        //{
+        //    NavMeshSurface nm = GameObject.Find("Terrain")?.GetComponent<NavMeshSurface>();
+        //    if (nm != null)
+        //        nm.BuildNavMesh();
+        //}
         gameManager.UIOpen = false;
 
         purchaseParticle.Play(true);

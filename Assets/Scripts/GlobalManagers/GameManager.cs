@@ -63,6 +63,18 @@ public class GameManager : MonoBehaviour
 
     public Dialogue escenaProgra;
     private bool escenaPrograFlag = true;
+
+    public float realKarma = 0;
+    public float reputacion = 0;
+
+
+    private bool attemptClose = false;
+
+    public GameObject testeando_jaja;
+    public bool test2 = false;
+
+
+    public GameObject marketUI;
     private void Awake()
     {
         goldQueue = new List<int>();
@@ -96,7 +108,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         isPaused = false;
@@ -106,9 +117,21 @@ public class GameManager : MonoBehaviour
             light = FindObjectOfType<Light>();
         }
     }
-
+    
     private void Update()
     {
+        if(attemptClose)
+        {
+            if(GlobalCustomerManager.Instance.customers.Count == 0)
+            {
+                showDailyStatistics(true);
+            }
+            else
+            {
+                actualHour -= Time.deltaTime;
+            }
+        }
+
 
         if (goldCooldown > 0)
         {
@@ -137,11 +160,22 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
-            if(escenaPrograFlag)
+            //MeshRenderer[] meshes = testeando_jaja.GetComponentsInChildren<MeshRenderer>();
+            //foreach(MeshRenderer mesh in meshes)
+            //{
+            //    mesh.enabled = test2;
+            //}
+            //test2 = !test2;
+            if (escenaPrograFlag)
             {
                 escenaPrograFlag = false;
                 DialogueManager.Instance.showDialoge(escenaProgra);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            openMarket();
         }
 
         // HACK TO OPEN/CLOSE THE SHOP
@@ -156,7 +190,7 @@ public class GameManager : MonoBehaviour
             addGold(1000);
         }
 
-        if (isPlaying)
+        if (isPlaying && !isPaused)
         {
             actualHour += Time.deltaTime;
         }
@@ -207,6 +241,19 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.HandleAmbience(hour);
     }
 
+    public void openMarket()
+    {
+        UIOpen = true;
+        isPlaying = false;
+        marketUI.SetActive(true);
+    }
+
+    public void closeMarket()
+    {
+        UIOpen = false;
+        isPlaying = true;
+        marketUI.SetActive(false);
+    }
     public void addGold(int amount)
     {
         goldQueue.Add(amount);
@@ -286,6 +333,7 @@ public class GameManager : MonoBehaviour
 
     public void showDailyStatistics(bool showCheckboxPay)
     {
+        attemptClose = false;
         addDebt = !showCheckboxPay;
         isPlaying = false;
         mostrar_ahorro.text = "Ahorro: " + oro_inicial.ToString();
@@ -373,7 +421,7 @@ public class GameManager : MonoBehaviour
         GameObject instance = Instantiate(feedbackPrefab, feedbackPlacement.transform.position, Quaternion.identity, canvas.transform);
         instance.GetComponent<goldFeedback>().amount = amount;
         yield return new WaitForSeconds(2);
-        horo_mostrar.text = horo.ToString() + "$";
+        horo_mostrar.text = "¤" + horo.ToString();
         Debug.Log(horo);
     }
 
@@ -403,7 +451,7 @@ public class GameManager : MonoBehaviour
 
         if (close)
         {
-            showDailyStatistics(true);
+            attemptClose = true;
         }
     }
 

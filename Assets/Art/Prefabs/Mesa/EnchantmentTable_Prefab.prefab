@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 7371802884638902192}
   - component: {fileID: 7298266322614917487}
   - component: {fileID: 6696634547318405248}
+  - component: {fileID: 4288685124898831798}
   m_Layer: 0
   m_Name: EnchantmentTable_Prefab
   m_TagString: Untagged
@@ -515,6 +516,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!208 &4288685124898831798
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8406347682521423268}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.72, y: 0.5, z: 0.895}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.71, y: 1.91, z: -2.18}
+  m_TimeToStationary: 0.5
 --- !u!1001 &3635085839089094493
 PrefabInstance:
   m_ObjectHideFlags: 0

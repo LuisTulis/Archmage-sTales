@@ -76,12 +76,12 @@ public class WorkstationPanelController_Prototipo : MonoBehaviour
         if (oro.costoso)
         {
             Debug.Log("AA");
-            profit.text = data.profit * .5f + "$";
+            profit.text = data.profit * .5f + "¤";
             profit.color = new Color(1, 1, 0.02830189f);
         }
         else
         {
-            profit.text = data.profit + "$";
+            profit.text = data.profit + "¤";
             profit.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
         }
         status.text = workstation.status;
@@ -96,7 +96,7 @@ public class WorkstationPanelController_Prototipo : MonoBehaviour
             speed.text = data.Speed.ToString() + "s";
             speed.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
         }
-        karma.text = data.karma < 10000 ? "Upgrade: " + data.karma.ToString() + "$" : "Max";
+        karma.text = data.karma < 10000 ? "Upgrade: " + data.karma.ToString() + "¤" : "Max";
         worker.text = string.IsNullOrEmpty(nombresito) ? "Select Worker" : nombresito;
         panel.SetActive(true);
     }
