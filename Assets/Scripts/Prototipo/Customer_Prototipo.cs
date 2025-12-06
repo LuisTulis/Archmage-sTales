@@ -240,6 +240,7 @@ public class Customer_Prototipo : MonoBehaviour
             this.objectiveStation = null;
         }
         this.objectives.Clear();
+        this.customerObjective.objective = "";
         MoveTo(GlobalCustomerManager_Prototipo.Instance.despawnPoint.position);
     }
 

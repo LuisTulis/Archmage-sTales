@@ -200,7 +200,7 @@ public class PrototypeGameManager : MonoBehaviour
         GameObject instance = Instantiate(feedbackPrefab, feedbackPlacement.transform.position, Quaternion.identity, canvas.transform);
         instance.GetComponent<goldFeedback>().amount = amount;
         yield return new WaitForSeconds(2);
-        horo_mostrar.text = horo.ToString() + "$";
+        horo_mostrar.text = "¤" + horo.ToString();
         Debug.Log(horo);
     }
 

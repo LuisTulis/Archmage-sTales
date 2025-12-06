@@ -19,7 +19,7 @@ public class UnlockRoomUI_Prototipo : MonoBehaviour {
             roomNameText.text = room.RoomName;
 
         if (roomPriceText != null)
-            roomPriceText.text = "$ " + room.RoomPrice.ToString();
+            roomPriceText.text = "¤ " + room.RoomPrice.ToString();
 
         gameObject.SetActive(true);
     }

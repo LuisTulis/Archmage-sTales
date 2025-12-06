@@ -18,7 +18,7 @@ public class goldFeedback2 : MonoBehaviour
     }
     public void changeText(string profit)
     {
-        this.text.text = profit + "$";
+        this.text.text = "¤" + profit;
     }
     void lookAtCamera()
     {
