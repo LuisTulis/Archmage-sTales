@@ -30908,7 +30908,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.083333336
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 3347b4670298f7340b653098bd0d5b2b, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 09cab93b7c0c51b4f8533d66c5757fec, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1246250186
 GameObject:
@@ -46962,6 +46962,14 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 33343483a6af51a4b932659565ed290b, type: 3}
     name: Proto y Tipo
   charsPerSecond: 30
+  currentDialogue:
+    ids: 
+    lines: []
+    positions: []
+    orientations: 
+    secondaryIds: 
+    secondaryPositions: []
+    secondaryOrientations: 
   workerDialogue: 0
 --- !u!4 &1891866366
 Transform:
