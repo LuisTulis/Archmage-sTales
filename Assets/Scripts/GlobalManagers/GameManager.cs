@@ -70,11 +70,12 @@ public class GameManager : MonoBehaviour
 
     private bool attemptClose = false;
 
-    public GameObject testeando_jaja;
-    public bool test2 = false;
+    public int actualFloor = 0;
+    public int maxFloor = 0;
 
 
     public GameObject marketUI;
+    public GameObject[] towerFloors;
     private void Awake()
     {
         goldQueue = new List<int>();
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
 
         oro_inicial = 0;
         horo = 0;
+        setFloor(0);
     }
 
     private void OnEnable()
@@ -158,14 +160,29 @@ public class GameManager : MonoBehaviour
                 pauseMenu.SetActive(isPaused);
             }
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            setFloor(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            setFloor(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            setFloor(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            setFloor(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            setFloor(4);
+        }
+
         if (Input.GetKeyDown(KeyCode.M))
         {
-            //MeshRenderer[] meshes = testeando_jaja.GetComponentsInChildren<MeshRenderer>();
-            //foreach(MeshRenderer mesh in meshes)
-            //{
-            //    mesh.enabled = test2;
-            //}
-            //test2 = !test2;
             if (escenaPrograFlag)
             {
                 escenaPrograFlag = false;
@@ -241,6 +258,28 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.HandleAmbience(hour);
     }
 
+    public void setFloor(int floor)
+    {
+        if(maxFloor >= floor)
+        {
+            actualFloor = floor;
+            GlobalWorkstationManager.Instance.showFloorRooms(actualFloor);
+            for (int i = 0; i < towerFloors.Length; i++)
+            {
+                if (i > actualFloor)
+                {
+                    towerFloors[i].gameObject.SetActive(false);
+                }
+                else
+                {
+
+                    towerFloors[i].gameObject.SetActive(true);
+                }
+            }
+        }
+       
+
+    }
     public void openMarket()
     {
         UIOpen = true;

@@ -28,6 +28,8 @@ public class AlchemyRoom : MonoBehaviour
 
     [SerializeField] private ParticleSystem purchaseParticle;
 
+    public WorkStationBehaviour purchasedWorkstation;
+    public int floorIndex;
     void Start()
     {
         if (prePurchaseArea != null && prePurchaseArea.GetComponent<Collider>() == null)
@@ -96,6 +98,7 @@ public class AlchemyRoom : MonoBehaviour
                 manager.AddStation(ws);
                 manager.activeStations.Add(ws);
                 ws.prepurchaseRoom = this;
+                purchasedWorkstation = ws;
             }
         }
 
@@ -142,6 +145,7 @@ public class AlchemyRoom : MonoBehaviour
 
         if (workstation != null)
         {
+            purchasedWorkstation = null;
             workstation.SetActive(false);
 
             WorkStationBehaviour ws = workstation.GetComponentInChildren<WorkStationBehaviour>();

@@ -6,6 +6,7 @@ public class GlobalWorkstationManager : MonoBehaviour
     public static GlobalWorkstationManager Instance { get; private set; }
 
     public List<WorkStationBehaviour> actualStations;
+    public List<AlchemyRoom> allStations;
     public List<WorkStationBehaviour> activeStations;
     public List<StationType> stationTypes;
 
@@ -41,9 +42,14 @@ public class GlobalWorkstationManager : MonoBehaviour
 
         actualStations = new List<WorkStationBehaviour>();
         activeStations = new List<WorkStationBehaviour>();
+        allStations = new List<AlchemyRoom>();
         stationTypes = new List<StationType>();
         WorkStationBehaviour[] stations = FindObjectsOfType<WorkStationBehaviour>();
-
+        AlchemyRoom[] rooms = FindObjectsOfType<AlchemyRoom>();
+        foreach(AlchemyRoom room in rooms)
+        {
+            allStations.Add(room);
+        }
         foreach (WorkStationBehaviour station in stations)
         {
             bool addType = true;
@@ -114,6 +120,30 @@ public class GlobalWorkstationManager : MonoBehaviour
             if (!stillHasType && stationTypes.Contains(station.type)) {
                 stationTypes.Remove(station.type);
                 Debug.Log("Tipo de estación removido: " + station.type);
+            }
+        }
+    }
+
+    public void showFloorRooms(int floorIndex)
+    {
+        foreach(AlchemyRoom room in allStations)
+        {
+            bool show = room.floorIndex <= floorIndex;
+            Debug.Log(show);
+            if(room.purchasedWorkstation != null)
+            {
+                room.purchasedWorkstation.showingFeedback = room.floorIndex == floorIndex;
+                if(room.purchasedWorkstation.status == "Being used")
+                {
+                    room.purchasedWorkstation.modifyActualFeedback();
+                }
+
+            }
+            room.GetComponent<BoxCollider>().enabled = show;
+            MeshRenderer[] meshes = room.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer mesh in meshes)
+            {
+                mesh.enabled = show;
             }
         }
     }

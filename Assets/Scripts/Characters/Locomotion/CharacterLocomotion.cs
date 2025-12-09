@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,6 +7,8 @@ public class CharacterLocomotion : MonoBehaviour
     public NavMeshAgent agent;
     protected CharacterModel agentModel;
     public Animator animator;
+    private float oldYPosition = 0;
+    private int oldFloor = 0;
 
     private void Awake()
     {
@@ -23,6 +26,22 @@ public class CharacterLocomotion : MonoBehaviour
             SetSpeed(agentModel.Speed);
         }
     }
+
+    private void Update()
+    {
+        int floorValue = GameManager.Instance.actualFloor;        
+        int minValue = floorValue * 3;
+        int maxValue = (1 + floorValue) * 3;
+        bool isShowing = (this.transform.position.y > minValue && this.transform.position.y < maxValue);
+        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = isShowing;
+        CustomerComponent customer = this.GetComponent<CustomerComponent>();
+        if(customer != null)
+        {
+            customer.customerObjective.show = isShowing;
+        }
+        
+    }
+
 
     public void MoveTo(Vector3 targetPosition)
     {

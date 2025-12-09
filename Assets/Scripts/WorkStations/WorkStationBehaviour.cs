@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -37,7 +38,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     [Header("SFX")]
     public AudioSource audioSource;
 
-    public int floor;
+    public bool showingFeedback;
 
     private void Awake()
     {
@@ -59,10 +60,19 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     {
         if (this.status == "Idle")
         {
-            if (fx) fx.SetWorking(true);
             this.status = "Being used";
             actualProgress = Instantiate(ProgressBarPrefab, clientPosition.position, Quaternion.identity, transform);
-            actualProgress.transform.position += new Vector3(0, 5, 0);
+            if (showingFeedback)
+            {
+                if (fx) fx.SetWorking(true);
+                actualProgress.transform.position += new Vector3(0, 5, 0);
+
+            }
+            else
+            {
+                actualProgress.transform.position += new Vector3(0, -5000, 0);
+
+            }
             elapsed = 0;
             assignedWorker = workerComponent;
             StartCoroutine(BeingUsed(workerComponent));
@@ -157,14 +167,48 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     private void PlaySfx(string clipName)
     {
-        audioSource.clip = AudioManager.Instance.FindSoundClip(clipName);
-        audioSource.loop = true;
-        audioSource.Play();
+        if(showingFeedback)
+        {
+            audioSource.clip = AudioManager.Instance.FindSoundClip(clipName);
+            audioSource.loop = true;
+            audioSource.Play();
+
+        }
     }
 
     private void StopSfx()
     {
         audioSource.Stop();
+    }
+
+    public void modifyActualFeedback()
+    {
+        if(this.showingFeedback)
+        {
+            switch(this.type.ToString())
+            {
+                case "adivinacion":
+                    PlaySfx("FairySound");
+                    break;
+                case "invocacion":
+                    PlaySfx("MagicEnchantment");
+                    break;
+                case "caldero":
+                    PlaySfx("BoilingCauldron");
+                    break;
+                case "encantamiento":
+                    PlaySfx("MagicEnchantment");
+                    break;
+            }
+            fx.SetWorking(true);
+            actualProgress.transform.position += new Vector3(0, 5000, 0);
+        }
+        else
+        {
+            fx.SetWorking(false);
+            StopSfx();
+            actualProgress.transform.position += new Vector3(0, -5000, 0);
+        }
     }
 
 }

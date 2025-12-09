@@ -12,7 +12,7 @@ public class CustomerComponent : CharacterComponent
 
     private GlobalWorkstationManager stationManager;
     public List<StationType> objectives;
-    private CustomerObjective customerObjective;
+    public CustomerObjective customerObjective;
 
     private Animator animator;
 
