@@ -17,7 +17,7 @@ public abstract class CharacterComponent : MonoBehaviour, ISelectable, IPointerC
     }
 
 
-    public void OnPointerClick(PointerEventData eventData) {
+    public virtual void OnPointerClick(PointerEventData eventData) {
         Debug.Log($"Click sobre {gameObject.name}");
         GlobalCharactersManager.Instance.SelectCharacter(this);
     }
