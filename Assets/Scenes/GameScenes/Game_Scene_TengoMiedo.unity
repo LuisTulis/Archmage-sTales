@@ -28096,7 +28096,6 @@ MonoBehaviour:
     useDescription: Repele a los enemigos que puedan acercarse.
     dayDuration: 5
     uses: 1
-  activeItems: 
   maxItemAmount: 3
   itemPrefab: {fileID: 3101487236250108953, guid: 57916b0dd51869749a93f98fc45c5432, type: 3}
   backpack: {fileID: 550612761}
@@ -29106,6 +29105,95 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013694316}
   m_CullTransparentMesh: 1
+--- !u!1001 &1021339401
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -498175717852421882, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: talkPoint
+      value: 
+      objectReference: {fileID: 1591523161}
+    - target: {fileID: -498175717852421882, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 732141148}
+    - target: {fileID: -498175717852421882, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: ErlichPrefab
+      value: 
+      objectReference: {fileID: 1319442157515400386, guid: 6e7de3b8309304344ad4a0b32d802847, type: 3}
+    - target: {fileID: -498175717852421882, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: despawnPoint
+      value: 
+      objectReference: {fileID: 665242908}
+    - target: {fileID: -498175717852421882, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: LordEnzoPrefab
+      value: 
+      objectReference: {fileID: 8884162122326847819, guid: bf623ec81bbc2a74ba55502fed5339be, type: 3}
+    - target: {fileID: -498175717852421882, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: taxCollectorPoint
+      value: 
+      objectReference: {fileID: 1127760525}
+    - target: {fileID: -498175717852421882, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: PaolaSanToroPrefab
+      value: 
+      objectReference: {fileID: 3298797673315379198, guid: 0a8f0582436ce4e4fbd602e47739b6a5, type: 3}
+    - target: {fileID: -498175717852421882, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: TaxCollectorPrefab
+      value: 
+      objectReference: {fileID: 3567755497599352150, guid: 479db855513f718449867ec1864db807, type: 3}
+    - target: {fileID: 3383158200760593294, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383158200760593294, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383158200760593294, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383158200760593294, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383158200760593294, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383158200760593294, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383158200760593294, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383158200760593294, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383158200760593294, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383158200760593294, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800155632241144247, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
+      propertyPath: m_Name
+      value: GlobalNpcManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
 --- !u!1001 &1026822078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30629,6 +30717,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39a38834ee24d8542b68b2e462a9e159, type: 3}
+--- !u!1 &1127760524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1127760525}
+  m_Layer: 0
+  m_Name: TaxCollectorPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1127760525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127760524}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.21, y: 0, z: -13.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1127826458 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2103438982261257762, guid: c54806abe4e592241b0a5fae0d4e8aed, type: 3}
@@ -52386,6 +52505,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dc0fdba7d64260e4f8f3eb30df43756c, type: 3}
   m_PrefabInstance: {fileID: 1576534868}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1591523160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1591523161}
+  m_Layer: 0
+  m_Name: TalkPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1591523161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591523160}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.35, y: 0, z: -19.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1592604683
 GameObject:
   m_ObjectHideFlags: 0
@@ -73324,9 +73474,12 @@ SceneRoots:
   - {fileID: 933687173}
   - {fileID: 6998549849375546409}
   - {fileID: 108621298974845543}
+  - {fileID: 1021339401}
   - {fileID: 7199913871378686124}
   - {fileID: 6415649705075381658}
   - {fileID: 732141148}
+  - {fileID: 1591523161}
+  - {fileID: 1127760525}
   - {fileID: 665242908}
   - {fileID: 5834632116095517380}
   - {fileID: 7861143}
