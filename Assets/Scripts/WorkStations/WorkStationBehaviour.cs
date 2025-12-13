@@ -39,6 +39,11 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     public int floor;
 
+    [Header("Break settings")]
+    [Range(0f, 1f)]
+    [Tooltip("Probability the workstation breaks after a use (0..1)")]
+    public float breakChance = 0.05f;
+
     private void Awake()
     {
         this.status = "Idle";
@@ -48,6 +53,11 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         Debug.Log(this.transform.position);
 
         fx = GetComponent<WorkstationFX>();
+
+        if (isBroken)
+        {
+            ApplyBrokenState();
+        }
     }
 
     public void OnPointerClick(PointerEventData e)
@@ -59,6 +69,8 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     {
         if (this.status == "Idle")
         {
+            if (isBroken) return;
+
             if (fx) fx.SetWorking(true);
             this.status = "Being used";
             actualProgress = Instantiate(ProgressBarPrefab, clientPosition.position, Quaternion.identity, transform);
@@ -96,7 +108,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
         while (elapsed < seconds)
         {
-            if(GameManager.Instance.isPlaying && !GameManager.Instance.isPaused)
+            if (GameManager.Instance.isPlaying && !GameManager.Instance.isPaused)
             {
                 elapsed += Time.deltaTime;
                 if (actualProgress != null)
@@ -104,25 +116,15 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
                     actualProgress.GetComponent<progressBar>().progress = elapsed * 100 / seconds;
                 }
             }
-            
+
             yield return null;
         }
 
-        //yield return new WaitForSeconds(seconds);
-
-        int realProfit;
-
-        if (assignedCustomer.GetComponent<CustomerModel>().thief)
+        if (assignedCustomer != null && assignedCustomer.GetComponent<CustomerModel>().thief)
         {
-            realProfit = (int)(workstationData.profit * -0.25f);
-
+            SetBroken(true);
         }
-        else
-        {
-            realProfit = workstationData.profit;
-        }
-        realProfit = gameManager.costoso ? (int)(realProfit * .5f) : realProfit;
-        realProfit = realProfit + (int)(realProfit * (karma * -0.035f));
+        var realProfit = workstationData.profit + (int)(workstationData.profit * (karma * -0.035f));
         gameManager.realKarma += karma / 10;
         gameManager.addGold(realProfit);
         if (realProfit < 0)
@@ -132,10 +134,30 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
         GameObject instance = Instantiate(textIndicatorPrefab, this.clientPosition.position, Quaternion.identity, this.transform);
         instance.GetComponent<goldFeedback2>().changeText(realProfit.ToString());
+        if (Random.value < breakChance)
+        {
+            SetBroken(true);
+
+            if (actualProgress != null)
+            {
+                Destroy(actualProgress);
+                actualProgress = null;
+            }
+
+            StopSfx();
+            yield break;
+        }
+
         this.status = "Idle";
         this.clientUsing = 0;
         if (fx) fx.SetWorking(false);
         StopSfx();
+
+        if (actualProgress != null)
+        {
+            Destroy(actualProgress);
+            actualProgress = null;
+        }
     }
 
     public void UpgradeFX(int level)
@@ -157,6 +179,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     private void PlaySfx(string clipName)
     {
+        if (audioSource == null) return;
         audioSource.clip = AudioManager.Instance.FindSoundClip(clipName);
         audioSource.loop = true;
         audioSource.Play();
@@ -164,7 +187,64 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     private void StopSfx()
     {
+        if (audioSource == null) return;
         audioSource.Stop();
+    }
+
+    public void SetBroken(bool broken)
+    {
+        if (isBroken == broken) return;
+        isBroken = broken;
+        if (isBroken)
+        {
+            ApplyBrokenState();
+        }
+        else
+        {
+            RepairState();
+        }
+    }
+
+    private void ApplyBrokenState()
+    {
+        StopAllCoroutines();
+        if (fx) fx.SetWorking(false);
+        if (actualProgress != null)
+        {
+            Destroy(actualProgress);
+            actualProgress = null;
+        }
+
+        if (assignedCustomer != null)
+        {
+            assignedCustomer.LeaveWithoutBuy();
+            assignedCustomer = null;
+            clientUsing = 0;
+        }
+
+        if (assignedWorker != null)
+        {
+            assignedWorker.isWorking = false;
+            assignedWorker.LeaveWorkStation();
+            assignedWorker = null;
+            assignedWorkerName = null;
+        }
+
+        status = "Broken";
+
+        if (GlobalWorkstationManager.Instance.activeStations.Contains(this))
+        {
+            GlobalWorkstationManager.Instance.activeStations.Remove(this);
+        }
+    }
+
+    private void RepairState()
+    {
+        status = "Idle";
+        if (!GlobalWorkstationManager.Instance.activeStations.Contains(this))
+        {
+            GlobalWorkstationManager.Instance.activeStations.Add(this);
+        }
     }
 
 }
