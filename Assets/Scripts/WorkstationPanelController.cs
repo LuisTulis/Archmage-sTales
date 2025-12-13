@@ -20,6 +20,7 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
     [SerializeField] TMP_Text speed;
     [SerializeField] TMP_Text karma;
     [SerializeField] TMP_Text worker;
+    [SerializeField] TMP_Text isBrokenText;
     [SerializeField] LayerMask interactableMask;
     [SerializeField] Slider karmaBar;
     private GlobalWorkstationManager workstationManager;
@@ -120,7 +121,10 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         selectedWorkstation = workstation;
         var data = workstation.workstationData;
         asignatedWorkerName = workstation.assignedWorkerName;
-
+        panel.SetActive(true);
+        if (selectedWorkstation.isBroken) {
+            isBrokenText.gameObject.SetActive(true);
+        }
         WorkstationData nextLevel = workstationManager.upgrade(selectedWorkstation.workstationData.name);
         this.karmaBar.value = workstation.karma;
         var multiplicador_karma = workstation.karma * -.035f;
@@ -174,7 +178,6 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         }
         karma.text = data.karma < 10000 ? "Upgrade: " + "¤" + data.karma.ToString(): "Max";
         worker.text = string.IsNullOrEmpty(asignatedWorkerName) ? "Select Worker" : asignatedWorkerName;
-        panel.SetActive(true);
     }
 
     public void Hide()
