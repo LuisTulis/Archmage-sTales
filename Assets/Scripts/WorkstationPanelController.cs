@@ -62,7 +62,8 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         }
         try
         {
-            if (selectedWorkstation.workstationData.karma > oro.horo)
+            int goldAmount = ItemController.Instance.activeItemsState[3] ? (int)(selectedWorkstation.workstationData.karma * .8f) : selectedWorkstation.workstationData.karma;
+            if (goldAmount > oro.horo)
             {
                 upgradeButton.interactable = false;
             }
@@ -102,10 +103,9 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
     }
     public void updateStation()
     {
-        Debug.Log(selectedWorkstation.ToString());
-        Debug.Log(selectedWorkstation.workstationData.karma.ToString());
-        this.oro.addGold(-selectedWorkstation.workstationData.karma);
-        GameManager.Instance.gastosMesas += selectedWorkstation.workstationData.karma;
+        int goldAmount = ItemController.Instance.activeItemsState[3] ? (int)(selectedWorkstation.workstationData.karma * .8f) : selectedWorkstation.workstationData.karma;
+        this.oro.addGold(-goldAmount);
+        GameManager.Instance.gastosMesas += goldAmount;
         this.selectedWorkstation.workstationData = workstationManager.upgrade(selectedWorkstation.workstationData.name);
         this.Show(selectedWorkstation);
 
@@ -114,8 +114,22 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
 
     public void Show(WorkStationBehaviour workstation)
     {
+
         GameManager.Instance.UIOpen = true;
         AudioManager.Instance.PlaySound("Madera1");
+
+        bool mejoraPua = false;
+        bool mejoraOro = false;
+        if (ItemController.Instance.activeItemsState[6])
+        {
+            mejoraPua = true;
+        }
+        
+        if (ItemController.Instance.activeItemsState[1])
+        {
+            mejoraOro = true;
+        }
+
 
         selectedWorkstation = workstation;
         var data = workstation.workstationData;
@@ -125,6 +139,7 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         this.karmaBar.value = workstation.karma;
         var multiplicador_karma = workstation.karma * -.035f;
         profit_actual_int = data.profit + (int)(data.profit * multiplicador_karma);
+        profit_actual_int = mejoraOro ? (int)(profit_actual_int * 1.2f) : profit_actual_int;
         title.text = data.displayName;
         desc.text = data.description;
         if (oro.costoso)
@@ -153,9 +168,10 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         }
 
         status.text = workstation.status;
+        int actualSpeed = mejoraPua ? (int)(data.Speed * .8f) : data.Speed;
         if (oro.aletargamiento)
         {
-            speed.text = (data.Speed * 2).ToString() + "s";
+            speed.text = (actualSpeed * 2).ToString() + "s";
 
             if (nextLevel != null)
             {
@@ -165,14 +181,16 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            speed.text = data.Speed.ToString() + "s";
+            speed.text = actualSpeed.ToString() + "s";
             if (nextLevel != null)
             {
                 speed.text += " -> " + nextLevel.Speed.ToString() + "s";
             }
             speed.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
         }
-        karma.text = data.karma < 10000 ? "Upgrade: " + "¤" + data.karma.ToString(): "Max";
+
+        int goldAmount = ItemController.Instance.activeItemsState[3] ? (int)(data.karma * .8f) : data.karma;
+        karma.text = data.karma < 10000 ? "Upgrade: " + "¤" + goldAmount.ToString(): "Max";
         worker.text = string.IsNullOrEmpty(asignatedWorkerName) ? "Select Worker" : asignatedWorkerName;
         panel.SetActive(true);
     }

@@ -9,7 +9,9 @@ public class ItemController : MonoBehaviour
 {
     public Item[] baseItems;
     public List<List<int>> playerItems;
-    public List<List<int>> activeItems;
+    public bool[] activeItemsState;
+    public int[] activeItemsDuration;
+    public int[] activeItemsUse;
     public static ItemController Instance;
     public int maxItemAmount = 1;
 
@@ -35,7 +37,9 @@ public class ItemController : MonoBehaviour
         }
         Instance = this;
         playerItems = new List<List<int>>();
-        activeItems = new List<List<int>>();
+        activeItemsState = new bool[12];
+        activeItemsDuration = new int[12];
+        activeItemsUse = new int[12];
         itemEntryList = new List<GameObject>();
     }
 
@@ -44,6 +48,27 @@ public class ItemController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E))
         {
             openBackpack();
+        }
+    }
+
+    public void checkActualItems()
+    {
+        int actualIndex = 0;
+
+        while(actualIndex < 12)
+        {
+            if (activeItemsState[actualIndex] == true)
+            {
+                int days = GameManager.Instance.dayCount - activeItemsDuration[actualIndex];
+                if (days >= baseItems[actualIndex].dayDuration || activeItemsUse[actualIndex] == 0)
+                {
+                    activeItemsDuration[actualIndex] = -1;
+                    activeItemsUse[actualIndex] = -1;
+                    activeItemsState[actualIndex] = false;
+                }
+
+            }
+            actualIndex++;
         }
     }
 
@@ -86,23 +111,16 @@ public class ItemController : MonoBehaviour
 
     public void useItem()
     {
-        int actualIndex = 0;
-        bool canUse = true;
-        while(actualIndex < activeItems.Count)
-        {
-            if (activeItems[actualIndex][0] == selectedItemIndex)
-            {
-                canUse = false;
-            }
-            actualIndex++;
-        }
+        int baseIndex = playerItems[selectedItemIndex][0];
 
-        if(canUse)
+
+        if (activeItemsState[baseIndex] == false)
         {
-            List<int> newActiveItem = new List<int>();
-            newActiveItem.Add(selectedItemIndex);
-            newActiveItem.Add(GameManager.Instance.dayCount);
-            activeItems.Add(newActiveItem);
+
+            activeItemsUse[baseIndex] = baseItems[baseIndex].uses;
+            activeItemsDuration[baseIndex] = GameManager.Instance.dayCount;
+            activeItemsState[baseIndex] = true;
+
             playerItems[selectedItemIndex][1]--;
             if (playerItems[selectedItemIndex][1] == 0)
             {

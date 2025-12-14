@@ -66,9 +66,6 @@ public class MarketController : MonoBehaviour
             }
             if(newItem)
             {
-                Debug.Log(ItemController.Instance.maxItemAmount);
-                Debug.Log(ItemController.Instance.playerItems.Count);
-                Debug.Log("——————————");
                 if (ItemController.Instance.maxItemAmount > ItemController.Instance.playerItems.Count)
                 {
                     List<int> newListItem = new List<int>();

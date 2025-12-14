@@ -35,7 +35,7 @@ public class BaseWorkerComponent : CharacterComponent
     {
         if (Vector3.Distance(this.transform.position, this.model.AsignatedStation.workerPosition.transform.position) < 3) {
             if (this.model.AsignatedStation.clientUsing == 2) {
-                if(Random.Range(0,9) == 1)
+                if(Random.Range(0,9) == 1 && this.model.Stats.adivinationStat >= 0)
                 {
                     switch (this.model.AsignatedStation.type.ToString())
                     {

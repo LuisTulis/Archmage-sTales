@@ -129,7 +129,6 @@ public class GlobalWorkstationManager : MonoBehaviour
         foreach(AlchemyRoom room in allStations)
         {
             bool show = room.floorIndex <= floorIndex;
-            Debug.Log(show);
             if(room.purchasedWorkstation != null)
             {
                 room.purchasedWorkstation.showingFeedback = room.floorIndex == floorIndex;

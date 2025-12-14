@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -38,7 +39,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     [Header("SFX")]
     public AudioSource audioSource;
 
-    public bool showingFeedback;
+    public bool showingFeedback = true;
 
     private void Awake()
     {
@@ -82,6 +83,15 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     {
 
         float seconds = gameManager.aletargamiento ? workstationData.Speed * 2 : workstationData.Speed;
+        float mejoraOro = 1;
+        if (ItemController.Instance.activeItemsState[6])
+        {
+            seconds = seconds * .8f;
+        }
+        if (ItemController.Instance.activeItemsState[1])
+        {
+            mejoraOro = 1.2f;
+        }
 
         switch (this.type.ToString())
         {
@@ -118,22 +128,30 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
             yield return null;
         }
 
-        //yield return new WaitForSeconds(seconds);
-
         int realProfit;
 
         if (assignedCustomer.GetComponent<CustomerModel>().thief)
         {
             realProfit = (int)(workstationData.profit * -0.25f);
-
         }
         else
         {
             realProfit = workstationData.profit;
         }
         realProfit = gameManager.costoso ? (int)(realProfit * .5f) : realProfit;
+        realProfit = (int)(realProfit * mejoraOro);
         realProfit = realProfit + (int)(realProfit * (karma * -0.035f));
         gameManager.realKarma += karma / 10;
+
+        if(gameManager.realKarma > 50)
+        {
+            gameManager.realKarma = 50;
+        }
+        else if(gameManager.realKarma < -50)
+        {
+            gameManager.realKarma = -50;
+        }
+
         gameManager.addGold(realProfit);
         if (realProfit < 0)
         {

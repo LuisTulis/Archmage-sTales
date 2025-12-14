@@ -23,8 +23,15 @@ public class CharacterLocomotion : MonoBehaviour
         agentModel = GetComponent<CharacterModel>();
         if (agent != null)
         {
-            SetSpeed(agentModel.Speed);
+            int speed = ItemController.Instance.activeItemsState[7] ? agentModel.Speed * 4 : agentModel.Speed;
+            SetSpeed(speed);
         }
+    }
+
+    public void checkSpeedUpgrade(bool powerUp)
+    {
+        int speed = powerUp ? agentModel.Speed * 4 : agentModel.Speed;
+        SetSpeed(speed);
     }
 
     private void Update()
@@ -32,7 +39,7 @@ public class CharacterLocomotion : MonoBehaviour
         int floorValue = GameManager.Instance.actualFloor;        
         int minValue = floorValue * 3;
         int maxValue = (1 + floorValue) * 3;
-        bool isShowing = (this.transform.position.y > minValue && this.transform.position.y < maxValue);
+        bool isShowing = (this.transform.position.y < .1f || (this.transform.position.y > minValue && this.transform.position.y < maxValue));
         gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = isShowing;
         CustomerComponent customer = this.GetComponent<CustomerComponent>();
         if(customer != null)

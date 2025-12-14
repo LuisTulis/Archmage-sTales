@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -49,6 +51,9 @@ public class GameManager : MonoBehaviour
     public Toggle toggle_salario;
     public Toggle toggle_deuda;
 
+    public GameObject showHour;
+    public TMP_Text showCloseTime;
+
     public bool UIOpen = true;
 
     private GameObject grupoTextoDia;
@@ -58,20 +63,23 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public bool isPaused = false;
 
+    public float realKarma = 0;
+    public float reputacion = 0;
     public Dialogue tutorial;
     private bool tutorialShowed = false;
 
     public Dialogue escenaProgra;
     private bool escenaPrograFlag = true;
 
-    public float realKarma = 0;
-    public float reputacion = 0;
-
-
     private bool attemptClose = false;
 
     public int actualFloor = 0;
     public int maxFloor = 0;
+    public int lastKarmaValue = 0;
+    public Image karmaBarColor;
+    public GameObject karmaBarMark;
+    public GameObject barContainer;
+
 
 
     public GameObject marketUI;
@@ -215,6 +223,8 @@ public class GameManager : MonoBehaviour
         int hour = isOpen ? 6 + (int)(actualHour * 18 / openTime) : (int)(actualHour * 6 / closeTime);
         if(hour == 7 && !tutorialShowed)
         {
+
+            setFloor(0);
             DialogueManager.Instance.showDialoge(tutorial);
             tutorialShowed = true;
         }
@@ -305,18 +315,37 @@ public class GameManager : MonoBehaviour
         isOpen = open;
         if (isOpen)
         {
+            if(realKarma != lastKarmaValue)
+            {
+                StartCoroutine(showKarmaBar());
+            }
+
+            float minMentalDecay = realKarma < 0 ? (-2f/25f) * realKarma + 1 : (-1f/50f) * realKarma + 1;
+            float maxMentalDecay = realKarma < 0 ? (-13f / 50f) * realKarma + 7 : (-2f / 25f) * realKarma + 7;
+
+            Debug.Log("Min decay -> " + minMentalDecay + " | Max decay -> " + maxMentalDecay);
+            GlobalCustomerManager.Instance.minMentalDecayRate = (int)minMentalDecay;
+            GlobalCustomerManager.Instance.maxMentalDecayRate = (int)maxMentalDecay;
+
+            float maxClients = realKarma < 0 ? (-3f / -50f) * realKarma + 5 : (1f / 10f) * realKarma + 5;
+
+            ItemController.Instance.checkActualItems();
             bajarTexto = true;
             if (dayCount != 1)
             {
-                float random = Random.Range(0f, 1f);
+                float randomThug = Random.Range(0f, 1f);
+                float randomSkeleton = Random.Range(0f, 1f);
+                float randomSpawnValue = realKarma > 0 ? -9f / 50f * realKarma + 10 : -3f / 10f * realKarma + 10;
                 Vector3 randomPosition = new Vector3(Random.Range(10, 20), 0, Random.Range(-30, 20));
-                if (random < .1f)
-                {
-                    GlobalEnemiesManager.Instance.SpawnSkeleton(randomPosition);
-                }
-                else if (random < .2f)
+
+                if (randomThug < randomSpawnValue/100)
                 {
                     GlobalEnemiesManager.Instance.SpawnThug(randomPosition);
+                    randomPosition = new Vector3(Random.Range(10, 20), 0, Random.Range(-30, 20));
+                }
+                if (randomSkeleton < 1* randomSpawnValue/100)
+                {
+                    GlobalEnemiesManager.Instance.SpawnSkeleton(randomPosition);
                 }
 
             }
@@ -339,7 +368,7 @@ public class GameManager : MonoBehaviour
                 {
                     StartCoroutine(OpenCloseShop(new Color(0.25f, 0.75f, 1f, 1)));
                     tipo_mostrar.text = "Día lluvioso";
-                    GlobalCustomerManager.Instance.maxCustomersInScene = 2;
+                    GlobalCustomerManager.Instance.maxCustomersInScene = (int)(maxClients * .6f);
                     rain.Play();
                 }
             }
@@ -348,7 +377,7 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(OpenCloseShop(new Color(1, 1, 1, 1)));
                 aletargamiento = false;
                 costoso = false;
-                GlobalCustomerManager.Instance.maxCustomersInScene = 5;
+                GlobalCustomerManager.Instance.maxCustomersInScene = (int)maxClients;
                 rain.Stop();
 
                 tipo_mostrar.text = "Día normal";
@@ -370,6 +399,41 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator showKarmaBar()
+    {
+        RectTransform barTransform = barContainer.GetComponent<RectTransform>();
+        while(barTransform.localPosition.y < 0)
+        {
+            barTransform.localPosition += new Vector3(0, 1000, 0) * Time.deltaTime;
+            yield return null;
+        }
+        float elapsed = 0;
+        float amountPerSecond = (lastKarmaValue - realKarma) / 2.5f;
+        int actualKarma = lastKarmaValue;
+        bool test = lastKarmaValue < realKarma;
+        while(elapsed < 2.5f)
+        {
+            elapsed += Time.deltaTime;
+            float newValue = (actualKarma - (amountPerSecond * elapsed));
+            lastKarmaValue = (int)newValue;
+            int red = (int)(-2.56f * lastKarmaValue + 128);
+            int green = (int)(2.56f * lastKarmaValue + 128);
+
+            karmaBarMark.GetComponent<RectTransform>().localPosition = new Vector3(lastKarmaValue * 10, 0, 0);
+
+            karmaBarColor.color = new Color(red / 255f, green / 255f, 0);
+            yield return null;
+        }
+
+        while (barTransform.localPosition.y > -1000)
+        {
+            barTransform.localPosition -= new Vector3(0, 1000, 0) * Time.deltaTime;
+            yield return null;
+        }
+
+
+    }
+
     public void showDailyStatistics(bool showCheckboxPay)
     {
         attemptClose = false;
@@ -389,6 +453,8 @@ public class GameManager : MonoBehaviour
 
         toggle_salario.gameObject.SetActive(showCheckboxPay);
         toggle_deuda.gameObject.SetActive(showCheckboxPay);
+        showHour.gameObject.SetActive(!showCheckboxPay);
+        showCloseTime.text = isOpen ? "Cierre: 00:00" : "Apertura: 06:00";
 
         if (toggle_salario.gameObject.activeSelf && toggle_salario.isOn)
         {
@@ -427,6 +493,7 @@ public class GameManager : MonoBehaviour
             this.gastosMesas = 0;
             this.perdidas = 0;
             int salario = GlobalCharactersManager.Instance.getAllSalary();
+            float magicCircleMultiply = ItemController.Instance.activeItemsState[5] ? .25f : 1;
             if (toggle_deuda.isOn)
             {
                 addGold(-deudaEmpleados);
@@ -434,7 +501,7 @@ public class GameManager : MonoBehaviour
             }
             if (deudaEmpleados > 0)
             {
-                GlobalCharactersManager.Instance.changeMental(-5);
+                GlobalCharactersManager.Instance.changeMental((int)(-5 * magicCircleMultiply));
             }
 
             if (toggle_salario.isOn)
@@ -445,7 +512,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 deudaEmpleados += salario;
-                GlobalCharactersManager.Instance.changeMental(-20);
+                GlobalCharactersManager.Instance.changeMental((int)(-20 * magicCircleMultiply));
             }
 
         }
@@ -456,12 +523,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator goldCoroutine(int amount)
     {
-        Debug.Log("Entré al coroutine");
         GameObject instance = Instantiate(feedbackPrefab, feedbackPlacement.transform.position, Quaternion.identity, canvas.transform);
         instance.GetComponent<goldFeedback>().amount = amount;
         yield return new WaitForSeconds(2);
         horo_mostrar.text = "¤" + horo.ToString();
-        Debug.Log(horo);
     }
 
     public void removeGold(int amount)

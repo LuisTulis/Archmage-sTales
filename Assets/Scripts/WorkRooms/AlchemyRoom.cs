@@ -98,6 +98,7 @@ public class AlchemyRoom : MonoBehaviour
                 manager.AddStation(ws);
                 manager.activeStations.Add(ws);
                 ws.prepurchaseRoom = this;
+                ws.showingFeedback = true;
                 purchasedWorkstation = ws;
             }
         }
