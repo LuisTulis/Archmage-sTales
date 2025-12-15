@@ -21,14 +21,21 @@ public class ItemController : MonoBehaviour
     public GameObject itemContainer;
     public GameObject itemSelection;
 
+    [SerializeField] public Button useButton;
     public TMP_Text itemName;
     public TMP_Text itemDescription;
     public TMP_Text itemDuration;
     public TMP_Text itemUses;
     public TMP_Text itemStock;
 
+    public Transform gravityTrapPoint;
+
     private int selectedItemIndex;
     private List<GameObject> itemEntryList;
+
+
+
+
     void Awake()
     {
         if(Instance != null)
@@ -43,13 +50,7 @@ public class ItemController : MonoBehaviour
         itemEntryList = new List<GameObject>();
     }
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            openBackpack();
-        }
-    }
+    
 
     public void checkActualItems()
     {
@@ -71,9 +72,20 @@ public class ItemController : MonoBehaviour
             actualIndex++;
         }
     }
-
+    public void closeBackpack()
+    {
+        itemName.text = "";
+        itemDescription.text = "";
+        itemDuration.text = "";
+        itemUses.text = "";
+        itemStock.text = "";
+        useButton.interactable = false;
+        backpack.SetActive(false);
+    }
     public void openBackpack()
     {
+        Debug.Log("A");
+
         int addedItems = 0;
         backpack.SetActive(true);
         
@@ -105,6 +117,7 @@ public class ItemController : MonoBehaviour
         itemDescription.text = baseItems[selectedIndex].useDescription;
         itemDuration.text = baseItems[selectedIndex].dayDuration + " días";
         itemUses.text = baseItems[selectedIndex].uses == -1 ? "" : baseItems[selectedIndex].uses == 1 ? "Único Uso" : baseItems[selectedIndex].uses + " usos";
+        useButton.interactable = !activeItemsState[selectedIndex];
         itemStock.text = "Usar - " + amount;
         selectedItemIndex = index;
     }
@@ -136,6 +149,11 @@ public class ItemController : MonoBehaviour
         }
                 
         
+    }
+
+    public void setGravityTrap(bool setTrap)
+    {
+
     }
 }
 

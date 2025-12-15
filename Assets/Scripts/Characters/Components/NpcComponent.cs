@@ -8,6 +8,7 @@ public abstract class NpcComponent : CharacterComponent {
     protected NpcModel model;
     [SerializeField] protected Transform talkPoint;
     protected CustomerObjective customerObjective;
+    public int greatingsIndex = 0;
 
     [SerializeField] protected bool readyToTalk = false;
 
@@ -15,10 +16,13 @@ public abstract class NpcComponent : CharacterComponent {
 
     [SerializeField] protected bool hasTalked = false;
 
+    private Animator animator;
+
     protected override void Awake() {
         base.Awake();
         locomotion = GetComponent<NpcLocomotion>();
         model = GetComponent<NpcModel>();
+        this.animator = this.gameObject.GetComponentInChildren<Animator>();
 
         customerObjective = this.gameObject.GetComponentInChildren<CustomerObjective>();
     }
@@ -26,8 +30,12 @@ public abstract class NpcComponent : CharacterComponent {
     private void Start() {
     }
 
+
+
     private void Update() {
-        if (hasTalked) {
+
+        UpdateWalkingAnimation();
+        if (hasTalked && GameManager.Instance.isPlaying) {
             if (customerObjective != null) customerObjective.objective = "";
             readyToTalk = false;
             Despawn();
@@ -45,6 +53,15 @@ public abstract class NpcComponent : CharacterComponent {
             }
         }
     }
+    private void UpdateWalkingAnimation()
+    {
+        if (animator == null) return;
+
+        bool isWalking = locomotion.agent.velocity.magnitude > 0.1f;
+        animator.SetBool("walking", isWalking);
+    }
+
+
 
     public abstract void MoveToTalkPoint();
 

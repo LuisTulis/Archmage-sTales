@@ -141,8 +141,13 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
             yield return null;
         }
 
-        if (assignedCustomer.GetComponent<CustomerModel>().thief)
-        { 
+        if (assignedCustomer.GetComponent<CustomerModel>().thief && !ItemController.Instance.activeItemsState[10])
+        {
+            if (ItemController.Instance.activeItemsState[10])
+            {
+                ItemController.Instance.activeItemsUse[10]--;
+                ItemController.Instance.checkActualItems();
+            }
             SetBroken(true);
         }
         int realProfit = workstationData.profit;
@@ -170,7 +175,8 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
         GameObject instance = Instantiate(textIndicatorPrefab, this.clientPosition.position, Quaternion.identity, this.transform);
         instance.GetComponent<goldFeedback2>().changeText(realProfit.ToString());
-        if (Random.value < breakChance)
+        float randomValue = ItemController.Instance.activeItemsState[2] ? Random.value * 2 : Random.value;
+        if (randomValue < breakChance)
         {
             SetBroken(true);
 

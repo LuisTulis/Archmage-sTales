@@ -20,9 +20,16 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
     [SerializeField] TMP_Text speed;
     [SerializeField] TMP_Text karma;
     [SerializeField] TMP_Text worker;
+    [SerializeField] TMP_Text repair;
     [SerializeField] TMP_Text isBrokenText;
     [SerializeField] LayerMask interactableMask;
     [SerializeField] Slider karmaBar;
+    [SerializeField] GameObject selectWorkerObject;
+    [SerializeField] GameObject repairStationObject;
+
+
+
+
     private GlobalWorkstationManager workstationManager;
     private WorkStationBehaviour selectedWorkstation;
     private string asignatedWorkerName = "";
@@ -64,7 +71,7 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         try
         {
             int goldAmount = ItemController.Instance.activeItemsState[3] ? (int)(selectedWorkstation.workstationData.karma * .8f) : selectedWorkstation.workstationData.karma;
-            if (goldAmount > oro.horo)
+            if (goldAmount > oro.horo || (selectedWorkstation != null && selectedWorkstation.isBroken))
             {
                 upgradeButton.interactable = false;
             }
@@ -136,16 +143,20 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         var data = workstation.workstationData;
         asignatedWorkerName = workstation.assignedWorkerName;
         panel.SetActive(true);
-        if (selectedWorkstation.isBroken) {
-            isBrokenText.gameObject.SetActive(true);
-        }
+        repairStationObject.SetActive(selectedWorkstation.isBroken);
+        selectWorkerObject.SetActive(!selectedWorkstation.isBroken);
+        desc.text = selectedWorkstation.isBroken ? "Una estación rota, al menos sirve de decoración..." : data.description;
+
         WorkstationData nextLevel = workstationManager.upgrade(selectedWorkstation.workstationData.name);
+
         this.karmaBar.value = workstation.karma;
         var multiplicador_karma = workstation.karma * -.035f;
         profit_actual_int = data.profit + (int)(data.profit * multiplicador_karma);
         profit_actual_int = mejoraOro ? (int)(profit_actual_int * 1.2f) : profit_actual_int;
         title.text = data.displayName;
-        desc.text = data.description;
+
+
+        
         if (oro.costoso)
         {
             profit_actual_int = (int)(profit_actual_int * .5f);
@@ -193,8 +204,23 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
             speed.color = new Color(0.02830189f, 0.02830189f, 0.02830189f);
         }
 
+        
+
         int goldAmount = ItemController.Instance.activeItemsState[3] ? (int)(data.karma * .8f) : data.karma;
+        int maxRepair = ItemController.Instance.activeItemsState[3] ? (int)(2500 * .8f) : 2500;
         karma.text = data.karma < 10000 ? "Upgrade: " + "¤" + goldAmount.ToString(): "Max";
+        if (selectedWorkstation.isBroken)
+        {
+            speed.text = "";
+            profit.text = "";
+            status.text = "";
+            karma.text = "";
+            repair.text = data.karma < 10000 ? "Repair: " + "¤" + ((int)(goldAmount*.25f)).ToString() : "Repair: " + "¤" + maxRepair;
+        }
+        else
+        {
+            repair.text = "";
+        }
         worker.text = string.IsNullOrEmpty(asignatedWorkerName) ? "Select Worker" : asignatedWorkerName;
     }
 
@@ -432,5 +458,11 @@ public class WorkstationPanelController : MonoBehaviour, IPointerClickHandler
         selectedWorkstation.CloseRoom();
     }
 
+
+    public void repairStation()
+    {
+        selectedWorkstation.SetBroken(false);
+        Show(selectedWorkstation);
+    }
 
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,12 +10,13 @@ public class CharacterLocomotion : MonoBehaviour
     public Animator animator;
     private float oldYPosition = 0;
     private int oldFloor = 0;
-
+    private bool isEnemy;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agentModel = GetComponent<CharacterModel>();
+        isEnemy = this.GetComponent<EnemyLocomotion>() != null;
     }
 
     private void Start()
@@ -46,7 +48,26 @@ public class CharacterLocomotion : MonoBehaviour
         {
             customer.customerObjective.show = isShowing;
         }
+
+        if(isEnemy && ItemController.Instance.activeItemsState[0] && Vector3.Distance(this.transform.position, ItemController.Instance.gravityTrapPoint.position) < 1)
+        {
+            ItemController.Instance.activeItemsUse[0]--;
+            ItemController.Instance.checkActualItems();
+            StartCoroutine(gravityAscend());
+        }
         
+    }
+
+    IEnumerator gravityAscend()
+    {
+        float speed = 0;
+        while(this.transform.position.y < 100)
+        {
+            speed += 2f * Time.deltaTime;
+            this.transform.position += new Vector3(0, speed, 0);
+            yield return null;
+        }
+        Destroy(this.gameObject);
     }
 
 

@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text mostrar_ahorro;
     public Toggle toggle_salario;
     public Toggle toggle_deuda;
+    public Toggle toggle_impuesto;
+    public TMP_Text mostrar_impuesto;
 
     public GameObject showHour;
     public TMP_Text showCloseTime;
@@ -80,7 +82,9 @@ public class GameManager : MonoBehaviour
     public GameObject karmaBarMark;
     public GameObject barContainer;
 
-
+    public GameObject itemEntryPrefab;
+    public GameObject actualItemList;
+    public List<GameObject> actualItemListObjects;
 
     public GameObject marketUI;
     public GameObject[] towerFloors;
@@ -294,6 +298,7 @@ public class GameManager : MonoBehaviour
     {
         UIOpen = true;
         isPlaying = false;
+        marketUI.gameObject.GetComponent<MarketController>().showUnlockedMarkets();
         marketUI.SetActive(true);
     }
 
@@ -323,7 +328,6 @@ public class GameManager : MonoBehaviour
             float minMentalDecay = realKarma < 0 ? (-2f/25f) * realKarma + 1 : (-1f/50f) * realKarma + 1;
             float maxMentalDecay = realKarma < 0 ? (-13f / 50f) * realKarma + 7 : (-2f / 25f) * realKarma + 7;
 
-            Debug.Log("Min decay -> " + minMentalDecay + " | Max decay -> " + maxMentalDecay);
             GlobalCustomerManager.Instance.minMentalDecayRate = (int)minMentalDecay;
             GlobalCustomerManager.Instance.maxMentalDecayRate = (int)maxMentalDecay;
 
@@ -436,6 +440,10 @@ public class GameManager : MonoBehaviour
 
     public void showDailyStatistics(bool showCheckboxPay)
     {
+        foreach(GameObject itemEntry in actualItemListObjects)
+        {
+            Destroy(itemEntry);
+        }
         attemptClose = false;
         addDebt = !showCheckboxPay;
         isPlaying = false;
@@ -453,12 +461,48 @@ public class GameManager : MonoBehaviour
 
         toggle_salario.gameObject.SetActive(showCheckboxPay);
         toggle_deuda.gameObject.SetActive(showCheckboxPay);
+
+        toggle_impuesto.gameObject.SetActive(showCheckboxPay && (dayCount % 7 == 0));
+        mostrar_impuesto.text = "Impuesto: " + (50 + dayCount * 100 * GlobalWorkstationManager.Instance.actualStations.Count).ToString(); 
+
         showHour.gameObject.SetActive(!showCheckboxPay);
         showCloseTime.text = isOpen ? "Cierre: 00:00" : "Apertura: 06:00";
 
+        if(!showCheckboxPay)
+        {
+            int itemIndex = 0;
+            while(itemIndex < 12)
+            {
+                if(ItemController.Instance.activeItemsState[itemIndex])
+                {
+                    GameObject go = Instantiate(itemEntryPrefab, actualItemList.transform);
+                    go.GetComponent<Image>().sprite = ItemController.Instance.baseItems[itemIndex].itemImage;
+                    actualItemListObjects.Add(go);
+
+                }
+                itemIndex++;
+            }
+        }
+
+        if (toggle_impuesto.gameObject.activeSelf && toggle_impuesto.isOn)
+        {
+            if (horo > (50 + dayCount * 100 * GlobalWorkstationManager.Instance.actualStations.Count))
+            {
+                total -= (50 + dayCount * 100 * GlobalWorkstationManager.Instance.actualStations.Count);
+            }
+            else
+            {
+                toggle_impuesto.isOn = false;
+            }
+
+        }
+
+
         if (toggle_salario.gameObject.activeSelf && toggle_salario.isOn)
         {
-            if (horo > salario_actual)
+            int horo_aux = toggle_impuesto.isOn ? horo - (50 + dayCount * 100 * GlobalWorkstationManager.Instance.actualStations.Count) : horo;
+
+            if (horo_aux > salario_actual)
             {
                 total -= salario_actual;
             }
@@ -467,9 +511,13 @@ public class GameManager : MonoBehaviour
                 toggle_salario.isOn = false;
             }
         }
+
+
+
         if (toggle_deuda.gameObject.activeSelf && toggle_deuda.isOn)
         {
-            int horo_aux = toggle_salario.isOn ? horo - salario_actual : horo;
+            int horo_aux = toggle_impuesto.isOn ? horo - (50 + dayCount * 100 * GlobalWorkstationManager.Instance.actualStations.Count) : horo;
+            horo_aux = toggle_salario.isOn ? horo_aux - salario_actual : horo;
             if (horo_aux > deudaEmpleados)
             {
                 total -= deudaEmpleados;
@@ -479,6 +527,7 @@ public class GameManager : MonoBehaviour
                 toggle_deuda.isOn = false;
             }
         }
+        
 
         mostrar_total.text = "Subtotal: " + total.ToString();
 
@@ -513,6 +562,18 @@ public class GameManager : MonoBehaviour
             {
                 deudaEmpleados += salario;
                 GlobalCharactersManager.Instance.changeMental((int)(-20 * magicCircleMultiply));
+            }
+
+            if(toggle_impuesto.isOn)
+            {
+                addGold(-(50 + dayCount * 100 * GlobalWorkstationManager.Instance.actualStations.Count));
+            }
+            else
+            {
+                if(toggle_impuesto.IsActive())
+                {
+                    SceneManager.LoadScene("GameOver_Scene");
+                }
             }
 
         }

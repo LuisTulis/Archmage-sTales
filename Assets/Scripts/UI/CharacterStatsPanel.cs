@@ -154,6 +154,11 @@ public class CharacterStatsPanel : MonoBehaviour
             dismissButton.gameObject.SetActive(true);
             dismissButton.onClick.AddListener(() => OnDismissButtonClicked(worker));
         }
+        if (character is CustomerComponent customer)
+        {
+            dismissButton.gameObject.SetActive(true);
+            dismissButton.onClick.AddListener(() => OnDismissCustomerButtonClicked(customer));
+        }
     }
 
     private void OnDismissButtonClicked(WorkerComponent worker)
@@ -161,6 +166,13 @@ public class CharacterStatsPanel : MonoBehaviour
         Debug.Log($"Despedido el trabajador: {worker.name}");
 
         worker.BeFired();
+        auxHidePanel();
+    }
+    private void OnDismissCustomerButtonClicked(CustomerComponent customer)
+    {
+        Debug.Log($"Despedido el trabajador: {customer.name}");
+
+        customer.LeaveWithoutBuy();
         auxHidePanel();
     }
 }

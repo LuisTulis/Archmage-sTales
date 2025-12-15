@@ -10,7 +10,6 @@ public class GlobalEnemiesManager : MonoBehaviour {
     [Header("Enemy Data")]
     [SerializeField] private EnemyData enemyData;
 
-
     private int enemyIdCounter;
     private void Awake() {
         if (Instance == null) {

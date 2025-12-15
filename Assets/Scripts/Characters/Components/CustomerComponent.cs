@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEngine;
 
 public class CustomerComponent : CharacterComponent
@@ -107,7 +108,9 @@ public class CustomerComponent : CharacterComponent
         {
             attemptTimer = 0f;
             searchAttempts++;
-            model.mental -= Random.Range(minMentalDecayRate, maxMentalDecayRate);
+            int mentalReduce = Random.Range(minMentalDecayRate, maxMentalDecayRate);
+            mentalReduce = ItemController.Instance.activeItemsState[11] ? (int)(mentalReduce * .5f) : mentalReduce;
+            model.mental -= mentalReduce; 
             Debug.Log($"{name} intenta buscar estación (Intento #{searchAttempts}) | Mental: {model.mental}");
 
             selectStation();
@@ -119,7 +122,7 @@ public class CustomerComponent : CharacterComponent
             var randomValue = Random.Range(0, (model.mental * 2));
             Debug.Log("Intento por irse del local: " + randomValue + "     maximo: " + (model.mental * 2));
 
-            if (searchAttempts >= 3 && randomValue == 0 && !model.skeleton)
+            if (searchAttempts >= 3 && randomValue <= 0 && !model.skeleton)
             {
                 Debug.Log($"{name} se va por frustración buscando estación.");
 
