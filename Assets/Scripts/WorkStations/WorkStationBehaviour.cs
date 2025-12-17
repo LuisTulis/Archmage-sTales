@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -37,7 +39,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     [Header("SFX")]
     public AudioSource audioSource;
 
-    public int floor;
+    public bool showingFeedback = true;
 
     [Header("Break settings")]
     [Range(0f, 1f)]
@@ -74,7 +76,17 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
             if (fx) fx.SetWorking(true);
             this.status = "Being used";
             actualProgress = Instantiate(ProgressBarPrefab, clientPosition.position, Quaternion.identity, transform);
-            actualProgress.transform.position += new Vector3(0, 5, 0);
+            if (showingFeedback)
+            {
+                if (fx) fx.SetWorking(true);
+                actualProgress.transform.position += new Vector3(0, 5, 0);
+
+            }
+            else
+            {
+                actualProgress.transform.position += new Vector3(0, -5000, 0);
+
+            }
             elapsed = 0;
             assignedWorker = workerComponent;
             StartCoroutine(BeingUsed(workerComponent));
@@ -84,6 +96,15 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
     {
 
         float seconds = gameManager.aletargamiento ? workstationData.Speed * 2 : workstationData.Speed;
+        float mejoraOro = 1;
+        if (ItemController.Instance.activeItemsState[6])
+        {
+            seconds = seconds * .8f;
+        }
+        if (ItemController.Instance.activeItemsState[1])
+        {
+            mejoraOro = 1.2f;
+        }
 
         switch (this.type.ToString())
         {
@@ -120,12 +141,32 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
             yield return null;
         }
 
-        if (assignedCustomer != null && assignedCustomer.GetComponent<CustomerModel>().thief)
+        if (assignedCustomer.GetComponent<CustomerModel>().thief && !ItemController.Instance.activeItemsState[10])
         {
+            if (ItemController.Instance.activeItemsState[10])
+            {
+                ItemController.Instance.activeItemsUse[10]--;
+                ItemController.Instance.checkActualItems();
+            }
             SetBroken(true);
         }
-        var realProfit = workstationData.profit + (int)(workstationData.profit * (karma * -0.035f));
+        int realProfit = workstationData.profit;
+        
+        realProfit = gameManager.costoso ? (int)(realProfit * .5f) : realProfit;
+        realProfit = (int)(realProfit * mejoraOro);
+        realProfit = realProfit + (int)(realProfit * (karma * -0.035f));
+        
         gameManager.realKarma += karma / 10;
+
+        if(gameManager.realKarma > 50)
+        {
+            gameManager.realKarma = 50;
+        }
+        else if(gameManager.realKarma < -50)
+        {
+            gameManager.realKarma = -50;
+        }
+
         gameManager.addGold(realProfit);
         if (realProfit < 0)
         {
@@ -134,7 +175,8 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
         GameObject instance = Instantiate(textIndicatorPrefab, this.clientPosition.position, Quaternion.identity, this.transform);
         instance.GetComponent<goldFeedback2>().changeText(realProfit.ToString());
-        if (Random.value < breakChance)
+        float randomValue = ItemController.Instance.activeItemsState[2] ? Random.value * 2 : Random.value;
+        if (randomValue < breakChance)
         {
             SetBroken(true);
 
@@ -183,6 +225,13 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         audioSource.clip = AudioManager.Instance.FindSoundClip(clipName);
         audioSource.loop = true;
         audioSource.Play();
+        if(showingFeedback)
+        {
+            audioSource.clip = AudioManager.Instance.FindSoundClip(clipName);
+            audioSource.loop = true;
+            audioSource.Play();
+
+        }
     }
 
     private void StopSfx()
@@ -244,6 +293,36 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         if (!GlobalWorkstationManager.Instance.activeStations.Contains(this))
         {
             GlobalWorkstationManager.Instance.activeStations.Add(this);
+        }
+    }
+
+    public void modifyActualFeedback()
+    {
+        if(this.showingFeedback)
+        {
+            switch(this.type.ToString())
+            {
+                case "adivinacion":
+                    PlaySfx("FairySound");
+                    break;
+                case "invocacion":
+                    PlaySfx("MagicEnchantment");
+                    break;
+                case "caldero":
+                    PlaySfx("BoilingCauldron");
+                    break;
+                case "encantamiento":
+                    PlaySfx("MagicEnchantment");
+                    break;
+            }
+            fx.SetWorking(true);
+            actualProgress.transform.position += new Vector3(0, 5000, 0);
+        }
+        else
+        {
+            fx.SetWorking(false);
+            StopSfx();
+            actualProgress.transform.position += new Vector3(0, -5000, 0);
         }
     }
 

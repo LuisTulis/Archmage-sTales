@@ -77,7 +77,16 @@ public class menu : MonoBehaviour
     public void OnNewGame()
     {
         AudioManager.Instance.PlaySound("Click");
-        SceneManager.LoadScene("Game_Scene_01");
+        SceneManager.LoadScene("Game_Scene_TengoMiedo");
+
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic("TheWanderer");
+    }
+
+    public void OnVolverMenu()
+    {
+        AudioManager.Instance.PlaySound("Click");
+        SceneManager.LoadScene("Menu_Scene_01");
 
         AudioManager.Instance.StopMusic();
         AudioManager.Instance.PlayMusic("TheWanderer");

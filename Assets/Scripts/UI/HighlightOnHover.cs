@@ -19,12 +19,16 @@ public class HighlightOnHover : MonoBehaviour
 
         foreach (Renderer renderer in renderers)
         {
-            Material material = renderer.material;
+            Material[] rendererMaterials = renderer.materials;
 
-            if (material.HasProperty(EMISSION_COLOR))
+            foreach(Material material in rendererMaterials)
             {
-                materials.Add(material);
-                originalEmissions.Add(material.GetColor(EMISSION_COLOR));
+                if (material.HasProperty(EMISSION_COLOR))
+                {
+                    materials.Add(material);
+                    originalEmissions.Add(material.GetColor(EMISSION_COLOR));
+                }
+
             }
         }
     }

@@ -1,3 +1,5 @@
+using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,12 +8,15 @@ public class CharacterLocomotion : MonoBehaviour
     public NavMeshAgent agent;
     protected CharacterModel agentModel;
     public Animator animator;
-
+    private float oldYPosition = 0;
+    private int oldFloor = 0;
+    private bool isEnemy;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agentModel = GetComponent<CharacterModel>();
+        isEnemy = this.GetComponent<EnemyLocomotion>() != null;
     }
 
     private void Start()
@@ -20,9 +25,51 @@ public class CharacterLocomotion : MonoBehaviour
         agentModel = GetComponent<CharacterModel>();
         if (agent != null)
         {
-            SetSpeed(agentModel.Speed);
+            int speed = ItemController.Instance.activeItemsState[7] ? agentModel.Speed * 4 : agentModel.Speed;
+            SetSpeed(speed);
         }
     }
+
+    public void checkSpeedUpgrade(bool powerUp)
+    {
+        int speed = powerUp ? agentModel.Speed * 4 : agentModel.Speed;
+        SetSpeed(speed);
+    }
+
+    private void Update()
+    {
+        int floorValue = GameManager.Instance.actualFloor;        
+        int minValue = floorValue * 3;
+        int maxValue = (1 + floorValue) * 3;
+        bool isShowing = (this.transform.position.y < .1f || (this.transform.position.y > minValue && this.transform.position.y < maxValue));
+        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = isShowing;
+        CustomerComponent customer = this.GetComponent<CustomerComponent>();
+        if(customer != null)
+        {
+            customer.customerObjective.show = isShowing;
+        }
+
+        if(isEnemy && ItemController.Instance.activeItemsState[0] && Vector3.Distance(this.transform.position, ItemController.Instance.gravityTrapPoint.position) < 1)
+        {
+            ItemController.Instance.activeItemsUse[0]--;
+            ItemController.Instance.checkActualItems();
+            StartCoroutine(gravityAscend());
+        }
+        
+    }
+
+    IEnumerator gravityAscend()
+    {
+        float speed = 0;
+        while(this.transform.position.y < 100)
+        {
+            speed += 2f * Time.deltaTime;
+            this.transform.position += new Vector3(0, speed, 0);
+            yield return null;
+        }
+        Destroy(this.gameObject);
+    }
+
 
     public void MoveTo(Vector3 targetPosition)
     {

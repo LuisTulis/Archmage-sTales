@@ -4,4 +4,6 @@ public class WorkerModel : BaseWorkerModel
     public int tier { get; set; }
     public int mental { get; set; }
 
+    public int clayDoll { get; set; }
+
 }

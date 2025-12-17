@@ -129,8 +129,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkPoint: {fileID: 0}
+  greatingsIndex: 0
   readyToTalk: 0
-  greatingsDialogue: []
+  greatingsDialogue:
+  - ids: 01000000ffffffff000000000100000001000000000000000000000000000000010000000100000000000000
+    lines:
+    - "\xA1Lo he visto por aqu\xED! \xA1Estoy seguro de que est\xE1 aqu\xED!"
+    - Un loco con traje de noble grita a la entrada de la tienda.
+    - "\xBFQu\xE9?"
+    - "\xA1El erizo azul! \xA1T\xFA lo estas escondiendo! "
+    - "\xA1De seguro eres parte de esos gnomos rojos!"
+    - ...
+    - "Para nada... \xA1Estoy de tu lado!"
+    - "Si lo encuentro te avisar\xE9... "
+    - "\xA1Muchas gracias! \xA1Tenemos que capturarlo con vida!"
+    - "\xA1Lo buscar\xE9 otra vez en mi castillo! \xA1Avisame si encuentras algo!"
+    - "Desquiciado... Aunque sea logr\xE9 que se vaya antes de que espante a los
+      clientes..."
+    positions:
+    - {x: 400, y: -128, z: 0}
+    - {x: 0, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    orientations: 010000000000000001000000ffffffffffffffff010000000100000001000000ffffffffffffffff01000000
+    secondaryIds: ffffffff010000000100000000000000000000000100000001000000010000000000000000000000ffffffff
+    secondaryPositions:
+    - {x: 0, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 0, y: -128, z: 0}
+    secondaryOrientations: 0000000001000000ffffffff0100000001000000ffffffffffffffffffffffff010000000100000000000000
+  - ids: 01000000
+    lines:
+    - "\xA1Hola! \xA1Solo me pasaba a ver que tal iba todo! \xA1No te olvides de
+      visitarme en la ciudad!"
+    positions:
+    - {x: 400, y: -128, z: 0}
+    orientations: ffffffff
+    secondaryIds: ffffffff
+    secondaryPositions:
+    - {x: 0, y: 0, z: 0}
+    secondaryOrientations: 00000000
   hasTalked: 0
 --- !u!1001 &1724073643031844630
 PrefabInstance:
@@ -198,12 +251,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
       propertyPath: images.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
       propertyPath: images.Array.data[4]
       value: 
       objectReference: {fileID: 21300000, guid: 3ef14819d7581974c8aba12deffac237, type: 3}
+    - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
+      propertyPath: images.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: 13dab9b3dc2326447afe52ea30f3b816, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

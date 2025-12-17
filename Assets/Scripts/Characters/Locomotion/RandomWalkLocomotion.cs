@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RandomWalkLocomotion : CharacterLocomotion
@@ -13,7 +14,6 @@ public class RandomWalkLocomotion : CharacterLocomotion
 
     private int currentIndex = 0;
     private float waitTimer = 0f;
-
     public void IdleRandomWalk() {
         if (patrolPoints == null || patrolPoints.Count == 0) return;
 

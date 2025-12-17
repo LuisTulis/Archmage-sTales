@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class GlobalCharactersManager : MonoBehaviour {
     public static GlobalCharactersManager Instance { get; private set; }
@@ -24,6 +25,9 @@ public class GlobalCharactersManager : MonoBehaviour {
     public event Action<CharacterComponent> OnCharacterSelected;
     public event Action<CharacterComponent> OnCharacterDeselected;
 
+    private bool lastNormalClayStatus = false;
+    private bool lastReinforcedClayStatus = false;
+
     void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -42,7 +46,62 @@ public class GlobalCharactersManager : MonoBehaviour {
                 DeselectCharacter();
             }
         }
+        if(lastNormalClayStatus != ItemController.Instance.activeItemsState[8])
+        {
+            lastNormalClayStatus = ItemController.Instance.activeItemsState[8];
+            manageNormalClay(lastNormalClayStatus);
+        }
+        if (lastReinforcedClayStatus != ItemController.Instance.activeItemsState[9])
+        {
+            lastReinforcedClayStatus = ItemController.Instance.activeItemsState[9];
+            manageReinforcedClay(lastReinforcedClayStatus);
+        }
     }
+
+    private void manageNormalClay(bool hire)
+    {
+        Debug.Log("aca estoy manejando los normalclay -> " + hire);
+        if(hire)
+        {
+            hireClayDoll();
+        }
+        else
+        {
+            int workerIndex = 0;
+            while(workerIndex < Workers.Count)
+            {
+                WorkerModel model = Workers[workerIndex].GetComponent<WorkerModel>();
+                if (model.clayDoll == 1)
+                {
+                    Workers[workerIndex].GetComponent<WorkerComponent>().BeKidnapped(GlobalLocomotionManager.Instance.despawnPoint);
+                }
+                workerIndex++;
+            }
+        }
+    }
+
+    private void manageReinforcedClay(bool hire)
+    {
+        Debug.Log("aca estoy manejando los normalclay -> " + hire);
+        if (hire)
+        {
+            hireReinforcedClayDoll();
+        }
+        else
+        {
+            int workerIndex = 0;
+            while (workerIndex < Workers.Count)
+            {
+                WorkerModel model = Workers[workerIndex].GetComponent<WorkerModel>();
+                if (model.clayDoll == 2)
+                {
+                    Workers[workerIndex].GetComponent<WorkerComponent>().BeKidnapped(GlobalLocomotionManager.Instance.despawnPoint);
+                }
+                workerIndex++;
+            }
+        }
+    }
+
     public int getAllSalary()
     {
         int salary = 0;
@@ -59,7 +118,7 @@ public class GlobalCharactersManager : MonoBehaviour {
         GameObject instance = Instantiate(StaffAdorPrefab, Vector3.zero, Quaternion.identity);
 
         StaffAdorModel model = instance.GetComponent<StaffAdorModel>();
-        model.Stats = new WorkerStats(true);
+        model.Stats = new WorkerStats(0);
         if (model != null) {
             model.Id = staffAdorData.Id;
             model.CharacterName = staffAdorData.Name;
@@ -78,8 +137,35 @@ public class GlobalCharactersManager : MonoBehaviour {
         tempWorker.Speed = workerData.Speed;
         tempWorker.CharacterName = CharacterNameHelper.GetRandomName();
         tempWorker.salary = UnityEngine.Random.Range(50, 150);
-        tempWorker.Stats = new WorkerStats(false);
+        tempWorker.Stats = new WorkerStats(1);
+        tempWorker.clayDoll = 0;
         return tempWorker;
+    }
+
+    private void hireClayDoll()
+    {
+        for(int i = 0; i < 5; i ++)
+        {
+            WorkerModel newClayDoll = new WorkerModel();
+            newClayDoll.Id = GetNewWorkerId();
+            newClayDoll.Speed = 2;
+            newClayDoll.CharacterName = CharacterNameHelper.GetRandomClayName();
+            newClayDoll.salary = 0;
+            newClayDoll.Stats = new WorkerStats(2);
+            newClayDoll.clayDoll = 1;
+            HireWorker(newClayDoll);
+        }
+    }
+    private void hireReinforcedClayDoll()
+    {
+        WorkerModel newClayDoll = new WorkerModel();
+        newClayDoll.Id = GetNewWorkerId();
+        newClayDoll.Speed = 2;
+        newClayDoll.CharacterName = CharacterNameHelper.GetRandomClayName();
+        newClayDoll.salary = 0;
+        newClayDoll.Stats = new WorkerStats(3);
+        newClayDoll.clayDoll = 2;
+        HireWorker(newClayDoll);
     }
 
     public void GenerateCandidates() {
@@ -94,23 +180,31 @@ public class GlobalCharactersManager : MonoBehaviour {
         foreach(GameObject worker in Workers)
         {
             WorkerModel mental = worker.GetComponent<WorkerModel>();
-            mental.mental += amount;
-            if(mental.mental < 0)
+            if(mental.clayDoll == 0)
             {
-                worker.GetComponentInChildren<WorkerStatus>().setStatus(0);
-            }
-            else
-            {
-                if(amount > 0)
+                if (mental.mental >= 0)
                 {
+                    mental.mental += amount;
+                    if (mental.mental < 0)
+                    {
+                        worker.GetComponentInChildren<WorkerStatus>().setStatus(0);
+                    }
+                    else
+                    {
+                        if (amount > 0)
+                        {
 
-                    worker.GetComponentInChildren<WorkerStatus>().setStatus(2);
+                            worker.GetComponentInChildren<WorkerStatus>().setStatus(2);
+                        }
+                        else
+                        {
+                            worker.GetComponentInChildren<WorkerStatus>().setStatus(1);
+                        }
+                    }
                 }
-                else
-                {
-                    worker.GetComponentInChildren<WorkerStatus>().setStatus(1);
-                }
+
             }
+            
         }
     }
 
@@ -125,7 +219,8 @@ public class GlobalCharactersManager : MonoBehaviour {
             model.CharacterName = candidate.CharacterName;
             model.salary = candidate.salary;
             model.Stats = candidate.Stats;
-            model.mental = 50;
+            model.mental = model.salary > 1 ? 50 : 0;
+            model.clayDoll = candidate.clayDoll;
 
             Workers.Add(instance);
         }

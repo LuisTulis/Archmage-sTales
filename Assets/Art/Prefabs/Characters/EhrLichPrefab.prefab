@@ -131,8 +131,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkPoint: {fileID: 0}
+  greatingsIndex: 0
   readyToTalk: 0
-  greatingsDialogue: []
+  greatingsDialogue:
+  - ids: ffffffff0400000004000000000000000400000004000000040000000000000004000000
+    lines:
+    - Una figura encapuchada se acerca a la torre, murmurando algo...
+    - "El balance entre bien y mal est\xE1 muy inestable aqu\xED..."
+    - "De hecho... la curva de interes en este siti\xF3 est\xE1 aumentando a pasos
+      agigantados..."
+    - "\xBFOtra maga por aqu\xED? \xBFVienes a buscar datos sobre la competencia?"
+    - "\xA1Que terrible eres! \xA1\xBFComo puedes pensar eso?!"
+    - "Tan solo me gust\xF3 la estetica del lugar... Aunque el tono me es confuso..."
+    - "\xBFQuieres construir una buena reputaci\xF3n? \xBFO destruir a tus enemigos? "
+    - "\xBFDisculpa? "
+    - "Te ver\xE9 en el cementerio en caso de que necesites ayuda..."
+    positions:
+    - {x: 0, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    orientations: 00000000010000000100000001000000ffffffffffffffffffffffff01000000ffffffff
+    secondaryIds: 04000000ffffffffffffffff040000000000000000000000000000000400000000000000
+    secondaryPositions:
+    - {x: 400, y: -128, z: 0}
+    - {x: 0, y: -128, z: 0}
+    - {x: 0, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    secondaryOrientations: 01000000000000000000000001000000010000000100000001000000ffffffff01000000
+  - ids: 03000000
+    lines:
+    - "\xA1Hola! \xA1Solo me pasaba a ver que tal iba todo! \xA1No te olvides de
+      visitarme en la ciudad!"
+    positions:
+    - {x: 400, y: -128, z: 0}
+    orientations: ffffffff
+    secondaryIds: ffffffff
+    secondaryPositions:
+    - {x: 0, y: 0, z: 0}
+    secondaryOrientations: 00000000
   hasTalked: 0
 --- !u!1 &3590263769835384414
 GameObject:
@@ -462,12 +509,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
       propertyPath: images.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
       propertyPath: images.Array.data[4]
       value: 
       objectReference: {fileID: 21300000, guid: 3ef14819d7581974c8aba12deffac237, type: 3}
+    - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
+      propertyPath: images.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: 13dab9b3dc2326447afe52ea30f3b816, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

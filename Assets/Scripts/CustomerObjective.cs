@@ -7,9 +7,10 @@ public class CustomerObjective : MonoBehaviour
     public Sprite[] images;
     public string objective;
     public Image image;
-
+    public bool show;
     void Awake()
     {
+        this.show = true;
         if (cameraTransform == null)
         {
             cameraTransform = Camera.main.transform;
@@ -23,6 +24,14 @@ public class CustomerObjective : MonoBehaviour
 
     void Update()
     {
+        if(show)
+        {
+            this.transform.localPosition = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            this.transform.localPosition = new Vector3(0, -5000, 0);
+        }
         lookAtCamera();
         if (objective != "")
         {
