@@ -84,7 +84,6 @@ public class ItemController : MonoBehaviour
     }
     public void openBackpack()
     {
-        Debug.Log("A");
 
         int addedItems = 0;
         backpack.SetActive(true);
@@ -94,6 +93,8 @@ public class ItemController : MonoBehaviour
             Destroy(itemEntryList[0]);
             itemEntryList.RemoveAt(0);
         }
+        useButton.interactable = false;
+        itemUses.text = "";
              
 
         while(addedItems < playerItems.Count)

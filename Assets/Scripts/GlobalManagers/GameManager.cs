@@ -590,6 +590,7 @@ public class GameManager : MonoBehaviour
 
         }
         isPlaying = true;
+        toggle_impuesto.isOn = false;
         this.UIOpen = false;
         this.dailyStatistics.SetActive(false);
     }

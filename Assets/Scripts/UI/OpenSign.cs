@@ -33,9 +33,12 @@ public class OpenSign : MonoBehaviour
 
     public void OnConfirm()
     {
-        gameManager.Open(!gameManager.isOpen);
-        openCloseUI.enabled = false;
-        GameManager.Instance.UIOpen = false;
+        if(gameManager.actualHour > 7)
+        {
+            gameManager.Open(!gameManager.isOpen);
+            openCloseUI.enabled = false;
+            GameManager.Instance.UIOpen = false;
+        }
     }
 
     public void OnClose()

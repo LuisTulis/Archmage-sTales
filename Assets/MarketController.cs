@@ -54,6 +54,11 @@ public class MarketController : MonoBehaviour
                 backButton.SetActive(true);
             }
         }
+        if(gameObject.activeSelf)
+        {
+            GameManager.Instance.isPlaying = false;
+            GameManager.Instance.UIOpen = true;
+        }
     }
     public void confirmBuy()
     {
