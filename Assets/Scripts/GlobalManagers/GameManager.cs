@@ -86,29 +86,39 @@ public class GameManager : MonoBehaviour
 
     public GameObject marketUI;
     public GameObject[] towerFloors;
-    private void Awake()
+    private bool awaked = false;
+    private void Start()
     {
-        goldQueue = new List<int>();
-        if (Instance == null)
+        newAwake();
+    }
+
+    private void newAwake()
+    {
+        if(!awaked)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            goldQueue = new List<int>();
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
+            if (rain != null)
+            {
+                rain.Stop();
+            }
+
+            grupoTextoDia = GameObject.Find("GrupoDia");
+            oro_inicial = 0;
+            horo = 0;
+            setFloor(0);
+            awaked = true;
         }
 
-        if (rain != null)
-        {
-            rain.Stop();
-        }
-
-        grupoTextoDia = GameObject.Find("GrupoDia");
-
-        oro_inicial = 0;
-        horo = 0;
-        setFloor(0);
     }
 
     private void OnEnable()
@@ -128,6 +138,8 @@ public class GameManager : MonoBehaviour
         {
             light = FindObjectOfType<Light>();
         }
+
+        newAwake();
     }
     
     private void Update()
@@ -272,7 +284,9 @@ public class GameManager : MonoBehaviour
 
     public void setFloor(int floor)
     {
-        if(maxFloor >= floor)
+        dia_mostrar.text = "-";
+        dia_mostrar.text = GlobalWorkstationManager.Instance.allStations.Count.ToString() + "a";
+        if (maxFloor >= floor)
         {
             actualFloor = floor;
             GlobalWorkstationManager.Instance.showFloorRooms(actualFloor);

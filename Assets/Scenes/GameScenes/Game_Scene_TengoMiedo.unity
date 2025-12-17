@@ -70097,11 +70097,11 @@ PrefabInstance:
     - target: {fileID: -498175717852421882, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
       propertyPath: LordEnzoPrefab
       value: 
-      objectReference: {fileID: 8884162122326847819, guid: bf623ec81bbc2a74ba55502fed5339be, type: 3}
+      objectReference: {fileID: 8884162122326847819, guid: 90091fdd447f90c4fbe8c98b6c5e345b, type: 3}
     - target: {fileID: -498175717852421882, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
       propertyPath: AlejandroPrefab
       value: 
-      objectReference: {fileID: 8884162122326847819, guid: 90091fdd447f90c4fbe8c98b6c5e345b, type: 3}
+      objectReference: {fileID: 8884162122326847819, guid: bf623ec81bbc2a74ba55502fed5339be, type: 3}
     - target: {fileID: -498175717852421882, guid: 50a3b8f58bded634b946fd5f8b237e98, type: 3}
       propertyPath: taxCollectorPoint
       value: 
@@ -91186,7 +91186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.9716981, g: 0.74464947, b: 0.46293163, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -92538,7 +92538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -100727,7 +100727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 273453024113665002, guid: 8445e81b10564db4da452cd9484ac8cc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -31.999878
+      value: -32.000122
       objectReference: {fileID: 0}
     - target: {fileID: 273453024113665002, guid: 8445e81b10564db4da452cd9484ac8cc, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -103759,6 +103759,12 @@ MonoBehaviour:
       - "Gran fuerza que nos orienta... sin dejarnos caer libremente en la desesperaci\xF3n..."
       - "Seguir\xE9 sus ense\xF1anzas de manera recta y uniforme..."
       - Por favor, que la sumatoria de sus deseos sea positiva hacia nosotros...
+      - Tras terminar su rezo, se voltea, notando la presencia del archimago.
+      - "\xA1Oh! \xA1Perdido! \xBFHas decidido unirte a la iglesia para arreglar
+        el sentido y direcci\xF3n de tu vida? "
+      - "Yo... Solo pasaba a ver que hab\xEDa por aqu\xED... "
+      - "Una lastima... Pero bueno, incluso si no te vuelves un adepto, podr\xEDa
+        venderte algun objeto para reforzar tu f\xE9."
       positions:
       - {x: 450, y: -128, z: 0}
       - {x: 450, y: -128, z: 0}

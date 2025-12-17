@@ -48,6 +48,7 @@ public class GlobalWorkstationManager : MonoBehaviour
         AlchemyRoom[] rooms = FindObjectsOfType<AlchemyRoom>();
         foreach(AlchemyRoom room in rooms)
         {
+            //Destroy(room);
             allStations.Add(room);
         }
         foreach (WorkStationBehaviour station in stations)
@@ -126,8 +127,10 @@ public class GlobalWorkstationManager : MonoBehaviour
 
     public void showFloorRooms(int floorIndex)
     {
-        foreach(AlchemyRoom room in allStations)
+
+        foreach (AlchemyRoom room in allStations)
         {
+            //room.gameObject.transform.localScale = new Vector3(500, 500, 500);
             bool show = room.floorIndex <= floorIndex;
             if(room.purchasedWorkstation != null)
             {
