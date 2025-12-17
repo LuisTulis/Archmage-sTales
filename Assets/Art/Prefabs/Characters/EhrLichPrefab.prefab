@@ -169,17 +169,23 @@ MonoBehaviour:
     - {x: 400, y: -128, z: 0}
     - {x: -400, y: -128, z: 0}
     secondaryOrientations: 01000000000000000000000001000000010000000100000001000000ffffffff01000000
-  - ids: 03000000
+  - ids: ffffffff0400000004000000
     lines:
-    - "\xA1Hola! \xA1Solo me pasaba a ver que tal iba todo! \xA1No te olvides de
-      visitarme en la ciudad!"
+    - La nigromante se acerca a la torre.
+    - "Una muy bonita construcci\xF3n... Que satisfacci\xF3n dar\xEDa el destruirla
+      totalmente... "
+    - "Digo... \xBFC\xF3mo est\xE1s? "
     positions:
     - {x: 400, y: -128, z: 0}
-    orientations: ffffffff
-    secondaryIds: ffffffff
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    orientations: ffffffffffffffffffffffff
+    secondaryIds: 040000000000000000000000
     secondaryPositions:
-    - {x: 0, y: 0, z: 0}
-    secondaryOrientations: 00000000
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    secondaryOrientations: ffffffff0100000001000000
   hasTalked: 0
 --- !u!1 &3590263769835384414
 GameObject:

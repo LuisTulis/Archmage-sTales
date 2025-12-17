@@ -127,17 +127,20 @@ MonoBehaviour:
     - {x: -400, y: -128, z: 0}
     - {x: -400, y: -128, z: 0}
     secondaryOrientations: 010000000100000001000000ffffffff010000000100000001000000
-  - ids: 03000000
+  - ids: ffffffff03000000
     lines:
-    - "\xA1Hola! \xA1Solo me pasaba a ver que tal iba todo! \xA1No te olvides de
-      visitarme en la ciudad!"
+    - Una maga blanca se acerca a la torre.
+    - "\xA1Solo pasaba a ver que tal iba todo! \xBFEl peso de tus acciones a\xFAn
+      no destruyeron tu vida? "
     positions:
+    - {x: 0, y: -128, z: 0}
     - {x: 400, y: -128, z: 0}
-    orientations: ffffffff
-    secondaryIds: ffffffff
+    orientations: ffffffffffffffff
+    secondaryIds: 0300000000000000
     secondaryPositions:
-    - {x: 0, y: 0, z: 0}
-    secondaryOrientations: 00000000
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    secondaryOrientations: ffffffff01000000
   hasTalked: 0
 --- !u!114 &5280501792992178429
 MonoBehaviour:

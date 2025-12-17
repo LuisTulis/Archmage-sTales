@@ -100866,7 +100866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 273453024113665002, guid: 8445e81b10564db4da452cd9484ac8cc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -32.000122
+      value: -32.000183
       objectReference: {fileID: 0}
     - target: {fileID: 273453024113665002, guid: 8445e81b10564db4da452cd9484ac8cc, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -103889,7 +103889,7 @@ MonoBehaviour:
   - background: {fileID: 21300000, guid: deb6c1b76c059c5438b1a80a31df68fd, type: 3}
     seller: {fileID: 21300000, guid: 8f971d4da268288459a54ad66ab2ee72, type: 3}
     firstDialogue:
-      ids: ffffffffffffffff03000000030000000300000003000000
+      ids: ffffffffffffffff03000000030000000300000003000000ffffffff030000000000000003000000
       lines:
       - Al entrar a la iglesia, Ador ve a una maga vestida con una tunica blanca.
       - Dicha persona, sin percatarse de la presencia del archimago, se mantiene
@@ -103911,8 +103911,12 @@ MonoBehaviour:
       - {x: 450, y: -128, z: 0}
       - {x: 450, y: -128, z: 0}
       - {x: 450, y: -128, z: 0}
-      orientations: ffffffffffffffffffffffffffffffffffffffffffffffff
-      secondaryIds: 0300000003000000ffffffffffffffffffffffffffffffff
+      - {x: 450, y: -128, z: 0}
+      - {x: 450, y: -128, z: 0}
+      - {x: -450, y: -128, z: 0}
+      - {x: 450, y: -128, z: 0}
+      orientations: 01000000010000000100000001000000010000000100000001000000ffffffff01000000ffffffff
+      secondaryIds: 0300000003000000ffffffffffffffffffffffffffffffff03000000000000000300000000000000
       secondaryPositions:
       - {x: 450, y: -128, z: 0}
       - {x: 450, y: -128, z: 0}
@@ -103920,60 +103924,93 @@ MonoBehaviour:
       - {x: 0, y: 0, z: 0}
       - {x: 0, y: 0, z: 0}
       - {x: 0, y: 0, z: 0}
-      secondaryOrientations: ffffffffffffffff00000000000000000000000000000000
+      - {x: 0, y: 0, z: 0}
+      - {x: 450, y: -128, z: 0}
+      - {x: -450, y: -128, z: 0}
+      - {x: 450, y: -128, z: 0}
+      secondaryOrientations: 010000000100000000000000000000000000000000000000ffffffff01000000ffffffff01000000
     secondDialogue:
-      ids: 03000000
+      ids: ffffffff03000000
       lines:
-      - "\xA1Has vuelto! Bienvenido, \xBFQu\xE9 llevar\xE1s hoy?"
+      - "La maga blanca se encuentra rezando en la iglesia, notando la presencia
+        de Ador unos pocos segundos despu\xE9s de que entre."
+      - "\xA1Oh! \xBFTus pasos ya han sido atra\xEDdos hacia el buen camino? \xBFO
+        tus pensamientos siguen densamente nublados?"
       positions:
       - {x: 400, y: -128, z: 0}
-      orientations: ffffffff
-      secondaryIds: ffffffff
+      - {x: 400, y: -128, z: 0}
+      orientations: ffffffffffffffff
+      secondaryIds: 0300000000000000
       secondaryPositions:
-      - {x: 0, y: 0, z: 0}
-      secondaryOrientations: 00000000
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      secondaryOrientations: 0100000001000000
     firstDialogueFlag: 0
     itemList: 0000000001000000
   - background: {fileID: 21300000, guid: 41fdc343a3fa20d44a8ebada461f1001, type: 3}
     seller: {fileID: 21300000, guid: 796d7f7ac7c86104eb6bad952cf9061e, type: 3}
     firstDialogue:
-      ids: ffffffffffffffff03000000030000000300000003000000
+      ids: ffffffff00000000ffffffff0500000005000000ffffffff05000000ffffffff0500000000000000050000000000000005000000
       lines:
-      - Al entrar a la iglesia, Ador ve a una maga vestida con una tunica blanca.
-      - Dicha persona, sin percatarce de la presencia del archimago, se mantiene
-        rezando.
-      - Oh, gran fuerza que nos permite tener los pies sobre la tierra.
-      - "Gran fuerza que nos orienta... sin dejarnos caer libremente en la desesperaci\xF3n..."
-      - "Seguir\xE9 sus ense\xF1anzas de manera recta y uniforme..."
-      - Por favor, que la sumatoria de sus deseos sea positiva hacia nosotros...
+      - 'Ador entra al taller rodeado de sonidos de maquinaria. '
+      - "\xBFHola? \xA1\xBFHola?!"
+      - "Parece que est\xE1 totalmente inmerso en lo suyo. "
+      - "Si agrego un 30% m\xE1s de pato... "
+      - "Si lo mezclo un poco m\xE1s fuerte... "
+      - "Una explosi\xF3n hace que espabile."
+      - "\xA1Uf! \xA1Por un pelo! Tendr\xE9 que anotar sobre este error..."
+      - "Reci\xE9n ah\xED la presencia de Ador es percibida. "
+      - "\xA1Has venido! \xBFDecidiste hacer la torre un 42% m\xE1s oscura?"
+      - "\xA1Me hab\xEDas dicho m\xE1s clara!"
+      - "\xA1Claro! \xA1Pero oscuramente oscura quedar\xE1 mejor! "
+      - '... '
+      - "Seguro estos planos te ayudan a darle un poco m\xE1s de estilo a tu tienda. "
       positions:
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      orientations: ffffffffffffffffffffffffffffffffffffffffffffffff
-      secondaryIds: 0300000003000000ffffffffffffffffffffffffffffffff
+      - {x: 0, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 0, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: 0, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: 0, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      orientations: 0000000001000000000000000100000001000000010000000100000000000000ffffffff01000000ffffffff01000000ffffffff
+      secondaryIds: 00000000050000000500000000000000000000000500000000000000050000000000000005000000000000000500000000000000
       secondaryPositions:
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: 0, z: 0}
-      secondaryOrientations: ffffffffffffffff00000000000000000000000000000000
+      - {x: 400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: 400, y: 0, z: 0}
+      - {x: -400, y: 0, z: 0}
+      - {x: -400, y: 0, z: 0}
+      - {x: 400, y: 0, z: 0}
+      - {x: -400, y: 0, z: 0}
+      - {x: 400, y: 0, z: 0}
+      - {x: -400, y: 0, z: 0}
+      - {x: 400, y: 0, z: 0}
+      - {x: -400, y: 0, z: 0}
+      - {x: 400, y: 0, z: 0}
+      - {x: -400, y: 0, z: 0}
+      secondaryOrientations: 01000000010000000100000001000000010000000100000001000000ffffffff01000000ffffffff01000000ffffffff01000000
     secondDialogue:
-      ids: 05000000
+      ids: ffffffff05000000
       lines:
-      - "\xA1Has vuelto! Bienvenido, \xBFQu\xE9 llevar\xE1s hoy?"
+      - "Ador entra en el taller y ve al inventor golpeando dos objetos entre s\xED. "
+      - "\xA1Estoy seguro que esto funcionar\xE1! \xA1Tan solo necesito mezclarlos
+        en mi cuarto de mezclado!"
       positions:
       - {x: 400, y: -128, z: 0}
-      orientations: ffffffff
-      secondaryIds: ffffffff
+      - {x: 400, y: -128, z: 0}
+      orientations: 00000000ffffffff
+      secondaryIds: 0500000000000000
       secondaryPositions:
-      - {x: 0, y: 0, z: 0}
-      secondaryOrientations: 00000000
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      secondaryOrientations: 0100000001000000
     firstDialogueFlag: 0
     itemList: 0200000003000000
   - background: {fileID: 21300000, guid: 84f0e3346d647b44f8a92d26bb5c5a7b, type: 3}
@@ -103981,8 +104018,8 @@ MonoBehaviour:
     firstDialogue:
       ids: ffffffffffffffff04000000040000000000000004000000
       lines:
-      - "Llegas al cementerio y un escalofr\xEDo recorre tu espalda."
-      - Al adentrarte un poco por los caminos, notas a una figura encapuchada.
+      - "Ador llega al cementerio y un escalofr\xEDo recorre su espalda."
+      - Al adentrarse un poco por los caminos, nota a una figura encapuchada.
       - "\xA1Cuidado con esa l\xEDnea! \xA1Casi rompes mi c\xEDrculo m\xE1gico!"
       - "\xA1\xBFC\xF3mo podr\xE9 invocar demonios si llegas a hacer algo as\xED?!"
       - "Disculpa... Estaba inmerso pensando en que comprar\xEDa..."
@@ -104005,139 +104042,196 @@ MonoBehaviour:
       - {x: -450, y: -128, z: 0}
       secondaryOrientations: ffffffffffffffff0100000001000000ffffffff01000000
     secondDialogue:
-      ids: 04000000
+      ids: ffffffffffffffff04000000
       lines:
-      - "\xA1Has vuelto! Bienvenido, \xBFQu\xE9 llevar\xE1s hoy?"
+      - "Entrando al cementerio, Ador escucha ruidos met\xE1licos en la lejan\xEDa,
+        notando que es la nigromante al acercarse."
+      - "M\xE1s de cerca, un esqueleto est\xE1 encerrado en una jaula, jalando desesperadamente
+        una palanca."
+      - "\xBFC\xF3mo te crees que los condiciono?"
       positions:
       - {x: 400, y: -128, z: 0}
-      orientations: ffffffff
-      secondaryIds: ffffffff
+      - {x: 400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      orientations: ffffffffffffffffffffffff
+      secondaryIds: 040000000400000000000000
       secondaryPositions:
       - {x: 0, y: 0, z: 0}
-      secondaryOrientations: 00000000
+      - {x: 0, y: 0, z: 0}
+      - {x: 0, y: 0, z: 0}
+      secondaryOrientations: 010000000100000001000000
     firstDialogueFlag: 0
     itemList: 0400000005000000
   - background: {fileID: 21300000, guid: d8912fa96881d1746b05e661d635bf6b, type: 3}
     seller: {fileID: 21300000, guid: fb52c5c253e84744cb1d1893658c3b0c, type: 3}
     firstDialogue:
-      ids: ffffffffffffffff04000000040000000000000004000000
+      ids: ffffffff020000000000000002000000ffffffffffffffff0200000001000000010000000000000001000000
       lines:
-      - "Llegas al cementerio y un escalofr\xEDo recorre tu espalda."
-      - Al adentrarte un poco por los caminos, notas a una figura encapuchada.
-      - "\xA1Cuidado con esa l\xEDnea! \xA1Casi rompes mi c\xEDrculo m\xE1gico!"
-      - "\xA1\xBFC\xF3mo podr\xE9 invocar demonios si llegas a hacer algo as\xED?!"
-      - "Disculpa... Estaba inmerso pensando en que comprar\xEDa..."
-      - Buff... Da igual, de todas formas ya rompiste mi estado de flow...
+      - Ador se halla frente a las puertas del castillo, siendo atendido por un peculiar
+        sujeto.
+      - "\xA1Prototipo! \xA1Prototipo!"
+      - "\xBFHola? \xBFEst\xE1 el due\xF1o del lugar aqu\xED? "
+      - "\xBFPrototipo? \xA1Prototipo! "
+      - "Ese extra\xF1o ser entra en el castillo, invitandote a seguirlo"
+      - "Por algun extra\xF1o motivo, accedes. "
+      - "\xA1Prototipo! "
+      - "\xA1Oh mi gran amigo! \xA1Justo me encuentras fabricando un prototipo para
+        una trampa!"
+      - "\xA1Estoy seguro que ahora si lograr\xE9 capturar a ese erizo azul!"
+      - Si... Sobre eso... No creo qu-
+      - "\xA1\xBFQuieres ver mi colecci\xF3n de p\xFAas?! \xA1Si insistes podr\xEDa
+        darte alguna! "
       positions:
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      orientations: ffffffffffffffffffffffffffffffff01000000ffffffff
-      secondaryIds: 040000000400000000000000000000000400000000000000
-      secondaryPositions:
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      secondaryOrientations: ffffffffffffffff0100000001000000ffffffff01000000
-    secondDialogue:
-      ids: 01000000
-      lines:
-      - "\xA1Has vuelto! Bienvenido, \xBFQu\xE9 llevar\xE1s hoy?"
-      positions:
+      - {x: 0, y: -128, z: 0}
       - {x: 400, y: -128, z: 0}
-      orientations: ffffffff
-      secondaryIds: ffffffff
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: 0, y: -128, z: 0}
+      - {x: 0, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      orientations: 00000000ffffffff01000000ffffffff000000000000000001000000ffffffffffffffff01000000ffffffff
+      secondaryIds: 0200000000000000020000000000000002000000020000000100000000000000000000000100000000000000
       secondaryPositions:
-      - {x: 0, y: 0, z: 0}
-      secondaryOrientations: 00000000
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      secondaryOrientations: ffffffff01000000ffffffff010000000100000001000000ffffffff0100000001000000ffffffff01000000
+    secondDialogue:
+      ids: 0200000001000000
+      lines:
+      - "\xA1Prototipo! \xA1Prototipo!"
+      - "\xA1Proto! \xBFEncontraste al erizo azul? Oh... solo eres t\xFA... "
+      positions:
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      orientations: 01000000ffffffff
+      secondaryIds: 0100000000000000
+      secondaryPositions:
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      secondaryOrientations: ffffffff01000000
     firstDialogueFlag: 0
     itemList: 0600000007000000
   - background: {fileID: 21300000, guid: 5b3e0daa910f2584c8cb7d6b4755128a, type: 3}
     seller: {fileID: 21300000, guid: 539d728c483cc7842817c9eefc04ce98, type: 3}
     firstDialogue:
-      ids: ffffffffffffffff04000000040000000000000004000000
+      ids: ffffffffffffffffffffffffffffffff0600000000000000060000000000000006000000
       lines:
-      - "Llegas al cementerio y un escalofr\xEDo recorre tu espalda."
-      - Al adentrarte un poco por los caminos, notas a una figura encapuchada.
-      - "\xA1Cuidado con esa l\xEDnea! \xA1Casi rompes mi c\xEDrculo m\xE1gico!"
-      - "\xA1\xBFC\xF3mo podr\xE9 invocar demonios si llegas a hacer algo as\xED?!"
-      - "Disculpa... Estaba inmerso pensando en que comprar\xEDa..."
-      - Buff... Da igual, de todas formas ya rompiste mi estado de flow...
+      - Ador llega a la plaza central y, entre todo el bullicio logra percibir un
+        gran tumulto de personas.
+      - "Al acercarse, nota al escultor, cincel en mano, d\xE1ndole forma a un bloque
+        de piedra."
+      - "Un gran, GRAN, grupo de personas lo rodean, extendi\xE9ndole una a una herramientas
+        que va utilizando. "
+      - 'El archimago se abre paso entre el grupo... '
+      - "\xA1Al fin lleg\xF3 el nuevo ayudante! \xA1Apurate y dame ese martillo!"
+      - Eh... No soy un ayudante...
+      - "\xBFNo? \xBFQu\xE9 haces aqu\xED entonces? \xBFQuieres venderme alguno?"
+      - "En la torre de magia... T\xFA me invitaste a venir... "
+      - "\xA1Ya lo recuerdo! \xA1Si llevas alguna de mis obras tu torre quedar\xE1
+        linda y bonita!"
       positions:
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      orientations: ffffffffffffffffffffffffffffffff01000000ffffffff
-      secondaryIds: 040000000400000000000000000000000400000000000000
+      - {x: 0, y: -128, z: 0}
+      - {x: 0, y: -128, z: 0}
+      - {x: 0, y: -128, z: 0}
+      - {x: 0, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      orientations: 00000000000000000000000000000000ffffffff01000000ffffffff01000000ffffffff
+      secondaryIds: 000000000600000006000000000000000000000006000000000000000600000000000000
       secondaryPositions:
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      secondaryOrientations: ffffffffffffffff0100000001000000ffffffff01000000
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      secondaryOrientations: 0100000001000000010000000100000001000000ffffffff01000000ffffffff01000000
     secondDialogue:
-      ids: 07000000
+      ids: ffffffff06000000
       lines:
-      - "\xA1Has vuelto! Bienvenido, \xBFQu\xE9 llevar\xE1s hoy?"
+      - "El tumulto de ayudantes es incluso m\xE1s grande que la \xFAltima vez que
+        Ador vino, teniendo que forcejear para alcanzar el centro."
+      - "\xA1Cincel! \xA1Martillo! \xBFNo eres mi ayudante? \xBFQu\xE9 haces aqu\xED
+        entonces?"
       positions:
       - {x: 400, y: -128, z: 0}
-      orientations: ffffffff
-      secondaryIds: ffffffff
+      - {x: 400, y: -128, z: 0}
+      orientations: ffffffffffffffff
+      secondaryIds: 0600000000000000
       secondaryPositions:
-      - {x: 0, y: 0, z: 0}
-      secondaryOrientations: 00000000
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      secondaryOrientations: 0100000001000000
     firstDialogueFlag: 0
     itemList: 0800000009000000
   - background: {fileID: 21300000, guid: 857ecca8e635d7340b50a59012c5f6ad, type: 3}
     seller: {fileID: 21300000, guid: 2bb42624022745848a9cef05fe313141, type: 3}
     firstDialogue:
-      ids: ffffffffffffffff04000000040000000000000004000000
+      ids: ffffffff07000000ffffffff070000000000000007000000ffffffff
       lines:
-      - "Llegas al cementerio y un escalofr\xEDo recorre tu espalda."
-      - Al adentrarte un poco por los caminos, notas a una figura encapuchada.
-      - "\xA1Cuidado con esa l\xEDnea! \xA1Casi rompes mi c\xEDrculo m\xE1gico!"
-      - "\xA1\xBFC\xF3mo podr\xE9 invocar demonios si llegas a hacer algo as\xED?!"
-      - "Disculpa... Estaba inmerso pensando en que comprar\xEDa..."
-      - Buff... Da igual, de todas formas ya rompiste mi estado de flow...
+      - Ador entra en el centro comunitario, viendo muchas familias dispersas, logrando
+        distinguir una risa particular.
+      - "\xA1Amigo! \xA1Por aqu\xED!"
+      - "Esa persona hace se\xF1as alevosas para que se acerque, con una medialuna
+        a medio comer en la mano."
+      - "-Sorbido- \xBFHas venido a disfrutar la tarde? "
+      - No... Solo estoy conociendo un poco la ciudad...
+      - "\xA1Te dar\xE9 un consejo, amigo! \xA1Si quieres tener buena clientela,
+        tienes que tenerla contenta!"
+      - Le ofrece al archimago nuevamente la calabaza.
       positions:
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      orientations: ffffffffffffffffffffffffffffffff01000000ffffffff
-      secondaryIds: 040000000400000000000000000000000400000000000000
+      - {x: 0, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: 0, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: 0, y: -128, z: 0}
+      orientations: ffffffffffffffffffffffffffffffff01000000ffffffffffffffff
+      secondaryIds: 00000000000000000700000000000000070000000000000007000000
       secondaryPositions:
-      - {x: 450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      - {x: 450, y: -128, z: 0}
-      - {x: -450, y: -128, z: 0}
-      secondaryOrientations: ffffffffffffffff0100000001000000ffffffff01000000
+      - {x: -400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      - {x: -400, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      secondaryOrientations: 0100000001000000ffffffff01000000ffffffff01000000ffffffff
     secondDialogue:
-      ids: 06000000
+      ids: ffffffff07000000
       lines:
-      - "\xA1Has vuelto! Bienvenido, \xBFQu\xE9 llevar\xE1s hoy?"
+      - "Ador entra en el centro comunitario, no hay tanta gente como la \xFAltima
+        vez, pero \xE9l si se encuentra ah\xED. "
+      - "-Sorbido- \xA1Hola! \xBFViniste a merendar? -Sorbido-"
       positions:
       - {x: 400, y: -128, z: 0}
-      orientations: ffffffff
-      secondaryIds: ffffffff
+      - {x: 400, y: -128, z: 0}
+      orientations: ffffffffffffffff
+      secondaryIds: 0700000000000000
       secondaryPositions:
-      - {x: 0, y: 0, z: 0}
-      secondaryOrientations: 00000000
+      - {x: 0, y: -128, z: 0}
+      - {x: 400, y: -128, z: 0}
+      secondaryOrientations: 0100000001000000
     firstDialogueFlag: 0
     itemList: 0a0000000b000000
   sellerObject: {fileID: 677151036}

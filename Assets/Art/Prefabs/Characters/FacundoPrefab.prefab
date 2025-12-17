@@ -162,17 +162,19 @@ MonoBehaviour:
     - {x: -400, y: -128, z: 0}
     - {x: -400, y: -128, z: 0}
     secondaryOrientations: 01000000ffffffff0100000001000000ffffffff0100000001000000
-  - ids: 06000000
+  - ids: ffffffff00000000
     lines:
-    - "\xA1Hola! \xA1Solo me pasaba a ver que tal iba todo! \xA1No te olvides de
-      visitarme en la ciudad!"
+    - El escultor se acerca a la torre, conversando un poco con los trabajadores.
+    - "\xA1Fuera de aqu\xED! \xA1No te llevar\xE1s a mis empleados!"
     positions:
     - {x: 400, y: -128, z: 0}
-    orientations: ffffffff
-    secondaryIds: ffffffff
+    - {x: -400, y: -128, z: 0}
+    orientations: ffffffff01000000
+    secondaryIds: 0600000006000000
     secondaryPositions:
-    - {x: 0, y: 0, z: 0}
-    secondaryOrientations: 00000000
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    secondaryOrientations: 01000000ffffffff
   hasTalked: 0
 --- !u!1001 &1724073643031844630
 PrefabInstance:

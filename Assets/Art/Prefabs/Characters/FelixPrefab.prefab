@@ -161,17 +161,19 @@ MonoBehaviour:
     - {x: 400, y: -128, z: 0}
     - {x: -400, y: -128, z: 0}
     secondaryOrientations: 0100000001000000ffffffffffffffff01000000ffffffff01000000
-  - ids: 07000000
+  - ids: ffffffff07000000
     lines:
-    - "\xA1Hola! \xA1Solo me pasaba a ver que tal iba todo! \xA1No te olvides de
-      visitarme en la ciudad!"
+    - Ador estaba trabajando, pero sorbidos sumamente fuertes lo distraen.
+    - "-Sorbido- \xA1Amigo! \xA1Vine a visitarte! \xBFEst\xE1s desocupado? -Sorbido-"
     positions:
     - {x: 400, y: -128, z: 0}
-    orientations: ffffffff
-    secondaryIds: ffffffff
+    - {x: 400, y: -128, z: 0}
+    orientations: ffffffffffffffff
+    secondaryIds: 0000000000000000
     secondaryPositions:
-    - {x: 0, y: 0, z: 0}
-    secondaryOrientations: 00000000
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    secondaryOrientations: 0100000001000000
   hasTalked: 0
 --- !u!1001 &1724073643031844630
 PrefabInstance:

@@ -173,17 +173,21 @@ MonoBehaviour:
     - {x: -400, y: -128, z: 0}
     - {x: 0, y: -128, z: 0}
     secondaryOrientations: 0000000001000000ffffffff0100000001000000ffffffffffffffffffffffff010000000100000000000000
-  - ids: 01000000
+  - ids: 0100000001000000
     lines:
-    - "\xA1Hola! \xA1Solo me pasaba a ver que tal iba todo! \xA1No te olvides de
-      visitarme en la ciudad!"
+    - "\xA1El negocio te est\xE1 yendo muy bien! \xA1\xBFC\xF3mo consigues el dineral
+      de los impuestos?!"
+    - "\xA1Estoy seguro de que tienes al erizo azul y est\xE1s utiliz\xE1ndolo para
+      tu beneficio!"
     positions:
     - {x: 400, y: -128, z: 0}
-    orientations: ffffffff
-    secondaryIds: ffffffff
+    - {x: 400, y: -128, z: 0}
+    orientations: ffffffffffffffff
+    secondaryIds: 0000000000000000
     secondaryPositions:
-    - {x: 0, y: 0, z: 0}
-    secondaryOrientations: 00000000
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    secondaryOrientations: 0100000001000000
   hasTalked: 0
 --- !u!1001 &1724073643031844630
 PrefabInstance:
