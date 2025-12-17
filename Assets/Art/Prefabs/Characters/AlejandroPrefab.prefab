@@ -169,17 +169,20 @@ MonoBehaviour:
     - {x: -400, y: -128, z: 0}
     - {x: 0, y: -128, z: 0}
     secondaryOrientations: 01000000ffffffffffffffffffffffff0100000001000000ffffffff0100000001000000ffffffff
-  - ids: 05000000
+  - ids: ffffffff05000000
     lines:
-    - "\xA1Hola! \xA1Solo me pasaba a ver que tal iba todo! \xA1No te olvides de
-      visitarme en la ciudad!"
+    - El inventor se acerca a la torre, negando con la cabeza.
+    - "No... no... no... Realmente no sabes combinar colores, \xBFno? Ven a mi taller
+      y te prestar\xE9 pintura."
     positions:
     - {x: 400, y: -128, z: 0}
-    orientations: ffffffff
-    secondaryIds: ffffffff
+    - {x: 400, y: -128, z: 0}
+    orientations: ffffffffffffffff
+    secondaryIds: 0500000000000000
     secondaryPositions:
-    - {x: 0, y: 0, z: 0}
-    secondaryOrientations: 00000000
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    secondaryOrientations: 0100000001000000
   hasTalked: 0
 --- !u!1001 &1724073643031844630
 PrefabInstance:
