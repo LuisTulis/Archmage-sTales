@@ -7,7 +7,8 @@ public class BaseWorkerComponent : CharacterComponent
     protected RandomWalkLocomotion locomotion;
     public BaseWorkerModel model;
     public bool isWorking;
-    protected override void Awake() {
+    protected override void Awake()
+    {
         base.Awake();
         locomotion = GetComponent<RandomWalkLocomotion>();
         model = GetComponent<BaseWorkerModel>();
@@ -16,7 +17,7 @@ public class BaseWorkerComponent : CharacterComponent
     protected virtual void Update()
     {
         locomotion.WalkingAnimation(isWorking);
-        
+
         // Fixme cuando tengamos un boton de deseleccionar trabajador, (que vuelva a estar idle)
         // debrai llamar a LeaveWorkStation
 
@@ -33,14 +34,16 @@ public class BaseWorkerComponent : CharacterComponent
 
     private void Work()
     {
-        if (Vector3.Distance(this.transform.position, this.model.AsignatedStation.workerPosition.transform.position) < 3) {
-            if (this.model.AsignatedStation.clientUsing == 2) {
-                if(Random.Range(0,9) == 1 && this.model.Stats.adivinationStat >= 0)
+        if (Vector3.Distance(this.transform.position, this.model.AsignatedStation.workerPosition.transform.position) < 3)
+        {
+            if (this.model.AsignatedStation.clientUsing == 2)
+            {
+                if (Random.Range(0, 9) == 1 && this.model.Stats.adivinationStat >= 0)
                 {
                     switch (this.model.AsignatedStation.type.ToString())
                     {
                         case "adivinacion":
-                            if(this.model.Stats.adivinationStat < 5)
+                            if (this.model.Stats.adivinationStat < 5)
                             {
                                 this.model.Stats.adivinationStat += 1;
                             }
@@ -68,7 +71,9 @@ public class BaseWorkerComponent : CharacterComponent
                 model.AsignatedStation.accessToWork(this);
                 this.isWorking = true;
                 this.GetIntoWorkingPosition(this.model.AsignatedStation.workerPosition);
-            } else {
+            }
+            else
+            {
                 this.isWorking = false;
                 locomotion.SittingAnimation(false);
             }
@@ -76,8 +81,11 @@ public class BaseWorkerComponent : CharacterComponent
         }
     }
 
-    public void LeaveWorkStation() {
-        if (model.AsignatedStation != null) {
+    public void LeaveWorkStation()
+    {
+        if (model.AsignatedStation != null)
+        {
+            locomotion.GoIdle();
             model.AsignatedStation.StopAllCoroutines();
             model.AsignatedStation.fx.SetWorking(false);
             model.AsignatedStation.status = "Idle";
@@ -103,7 +111,8 @@ public class BaseWorkerComponent : CharacterComponent
         locomotion.SittingAnimation(this.model.AsignatedStation.sittingWorkstation);
     }
 
-    public override Dictionary<string, object> GetStats() {
+    public override Dictionary<string, object> GetStats()
+    {
         var stats = new Dictionary<string, object>
         {
             { "Name", model.CharacterName },

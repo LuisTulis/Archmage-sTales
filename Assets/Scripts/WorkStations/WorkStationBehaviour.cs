@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -151,18 +149,18 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
             SetBroken(true);
         }
         int realProfit = workstationData.profit;
-        
+
         realProfit = gameManager.costoso ? (int)(realProfit * .5f) : realProfit;
         realProfit = (int)(realProfit * mejoraOro);
         realProfit = realProfit + (int)(realProfit * (karma * -0.035f));
-        
+
         gameManager.realKarma += karma / 10;
 
-        if(gameManager.realKarma > 50)
+        if (gameManager.realKarma > 50)
         {
             gameManager.realKarma = 50;
         }
-        else if(gameManager.realKarma < -50)
+        else if (gameManager.realKarma < -50)
         {
             gameManager.realKarma = -50;
         }
@@ -225,7 +223,7 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         audioSource.clip = AudioManager.Instance.FindSoundClip(clipName);
         audioSource.loop = true;
         audioSource.Play();
-        if(showingFeedback)
+        if (showingFeedback)
         {
             audioSource.clip = AudioManager.Instance.FindSoundClip(clipName);
             audioSource.loop = true;
@@ -303,9 +301,9 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
 
     public void modifyActualFeedback()
     {
-        if(this.showingFeedback)
+        if (this.showingFeedback)
         {
-            switch(this.type.ToString())
+            switch (this.type.ToString())
             {
                 case "adivinacion":
                     PlaySfx("FairySound");
