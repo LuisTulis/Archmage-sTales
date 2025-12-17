@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Mime;
 using UnityEngine;
 
 public class CustomerComponent : CharacterComponent
@@ -32,7 +31,7 @@ public class CustomerComponent : CharacterComponent
     private bool isBlinking = false;
     private Coroutine blinkingCoroutine;
 
-    
+
 
     protected override void Awake()
     {
@@ -57,13 +56,13 @@ public class CustomerComponent : CharacterComponent
 
     private void Start()
     {
-        if(GameManager.Instance.dayCount < 2)
+        if (GameManager.Instance.dayCount < 2)
         {
             model.thief = false;
         }
         if (model.thief)
         {
-            
+
             customerObjective.image.color = new Color(1, 0, 0);
         }
     }
@@ -110,7 +109,7 @@ public class CustomerComponent : CharacterComponent
             searchAttempts++;
             int mentalReduce = Random.Range(minMentalDecayRate, maxMentalDecayRate);
             mentalReduce = ItemController.Instance.activeItemsState[11] ? (int)(mentalReduce * .5f) : mentalReduce;
-            model.mental -= mentalReduce; 
+            model.mental -= mentalReduce;
             Debug.Log($"{name} intenta buscar estación (Intento #{searchAttempts}) | Mental: {model.mental}");
 
             selectStation();
@@ -129,7 +128,7 @@ public class CustomerComponent : CharacterComponent
                 LeaveWithoutBuy();
             }
         }
-       
+
     }
 
     private void HandleStationLogic()
@@ -158,7 +157,7 @@ public class CustomerComponent : CharacterComponent
                 selectStation();
             }
         }
-        else if (Vector3.Distance(transform.position, objectiveStation.transform.position) < 3)
+        else if (Vector3.Distance(transform.position, objectiveStation.clientPosition.transform.position) < 2f)
         {
             objectiveStation.clientUsing = 2;
             objectiveStation.assignedCustomer = this;
@@ -189,7 +188,7 @@ public class CustomerComponent : CharacterComponent
                         customerObjective.objective = "";
                     }
                 }
-                
+
             }
         }
         else
@@ -261,7 +260,7 @@ public class CustomerComponent : CharacterComponent
 
     private void LeaveTheShop()
     {
-        GameManager.Instance.reputacion += (this.model.mental - 25)/10;
+        GameManager.Instance.reputacion += (this.model.mental - 25) / 10;
         Debug.Log("mental: " + this.model.mental);
         GlobalCustomerManager.Instance.CustomerLeft(this);
     }

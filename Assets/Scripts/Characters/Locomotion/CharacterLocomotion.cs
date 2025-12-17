@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -38,30 +37,30 @@ public class CharacterLocomotion : MonoBehaviour
 
     private void Update()
     {
-        int floorValue = GameManager.Instance.actualFloor;        
+        int floorValue = GameManager.Instance.actualFloor;
         int minValue = floorValue * 3;
         int maxValue = (1 + floorValue) * 3;
         bool isShowing = (this.transform.position.y < .1f || (this.transform.position.y > minValue && this.transform.position.y < maxValue));
         gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = isShowing;
         CustomerComponent customer = this.GetComponent<CustomerComponent>();
-        if(customer != null)
+        if (customer != null)
         {
             customer.customerObjective.show = isShowing;
         }
 
-        if(isEnemy && ItemController.Instance.activeItemsState[0] && Vector3.Distance(this.transform.position, ItemController.Instance.gravityTrapPoint.position) < 1)
+        if (isEnemy && ItemController.Instance.activeItemsState[0] && Vector3.Distance(this.transform.position, ItemController.Instance.gravityTrapPoint.position) < 1)
         {
             ItemController.Instance.activeItemsUse[0]--;
             ItemController.Instance.checkActualItems();
             StartCoroutine(gravityAscend());
         }
-        
+
     }
 
     IEnumerator gravityAscend()
     {
         float speed = 0;
-        while(this.transform.position.y < 100)
+        while (this.transform.position.y < 100)
         {
             speed += 2f * Time.deltaTime;
             this.transform.position += new Vector3(0, speed, 0);
@@ -99,8 +98,15 @@ public class CharacterLocomotion : MonoBehaviour
     {
         if (animator == null || agent == null) return;
 
-        bool isWalking = agent.velocity.magnitude > 0.1f;
+        bool isWalking = agent?.velocity.magnitude > 0.1f;
         animator.SetBool("walking", isWalking && !isWorking);
+    }
+
+    public void GoIdle()
+    {
+        if (animator == null || agent == null) return;
+        animator.SetBool("walking", true);
+        animator.SetBool("sitting", false);
     }
 
     public void SittingAnimation(bool sitting)
