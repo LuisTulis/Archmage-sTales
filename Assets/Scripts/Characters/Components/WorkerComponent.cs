@@ -43,7 +43,7 @@ public class WorkerComponent : BaseWorkerComponent
         {
             locomotion.MoveTo(kidnapper.position - new Vector3(0, 0, 1.5f));
             float distanceToDespawn = Vector3.Distance(transform.position, GlobalLocomotionManager.Instance.despawnPoint.position);
-            if (distanceToDespawn < 1f)
+            if (distanceToDespawn < 3f)
             {
                 Despawn();
             }
