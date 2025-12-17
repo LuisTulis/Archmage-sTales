@@ -142,6 +142,12 @@ public class GlobalWorkstationManager : MonoBehaviour
 
             }
             room.GetComponent<BoxCollider>().enabled = show;
+
+            BoxCollider[] colliders = room.GetComponentsInChildren<BoxCollider>();
+            foreach (BoxCollider collider in colliders)
+            {
+                collider.enabled = room.floorIndex == floorIndex;
+            }
             MeshRenderer[] meshes = room.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer mesh in meshes)
             {
