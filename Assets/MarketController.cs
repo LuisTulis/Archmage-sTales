@@ -24,6 +24,7 @@ public class MarketController : MonoBehaviour
     public GameObject confirmBuyPanel;
     public TMP_Text itemName;
     public TMP_Text itemDesc;
+    public TMP_Text itemDescData;
     public TMP_Text itemPrice;
 
 
@@ -152,6 +153,7 @@ public class MarketController : MonoBehaviour
         confirmBuyPanel.SetActive(true);
         itemName.text = selectedItem.name;
         itemDesc.text = selectedItem.description;
+        itemDescData.text = selectedItem.useDescription;
         itemPrice.text = "¤" + selectedItem.price;
     }
 
