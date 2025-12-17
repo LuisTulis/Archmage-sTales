@@ -236,6 +236,9 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         {
             GlobalWorkstationManager.Instance.activeStations.Remove(this);
         }
+
+        fx.SetBroken(true);
+
     }
 
     private void RepairState()
@@ -245,6 +248,8 @@ public class WorkStationBehaviour : MonoBehaviour, IPointerClickHandler
         {
             GlobalWorkstationManager.Instance.activeStations.Add(this);
         }
+
+        fx.SetBroken(false);
     }
 
 }

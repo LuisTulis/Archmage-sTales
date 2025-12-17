@@ -84,6 +84,13 @@ public class WorkstationFX : MonoBehaviour
         }
     }
 
+    public void SetBroken(bool on)
+    {
+        if (anim)
+        {
+            anim.SetBool("isBroken", on);
+        }
+    }
     private IEnumerator PlayOnceAndStop(ParticleSystem ps)
     {
         if (ps == null) yield break;
