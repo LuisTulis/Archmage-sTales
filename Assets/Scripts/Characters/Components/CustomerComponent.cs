@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEngine;
 
 public class CustomerComponent : CharacterComponent
@@ -12,7 +13,7 @@ public class CustomerComponent : CharacterComponent
 
     private GlobalWorkstationManager stationManager;
     public List<StationType> objectives;
-    private CustomerObjective customerObjective;
+    public CustomerObjective customerObjective;
 
     private Animator animator;
 
@@ -26,10 +27,12 @@ public class CustomerComponent : CharacterComponent
     private float attendCooldown = 8f;
     private int maxAttendAttempts = 5;
 
-    private int minMentalDecayRate = 1;
-    private int maxMentalDecayRate = 7;
+    public int minMentalDecayRate = 1;
+    public int maxMentalDecayRate = 7;
     private bool isBlinking = false;
     private Coroutine blinkingCoroutine;
+
+    
 
     protected override void Awake()
     {
@@ -45,6 +48,9 @@ public class CustomerComponent : CharacterComponent
         objectives.Add(stationManager.stationTypes[Random.Range(0, stationManager.stationTypes.Count)]);
         customerObjective = this.gameObject.GetComponentInChildren<CustomerObjective>();
         customerObjective.objective = objectives[0].ToString();
+
+        this.minMentalDecayRate = GlobalCustomerManager.Instance.minMentalDecayRate;
+        this.maxMentalDecayRate = GlobalCustomerManager.Instance.maxMentalDecayRate;
 
         selectStation();
     }
@@ -84,7 +90,7 @@ public class CustomerComponent : CharacterComponent
 
 
         // FIXME: Deberia ser una posibilidad de volverse ladron, cuanto mas bajo el mental.
-        if (model.mental < 15)
+        if (model.mental < 15 && !model.skeleton)
         {
             model.thief = true;
             customerObjective.image.color = new Color(1, 0, 0);
@@ -102,19 +108,21 @@ public class CustomerComponent : CharacterComponent
         {
             attemptTimer = 0f;
             searchAttempts++;
-            model.mental -= Random.Range(minMentalDecayRate, maxMentalDecayRate);
+            int mentalReduce = Random.Range(minMentalDecayRate, maxMentalDecayRate);
+            mentalReduce = ItemController.Instance.activeItemsState[11] ? (int)(mentalReduce * .5f) : mentalReduce;
+            model.mental -= mentalReduce; 
             Debug.Log($"{name} intenta buscar estación (Intento #{searchAttempts}) | Mental: {model.mental}");
 
             selectStation();
 
-            if (objectiveStation == null && model.mental < 40 && searchAttempts >= 3 && !isBlinking)
+            if (objectiveStation == null && model.mental < 40 && searchAttempts >= 3 && !isBlinking && !model.skeleton)
             {
                 blinkingCoroutine = StartCoroutine(BlinkObjectiveIcon());
             }
             var randomValue = Random.Range(0, (model.mental * 2));
             Debug.Log("Intento por irse del local: " + randomValue + "     maximo: " + (model.mental * 2));
 
-            if (searchAttempts >= 3 && randomValue == 0)
+            if (searchAttempts >= 3 && randomValue <= 0 && !model.skeleton)
             {
                 Debug.Log($"{name} se va por frustración buscando estación.");
 

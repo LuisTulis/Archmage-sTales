@@ -5,21 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/DevelopScenes/Develop_Scene_Tom.unity
-    guid: dbdb0af65aa2bbd48afd8738e9c01f28
   - enabled: 1
-    path: Assets/Scenes/GameScenes/Menu_Scene_01.unity
+    path: Assets/Menu_Scene_01.unity
+    guid: 76ae228ee0b7fc84b88fc1ca19067fe5
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Game_Scene_TengoMiedo.unity
+    guid: 7b23f8338a3dbbd4a869d02bfca6ffb0
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/GameOver_Scene.unity
     guid: 53fc5afe92953c74c8851c2478b4f6da
-  - enabled: 1
-    path: Assets/Scenes/GameScenes/Game_Scene_01.unity
-    guid: 15c092330e707614ab76f1c45e6bdb57
-  - enabled: 0
-    path: Assets/Scenes/DevelopScenes/Develop_Scene_Luis.unity
-    guid: acf7c1abf48b6b140984f219a977d749
-  - enabled: 0
-    path: Assets/Scenes/GameScenes/Game_Scene_02.unity
-    guid: 9f51006c636acd046b52497fff533266
   - enabled: 1
     path: Assets/Scenes/GameScenes/esteeselprototipo.unity
     guid: 8aac3244380fc27498ccc1b29bac6f97

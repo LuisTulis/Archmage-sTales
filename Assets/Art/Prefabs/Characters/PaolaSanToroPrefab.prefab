@@ -96,8 +96,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkPoint: {fileID: 0}
+  greatingsIndex: 0
   readyToTalk: 0
-  greatingsDialogue: []
+  greatingsDialogue:
+  - ids: ffffffff030000000300000000000000030000000300000003000000
+    lines:
+    - 'Una maga blanca se acerca a la torre. '
+    - "\xBFEres t\xFA el due\xF1o de este lugar? "
+    - "\xBFPodr\xEDa hablarte sobre las virtudes de ser adepto a la iglesia?"
+    - Lo lamento... No creo en esas cosas...
+    - Pobre perdido... No entiendes la gravedad de tus palabras...
+    - Aunque es normal que te opongas a mis creencias...
+    - "Pero es cuesti\xF3n de tiempo para que con velocidad vengas a la iglesia.."
+    positions:
+    - {x: 0, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    orientations: 00000000ffffffffffffffff01000000ffffffffffffffffffffffff
+    secondaryIds: 03000000000000000000000003000000000000000000000000000000
+    secondaryPositions:
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    secondaryOrientations: 010000000100000001000000ffffffff010000000100000001000000
+  - ids: 03000000
+    lines:
+    - "\xA1Hola! \xA1Solo me pasaba a ver que tal iba todo! \xA1No te olvides de
+      visitarme en la ciudad!"
+    positions:
+    - {x: 400, y: -128, z: 0}
+    orientations: ffffffff
+    secondaryIds: ffffffff
+    secondaryPositions:
+    - {x: 0, y: 0, z: 0}
+    secondaryOrientations: 00000000
   hasTalked: 0
 --- !u!114 &5280501792992178429
 MonoBehaviour:
@@ -190,12 +230,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
       propertyPath: images.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
       propertyPath: images.Array.data[4]
       value: 
       objectReference: {fileID: 21300000, guid: 3ef14819d7581974c8aba12deffac237, type: 3}
+    - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
+      propertyPath: images.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: 13dab9b3dc2326447afe52ea30f3b816, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

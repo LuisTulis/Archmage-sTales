@@ -18,13 +18,21 @@ public class MarketController : MonoBehaviour
     public GameObject sellerObject;
     public GameObject itemsObject;
     public GameObject backButton;
+    public Button[] marketButtons;
+    public List<GameObject> actualItems;
 
     public GameObject confirmBuyPanel;
     public TMP_Text itemName;
     public TMP_Text itemDesc;
     public TMP_Text itemPrice;
 
+
     private int actualBuying;
+
+    private void Start()
+    {
+        actualItems = new List<GameObject>();
+    }
     private void Update()
     {
         if(DialogueManager.Instance.currentDialogue != null)
@@ -66,9 +74,6 @@ public class MarketController : MonoBehaviour
             }
             if(newItem)
             {
-                Debug.Log(ItemController.Instance.maxItemAmount);
-                Debug.Log(ItemController.Instance.playerItems.Count);
-                Debug.Log("——————————");
                 if (ItemController.Instance.maxItemAmount > ItemController.Instance.playerItems.Count)
                 {
                     List<int> newListItem = new List<int>();
@@ -111,6 +116,13 @@ public class MarketController : MonoBehaviour
         chooseMarketMenu.SetActive(false);
         actualMarketBackground.sprite = selectedMarket.background;
         actualMarketSeller.sprite = selectedMarket.seller;
+        while(actualItems.Count > 0)
+        {
+            Destroy(actualItems[0]);
+            actualItems.RemoveAt(0);
+        }
+
+
         if(!selectedMarket.firstDialogueFlag)
         {
             marketList[marketIndex].firstDialogueFlag = true;
@@ -127,6 +139,7 @@ public class MarketController : MonoBehaviour
             GameObject newItemEntry = Instantiate(itemEntryPrefab, itemsObject.transform);
             newItemEntry.GetComponent<Image>().sprite = ItemController.Instance.baseItems[actualIndex].itemImage;
             newItemEntry.GetComponent<Button>().onClick.AddListener(() => showEntry(actualIndex));
+            actualItems.Add(newItemEntry);
             addedItems += 1;
 
         }
@@ -140,6 +153,17 @@ public class MarketController : MonoBehaviour
         itemName.text = selectedItem.name;
         itemDesc.text = selectedItem.description;
         itemPrice.text = "¤" + selectedItem.price;
+    }
+
+    public void showUnlockedMarkets()
+    {
+        int index = 0;
+        while(index < 6)
+        {
+
+            marketButtons[index].interactable = GlobalNpcManager.Instance.sellerHasSpawned[index];
+            index++;
+        }
     }
 
 }

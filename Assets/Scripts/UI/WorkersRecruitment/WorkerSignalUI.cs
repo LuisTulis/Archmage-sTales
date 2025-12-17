@@ -8,7 +8,7 @@ public class WorkerSignalUI : MonoBehaviour {
     [SerializeField] private Transform candidatesContainer;
     [SerializeField] private GameObject candidateEntryPrefab;
 
-    private void OnEnable() {
+    private void Start() {
         PopulateCandidates();
     }
 

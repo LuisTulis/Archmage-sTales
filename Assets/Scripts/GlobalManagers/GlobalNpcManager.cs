@@ -6,7 +6,7 @@ public class GlobalNpcManager : MonoBehaviour {
     public static GlobalNpcManager Instance { get; private set; }
 
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private Transform talkPoint;
+    [SerializeField] public Transform talkPoint;
     public Transform taxCollectorPoint;
     [SerializeField] private Transform despawnPoint;
     public bool ShopIsOpen = true;
@@ -28,7 +28,7 @@ public class GlobalNpcManager : MonoBehaviour {
     private TaxCollectorComponent currentTaxCollector;
     private SellerComponent currentSeller;
     private SellerComponent[] sellerPrefabs;
-    private bool[] sellerHasSpawned;
+    public bool[] sellerHasSpawned;
 
     private void Awake() {
         if (Instance == null) {
@@ -102,6 +102,7 @@ public class GlobalNpcManager : MonoBehaviour {
         var seller = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
 
         currentSeller = seller;
+        seller.GetComponent<NpcComponent>().greatingsIndex = sellerHasSpawned[index] ? 1 : 0;
         sellerHasSpawned[index] = true;
         lastSellerSpawnDay = GameManager.Instance.dayCount;
     }

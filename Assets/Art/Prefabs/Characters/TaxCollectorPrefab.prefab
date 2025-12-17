@@ -129,8 +129,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkPoint: {fileID: 0}
+  greatingsIndex: 0
   readyToTalk: 0
   greatingsDialogue:
+  - ids: 0800000008000000080000000000000000000000
+    lines:
+    - "Vaya... Que linda tiendita tenemos por aqu\xED... "
+    - "Seguro al rey le encantar\xE1 recibir el tributo semanal..."
+    - Encargate de tenerlo para hoy... y para la siguiente semana... y la siguiente...
+    - "Menudo robo... \xBFQu\xE9 ha hecho el rey por m\xED como para tener que pagarla?"
+    - "Aun as\xED... Si no quiero tenerlo en contra deber\xE9 de obedecer."
+    positions:
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    orientations: ffffffffffffffffffffffff0100000001000000
+    secondaryIds: 000000000000000000000000ffffffffffffffff
+    secondaryPositions:
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    secondaryOrientations: 0100000001000000010000000100000001000000
   - ids: 
     lines: []
     positions: []
@@ -138,13 +161,7 @@ MonoBehaviour:
     secondaryIds: 
     secondaryPositions: []
     secondaryOrientations: 
-  - ids: 
-    lines: []
-    positions: []
-    orientations: 
-    secondaryIds: 
-    secondaryPositions: []
-    secondaryOrientations: 
+  hasTalked: 0
 --- !u!1001 &239869259807313739
 PrefabInstance:
   m_ObjectHideFlags: 0

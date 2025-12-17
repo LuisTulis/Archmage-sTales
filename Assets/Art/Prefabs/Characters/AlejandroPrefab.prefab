@@ -129,8 +129,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkPoint: {fileID: 0}
+  greatingsIndex: 0
   readyToTalk: 0
-  greatingsDialogue: []
+  greatingsDialogue:
+  - ids: ffffffff050000000500000000000000050000000500000000000000050000000500000000000000
+    lines:
+    - 'Un sujeto observa atentamente la torre, dibujando algo en un cuaderno. '
+    - 'Ya veo... Aja... '
+    - Tal vez si los ladrillos fueran un 3% mas oscuros...
+    - "\xBFDisculpa? \xBFPuedo ayudarte con algo? "
+    - "\xA1Oh! \xA1El due\xF1o de la tienda! Solo pasaba por aqu\xED..."
+    - "\xBFConsideraste hacer la tienda un 7% mas clara?"
+    - "\xBFNo hab\xEDas dicho oscura...? "
+    - "\xA1Claro! \xA1Pero claramente clara quedar\xE1 mejor! "
+    - "\xA1Puedo darte mas consejos si pasas por mi taller en la ciudad!"
+    - "Claramente veo que est\xE1 loco..."
+    positions:
+    - {x: 0, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    orientations: ffffffff010000000100000001000000ffffffffffffffff01000000ffffffffffffffff01000000
+    secondaryIds: 05000000ffffffffffffffff050000000000000000000000050000000000000000000000ffffffff
+    secondaryPositions:
+    - {x: 400, y: -128, z: 0}
+    - {x: 0, y: -128, z: 0}
+    - {x: 0, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: -400, y: -128, z: 0}
+    - {x: 0, y: -128, z: 0}
+    secondaryOrientations: 01000000ffffffffffffffffffffffff0100000001000000ffffffff0100000001000000ffffffff
+  - ids: 05000000
+    lines:
+    - "\xA1Hola! \xA1Solo me pasaba a ver que tal iba todo! \xA1No te olvides de
+      visitarme en la ciudad!"
+    positions:
+    - {x: 400, y: -128, z: 0}
+    orientations: ffffffff
+    secondaryIds: ffffffff
+    secondaryPositions:
+    - {x: 0, y: 0, z: 0}
+    secondaryOrientations: 00000000
   hasTalked: 0
 --- !u!1001 &1724073643031844630
 PrefabInstance:
@@ -198,12 +247,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
       propertyPath: images.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
       propertyPath: images.Array.data[4]
       value: 
       objectReference: {fileID: 21300000, guid: 3ef14819d7581974c8aba12deffac237, type: 3}
+    - target: {fileID: 8625262018730738362, guid: f350c2c6b655e5e40931362d3661fef9, type: 3}
+      propertyPath: images.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: 13dab9b3dc2326447afe52ea30f3b816, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
